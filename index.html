@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinova - Digital Video Editing & Motion Agency</title>
+    <meta name="description" content="Leading digital video editing agency focused on storytelling, motion graphics, and creative video production.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">Cinova</div>
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <!-- Logo placeholder - replace with actual logo -->
+                    <span class="logo-text">cinova</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu-bubble" id="nav-menu-bubble">
+                <span class="menu-text">menu</span>
+                <div class="menu-hamburger" id="menu-hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Screen Menu Overlay -->
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="menu-close" id="menu-close">
+            <span class="close-line"></span>
+            <span class="close-line"></span>
+        </div>
+        
+        <div class="menu-content">
+            <div class="menu-columns">
+                <div class="menu-column">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title">Menu</h3>
+                        <ul class="menu-list">
+                            <li class="menu-item">
+                                <a href="#services" class="menu-link">
+                                    <span class="menu-link-text">What we do</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#projects" class="menu-link">
+                                    <span class="menu-link-text">Projects</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#about" class="menu-link">
+                                    <span class="menu-link-text">Company</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#contact" class="menu-link">
+                                    <span class="menu-link-text">Contact</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="menu-column">
+                    <div class="menu-section">
+                        <h3 class="menu-section-title">Get in touch</h3>
+                        <div class="menu-contact">
+                            <a href="mailto:xabhijeetxa@gmail.com" class="menu-contact-link">xabhijeetxa@gmail.com</a>
+                            <a href="tel:+917428245045" class="menu-contact-link">+91 7428245045</a>
+                            <a href="#contact-form" class="menu-contact-link">Contact Form</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <!-- Video placeholder - replace with actual video -->
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="data:video/mp4;base64," type="video/mp4">
+                <!-- Fallback for unsupported video -->
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="hero-title-line hero-title-large">"Don't <span class="hero-highlight">Stop</span>" Just because</span>
+                    <span class="hero-title-line hero-title-italic">you can't edit</span>
+                    <span class="hero-title-line hero-title-bold">unleash your content with us</span>
+                </h1>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <div class="scroll-text">Scroll</div>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Services Section - Cuberto Style -->
+    <section class="services" id="services">
+        <!-- Animated Text Banner -->
+        <div class="services-text-banner">
+            <div class="animated-text">
+                <span class="text-loop">what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span> what we do <span class="text-hyphen"></span></span>
+            </div>
+        </div>
+
+        <!-- Draggable Cards Container -->
+        <div class="services-drag-container">
+            <div class="drag-instruction">
+                <p>Drag to explore our services</p>
+            </div>
+            
+            <div class="services-cards-wrapper">
+                <div class="services-cards" id="services-cards">
+                    <!-- Video Editing Card -->
+                    <div class="service-card-drag" data-color="#FF6B6B">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <rect x="8" y="18" width="44" height="24" rx="4" stroke="#FF6B6B" stroke-width="2.5"/>
+                                    <path d="M22 26l10 4-10 4v-8z" fill="#FF6B6B"/>
+                                    <circle cx="42" cy="12" r="3" fill="#FF6B6B"/>
+                                    <circle cx="42" cy="48" r="3" fill="#FF6B6B"/>
+                                </svg>
+                            </div>
+                            <h3>Video Editing</h3>
+                            <p>Professional video editing that transforms raw footage into compelling stories</p>
+                        </div>
+                    </div>
+
+                    <!-- Motion Graphics Card -->
+                    <div class="service-card-drag" data-color="#4ECDC4">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <circle cx="30" cy="30" r="22" stroke="#4ECDC4" stroke-width="2.5"/>
+                                    <path d="M30 12v20l14-10-14-10z" fill="#4ECDC4"/>
+                                    <circle cx="30" cy="30" r="8" fill="#4ECDC4" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <h3>Motion Graphics</h3>
+                            <p>Dynamic animations and visual effects that bring your brand to life</p>
+                        </div>
+                    </div>
+
+                    <!-- UI/UX Design Card -->
+                    <div class="service-card-drag" data-color="#45B7D1">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <rect x="12" y="8" width="36" height="44" rx="6" stroke="#45B7D1" stroke-width="2.5"/>
+                                    <rect x="16" y="16" width="28" height="4" rx="2" fill="#45B7D1"/>
+                                    <rect x="16" y="24" width="20" height="4" rx="2" fill="#45B7D1" opacity="0.6"/>
+                                    <rect x="16" y="32" width="24" height="4" rx="2" fill="#45B7D1" opacity="0.6"/>
+                                    <circle cx="38" cy="42" r="4" fill="#45B7D1"/>
+                                </svg>
+                            </div>
+                            <h3>UI/UX Design</h3>
+                            <p>User-centered designs that create intuitive and engaging experiences</p>
+                        </div>
+                    </div>
+
+                    <!-- Branding Card -->
+                    <div class="service-card-drag" data-color="#96CEB4">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <circle cx="30" cy="30" r="20" stroke="#96CEB4" stroke-width="2.5"/>
+                                    <path d="M22 22h16v4H22z" fill="#96CEB4"/>
+                                    <path d="M22 30h16v4H22z" fill="#96CEB4"/>
+                                    <path d="M22 38h10v4H22z" fill="#96CEB4"/>
+                                    <circle cx="18" cy="18" r="2" fill="#96CEB4"/>
+                                    <circle cx="42" cy="18" r="2" fill="#96CEB4"/>
+                                    <circle cx="18" cy="42" r="2" fill="#96CEB4"/>
+                                    <circle cx="42" cy="42" r="2" fill="#96CEB4"/>
+                                </svg>
+                            </div>
+                            <h3>Branding</h3>
+                            <p>Complete brand identity development that makes your business memorable</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Development Card -->
+                    <div class="service-card-drag" data-color="#FFEAA7">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <rect x="18" y="6" width="24" height="48" rx="6" stroke="#FFEAA7" stroke-width="2.5"/>
+                                    <rect x="22" y="14" width="16" height="24" rx="2" fill="#FFEAA7" opacity="0.3"/>
+                                    <circle cx="30" cy="46" r="3" fill="#FFEAA7"/>
+                                    <rect x="26" y="10" width="8" height="2" rx="1" fill="#FFEAA7"/>
+                                </svg>
+                            </div>
+                            <h3>Mobile Development</h3>
+                            <p>Native and cross-platform mobile apps that deliver exceptional user experiences</p>
+                        </div>
+                    </div>
+
+                    <!-- Web Development Card -->
+                    <div class="service-card-drag" data-color="#DDA0DD">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <rect x="6" y="14" width="48" height="32" rx="4" stroke="#DDA0DD" stroke-width="2.5"/>
+                                    <rect x="6" y="14" width="48" height="8" rx="4" fill="#DDA0DD" opacity="0.3"/>
+                                    <circle cx="14" cy="18" r="2" fill="#DDA0DD"/>
+                                    <circle cx="22" cy="18" r="2" fill="#DDA0DD"/>
+                                    <circle cx="30" cy="18" r="2" fill="#DDA0DD"/>
+                                    <rect x="12" y="28" width="20" height="3" rx="1" fill="#DDA0DD"/>
+                                    <rect x="12" y="34" width="16" height="3" rx="1" fill="#DDA0DD"/>
+                                    <rect x="12" y="40" width="24" height="3" rx="1" fill="#DDA0DD"/>
+                                </svg>
+                            </div>
+                            <h3>Web Development</h3>
+                            <p>Modern websites and web applications built with cutting-edge technologies</p>
+                        </div>
+                    </div>
+
+                    <!-- Color Grading Card -->
+                    <div class="service-card-drag" data-color="#FFB6C1">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <rect x="10" y="10" width="40" height="40" rx="6" stroke="#FFB6C1" stroke-width="2.5"/>
+                                    <rect x="14" y="18" width="32" height="4" rx="2" fill="#FFB6C1"/>
+                                    <rect x="14" y="26" width="32" height="4" rx="2" fill="#FFB6C1" opacity="0.7"/>
+                                    <rect x="14" y="34" width="32" height="4" rx="2" fill="#FFB6C1" opacity="0.4"/>
+                                    <circle cx="20" cy="44" r="2" fill="#FFB6C1"/>
+                                    <circle cx="30" cy="44" r="2" fill="#FFB6C1"/>
+                                    <circle cx="40" cy="44" r="2" fill="#FFB6C1"/>
+                                </svg>
+                            </div>
+                            <h3>Color Grading</h3>
+                            <p>Professional color correction that enhances the visual impact of your content</p>
+                        </div>
+                    </div>
+
+                    <!-- Audio Post-Production Card -->
+                    <div class="service-card-drag" data-color="#87CEEB">
+                        <div class="service-card-content">
+                            <div class="service-icon-drag">
+                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <path d="M15 22v16M21 18v24M27 12v36M33 20v20M39 16v28M45 14v32" stroke="#87CEEB" stroke-width="2.5"/>
+                                    <circle cx="15" cy="30" r="3" fill="#87CEEB"/>
+                                    <circle cx="21" cy="30" r="3" fill="#87CEEB"/>
+                                    <circle cx="27" cy="30" r="3" fill="#87CEEB"/>
+                                    <circle cx="33" cy="30" r="3" fill="#87CEEB"/>
+                                    <circle cx="39" cy="30" r="3" fill="#87CEEB"/>
+                                    <circle cx="45" cy="30" r="3" fill="#87CEEB"/>
+                                </svg>
+                            </div>
+                            <h3>Audio Post-Production</h3>
+                            <p>Complete audio services including sound design, mixing, and mastering</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured <em>projects</em></h2>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- Project image placeholder -->
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPkNvcnBvcmF0ZSBWaWRlbyBQcm9qZWN0PC90ZXh0Pgo8L3N2Zz4K" alt="Corporate Video Project">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Corporate Branding Video</h3>
+                                <p class="project-description">Complete brand video production for tech startup</p>
+                                <div class="project-tags">
+                                    <span class="tag">Corporate</span>
+                                    <span class="tag">Branding</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPlNvY2lhbCBNZWRpYSBDYW1wYWlnbjwvdGV4dD4KPC9zdmc+Cg==" alt="Social Media Campaign">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Social Media Campaign</h3>
+                                <p class="project-description">Multi-platform social media video content</p>
+                                <div class="project-tags">
+                                    <span class="tag">Social Media</span>
+                                    <span class="tag">Campaign</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPk1vdGlvbiBHcmFwaGljcyBTaG93cmVlbDwvdGV4dD4KPC9zdmc+Cg==" alt="Motion Graphics Showreel">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Motion Graphics Showreel</h3>
+                                <p class="project-description">Dynamic motion graphics and animation showcase</p>
+                                <div class="project-tags">
+                                    <span class="tag">Motion Graphics</span>
+                                    <span class="tag">Animation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPkRvY3VtZW50YXJ5IEZpbG08L3RleHQ+Cjwvc3ZnPgo=" alt="Documentary Film">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Documentary Film</h3>
+                                <p class="project-description">Full-length documentary post-production</p>
+                                <div class="project-tags">
+                                    <span class="tag">Documentary</span>
+                                    <span class="tag">Film</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPkNvbW1lcmNpYWwgQWQ8L3RleHQ+Cjwvc3ZnPgo=" alt="Commercial Advertisement">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Commercial Advertisement</h3>
+                                <p class="project-description">High-impact commercial video production</p>
+                                <div class="project-tags">
+                                    <span class="tag">Commercial</span>
+                                    <span class="tag">Advertisement</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUExQTFBIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMjAwIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIiIGZvbnQtc2l6ZT0iMTgiPk11c2ljIFZpZGVvPC90ZXh0Pgo8L3N2Zz4K" alt="Music Video">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Music Video</h3>
+                                <p class="project-description">Creative music video with visual effects</p>
+                                <div class="project-tags">
+                                    <span class="tag">Music Video</span>
+                                    <span class="tag">VFX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="about">
+        <div class="container">
+            <div class="philosophy-content">
+                <div class="philosophy-text">
+                    <h2 class="section-title">Our <em>philosophy</em></h2>
+                    <p>In our team, editors work alongside motion designers, colorists and audio engineers. Cinova doesn't do cookie-cutter solutions and we craft videos exactly as they were envisioned during the creative phase, no shortcuts or compromises.</p>
+                    <p>We're driven by story-centered editing that drives engagement and increases conversions. Our expertise and creativity are remarkable, yet we always strive to outdo and outperform our previous achievements.</p>
+                </div>
+                <div class="philosophy-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="section-title">Have <em>an idea?</em></h2>
+                    <p class="contact-description">Tell us about your project and let's create something amazing together.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:xabhijeetxa@gmail.com" class="contact-link">xabhijeetxa@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:+917428245045" class="contact-link">+91 7428245045</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading">Sending...</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <h3>Cinova</h3>
+                        <p>Digital video editing and motion agency</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Services</h4>
+                            <ul>
+                                <li><a href="#services">Video Editing</a></li>
+                                <li><a href="#services">Motion Graphics</a></li>
+                                <li><a href="#services">Color Grading</a></li>
+                                <li><a href="#services">Audio Post</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Company</h4>
+                            <ul>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#projects">Projects</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Connect</h4>
+                            <ul>
+                                <li><a href="#" target="_blank">LinkedIn</a></li>
+                                <li><a href="#" target="_blank">Instagram</a></li>
+                                <li><a href="#" target="_blank">YouTube</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Cinova. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
