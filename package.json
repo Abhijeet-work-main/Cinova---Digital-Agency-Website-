@@ -1,0 +1,33 @@
+{
+  "name": "cinova-website",
+  "version": "1.0.0",
+  "description": "Cinova - Digital Video Editing & Motion Agency Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080",
+    "dev": "npx live-server --port=8080",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "video-editing",
+    "motion-graphics",
+    "digital-agency",
+    "website",
+    "cuberto-inspired"
+  ],
+  "author": "Cinova Team",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/cinova-website#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/cinova-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/cinova-website/issues"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+} 
