@@ -979,6 +979,94 @@ class ServicesDragController {
     }
 }
 
+// Philosophy Animations Controller
+class PhilosophyAnimationsController {
+    constructor() {
+        this.philosophyPoints = [];
+        this.observer = null;
+    }
+
+    init() {
+        this.setupPhilosophyAnimations();
+    }
+
+    setupPhilosophyAnimations() {
+        this.philosophyPoints = document.querySelectorAll('.philosophy-point');
+        
+        if (this.philosophyPoints.length === 0) return;
+
+        // Create intersection observer
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animatePhilosophyPoint(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        // Observe all philosophy points
+        this.philosophyPoints.forEach(point => {
+            this.observer.observe(point);
+        });
+    }
+
+    animatePhilosophyPoint(element) {
+        const animationType = element.getAttribute('data-animation');
+        
+        // Add the animate class based on animation type
+        setTimeout(() => {
+            element.classList.add('animate');
+        }, 100);
+
+        // Unobserve after animation
+        if (this.observer) {
+            this.observer.unobserve(element);
+        }
+    }
+
+    // Manual animation methods for easy control
+    animateAllPoints() {
+        this.philosophyPoints.forEach((point, index) => {
+            setTimeout(() => {
+                point.classList.add('animate');
+            }, index * 200);
+        });
+    }
+
+    resetAllAnimations() {
+        this.philosophyPoints.forEach(point => {
+            point.classList.remove('animate');
+        });
+    }
+
+    animateFromLeft() {
+        this.philosophyPoints.forEach(point => {
+            point.setAttribute('data-animation', 'fade-left');
+            point.classList.remove('animate');
+        });
+        this.animateAllPoints();
+    }
+
+    animateFromRight() {
+        this.philosophyPoints.forEach(point => {
+            point.setAttribute('data-animation', 'fade-right');
+            point.classList.remove('animate');
+        });
+        this.animateAllPoints();
+    }
+
+    animateFromBottom() {
+        this.philosophyPoints.forEach(point => {
+            point.setAttribute('data-animation', 'fade-up');
+            point.classList.remove('animate');
+        });
+        this.animateAllPoints();
+    }
+}
+
 // Initialize all components
 function initializeComponents() {
     // Initialize cursor
@@ -992,6 +1080,10 @@ function initializeComponents() {
     // Initialize scroll animations
     const scrollAnimations = new ScrollAnimationsController();
     scrollAnimations.init();
+
+    // Initialize philosophy animations
+    const philosophyAnimations = new PhilosophyAnimationsController();
+    philosophyAnimations.init();
 
     // Initialize contact form
     const contactForm = new ContactFormController();
@@ -1027,7 +1119,8 @@ function initializeComponents() {
         window.CinovaApp = {
             cursor,
             isLoading,
-            initializeComponents
+            initializeComponents,
+            philosophyAnimations
         };
     }
 }
