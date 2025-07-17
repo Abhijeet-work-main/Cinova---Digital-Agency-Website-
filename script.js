@@ -93,6 +93,7 @@ class CursorController {
         this.followerX = 0;
         this.followerY = 0;
         this.isActive = false;
+        this.firstMove = true;
     }
 
     init() {
@@ -105,11 +106,25 @@ class CursorController {
             return;
         }
 
-        // Set initial opacity and visibility
-        this.cursor.style.opacity = '1';
-        this.cursorFollower.style.opacity = '1';
-        this.cursor.style.visibility = 'visible';
-        this.cursorFollower.style.visibility = 'visible';
+        // Completely hide cursors initially
+        this.cursor.style.display = 'none';
+        this.cursorFollower.style.display = 'none';
+        this.cursor.style.opacity = '0';
+        this.cursorFollower.style.opacity = '0';
+        this.cursor.style.visibility = 'hidden';
+        this.cursorFollower.style.visibility = 'hidden';
+        
+        // Initialize positions off-screen
+        this.mouseX = -1000;
+        this.mouseY = -1000;
+        this.followerX = -1000;
+        this.followerY = -1000;
+
+        // Set initial positions way off-screen
+        this.cursor.style.left = this.mouseX + 'px';
+        this.cursor.style.top = this.mouseY + 'px';
+        this.cursorFollower.style.left = this.followerX + 'px';
+        this.cursorFollower.style.top = this.followerY + 'px';
         
         // Ensure cursor stays above menu
         this.cursor.style.zIndex = '10001';
@@ -124,10 +139,40 @@ class CursorController {
         document.addEventListener('mousemove', (e) => {
             this.mouseX = e.clientX;
             this.mouseY = e.clientY;
+            
+            // Show cursor on first mouse movement
+            if (this.firstMove && this.isActive && window.innerWidth > 768) {
+                // Initialize follower position to current mouse position to prevent jumping
+                this.followerX = this.mouseX;
+                this.followerY = this.mouseY;
+                
+                // Show and position both cursors
+                this.cursor.style.display = 'block';
+                this.cursorFollower.style.display = 'block';
+                this.cursor.style.visibility = 'visible';
+                this.cursorFollower.style.visibility = 'visible';
+                this.cursor.style.opacity = '1';
+                this.cursorFollower.style.opacity = '1';
+                
+                // Set positions immediately
+                this.cursor.style.left = this.mouseX + 'px';
+                this.cursor.style.top = this.mouseY + 'px';
+                this.cursorFollower.style.left = this.followerX + 'px';
+                this.cursorFollower.style.top = this.followerY + 'px';
+                
+                // Fix mix-blend-mode issue for cursor visibility
+                this.cursor.style.mixBlendMode = 'normal';
+                this.cursor.style.backgroundColor = '#ffffff';
+                
+                this.firstMove = false;
+            }
         });
 
         document.addEventListener('mouseenter', () => {
-            if (this.isActive && window.innerWidth > 768) {
+            // Only show cursor on mouseenter if it has already been shown via mousemove
+            if (this.isActive && window.innerWidth > 768 && !this.firstMove) {
+                this.cursor.style.display = 'block';
+                this.cursorFollower.style.display = 'block';
                 this.cursor.style.opacity = '1';
                 this.cursorFollower.style.opacity = '1';
                 this.cursor.style.visibility = 'visible';
@@ -160,18 +205,24 @@ class CursorController {
     }
 
     animate() {
-        if (!this.isActive) return;
+        if (!this.isActive) {
+            requestAnimationFrame(() => this.animate());
+            return;
+        }
 
-        // Smooth cursor movement
-        this.cursor.style.left = this.mouseX + 'px';
-        this.cursor.style.top = this.mouseY + 'px';
+        // Only animate if cursor has been shown
+        if (!this.firstMove) {
+            // Smooth cursor movement
+            this.cursor.style.left = this.mouseX + 'px';
+            this.cursor.style.top = this.mouseY + 'px';
 
-        // Smooth follower movement with delay
-        this.followerX += (this.mouseX - this.followerX) * 0.1;
-        this.followerY += (this.mouseY - this.followerY) * 0.1;
+            // Smooth follower movement with delay
+            this.followerX += (this.mouseX - this.followerX) * 0.1;
+            this.followerY += (this.mouseY - this.followerY) * 0.1;
 
-        this.cursorFollower.style.left = this.followerX + 'px';
-        this.cursorFollower.style.top = this.followerY + 'px';
+            this.cursorFollower.style.left = this.followerX + 'px';
+            this.cursorFollower.style.top = this.followerY + 'px';
+        }
 
         requestAnimationFrame(() => this.animate());
     }
@@ -300,8 +351,10 @@ class NavigationController {
         this.fullscreenMenu.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Ensure cursor stays visible during menu opening
-        if (cursor && cursor.cursor && cursor.cursorFollower) {
+        // Ensure cursor stays visible during menu opening (only if already shown)
+        if (cursor && cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
             cursor.cursor.style.opacity = '1';
             cursor.cursorFollower.style.opacity = '1';
             cursor.cursor.style.visibility = 'visible';
@@ -864,8 +917,10 @@ class ServicesDragController {
             this.dragCursor.classList.remove('active');
         });
         
-        // Smoothly show default cursor
-        if (cursor && cursor.cursor && cursor.cursorFollower) {
+        // Smoothly show default cursor (only if it has been shown before)
+        if (cursor && cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
             cursor.cursor.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             cursor.cursorFollower.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             cursor.cursor.style.opacity = '1';
@@ -979,27 +1034,27 @@ class ServicesDragController {
     }
 }
 
-// Philosophy Animations Controller
-class PhilosophyAnimationsController {
+// Why Choose Us Animations Controller
+class WhyChooseUsAnimationsController {
     constructor() {
-        this.philosophyPoints = [];
+        this.whyChooseUsPoints = [];
         this.observer = null;
     }
 
     init() {
-        this.setupPhilosophyAnimations();
+        this.setupWhyChooseUsAnimations();
     }
 
-    setupPhilosophyAnimations() {
-        this.philosophyPoints = document.querySelectorAll('.philosophy-point');
+    setupWhyChooseUsAnimations() {
+        this.whyChooseUsPoints = document.querySelectorAll('.why-choose-us-point');
         
-        if (this.philosophyPoints.length === 0) return;
+        if (this.whyChooseUsPoints.length === 0) return;
 
         // Create intersection observer
         this.observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    this.animatePhilosophyPoint(entry.target);
+                    this.animateWhyChooseUsPoint(entry.target);
                 }
             });
         }, {
@@ -1007,13 +1062,13 @@ class PhilosophyAnimationsController {
             rootMargin: '0px 0px -100px 0px'
         });
 
-        // Observe all philosophy points
-        this.philosophyPoints.forEach(point => {
+        // Observe all why choose us points
+        this.whyChooseUsPoints.forEach(point => {
             this.observer.observe(point);
         });
     }
 
-    animatePhilosophyPoint(element) {
+    animateWhyChooseUsPoint(element) {
         const animationType = element.getAttribute('data-animation');
         
         // Add the animate class based on animation type
@@ -1029,7 +1084,7 @@ class PhilosophyAnimationsController {
 
     // Manual animation methods for easy control
     animateAllPoints() {
-        this.philosophyPoints.forEach((point, index) => {
+        this.whyChooseUsPoints.forEach((point, index) => {
             setTimeout(() => {
                 point.classList.add('animate');
             }, index * 200);
@@ -1037,13 +1092,13 @@ class PhilosophyAnimationsController {
     }
 
     resetAllAnimations() {
-        this.philosophyPoints.forEach(point => {
+        this.whyChooseUsPoints.forEach(point => {
             point.classList.remove('animate');
         });
     }
 
     animateFromLeft() {
-        this.philosophyPoints.forEach(point => {
+        this.whyChooseUsPoints.forEach(point => {
             point.setAttribute('data-animation', 'fade-left');
             point.classList.remove('animate');
         });
@@ -1051,7 +1106,7 @@ class PhilosophyAnimationsController {
     }
 
     animateFromRight() {
-        this.philosophyPoints.forEach(point => {
+        this.whyChooseUsPoints.forEach(point => {
             point.setAttribute('data-animation', 'fade-right');
             point.classList.remove('animate');
         });
@@ -1059,7 +1114,7 @@ class PhilosophyAnimationsController {
     }
 
     animateFromBottom() {
-        this.philosophyPoints.forEach(point => {
+        this.whyChooseUsPoints.forEach(point => {
             point.setAttribute('data-animation', 'fade-up');
             point.classList.remove('animate');
         });
@@ -1081,9 +1136,9 @@ function initializeComponents() {
     const scrollAnimations = new ScrollAnimationsController();
     scrollAnimations.init();
 
-    // Initialize philosophy animations
-    const philosophyAnimations = new PhilosophyAnimationsController();
-    philosophyAnimations.init();
+    // Initialize why choose us animations
+    const whyChooseUsAnimations = new WhyChooseUsAnimationsController();
+    whyChooseUsAnimations.init();
 
     // Initialize contact form
     const contactForm = new ContactFormController();
@@ -1120,7 +1175,7 @@ function initializeComponents() {
             cursor,
             isLoading,
             initializeComponents,
-            philosophyAnimations
+            whyChooseUsAnimations
         };
     }
 }
@@ -1170,8 +1225,10 @@ document.addEventListener('visibilitychange', function() {
         // Resume animations when tab is visible
         if (cursor && window.innerWidth > 768) {
             cursor.isActive = true;
-            // Ensure cursor is visible
-            if (cursor.cursor && cursor.cursorFollower) {
+            // Only make cursor visible if it has been shown before
+            if (cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+                cursor.cursor.style.display = 'block';
+                cursor.cursorFollower.style.display = 'block';
                 cursor.cursor.style.opacity = '1';
                 cursor.cursorFollower.style.opacity = '1';
                 cursor.cursor.style.visibility = 'visible';
@@ -1186,8 +1243,10 @@ document.addEventListener('visibilitychange', function() {
 window.addEventListener('focus', function() {
     if (cursor && window.innerWidth > 768) {
         cursor.isActive = true;
-        // Ensure cursor is visible
-        if (cursor.cursor && cursor.cursorFollower) {
+        // Only make cursor visible if it has been shown before
+        if (cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
             cursor.cursor.style.opacity = '1';
             cursor.cursorFollower.style.opacity = '1';
             cursor.cursor.style.visibility = 'visible';
