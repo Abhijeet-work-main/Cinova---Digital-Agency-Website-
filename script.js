@@ -1034,6 +1034,254 @@ class ServicesDragController {
     }
 }
 
+// Projects drag controller
+class ProjectsDragController {
+    constructor() {
+        this.projectsCards = document.getElementById('projects-cards');
+        this.dragCursor = null;
+        this.isDragging = false;
+        this.startX = 0;
+        this.currentX = 0;
+        this.initialTransform = 0;
+        this.dragThreshold = 5;
+        this.momentum = 0;
+        this.animationId = null;
+        this.isMouseDown = false;
+        this.maxDrag = 0;
+    }
+
+    init() {
+        if (!this.projectsCards) return;
+        
+        this.calculateMaxDrag();
+        this.createDragCursor();
+        this.bindEvents();
+        this.setupCardHoverEffects();
+    }
+
+    calculateMaxDrag() {
+        const wrapper = this.projectsCards.parentElement;
+        const wrapperWidth = wrapper.offsetWidth;
+        const cardsWidth = this.projectsCards.scrollWidth;
+        this.maxDrag = Math.max(0, cardsWidth - wrapperWidth + 160); // 160px for padding
+    }
+
+    createDragCursor() {
+        this.dragCursor = document.createElement('div');
+        this.dragCursor.className = 'cursor-drag';
+        this.dragCursor.textContent = 'drag';
+        document.body.appendChild(this.dragCursor);
+    }
+
+    bindEvents() {
+        // Mouse events
+        this.projectsCards.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+        document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+        this.projectsCards.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+
+        // Touch events for mobile
+        this.projectsCards.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+        document.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+        document.addEventListener('touchend', this.handleTouchEnd.bind(this));
+
+        // Prevent default drag behavior
+        this.projectsCards.addEventListener('dragstart', (e) => e.preventDefault());
+        
+        // Recalculate on resize
+        window.addEventListener('resize', () => {
+            this.calculateMaxDrag();
+        });
+    }
+
+    setupCardHoverEffects() {
+        const cards = this.projectsCards.querySelectorAll('.project-card-drag');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                this.showDragCursor(e);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (!this.isDragging) {
+                    this.hideDragCursor();
+                }
+            });
+            
+            card.addEventListener('mousemove', (e) => {
+                this.updateDragCursor(e);
+            });
+        });
+    }
+
+    showDragCursor(e) {
+        if (this.isDragging || window.innerWidth <= 768) return;
+        
+        requestAnimationFrame(() => {
+            this.dragCursor.classList.add('active');
+            this.updateDragCursor(e);
+        });
+        
+        // Smoothly hide default cursor
+        if (cursor && cursor.cursor && cursor.cursorFollower) {
+            cursor.cursor.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            cursor.cursorFollower.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            cursor.cursor.style.opacity = '0';
+            cursor.cursorFollower.style.opacity = '0';
+        }
+    }
+
+    hideDragCursor() {
+        if (this.isDragging) return;
+        
+        this.dragCursor.classList.remove('active');
+        
+        // Restore default cursor
+        if (cursor && cursor.cursor && cursor.cursorFollower) {
+            cursor.cursor.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            cursor.cursorFollower.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            cursor.cursor.style.opacity = '1';
+            cursor.cursorFollower.style.opacity = '1';
+        }
+    }
+
+    updateDragCursor(e) {
+        if (!this.dragCursor || this.isDragging) return;
+        
+        const rect = this.dragCursor.getBoundingClientRect();
+        const x = e.clientX - rect.width / 2;
+        const y = e.clientY - rect.height / 2;
+        
+        this.dragCursor.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    handleMouseDown(e) {
+        this.isMouseDown = true;
+        this.startX = e.clientX - this.getCurrentTransform();
+        this.currentX = this.startX;
+        
+        this.projectsCards.classList.add('dragging');
+        this.isDragging = true;
+        
+        this.hideDragCursor();
+        this.projectsCards.style.userSelect = 'none';
+    }
+
+    handleMouseMove(e) {
+        if (!this.isMouseDown) return;
+        
+        this.currentX = e.clientX - this.startX;
+        const clampedX = Math.max(-this.maxDrag, Math.min(0, this.currentX));
+        
+        this.setTransform(clampedX);
+        
+        // Calculate momentum
+        const deltaX = e.clientX - (this.startX + this.getCurrentTransform());
+        this.momentum = deltaX * 0.1;
+    }
+
+    handleMouseUp() {
+        if (!this.isMouseDown) return;
+        
+        this.isMouseDown = false;
+        this.projectsCards.classList.remove('dragging');
+        this.projectsCards.style.userSelect = 'auto';
+        
+        // Apply momentum
+        if (Math.abs(this.momentum) > 1) {
+            this.applyMomentum();
+        }
+        // Restore main cursor and follower
+        if (cursor && cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
+            cursor.cursor.style.opacity = '1';
+            cursor.cursorFollower.style.opacity = '1';
+            cursor.cursor.style.visibility = 'visible';
+            cursor.cursorFollower.style.visibility = 'visible';
+        }
+    }
+
+    handleMouseLeave() {
+        if (this.isMouseDown) {
+            this.handleMouseUp();
+        }
+        // Restore main cursor and follower
+        if (cursor && cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
+            cursor.cursor.style.opacity = '1';
+            cursor.cursorFollower.style.opacity = '1';
+            cursor.cursor.style.visibility = 'visible';
+            cursor.cursorFollower.style.visibility = 'visible';
+        }
+    }
+
+    handleTouchStart(e) {
+        const touch = e.touches[0];
+        this.isMouseDown = true;
+        this.startX = touch.clientX - this.getCurrentTransform();
+        this.currentX = this.startX;
+        
+        this.projectsCards.classList.add('dragging');
+        this.isDragging = true;
+    }
+
+    handleTouchMove(e) {
+        if (!this.isMouseDown) return;
+        e.preventDefault();
+        
+        const touch = e.touches[0];
+        this.currentX = touch.clientX - this.startX;
+        const clampedX = Math.max(-this.maxDrag, Math.min(0, this.currentX));
+        
+        this.setTransform(clampedX);
+    }
+
+    handleTouchEnd() {
+        this.isMouseDown = false;
+        this.projectsCards.classList.remove('dragging');
+        
+        const style = window.getComputedStyle(this.projectsCards);
+        const matrix = new DOMMatrix(style.transform);
+        const currentX = matrix.m41;
+        
+        // Snap to bounds
+        const clampedX = Math.max(-this.maxDrag, Math.min(0, currentX));
+        this.setTransform(clampedX);
+        // Restore main cursor and follower
+        if (cursor && cursor.cursor && cursor.cursorFollower && !cursor.firstMove) {
+            cursor.cursor.style.display = 'block';
+            cursor.cursorFollower.style.display = 'block';
+            cursor.cursor.style.opacity = '1';
+            cursor.cursorFollower.style.opacity = '1';
+            cursor.cursor.style.visibility = 'visible';
+            cursor.cursorFollower.style.visibility = 'visible';
+        }
+    }
+
+    getCurrentTransform() {
+        const style = window.getComputedStyle(this.projectsCards);
+        const matrix = new DOMMatrix(style.transform);
+        return matrix.m41;
+    }
+
+    setTransform(x) {
+        this.projectsCards.style.transform = `translateX(${x}px)`;
+    }
+
+    applyMomentum() {
+        const currentX = this.getCurrentTransform();
+        const newX = currentX + this.momentum;
+        const clampedX = Math.max(-this.maxDrag, Math.min(0, newX));
+        
+        this.setTransform(clampedX);
+        this.momentum *= 0.95;
+        
+        this.animationId = requestAnimationFrame(() => this.applyMomentum());
+    }
+}
+
 // Why Choose Us Animations Controller
 class WhyChooseUsAnimationsController {
     constructor() {
@@ -1151,6 +1399,10 @@ function initializeComponents() {
     // Initialize services drag functionality
     const servicesDrag = new ServicesDragController();
     servicesDrag.init();
+
+    // Initialize projects drag functionality
+    const projectsDrag = new ProjectsDragController();
+    projectsDrag.init();
 
     // Add smooth scrolling to anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
