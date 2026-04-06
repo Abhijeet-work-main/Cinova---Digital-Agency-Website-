@@ -1510,3 +1510,110 @@ window.addEventListener('focus', function() {
 
 // Debugging helper
 console.log('Cinova App initialized successfully');
+// =========================
+// HERO GALLERY SECTION
+// =========================
+document.addEventListener("DOMContentLoaded", function () { 
+    var mousePos = { x: 0, y: 0 }; 
+    var galleryPos = { x: 0, y: 0}; 
+    var galleryBounds = { top: 0, right: 0, bottom: 0, left: 0 }; 
+
+    var galleryBox = document.querySelector('div#gallery-box');
+    var galleryInner = document.querySelector('div#gallery-box div.gallery');
+    if (!galleryBox || !galleryInner) return;
+
+    function updateGalleryBounds() {
+        var rect = galleryBox.getBoundingClientRect();
+        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        galleryBounds = {
+            top: rect.top + scrollTop,
+            left: rect.left + scrollLeft,
+            right: rect.left + scrollLeft + rect.width,
+            bottom: rect.top + scrollTop + rect.height
+        };
+        galleryPos = {
+            x: galleryBounds.left + (rect.width / 2),
+            y: galleryBounds.top + (rect.height / 2)
+        };
+    }
+
+    // Initial calculation after a slight delay to ensure layout is done
+    setTimeout(updateGalleryBounds, 100);
+
+    galleryBox.addEventListener('mousemove', function(e) { 
+        mousePos = {x: e.pageX, y: e.pageY}; 
+        calcOffset(); 
+        move(); 
+        parallaxPics(); 
+    }); 
+
+    galleryBox.addEventListener('mouseleave', function() { 
+        galleryInner.setAttribute('data-offset-x', '0'); 
+        galleryInner.setAttribute('data-offset-y', '0'); 
+        
+        var images = document.querySelectorAll('div.item img');
+        images.forEach(function(img) { 
+            img.style.left = '50%'; 
+            img.style.top = '50%'; 
+        }); 
+        move(); 
+    }); 
+
+    window.addEventListener('resize', function() { 
+        updateGalleryBounds();
+    }); 
+
+    var overlayLinks = document.querySelectorAll('div.overlay a');
+    overlayLinks.forEach(function(link) {
+        link.addEventListener('mouseleave', function() { 
+            link.classList.add('leave'); 
+            setTimeout(function() { 
+                link.classList.remove('leave'); 
+            }, 500); 
+        });
+    });
+
+    function calcOffset() { 
+        var newX = mousePos.x - galleryPos.x; 
+        newX = invertValue(newX) / 2; 
+        var newY = mousePos.y - galleryPos.y; 
+        newY = invertValue(newY); 
+        
+        galleryInner.setAttribute('data-offset-x', newX); 
+        galleryInner.setAttribute('data-offset-y', newY); 
+    } 
+
+    function calcPercentage() { 
+        var rect = galleryBox.getBoundingClientRect();
+        var horizontal = ((mousePos.x - galleryBounds.left) / rect.width) * 100; 
+        var vertical = ((mousePos.y - galleryBounds.top) / rect.height) * 100; 
+        return { h: horizontal, v: vertical }; 
+    } 
+
+    function move() { 
+        var newX = galleryInner.getAttribute('data-offset-x') || 0; 
+        var newY = galleryInner.getAttribute('data-offset-y') || 0; 
+        
+        galleryInner.style.transform = 'translate(-50%, -50%) translate('+newX+'px, '+newY+'px)';  
+    } 
+
+    function parallaxPics() { 
+        var percentages = calcPercentage(); 
+        var images = document.querySelectorAll('div.item img');
+        images.forEach(function(img) { 
+            img.style.left = (100 - percentages.h) + '%'; 
+            img.style.top = (100 - percentages.v) + '%'; 
+        }); 
+    } 
+
+    function invertValue(num) { 
+        if(Math.sign(num) == 1) { 
+            num = -Math.abs(num); 
+        } else { 
+            num = Math.abs(num); 
+        } 
+        return num; 
+    }
+});
