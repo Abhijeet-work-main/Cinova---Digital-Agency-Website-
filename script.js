@@ -1617,3 +1617,311 @@ document.addEventListener("DOMContentLoaded", function () {
         return num; 
     }
 });
+
+// --- Lottie & Glitter Wrap Additions ---
+function initAdvancedLottie() {
+    // Attention Lottie
+    const attentionContainer = document.getElementById('lottie-attention-choose-us');
+    if (attentionContainer && typeof lottie !== 'undefined') {
+        lottie.loadAnimation({
+            container: attentionContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'Assets/Essential Animations/lottieflow-attention-07-000000-easey.json'
+        });
+    }
+
+    // Checkboxes
+    const checkContainers = document.querySelectorAll('.lottie-check');
+    if (typeof lottie !== 'undefined') {
+        checkContainers.forEach(container => {
+            const anim = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'Assets/Essential Animations/lottieflow-checkbox-09-000000-easey.json'
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => anim.play(), 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(container);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initAdvancedLottie();
+});
+
+class GlitterWrap {
+    constructor(canvas, options = {}) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.container = canvas.parentElement;
+        
+        this.options = {
+            particleCount: 1000,
+            color1: "#ffffff",
+            color2: "#FF0000",
+            color3: "#FFE500",
+            speed: 5,
+            density: 100,
+            starSize: 10,
+            focalDepth: 5,
+            turbulence: 0,
+            brightness: 100,
+            glitterIntensity: 3,
+            trailAmount: 30,
+            reverse: false,
+            ...options
+        };
+
+        this.stars = [];
+        this.elapsed = 0;
+        this.lastT = performance.now();
+        this.rafId = null;
+        this.size = { w: 0, h: 0, dpr: 1 };
+        
+        this.colors = {
+            parsed1: this.parseColor(this.options.color1),
+            parsed2: this.parseColor(this.options.color2),
+            parsed3: this.parseColor(this.options.color3),
+        };
+        this.rgbStrs = [
+            `rgb(${this.colors.parsed1[0]}, ${this.colors.parsed1[1]}, ${this.colors.parsed1[2]})`,
+            `rgb(${this.colors.parsed2[0]}, ${this.colors.parsed2[1]}, ${this.colors.parsed2[2]})`,
+            `rgb(${this.colors.parsed3[0]}, ${this.colors.parsed3[1]}, ${this.colors.parsed3[2]})`,
+        ];
+
+        this.init();
+    }
+
+    parseColor(input) {
+        if (!input) return [255, 255, 255, 1];
+        const s = input.trim();
+        if (s.startsWith("#")) {
+            let hex = s.slice(1);
+            if (hex.length === 3) hex = hex.split("").map(c => c + c).join("");
+            const num = parseInt(hex, 16);
+            return [(num >> 16) & 255, (num >> 8) & 255, num & 255, 1];
+        }
+        const m = s.match(/rgba?\(([^)]+)\)/i);
+        if (m) {
+            const parts = m[1].split(",").map(p => parseFloat(p.trim()));
+            return [parts[0] || 0, parts[1] || 0, parts[2] || 0, parts[3] == null ? 1 : parts[3]];
+        }
+        return [255, 255, 255, 1];
+    }
+
+    cfg() {
+        return {
+            reverse: this.options.reverse,
+            density: this.options.density,
+            stepZ: this.options.speed * 0.0008,
+            focalDepth: this.options.focalDepth / 100,
+            starScale: this.options.starSize * 0.15,
+            turbulence: this.options.turbulence * 0.2,
+            glitter: this.options.glitterIntensity * 0.1,
+            brightness: Math.min(1, this.options.brightness / 100),
+            trail: this.options.trailAmount / 100,
+        };
+    }
+
+    resetStar(s, initial = false) {
+        const c = this.cfg();
+        const angle = Math.random() * Math.PI * 2;
+        const radius = (0.2 + Math.random() * 0.8) * (c.density / 15);
+        
+        s.x = Math.cos(angle) * radius;
+        s.y = Math.sin(angle) * radius;
+        
+        if (c.reverse) {
+            s.z = initial ? c.focalDepth + Math.random() * (1 - c.focalDepth) : c.focalDepth;
+        } else {
+            s.z = initial ? Math.random() : 1.0;
+        }
+        
+        s.px = NaN;
+        s.py = NaN;
+        s.seed = Math.random() * 1000;
+        s.vmul = 0.6 + Math.random() * 0.8;
+        s.colorIdx = Math.floor(Math.random() * 3);
+        s.flashUntil = 0;
+        s.nextFlash = this.elapsed + 1 + Math.random() * 4 * (1 / Math.max(0.0001, c.glitter));
+    }
+
+    makeStar() {
+        return { x: 0, y: 0, z: 0, px: NaN, py: NaN, seed: 0, vmul: 1, colorIdx: 0, flashUntil: 0, nextFlash: 0 };
+    }
+
+    syncCount() {
+        const count = Math.max(1, Math.floor(this.options.particleCount));
+        if (this.stars.length === count) return;
+        if (this.stars.length > count) {
+            this.stars.length = count;
+        } else {
+            while (this.stars.length < count) {
+                const s = this.makeStar();
+                this.resetStar(s, true);
+                this.stars.push(s);
+            }
+        }
+    }
+
+    resize(entry) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const cr = entry?.contentRect;
+        const rectW = cr?.width || this.container.clientWidth || this.container.getBoundingClientRect().width;
+        const rectH = cr?.height || this.container.clientHeight || this.container.getBoundingClientRect().height;
+        const w = Math.max(1, Math.floor(rectW) || 600);
+        const h = Math.max(1, Math.floor(rectH) || 400);
+
+        if (this.size.w === w && this.size.h === h && this.size.dpr === dpr) return;
+
+        this.size = { w, h, dpr };
+        this.canvas.width = Math.floor(w * dpr);
+        this.canvas.height = Math.floor(h * dpr);
+        this.canvas.style.width = `${w}px`;
+        this.canvas.style.height = `${h}px`;
+        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        this.ctx.clearRect(0, 0, w, h);
+    }
+
+    drawFrame(deltaSec) {
+        const c = this.cfg();
+        this.syncCount();
+        
+        const { w, h } = this.size;
+        const cx = w / 2;
+        const cy = h / 2;
+        const projScale = Math.min(w, h) * 0.9;
+        const dt = Math.max(0.001, Math.min(0.1, deltaSec)) * 60;
+
+        const keep = Math.pow(Math.min(0.98, Math.max(0, c.trail)), dt);
+        const trailAlpha = Math.max(0.02, 1 - keep);
+        
+        this.ctx.globalAlpha = 1;
+        this.ctx.globalCompositeOperation = "destination-out";
+        this.ctx.fillStyle = `rgba(0, 0, 0, ${trailAlpha})`;
+        this.ctx.fillRect(0, 0, w, h);
+
+        this.ctx.globalCompositeOperation = "lighter";
+
+        for (let i = 0; i < this.stars.length; i++) {
+            const s = this.stars[i];
+            const vz = c.stepZ * s.vmul * dt;
+            
+            if (c.reverse) {
+                s.z += vz;
+                if (s.z >= 1.0) { this.resetStar(s); continue; }
+            } else {
+                s.z -= vz;
+                if (s.z <= c.focalDepth) { this.resetStar(s); continue; }
+            }
+
+            let tx = s.x;
+            let ty = s.y;
+            if (c.turbulence > 0) {
+                const t = this.elapsed * 1.2 + s.seed;
+                const amp = c.turbulence * (1 - s.z) * 0.25;
+                tx += Math.sin(t + s.seed) * amp;
+                ty += Math.cos(t * 1.13 + s.seed * 0.7) * amp;
+            }
+
+            const persp = c.focalDepth / Math.max(s.z, 0.0001);
+            const sx = cx + tx * persp * projScale;
+            const sy = cy + ty * persp * projScale;
+
+            if (!c.reverse && (sx < -20 || sx > w + 20 || sy < -20 || sy > h + 20)) {
+                this.resetStar(s);
+                continue;
+            }
+
+            let flashMult = 1;
+            if (c.glitter > 0) {
+                if (this.elapsed >= s.nextFlash && s.flashUntil < this.elapsed) {
+                    s.flashUntil = this.elapsed + 0.04 + Math.random() * 0.07;
+                    s.nextFlash = this.elapsed + 1 + Math.random() * 4 * (1 / Math.max(0.0001, c.glitter));
+                }
+                if (this.elapsed <= s.flashUntil) flashMult = 1 + 2.5 * c.glitter;
+            }
+
+            const sizePersp = Math.min(2.5, (c.focalDepth / Math.max(s.z, 0.0001)) * 0.6);
+            const baseR = Math.max(0.25, c.starScale * (0.4 + sizePersp));
+            const maxR = 1 + c.starScale * 2.5;
+            const r = Math.min(baseR * flashMult, maxR);
+
+            const lifeT = c.reverse ? s.z : 1 - s.z;
+            const fadeIn = c.reverse ? Math.min(1, (s.z - c.focalDepth) / (1 - c.focalDepth) / 0.12) : 1;
+            const a = Math.min(1, c.reverse ? 0.85 - lifeT * 0.6 : lifeT * 0.9 + 0.05) * fadeIn * c.brightness * (flashMult > 1 ? 1 : 0.85);
+            
+            const colStr = this.rgbStrs[s.colorIdx];
+
+            if (!Number.isNaN(s.px) && !Number.isNaN(s.py)) {
+                this.ctx.globalAlpha = a * 0.5;
+                this.ctx.strokeStyle = colStr;
+                this.ctx.lineWidth = Math.max(0.4, r * 0.4);
+                this.ctx.beginPath();
+                this.ctx.moveTo(s.px, s.py);
+                this.ctx.lineTo(sx, sy);
+                this.ctx.stroke();
+            }
+
+            this.ctx.globalAlpha = a;
+            this.ctx.fillStyle = colStr;
+            this.ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
+
+            if (flashMult > 1) {
+                const rf = Math.min(r * 1.4, maxR * 1.4);
+                this.ctx.globalAlpha = a * 0.5;
+                this.ctx.fillRect(sx - rf, sy - rf, rf * 2, rf * 2);
+            }
+
+            s.px = sx;
+            s.py = sy;
+        }
+
+        this.ctx.globalAlpha = 1;
+        this.ctx.globalCompositeOperation = "source-over";
+        this.elapsed += Math.min(0.1, Math.max(0, deltaSec));
+    }
+
+    loop(t) {
+        const deltaSec = (t - this.lastT) / 1000;
+        this.lastT = t;
+        this.drawFrame(deltaSec);
+        this.rafId = requestAnimationFrame(this.loop.bind(this));
+    }
+
+    init() {
+        this.syncCount();
+        this.resize();
+
+        this.ro = new ResizeObserver((entries) => this.resize(entries[0]));
+        this.ro.observe(this.container);
+
+        this.rafId = requestAnimationFrame(this.loop.bind(this));
+    }
+
+    destroy() {
+        if (this.rafId) cancelAnimationFrame(this.rafId);
+        if (this.ro) this.ro.disconnect();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('glitter-canvas');
+    if (canvas) {
+        new GlitterWrap(canvas, { particleCount: 1000, starSize: 10, focalDepth: 5, trailAmount: 30 });
+    }
+});
+

@@ -109,3 +109,20 @@ build/
 # Temporary files
 *.tmp
 *.temp 
+.originkit/
+
+
+node_modules/
+package-lock.json
+*.tsx
+*.ts
+*.md
+deploy.ps1
+
+
+#ignoring Assets folder
+/Assets/
+
+#ignoring chromatic waves folder ( background for why us section)
+/chromatic-waves.js
+
