@@ -122,7 +122,3 @@ deploy.ps1
 
 #ignoring Assets folder
 /Assets/
-
-#ignoring chromatic waves folder ( background for why us section)
-/chromatic-waves.js
-
