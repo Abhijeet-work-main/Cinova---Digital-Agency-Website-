@@ -1924,4 +1924,3 @@ document.addEventListener('DOMContentLoaded', () => {
         new GlitterWrap(canvas, { particleCount: 1000, starSize: 10, focalDepth: 5, trailAmount: 30 });
     }
 });
-
