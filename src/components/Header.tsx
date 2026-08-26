@@ -77,10 +77,14 @@ export default function Header() {
               }}
               className="desktop-nav"
             >
-              {["Work", "Solutions", "Industries"].map((link) => (
+              {[
+                { label: "Work", href: "/#work" },
+                { label: "Solutions", href: "/solutions/paid-growth" },
+                { label: "Industries", href: "/for/ecommerce" },
+              ].map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.label}
+                  href={link.href}
                   style={{
                     color: "var(--text-secondary)",
                     textDecoration: "none",
@@ -91,7 +95,7 @@ export default function Header() {
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -187,10 +191,15 @@ export default function Header() {
             [close]
           </button>
           <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "2rem" }}>
-            {["Work", "Solutions", "Industries", "About"].map((item) => (
+            {[
+              { label: "Work", href: "/#work" },
+              { label: "Solutions", href: "/solutions/paid-growth" },
+              { label: "Industries", href: "/for/ecommerce" },
+              { label: "Free Audit", href: "/#audit" },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 onClick={toggleMenu}
                 style={{
                   fontFamily: "var(--font-display)",
@@ -200,7 +209,7 @@ export default function Header() {
                   fontWeight: 600,
                 }}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>

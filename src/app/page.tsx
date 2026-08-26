@@ -101,6 +101,35 @@ export default function Home() {
                 See How It Connects
               </a>
             </div>
+
+            {/* Industry quick-entry strip */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "2rem", alignItems: "center" }}>
+              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginRight: "0.25rem" }}>We work with:</span>
+              {[
+                { label: "E-commerce", slug: "ecommerce" },
+                { label: "Service Brands", slug: "service-brands" },
+                { label: "Creators", slug: "creators" },
+                { label: "Fashion & Apparel", slug: "fashion-apparel" },
+              ].map((ind) => (
+                <a
+                  key={ind.slug}
+                  href={`/for/${ind.slug}`}
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "var(--text-secondary)",
+                    textDecoration: "none",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "50px",
+                    padding: "0.3rem 0.85rem",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-primary)"; e.currentTarget.style.color = "#fff"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
+                >
+                  {ind.label} →
+                </a>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -210,7 +239,9 @@ export default function Home() {
               }}
             >
               {caseStudies.map((study) => (
-                <CaseStudyCard key={study.slug} study={study} />
+                <a key={study.slug} href={`/work/${study.slug}`} style={{ textDecoration: "none", display: "block" }}>
+                  <CaseStudyCard study={study} />
+                </a>
               ))}
             </div>
           </div>
@@ -248,31 +279,35 @@ export default function Home() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem" }}>
               {solutions.map((sol) => (
-                <div
+                <a
                   key={sol.id}
-                  style={{
-                    padding: "3rem 2rem",
-                    borderRadius: "var(--border-radius-medium)",
-                    border: "1px solid rgba(255, 255, 255, 0.05)",
-                  }}
-                  className="glass-panel"
+                  href={`/solutions/${sol.slug}`}
+                  style={{ textDecoration: "none", display: "block" }}
                 >
-                  <h3 style={{ fontSize: "1.8rem", color: "#ffffff", marginBottom: "1rem" }}>{sol.name}</h3>
-                  <h4 style={{ fontSize: "1rem", color: "var(--accent-primary)", fontWeight: 500, marginBottom: "1.5rem" }}>{sol.tagline}</h4>
-                  <p style={{ marginBottom: "2rem", fontSize: "0.95rem" }}>{sol.description}</p>
-                  <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: "1.5rem" }}>
-                    <h5 style={{ color: "#ffffff", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "1rem" }}>
-                      Integrated Capabilities:
-                    </h5>
-                    <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                      {sol.capabilities.map((cap) => (
-                        <li key={cap} style={{ fontSize: "0.9rem", color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                          <span style={{ color: "var(--accent-primary)" }}>✓</span> {cap}
-                        </li>
-                      ))}
-                    </ul>
+                  <div
+                    style={{
+                      padding: "3rem 2rem",
+                      borderRadius: "var(--border-radius-medium)",
+                      border: "1px solid rgba(255, 255, 255, 0.05)",
+                      height: "100%",
+                    }}
+                    className="glass-panel glass-panel-hover"
+                  >
+                    <h3 style={{ fontSize: "1.8rem", color: "#ffffff", marginBottom: "1rem" }}>{sol.name}</h3>
+                    <h4 style={{ fontSize: "1rem", color: "var(--accent-primary)", fontWeight: 500, marginBottom: "1.5rem" }}>{sol.tagline}</h4>
+                    <p style={{ marginBottom: "2rem", fontSize: "0.95rem" }}>{sol.heroSubtext}</p>
+                    <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: "1.5rem" }}>
+                      <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                        {sol.capabilities.map((cap) => (
+                          <li key={cap} style={{ fontSize: "0.9rem", color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                            <span style={{ color: "var(--accent-primary)" }}>✓</span> {cap}
+                          </li>
+                        ))}
+                      </ul>
+                      <span style={{ display: "inline-block", marginTop: "1.5rem", color: "var(--accent-primary)", fontSize: "0.85rem", fontWeight: 600 }}>Explore this solution →</span>
+                    </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
