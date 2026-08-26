@@ -1,0 +1,254 @@
+// Magnetic Hover Button — Originkit
+// Originkit — props baked into the default export.
+// Delivered by Originkit · stack: nextjs
+"use client";
+
+import { motion, useMotionValue, useSpring } from "framer-motion"
+import { useRef, useState, useEffect, type CSSProperties } from "react"
+
+const DEFAULTS = {
+    label: "Magnetic Hover",
+    fill: "#FFFFFF",
+    textColor: "#000000",
+    sweepColor: "#0000FF",
+    sweepTextColor: "#FFFFFF",
+    radius: 100,
+    magnet: 10,
+    paddingX: 48,
+    paddingY: 24,
+    transition: { type: "tween", ease: "easeInOut", duration: 0.3 },
+    border: true,
+    borderOptions: { color: "#FFFFFF", width: 1 },
+}
+
+// Magnet governs both halves of the field. Each point of it widens the reach by
+// RANGE_PER_POINT beyond the button's own edge, and stiffens the pull: at 20 the
+// button closes half the gap to the cursor, at 0 it never budges.
+const RANGE_PER_POINT = 18
+const MAX_PULL = 0.5
+
+interface BorderOptions {
+    color: string
+    width: number
+}
+
+interface MagneticButtonProps {
+    label: string
+    link?: string
+    newTab: boolean
+    font?: CSSProperties
+    fill: string
+    textColor: string
+    sweepColor: string
+    sweepTextColor: string
+    radius: number
+    magnet: number
+    paddingX: number
+    paddingY: number
+    transition: any
+    border: boolean
+    borderOptions: BorderOptions
+    style?: CSSProperties
+}
+
+/**
+ * Magnetic Button
+ *
+ * A CTA that leans toward the cursor from a distance, with a color wipe on hover.
+ * The wipe grows from wherever the cursor enters the button. Magnet sets how far
+ * the field reaches and how hard it pulls.
+ *
+ * @framerIntrinsicWidth 600
+ * @framerIntrinsicHeight 600
+ *
+ * @framerSupportedLayoutWidth any-prefer-fixed
+ * @framerSupportedLayoutHeight any-prefer-fixed
+ */
+function __OriginkitBase_MagneticButton(props: MagneticButtonProps) {
+    const {
+        label = DEFAULTS.label,
+        link,
+        newTab = false,
+        font,
+        fill = DEFAULTS.fill,
+        textColor = DEFAULTS.textColor,
+        sweepColor = DEFAULTS.sweepColor,
+        sweepTextColor = DEFAULTS.sweepTextColor,
+        radius = DEFAULTS.radius,
+        magnet = DEFAULTS.magnet,
+        paddingX = DEFAULTS.paddingX,
+        paddingY = DEFAULTS.paddingY,
+        transition = DEFAULTS.transition,
+        border = DEFAULTS.border,
+        borderOptions = DEFAULTS.borderOptions,
+    } = props
+
+    const ref = useRef<HTMLAnchorElement>(null)
+    const [hover, setHover] = useState(false)
+    // Where the wipe grows from: the point (in the button's own box) where the
+    // cursor crossed the edge, plus a diameter large enough to cover the button.
+    const [origin, setOrigin] = useState({ x: 0, y: 0, d: 0 })
+    const hoverRef = useRef(false)
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+    const sx = useSpring(x, { stiffness: 260, damping: 18, mass: 0.4 })
+    const sy = useSpring(y, { stiffness: 260, damping: 18, mass: 0.4 })
+
+    const borderColor = borderOptions?.color ?? DEFAULTS.borderOptions.color
+    const borderWidth = border ? (borderOptions?.width ?? 0) : 0
+
+    useEffect(() => {
+        const el = ref.current
+        if (!el) return
+        const node: HTMLAnchorElement = el
+
+        const pull = (magnet / 20) * MAX_PULL
+        const reach = magnet * RANGE_PER_POINT
+
+        function onMove(event: PointerEvent) {
+            const rect = node.getBoundingClientRect()
+            // The rect already includes the offset the spring is applying, so
+            // subtract it back out. Measuring the moved button and then moving it
+            // again from there would chase the cursor and never settle.
+            const cx = rect.left + rect.width / 2 - sx.get()
+            const cy = rect.top + rect.height / 2 - sy.get()
+
+            const dx = event.clientX - cx
+            const dy = event.clientY - cy
+
+            // Hover is tested against the button's ACTUAL rendered rect (which
+            // already carries the magnet offset), so it flips the instant the
+            // cursor touches the visible edge — not the un-moved box.
+            const inside =
+                event.clientX >= rect.left &&
+                event.clientX <= rect.right &&
+                event.clientY >= rect.top &&
+                event.clientY <= rect.bottom
+
+            // Distance measured from the button's edge, not its centre, so a wide
+            // button doesn't have a correspondingly weaker grip near its ends.
+            const edgeX = Math.max(0, Math.abs(dx) - rect.width / 2)
+            const edgeY = Math.max(0, Math.abs(dy) - rect.height / 2)
+            const gap = Math.hypot(edgeX, edgeY)
+
+            // Local point inside the button's box (clamped to its edges). Used as
+            // the wipe origin on both entry (grow) and exit (retract).
+            if (inside !== hoverRef.current) {
+                const lx = Math.max(
+                    0,
+                    Math.min(rect.width, event.clientX - rect.left)
+                )
+                const ly = Math.max(
+                    0,
+                    Math.min(rect.height, event.clientY - rect.top)
+                )
+                // Radius reaching the far corner, doubled so the circle always
+                // covers the whole button from any entry point.
+                const d = 2 * Math.hypot(rect.width, rect.height)
+                setOrigin({ x: lx, y: ly, d })
+                hoverRef.current = inside
+                setHover(inside)
+            }
+
+            if (gap > reach) {
+                x.set(0)
+                y.set(0)
+                return
+            }
+            // Full strength against the button, tapering to nothing at the rim of
+            // the field, so it eases in rather than snapping the moment you cross.
+            const falloff = reach === 0 ? 0 : 1 - gap / reach
+            x.set(dx * pull * falloff)
+            y.set(dy * pull * falloff)
+        }
+
+        function onLeave() {
+            x.set(0)
+            y.set(0)
+            hoverRef.current = false
+            setHover(false)
+        }
+
+        window.addEventListener("pointermove", onMove)
+        document.addEventListener("pointerleave", onLeave)
+        return () => {
+            window.removeEventListener("pointermove", onMove)
+            document.removeEventListener("pointerleave", onLeave)
+        }
+    }, [magnet, x, y, sx, sy])
+
+    return (
+        <motion.a
+            ref={ref}
+            href={link || undefined}
+            target={link && newTab ? "_blank" : undefined}
+            rel={link && newTab ? "noopener noreferrer" : undefined}
+            style={{
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxSizing: "border-box",
+                padding: `${paddingY}px ${paddingX}px`,
+                borderRadius: radius,
+                background: fill,
+                border:
+                    borderWidth > 0
+                        ? `${borderWidth}px solid ${borderColor}`
+                        : "none",
+                cursor: "pointer",
+                overflow: "hidden",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                x: sx,
+                y: sy,
+                boxShadow: hover
+                    ? "0 16px 40px rgba(0,0,0,0.22)"
+                    : "0 8px 22px rgba(0,0,0,0.14)",
+                ...font,
+            }}
+        >
+            <motion.span
+                aria-hidden
+                initial={false}
+                animate={{ scale: hover ? 1 : 0 }}
+                transition={transition}
+                style={{
+                    position: "absolute",
+                    top: origin.y,
+                    left: origin.x,
+                    width: origin.d,
+                    height: origin.d,
+                    marginLeft: -origin.d / 2,
+                    marginTop: -origin.d / 2,
+                    borderRadius: "50%",
+                    background: sweepColor,
+                    transformOrigin: "center",
+                    pointerEvents: "none",
+                }}
+            />
+            <motion.span
+                initial={false}
+                animate={{ color: hover ? sweepTextColor : textColor }}
+                transition={transition}
+                style={{ position: "relative", zIndex: 1 }}
+            >
+                {label}
+            </motion.span>
+        </motion.a>
+    )
+}
+
+const __originkitPresetProps = {
+  "sweepColor": "#4FFF00",
+  "sweepTextColor": "#000000",
+  "magnet": 20,
+  "borderOptions": {
+    "color": "#000000",
+    "width": 1
+  }
+};
+
+export default function MagneticButton(props: Record<string, unknown>) {
+  return <__OriginkitBase_MagneticButton {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
+}

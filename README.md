@@ -1,152 +1,36 @@
-# Cinova - Professional Video Editing Agency Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A modern, animated, and responsive website for **Cinova**, a professional video editing agency. Built with vanilla HTML, CSS, and JavaScript for optimal performance and user experience.
+## Getting Started
 
-## 🚀 Features
+First, run the development server:
 
-### Design & User Experience
-- **Floating Navigation**: Translucent, centered navbar with rounded corners
-- **Smooth Animations**: CSS animations and transitions throughout
-- **Interactive Elements**: Hover effects, floating elements, and micro-interactions
-- **Responsive Design**: Mobile-first approach with optimized layouts
-- **Modern Typography**: Beautiful font combinations (Inter + Playfair Display)
-
-### Functionality
-- **Portfolio Filtering**: Dynamic project showcase with category filters
-- **Contact Form**: Functional form with validation and notifications
-- **Animated Counters**: Statistics that animate when scrolled into view
-- **Mobile Menu**: Hamburger menu with smooth toggle animation
-- **Smooth Scrolling**: Seamless navigation between sections
-- **Get Started Button**: Prominent CTA in the floating navbar
-
-### Technical Features
-- **Lightweight**: No external dependencies, pure vanilla JS
-- **Performance Optimized**: Lazy loading, debounced scroll handlers
-- **Accessibility**: Keyboard navigation and reduced motion support
-- **SEO Friendly**: Proper meta tags and semantic HTML
-- **Cross-browser Compatible**: Works across all modern browsers
-
-## 🎨 Color Palette
-
-The website uses a carefully crafted color scheme:
-- **Primary**: `#FFFADC` - Warm cream background
-- **Secondary**: `#B6F500` - Vibrant lime green
-- **Tertiary**: `#A4DD00` - Medium lime green
-- **Accent**: `#98CD00` - Darker lime green
-- **Text Dark**: `#2c3e50` - Deep blue-gray
-- **Text Light**: `#6c757d` - Medium gray
-
-## 📁 File Structure
-
-```
-Agency website/
-├── index.html          # Main HTML structure
-├── style.css           # Complete styling and animations
-├── script.js          # Interactive functionality
-└── README.md          # This documentation
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🛠️ Usage
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. **Local Development**: Open `index.html` in any modern web browser
-2. **Web Server**: Upload files to your web hosting service
-3. **Customization**: Edit colors, content, and contact information as needed
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 📱 Responsive Breakpoints
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- **Desktop**: 1024px and above
-- **Tablet**: 768px - 1023px
-- **Mobile**: 767px and below
-- **Small Mobile**: 480px and below
+## Learn More
 
-## 🔧 Customization
+To learn more about Next.js, take a look at the following resources:
 
-### Contact Information
-Update the following in `index.html`:
-- **Email**: xabhijeetxa@gmail.com
-- **Phone**: +91 7428245045
-- **Response Time**: Within 24 hours
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Agency Name
-The agency name "Cinova" appears in:
-- Page title and meta tags
-- Navigation logo
-- About section heading
-- Footer branding
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Services
-Edit the services section to match your offerings:
-- Corporate Videos
-- Social Media Content
-- Marketing Videos
-- Motion Graphics
+## Deploy on Vercel
 
-## 🌟 Key Sections
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-1. **Hero Section**: Eye-catching intro with floating elements
-2. **About Section**: Company story with animated statistics
-3. **Services Section**: Four main service categories
-4. **Portfolio Section**: Filterable project showcase
-5. **Contact Section**: Form and contact information
-6. **Footer**: Company links and social media
-
-## 🎯 Performance Features
-
-- **CSS Animations**: Hardware-accelerated transforms
-- **Intersection Observer**: Lazy loading for animations
-- **Debounced Scroll**: Optimized scroll event handling
-- **Preloading**: Image preloading for better UX
-- **Passive Listeners**: Non-blocking event handlers
-
-## 🔍 SEO Optimizations
-
-- Semantic HTML structure
-- Proper heading hierarchy
-- Meta descriptions and keywords
-- Alt text for images (when added)
-- Schema markup ready
-
-## 📞 Contact Information
-
-For questions about this website or video editing services:
-
-- **Email**: xabhijeetxa@gmail.com
-- **Phone**: +91 7428245045
-- **Website**: Cinova Video Editing Agency
-
-## 🎬 About Cinova
-
-Cinova is a professional video editing agency specializing in:
-- Corporate video production
-- Social media content creation
-- Marketing video campaigns
-- Motion graphics and animations
-
-We transform visions into compelling visual stories that engage audiences and drive results.
-
-## 🚀 Getting Started
-
-1. **Download** all files to your local machine
-2. **Open** `index.html` in your preferred web browser
-3. **Customize** content, colors, and contact information
-4. **Deploy** to your web hosting service
-
-## 📋 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 🔄 Updates
-
-This website is designed to be easily maintainable:
-- Update portfolio items in the HTML
-- Modify colors in CSS custom properties
-- Add new animations in the CSS animations section
-- Extend functionality in the JavaScript file
-
----
-
-**Built with ❤️ for Cinova by a modern web development approach** 
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
