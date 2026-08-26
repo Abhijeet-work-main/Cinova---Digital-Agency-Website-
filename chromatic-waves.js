@@ -15,10 +15,10 @@
     frequency: 2,
     speed: 2,
     bgColor: "#FFFFFF",
-    colors: ["#B6F500"],
+    colors: ["#FFFFFF","#000000"],
     cellSize: 3,
-    gamma: 7,
-    paletteBias: 5,
+    gamma: 6,
+    paletteBias: 0,
     fps: 30,
   };
 
