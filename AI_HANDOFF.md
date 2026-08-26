@@ -31,6 +31,20 @@ The codebase is a Next.js 16 (App Router) project written in TypeScript.
 - **Next.js Migration setup**: Fully configured.
 - **Phase A (Foundation & Homepage)**: The core UI, global CSS, components, and primary homepage.
 - **Phase B (Dynamic Routes)**: Data-driven architecture for solutions, industries, and case studies, completely wired with cross-links.
+- **Phase C.0 (Visual Audit)**: Read-only audit of reference HTML/CSS/JS. `PHASE_C_IMPLEMENTATION_PLAN.md` created.
+- **Phase C.1 (Global Interactions & Header)**:
+  - `src/components/Header.tsx` rebuilt: cinematic fullscreen slide-in navigation panel.
+  - Menu links: Solutions (4), Industries (4), Work (5), Free Audit CTA.
+  - Keyboard nav: Escape to close, Tab focus trap, focus returns to trigger on close.
+  - Body scroll lock on open; restored on close.
+  - CSS stagger animations on sections and nav links (CSS custom properties `--section-index`, `--item-index`).
+  - Hamburger icon animates into × when menu is open.
+  - Scroll-aware header bar transitions to glass blur on scroll.
+  - `src/components/ui/MagneticButton.tsx` created: fine-pointer + reduced-motion aware, element-scoped mousemove listeners, CSS `transform` only, cleaned up on unmount.
+  - `src/app/globals.css` extended with ~380 lines of BEM-namespaced Phase C.1 CSS.
+  - `@media (prefers-reduced-motion: reduce)` block eliminates all transitions/animations.
+  - **No new npm packages installed.**
+  - **CustomCursor.tsx intentionally omitted**: Cannot safely implement a continuous RAF loop without Framer Motion's `useSpring`. Requires explicit separate approval.
 - All code statically compiles via `npm run build` without errors.
 
 ## 6. VERIFIED FACTS & PROHIBITED CLAIMS
@@ -58,6 +72,11 @@ Do not overwrite, remove, or discard the original reference files or project sca
 - `AI_HANDOFF.md`
 - `Proof/` and `Assets/` directories.
 
-## 9. SAFEST NEXT IMPLEMENTATION PRIORITIES
-The repository is perfectly clean, synced with git (`origin/main`), and statically compiled.
-**Do not start any new work.** Wait for explicit instruction regarding Phase C (e.g., integrations, advanced animations, diagnostic backend) from the user.
+## 9. NEXT IMPLEMENTATION PRIORITY
+Phase C.1 is complete and build-verified. **Do not commit until explicitly instructed.**
+
+Next: **Phase C.2 — Hero & Backgrounds**, per `PHASE_C_IMPLEMENTATION_PLAN.md`:
+- Create `src/components/ui/ChromaticWaves.tsx` (WebGL canvas, pauses off-screen via IntersectionObserver).
+- Rebuild the Hero section in `src/app/page.tsx` with a parallax image masonry using CSS Grid + scroll-linked transforms.
+- Must still use only existing dependencies (no Framer Motion).
+- Await explicit approval before starting.
