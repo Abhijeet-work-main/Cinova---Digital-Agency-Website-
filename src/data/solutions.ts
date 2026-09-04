@@ -141,50 +141,6 @@ export const solutions: Solution[] = [
   },
 ];
 
-export interface SystemStep {
-  name: string;
-  description: string;
-  detail: string;
-}
-
-export const systemSteps: SystemStep[] = [
-  {
-    name: "Strategy",
-    description: "Outcome Alignment",
-    detail: "Diagnosing growth leaks and organizing marketing around business outcomes.",
-  },
-  {
-    name: "Creative",
-    description: "Concept Design",
-    detail: "High-contrast styling, scripting, and layout direction built for conversion.",
-  },
-  {
-    name: "Production",
-    description: "Asset Execution",
-    detail: "Capturing videography, designing vector imagery, and post-production editing.",
-  },
-  {
-    name: "Digital",
-    description: "Conversion Platform",
-    detail: "Building responsive Next.js interfaces and automated scheduler flows.",
-  },
-  {
-    name: "Distribution",
-    description: "Paid & Organic Ads",
-    detail: "Deploying campaigns on Meta Ads and seeding retention-optimized content.",
-  },
-  {
-    name: "Intelligence",
-    description: "Measurement System",
-    detail: "Attributing link clicks, form events, and customer pathways via telemetry.",
-  },
-  {
-    name: "Optimization",
-    description: "Iterative Testing",
-    detail: "Refining pricing structures, offers, visual hooks, and landing variants.",
-  },
-];
-
 export function getSolutionBySlug(slug: string): Solution | undefined {
   return solutions.find((s) => s.slug === slug);
 }

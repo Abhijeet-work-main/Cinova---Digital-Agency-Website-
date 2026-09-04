@@ -2,12 +2,13 @@
 
 import React from "react";
 import Header from "../components/Header";
+import Hero from "../components/Hero";
 import Footer from "../components/Footer";
-import CinovaSystem from "../components/CinovaSystem";
 import CaseStudyCard from "../components/CaseStudyCard";
 import CTA from "../components/CTA";
 import { caseStudies } from "../data/caseStudies";
 import { solutions } from "../data/solutions";
+import EngagementModels from "../components/EngagementModels";
 
 export default function Home() {
   return (
@@ -17,121 +18,7 @@ export default function Home() {
 
       <main>
         {/* 1. HERO SECTION */}
-        <section
-          style={{
-            padding: "10rem 2rem 6rem 2rem",
-            position: "relative",
-            overflow: "hidden",
-            zIndex: 10,
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "1400px",
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: "2.5rem",
-            }}
-          >
-            <div>
-              <span
-                style={{
-                  color: "var(--accent-primary)",
-                  textTransform: "uppercase",
-                  fontSize: "0.85rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.2em",
-                  display: "inline-block",
-                  marginBottom: "1rem",
-                }}
-              >
-                Cinova Digital Growth
-              </span>
-              <h1
-                style={{
-                  fontSize: "clamp(2.8rem, 8vw, 6.5rem)",
-                  color: "#ffffff",
-                  lineHeight: "1.05",
-                  letterSpacing: "-0.04em",
-                  maxWidth: "1100px",
-                }}
-              >
-                We resolve growth bottlenecks by connecting <em style={{ fontStyle: "italic", color: "var(--accent-primary)" }}>creative</em> and <em style={{ fontStyle: "italic", color: "var(--accent-primary)" }}>funnels</em>.
-              </h1>
-            </div>
-
-            <p style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)", maxWidth: "700px", lineHeight: "1.6" }}>
-              Most agencies deliver isolated pieces—stale ad campaigns, separate videography, and disconnected web portals. We build clean, high-contrast, fully integrated acquisition architectures.
-            </p>
-
-            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", marginTop: "1rem" }}>
-              <a
-                href="#audit"
-                style={{
-                  backgroundColor: "var(--accent-primary)",
-                  color: "#000000",
-                  padding: "1rem 2rem",
-                  borderRadius: "50px",
-                  fontWeight: 700,
-                  textDecoration: "none",
-                  fontSize: "1rem",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--accent-hover)")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--accent-primary)")}
-              >
-                Get Free Growth Audit
-              </a>
-              <a
-                href="#system"
-                className="glass-panel"
-                style={{
-                  color: "#ffffff",
-                  padding: "1rem 2rem",
-                  borderRadius: "50px",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  fontSize: "1rem",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--accent-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)")}
-              >
-                See How It Connects
-              </a>
-            </div>
-
-            {/* Industry quick-entry strip */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "2rem", alignItems: "center" }}>
-              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginRight: "0.25rem" }}>We work with:</span>
-              {[
-                { label: "E-commerce", slug: "ecommerce" },
-                { label: "Service Brands", slug: "service-brands" },
-                { label: "Creators", slug: "creators" },
-                { label: "Fashion & Apparel", slug: "fashion-apparel" },
-              ].map((ind) => (
-                <a
-                  key={ind.slug}
-                  href={`/for/${ind.slug}`}
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "var(--text-secondary)",
-                    textDecoration: "none",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: "50px",
-                    padding: "0.3rem 0.85rem",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-primary)"; e.currentTarget.style.color = "#fff"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
-                >
-                  {ind.label} →
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         {/* 2. PROBLEM RECOGNITION */}
         <section
@@ -193,8 +80,257 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. THE CINOVA SYSTEM (Interactive blueprint component) */}
-        <CinovaSystem />
+        {/* 3. CONVERSION BRIDGE — "Where Is Your Growth Leaking?" */}
+        <section
+          id="growth-leaking"
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            position: "relative",
+            zIndex: 10,
+            overflow: "hidden",
+          }}
+        >
+          {/* Subtle lime accent glow — top-left */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "-80px",
+              left: "-120px",
+              width: "520px",
+              height: "520px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(182,245,0,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+
+            {/* Eyebrow */}
+            <span
+              style={{
+                color: "var(--accent-primary)",
+                textTransform: "uppercase",
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                letterSpacing: "0.18em",
+                display: "inline-block",
+                marginBottom: "2rem",
+              }}
+            >
+              Conversion Clarity
+            </span>
+
+            {/* Main headline */}
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2.4rem, 6vw, 5rem)",
+                color: "#ffffff",
+                lineHeight: 1.1,
+                maxWidth: "760px",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Where is your growth system{" "}
+              <em
+                style={{
+                  color: "var(--accent-primary)",
+                  fontStyle: "italic",
+                }}
+              >
+                leaking?
+              </em>
+            </h2>
+
+            {/* Supporting statement */}
+            <p
+              style={{
+                fontSize: "clamp(1.05rem, 2vw, 1.3rem)",
+                color: "var(--text-secondary)",
+                maxWidth: "600px",
+                lineHeight: 1.7,
+                marginBottom: "5rem",
+              }}
+            >
+              Your ads may be working. Your funnel may not.
+              <br />
+              Attention is not the problem. Conversion is.
+            </p>
+
+            {/* Three diagnostic pillars */}
+            <div
+              className="growth-leaking-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "2px",
+              }}
+            >
+              {/* Pillar 1 */}
+              <div
+                style={{
+                  padding: "3rem 2.5rem",
+                  borderTop: "2px solid var(--accent-primary)",
+                  background: "rgba(255,255,255,0.02)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "3.5rem",
+                    color: "rgba(182,245,0,0.12)",
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    marginBottom: "1.5rem",
+                    userSelect: "none",
+                  }}
+                  aria-hidden="true"
+                >
+                  01
+                </span>
+                <h3
+                  style={{
+                    fontSize: "1.2rem",
+                    color: "#ffffff",
+                    marginBottom: "0.75rem",
+                    fontFamily: "var(--font-display)",
+                  }}
+                >
+                  Traffic Without Conversion
+                </h3>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>
+                  Clicks arrive. Visitors browse. Nothing is purchased or booked. The gap is not visibility — it is the conversion architecture between your ad and your outcome.
+                </p>
+              </div>
+
+              {/* Pillar 2 */}
+              <div
+                style={{
+                  padding: "3rem 2.5rem",
+                  borderTop: "2px solid rgba(182,245,0,0.35)",
+                  background: "rgba(255,255,255,0.02)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "3.5rem",
+                    color: "rgba(182,245,0,0.08)",
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    marginBottom: "1.5rem",
+                    userSelect: "none",
+                  }}
+                  aria-hidden="true"
+                >
+                  02
+                </span>
+                <h3
+                  style={{
+                    fontSize: "1.2rem",
+                    color: "#ffffff",
+                    marginBottom: "0.75rem",
+                    fontFamily: "var(--font-display)",
+                  }}
+                >
+                  Creative Without a System
+                </h3>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>
+                  You have content. You may even have good content. But without a connected system, content earns attention for the algorithm — not revenue for the business.
+                </p>
+              </div>
+
+              {/* Pillar 3 */}
+              <div
+                style={{
+                  padding: "3rem 2.5rem",
+                  borderTop: "2px solid rgba(182,245,0,0.15)",
+                  background: "rgba(255,255,255,0.02)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "3.5rem",
+                    color: "rgba(182,245,0,0.06)",
+                    fontWeight: 700,
+                    lineHeight: 1,
+                    marginBottom: "1.5rem",
+                    userSelect: "none",
+                  }}
+                  aria-hidden="true"
+                >
+                  03
+                </span>
+                <h3
+                  style={{
+                    fontSize: "1.2rem",
+                    color: "#ffffff",
+                    marginBottom: "0.75rem",
+                    fontFamily: "var(--font-display)",
+                  }}
+                >
+                  Vendors Without Accountability
+                </h3>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>
+                  Separate agencies. Separate teams. Each owns one part and none owns the outcome. When something underperforms, accountability dissolves into coordination overhead.
+                </p>
+              </div>
+            </div>
+
+            {/* Bridge statement */}
+            <div
+              style={{
+                marginTop: "5rem",
+                paddingTop: "3rem",
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+                display: "flex",
+                alignItems: "center",
+                gap: "2rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "clamp(1rem, 2vw, 1.2rem)",
+                  color: "var(--text-secondary)",
+                  maxWidth: "680px",
+                  lineHeight: 1.7,
+                  flex: "1 1 300px",
+                }}
+              >
+                Every month without a connected system, qualified buyers find your competitors. The evidence below is what a connected system looks like when it works.
+              </p>
+              <a
+                href="#work"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "var(--accent-primary)",
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  flexShrink: 0,
+                  transition: "gap var(--transition-fast)",
+                }}
+                className="growth-leaking-link"
+              >
+                See the proof
+                <span aria-hidden="true" style={{ fontSize: "1.1rem" }}>→</span>
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* 4. REAL WORK / PROOF */}
         <section
@@ -261,7 +397,7 @@ export default function Home() {
             <div style={{ textAlign: "center", marginBottom: "5rem" }}>
               <span
                 style={{
-                  color: "var(--text-muted)",
+                  color: "var(--accent-primary)",
                   textTransform: "uppercase",
                   fontSize: "0.85rem",
                   fontWeight: 700,
@@ -272,61 +408,256 @@ export default function Home() {
               >
                 Integrated Capabilities
               </span>
-              <h2 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", color: "#ffffff" }}>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+                  color: "#ffffff",
+                  lineHeight: 1.15,
+                  maxWidth: "800px",
+                  margin: "0 auto 1.25rem",
+                }}
+              >
                 How We Resolve Bottlenecks.
               </h2>
+              <p
+                style={{
+                  color: "var(--text-secondary)",
+                  fontSize: "1.05rem",
+                  maxWidth: "600px",
+                  margin: "0 auto",
+                  lineHeight: 1.6,
+                }}
+              >
+                Every capability is connected to drive actual customer acquisition and revenue, never isolated in a vacuum.
+              </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem" }}>
-              {solutions.map((sol) => (
+            <div
+              className="solutions-overview-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: "2rem",
+              }}
+            >
+              {solutions.map((sol, idx) => (
                 <a
                   key={sol.id}
                   href={`/solutions/${sol.slug}`}
-                  style={{ textDecoration: "none", display: "block" }}
+                  style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}
+                  className="solution-card-link"
                 >
                   <div
                     style={{
-                      padding: "3rem 2rem",
-                      borderRadius: "var(--border-radius-medium)",
-                      border: "1px solid rgba(255, 255, 255, 0.05)",
+                      padding: "3rem 2.25rem",
+                      borderRadius: "16px",
+                      border: "1px solid rgba(255, 255, 255, 0.07)",
+                      backgroundColor: "rgba(255, 255, 255, 0.015)",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                       height: "100%",
+                      position: "relative",
+                      transition: "transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease",
                     }}
-                    className="glass-panel glass-panel-hover"
+                    className="solution-card glass-panel"
                   >
-                    <h3 style={{ fontSize: "1.8rem", color: "#ffffff", marginBottom: "1rem" }}>{sol.name}</h3>
-                    <h4 style={{ fontSize: "1rem", color: "var(--accent-primary)", fontWeight: 500, marginBottom: "1.5rem" }}>{sol.tagline}</h4>
-                    <p style={{ marginBottom: "2rem", fontSize: "0.95rem" }}>{sol.heroSubtext}</p>
-                    <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: "1.5rem" }}>
-                      <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                        {sol.capabilities.map((cap) => (
-                          <li key={cap} style={{ fontSize: "0.9rem", color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                            <span style={{ color: "var(--accent-primary)" }}>✓</span> {cap}
-                          </li>
-                        ))}
-                      </ul>
-                      <span style={{ display: "inline-block", marginTop: "1.5rem", color: "var(--accent-primary)", fontSize: "0.85rem", fontWeight: 600 }}>Explore this solution →</span>
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          marginBottom: "1.75rem",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: "1.2rem",
+                            color: "rgba(182, 245, 0, 0.5)",
+                            fontWeight: 700,
+                          }}
+                        >
+                          0{idx + 1}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "0.75rem",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.15em",
+                            color: "var(--text-muted)",
+                            fontWeight: 600,
+                          }}
+                        >
+                          Core Solution
+                        </span>
+                      </div>
+
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: "1.85rem",
+                          color: "#ffffff",
+                          marginBottom: "0.75rem",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {sol.name}
+                      </h3>
+                      <h4
+                        style={{
+                          fontSize: "0.95rem",
+                          color: "var(--accent-primary)",
+                          fontWeight: 500,
+                          marginBottom: "1.25rem",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {sol.tagline}
+                      </h4>
+                      <p
+                        style={{
+                          marginBottom: "2rem",
+                          fontSize: "0.92rem",
+                          color: "var(--text-secondary)",
+                          lineHeight: 1.65,
+                        }}
+                      >
+                        {sol.heroSubtext}
+                      </p>
+
+                      <div
+                        style={{
+                          borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+                          paddingTop: "1.5rem",
+                          marginBottom: "2.5rem",
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: "block",
+                            fontSize: "0.75rem",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.12em",
+                            color: "var(--text-muted)",
+                            fontWeight: 600,
+                            marginBottom: "0.85rem",
+                          }}
+                        >
+                          Included Scope
+                        </span>
+                        <ul
+                          style={{
+                            listStyle: "none",
+                            padding: 0,
+                            margin: 0,
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "0.65rem",
+                          }}
+                        >
+                          {sol.capabilities.map((cap) => (
+                            <li
+                              key={cap}
+                              style={{
+                                fontSize: "0.88rem",
+                                color: "var(--text-primary)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.6rem",
+                              }}
+                            >
+                              <span
+                                style={{
+                                  color: "var(--accent-primary)",
+                                  fontSize: "0.85rem",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                ✓
+                              </span>
+                              <span>{cap}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        paddingTop: "1.25rem",
+                        borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "var(--accent-primary)",
+                          fontSize: "0.9rem",
+                          fontWeight: 700,
+                          letterSpacing: "0.02em",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "0.4rem",
+                        }}
+                        className="solution-card-cta"
+                      >
+                        Explore Solution
+                        <span
+                          style={{
+                            transition: "transform 0.2s ease",
+                            display: "inline-block",
+                          }}
+                          className="solution-arrow"
+                        >
+                          →
+                        </span>
+                      </span>
                     </div>
                   </div>
                 </a>
               ))}
             </div>
           </div>
+
+          <style>{`
+            .solution-card-link:hover .solution-card {
+              border-color: rgba(182, 245, 0, 0.35) !important;
+              background-color: rgba(255, 255, 255, 0.03) !important;
+              transform: translateY(-4px);
+            }
+            .solution-card-link:hover .solution-arrow {
+              transform: translateX(4px);
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .solution-card, .solution-arrow {
+                transition: none !important;
+                transform: none !important;
+              }
+              .solution-card-link:hover .solution-card {
+                transform: none !important;
+              }
+              .solution-card-link:hover .solution-arrow {
+                transform: none !important;
+              }
+            }
+          `}</style>
         </section>
 
-        {/* 6. LOWER-FRICTION CONVERSION (CTA section with custom form) */}
+        {/* 6. ENGAGEMENT MODELS */}
+        <EngagementModels />
+
+        {/* 7. LOWER-FRICTION CONVERSION (CTA section with custom form) */}
         <CTA />
       </main>
 
       {/* Global Footer */}
       <Footer />
 
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          .problem-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

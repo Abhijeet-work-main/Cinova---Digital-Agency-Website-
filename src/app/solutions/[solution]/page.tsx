@@ -45,17 +45,33 @@ export default async function SolutionPage({ params }: Props) {
         {/* HERO */}
         <section
           style={{
-            padding: "10rem 2rem 6rem",
+            padding: "10rem 2rem 6.5rem",
             position: "relative",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+            backgroundColor: "var(--bg-primary)",
+            overflow: "hidden",
           }}
         >
-          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "-60px",
+              left: "-100px",
+              width: "480px",
+              height: "480px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(182,245,0,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div style={{ maxWidth: "1400px", margin: "0 auto", position: "relative", zIndex: 2 }}>
             <span
               style={{
                 color: "var(--accent-primary)",
                 textTransform: "uppercase",
-                fontSize: "0.8rem",
+                fontSize: "0.82rem",
                 fontWeight: 700,
                 letterSpacing: "0.2em",
                 display: "inline-block",
@@ -66,51 +82,59 @@ export default async function SolutionPage({ params }: Props) {
             </span>
             <h1
               style={{
-                fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2.6rem, 6.5vw, 5.2rem)",
                 color: "#ffffff",
-                lineHeight: 1.05,
-                letterSpacing: "-0.04em",
-                maxWidth: "1000px",
-                marginBottom: "2rem",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+                maxWidth: "1050px",
+                marginBottom: "1.75rem",
               }}
             >
               {solution.heroHeadline}
             </h1>
             <p
               style={{
-                fontSize: "clamp(1.05rem, 2vw, 1.3rem)",
-                maxWidth: "680px",
-                lineHeight: 1.65,
+                fontSize: "clamp(1.1rem, 2vw, 1.3rem)",
+                color: "var(--text-secondary)",
+                maxWidth: "700px",
+                lineHeight: 1.7,
                 marginBottom: "3rem",
               }}
             >
               {solution.heroSubtext}
             </p>
-            <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", alignItems: "center" }}>
               <a
                 href="#audit"
                 style={{
                   backgroundColor: "var(--accent-primary)",
-                  color: "#000",
-                  padding: "1rem 2rem",
+                  color: "#000000",
+                  padding: "1.05rem 2.2rem",
                   borderRadius: "50px",
                   fontWeight: 700,
                   textDecoration: "none",
                   fontSize: "0.95rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  boxShadow: "0 4px 20px rgba(182, 245, 0, 0.15)",
                 }}
               >
                 Get Free Growth Audit
+                <span aria-hidden="true">→</span>
               </a>
               <a
                 href="#proof"
                 className="glass-panel"
                 style={{
-                  color: "#fff",
-                  padding: "1rem 2rem",
+                  color: "#ffffff",
+                  padding: "1.05rem 2.2rem",
                   borderRadius: "50px",
                   fontWeight: 600,
                   textDecoration: "none",
                   fontSize: "0.95rem",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               >
                 See Real Results
@@ -122,8 +146,9 @@ export default async function SolutionPage({ params }: Props) {
         {/* PROBLEM RECOGNITION */}
         <section
           style={{
-            padding: "7rem 2rem",
+            padding: "8rem 2rem",
             backgroundColor: "var(--bg-secondary)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
           }}
         >
           <div
@@ -142,18 +167,19 @@ export default async function SolutionPage({ params }: Props) {
                 style={{
                   color: "var(--text-muted)",
                   textTransform: "uppercase",
-                  fontSize: "0.78rem",
+                  fontSize: "0.8rem",
                   fontWeight: 700,
                   letterSpacing: "0.15em",
                   display: "inline-block",
                   marginBottom: "1rem",
                 }}
               >
-                The Problem
+                The Friction Point
               </span>
               <h2
                 style={{
-                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
                   color: "#ffffff",
                   marginBottom: "1.5rem",
                   lineHeight: 1.2,
@@ -161,19 +187,18 @@ export default async function SolutionPage({ params }: Props) {
               >
                 {solution.problemStatement}
               </h2>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.7 }}>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.75, color: "var(--text-secondary)" }}>
                 {solution.whyItHappens}
               </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
               <h3
                 style={{
-                  fontFamily: "var(--font-primary)",
-                  color: "#fff",
-                  fontSize: "1rem",
+                  color: "#ffffff",
+                  fontSize: "0.95rem",
                   fontWeight: 600,
                   textTransform: "uppercase",
-                  letterSpacing: "0.08em",
+                  letterSpacing: "0.1em",
                   marginBottom: "0.5rem",
                 }}
               >
@@ -184,25 +209,27 @@ export default async function SolutionPage({ params }: Props) {
                   key={i}
                   className="glass-panel"
                   style={{
-                    padding: "1.1rem 1.5rem",
-                    borderRadius: "12px",
+                    padding: "1.4rem 1.75rem",
+                    borderRadius: "14px",
                     display: "flex",
-                    gap: "1rem",
+                    gap: "1.2rem",
                     alignItems: "flex-start",
+                    border: "1px solid rgba(255, 255, 255, 0.06)",
+                    backgroundColor: "rgba(255, 255, 255, 0.015)",
                   }}
                 >
                   <span
                     style={{
                       color: "var(--accent-primary)",
                       fontWeight: 700,
-                      fontSize: "1rem",
+                      fontSize: "1.1rem",
                       flexShrink: 0,
-                      marginTop: "0.1rem",
+                      marginTop: "0.05rem",
                     }}
                   >
                     →
                   </span>
-                  <p style={{ fontSize: "0.95rem", margin: 0, lineHeight: 1.5, color: "var(--text-secondary)" }}>
+                  <p style={{ fontSize: "0.98rem", margin: 0, lineHeight: 1.6, color: "var(--text-primary)" }}>
                     {prob}
                   </p>
                 </div>
@@ -212,7 +239,13 @@ export default async function SolutionPage({ params }: Props) {
         </section>
 
         {/* HOW CINOVA HELPS */}
-        <section style={{ padding: "7rem 2rem", backgroundColor: "var(--bg-primary)" }}>
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+          }}
+        >
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
             <div
               style={{
@@ -228,9 +261,9 @@ export default async function SolutionPage({ params }: Props) {
                   style={{
                     color: "var(--accent-primary)",
                     textTransform: "uppercase",
-                    fontSize: "0.78rem",
+                    fontSize: "0.8rem",
                     fontWeight: 700,
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.18em",
                     display: "inline-block",
                     marginBottom: "1rem",
                   }}
@@ -239,7 +272,8 @@ export default async function SolutionPage({ params }: Props) {
                 </span>
                 <h2
                   style={{
-                    fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
                     color: "#ffffff",
                     marginBottom: "1.5rem",
                     lineHeight: 1.2,
@@ -247,34 +281,36 @@ export default async function SolutionPage({ params }: Props) {
                 >
                   Connected execution across all the parts that matter.
                 </h2>
-                <p style={{ fontSize: "1.1rem", lineHeight: 1.7, marginBottom: "2.5rem" }}>
+                <p style={{ fontSize: "1.1rem", lineHeight: 1.75, color: "var(--text-secondary)", marginBottom: "2.5rem" }}>
                   {solution.howCinovaHelps}
                 </p>
                 <a
                   href="#audit"
                   style={{
                     backgroundColor: "var(--accent-primary)",
-                    color: "#000",
-                    padding: "0.9rem 1.8rem",
+                    color: "#000000",
+                    padding: "1rem 2.2rem",
                     borderRadius: "50px",
                     fontWeight: 700,
                     textDecoration: "none",
                     fontSize: "0.95rem",
-                    display: "inline-block",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
                   }}
                 >
                   Diagnose My Growth Gaps
+                  <span aria-hidden="true">→</span>
                 </a>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <h3
                   style={{
-                    fontFamily: "var(--font-primary)",
-                    color: "#fff",
-                    fontSize: "0.9rem",
+                    color: "#ffffff",
+                    fontSize: "0.95rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.1em",
                     marginBottom: "0.5rem",
                   }}
                 >
@@ -284,17 +320,20 @@ export default async function SolutionPage({ params }: Props) {
                   <div
                     key={i}
                     style={{
-                      padding: "0.9rem 1.4rem",
-                      borderRadius: "10px",
-                      borderLeft: "2px solid var(--accent-primary)",
+                      padding: "1.1rem 1.5rem",
+                      borderRadius: "12px",
+                      borderLeft: "3px solid var(--accent-primary)",
                       backgroundColor: "rgba(182, 245, 0, 0.03)",
+                      borderTop: "1px solid rgba(255, 255, 255, 0.04)",
+                      borderRight: "1px solid rgba(255, 255, 255, 0.04)",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.75rem",
+                      gap: "0.85rem",
                     }}
                   >
-                    <span style={{ color: "var(--accent-primary)", fontSize: "0.85rem" }}>✓</span>
-                    <span style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>{cap}</span>
+                    <span style={{ color: "var(--accent-primary)", fontSize: "0.9rem", fontWeight: "bold" }}>✓</span>
+                    <span style={{ color: "var(--text-primary)", fontSize: "0.95rem", fontWeight: 500 }}>{cap}</span>
                   </div>
                 ))}
               </div>
@@ -357,9 +396,9 @@ export default async function SolutionPage({ params }: Props) {
         {/* COST OF DELAY */}
         <section
           style={{
-            padding: "6rem 2rem",
+            padding: "8rem 2rem",
             backgroundColor: "var(--bg-primary)",
-            borderTop: "1px solid rgba(255,255,255,0.04)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.05)",
           }}
         >
           <div
@@ -373,7 +412,7 @@ export default async function SolutionPage({ params }: Props) {
               style={{
                 color: "var(--text-muted)",
                 textTransform: "uppercase",
-                fontSize: "0.78rem",
+                fontSize: "0.8rem",
                 fontWeight: 700,
                 letterSpacing: "0.2em",
                 display: "inline-block",
@@ -384,9 +423,10 @@ export default async function SolutionPage({ params }: Props) {
             </span>
             <p
               style={{
-                fontSize: "clamp(1.2rem, 3vw, 1.6rem)",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.35rem, 3.5vw, 1.95rem)",
                 color: "var(--text-secondary)",
-                lineHeight: 1.7,
+                lineHeight: 1.6,
                 fontStyle: "italic",
               }}
             >
