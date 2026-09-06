@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local development tools
+cloudflared.exe
+
+# IDE / local workspace
+.vscode/
+.idea/

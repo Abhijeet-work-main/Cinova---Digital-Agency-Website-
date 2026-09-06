@@ -343,7 +343,18 @@ export default function Home() {
           }}
         >
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "2rem", marginBottom: "4rem" }}>
+
+            {/* Section header */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                flexWrap: "wrap",
+                gap: "2rem",
+                marginBottom: "4rem",
+              }}
+            >
               <div>
                 <span
                   style={{
@@ -358,29 +369,169 @@ export default function Home() {
                 >
                   Verified Delivery
                 </span>
-                <h2 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", color: "#ffffff" }}>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2.2rem, 5vw, 4rem)",
+                    color: "#ffffff",
+                    lineHeight: 1.1,
+                  }}
+                >
                   Factual Proof. Real Solutions.
                 </h2>
               </div>
-              <p style={{ maxWidth: "450px", fontSize: "1rem" }}>
-                We avoid fabricated percentages or mock metrics. These are verified case studies representing client partner outcomes.
+              <p style={{ maxWidth: "450px", fontSize: "1rem", lineHeight: 1.65 }}>
+                We avoid fabricated percentages or mock metrics. These are verified case studies representing actual client partner outcomes.
               </p>
             </div>
 
+            {/* Tier 1 — Featured case study (Erminio Palamino) */}
+            {(() => {
+              const featured = caseStudies.find((cs) => cs.slug === "erminio-palamino");
+              if (!featured) return null;
+              return (
+                <a
+                  href={`/work/${featured.slug}`}
+                  style={{ textDecoration: "none", display: "block", marginBottom: "2rem" }}
+                  className="cs-featured-wrapper"
+                >
+                  <CaseStudyCard study={featured} variant="featured" />
+                </a>
+              );
+            })()}
+
+            {/* Tier 2 — Supporting case studies */}
+            <div className="cs-supporting-grid">
+              {caseStudies
+                .filter((cs) => cs.slug !== "erminio-palamino")
+                .map((study) => (
+                  <a
+                    key={study.slug}
+                    href={`/work/${study.slug}`}
+                    style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}
+                    className="cs-supporting-link"
+                  >
+                    <CaseStudyCard study={study} variant="default" />
+                  </a>
+                ))}
+            </div>
+
+            {/* Bridge statement */}
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+                marginTop: "5rem",
+                paddingTop: "3rem",
+                borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
                 gap: "2rem",
               }}
             >
-              {caseStudies.map((study) => (
-                <a key={study.slug} href={`/work/${study.slug}`} style={{ textDecoration: "none", display: "block" }}>
-                  <CaseStudyCard study={study} />
-                </a>
-              ))}
+              <p
+                style={{
+                  fontSize: "clamp(1rem, 2vw, 1.15rem)",
+                  color: "var(--text-secondary)",
+                  maxWidth: "620px",
+                  lineHeight: 1.7,
+                  flex: "1 1 300px",
+                }}
+              >
+                Every engagement starts with understanding the problem. The solutions below show how we structure the work to close the gaps.
+              </p>
+              <a
+                href="#solutions"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "var(--accent-primary)",
+                  fontSize: "0.85rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  flexShrink: 0,
+                  transition: "gap var(--transition-fast)",
+                }}
+                className="cs-bridge-link"
+              >
+                See the solutions
+                <span aria-hidden="true" style={{ fontSize: "1.1rem" }}>→</span>
+              </a>
             </div>
+
           </div>
+
+          {/* Scoped C.3E styles */}
+          <style>{`
+            /* Supporting grid layout */
+            .cs-supporting-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 1.5rem;
+            }
+
+            /* Featured card hover */
+            .cs-featured-wrapper:hover .cs-featured-card {
+              border-color: rgba(182, 245, 0, 0.3) !important;
+              background-color: rgba(255, 255, 255, 0.03) !important;
+            }
+            .cs-featured-wrapper:hover .cs-arrow {
+              transform: translateX(5px);
+            }
+
+            /* Featured metrics grid */
+            .cs-featured-metrics {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+              gap: 1.5rem 2rem;
+            }
+
+            /* Supporting card hover arrow */
+            .cs-supporting-link:hover .cs-arrow {
+              transform: translateX(4px);
+            }
+
+            /* Bridge link hover */
+            .cs-bridge-link:hover {
+              gap: 0.75rem !important;
+            }
+
+            /* Tablet: supporting grid 2-col */
+            @media (max-width: 1024px) {
+              .cs-supporting-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+
+            /* Mobile: everything single column */
+            @media (max-width: 680px) {
+              .cs-supporting-grid {
+                grid-template-columns: 1fr;
+              }
+              .cs-featured-metrics {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.25rem;
+              }
+            }
+
+            /* Reduced motion */
+            @media (prefers-reduced-motion: reduce) {
+              .cs-featured-wrapper:hover .cs-featured-card,
+              .cs-featured-card,
+              .cs-arrow,
+              .cs-bridge-link {
+                transition: none !important;
+                transform: none !important;
+              }
+              .cs-featured-wrapper:hover .cs-arrow,
+              .cs-supporting-link:hover .cs-arrow {
+                transform: none !important;
+              }
+            }
+          `}</style>
         </section>
 
         {/* 5. SOLUTIONS OVERVIEW */}
