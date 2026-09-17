@@ -5,7 +5,7 @@ export default function Footer() {
     <footer
       style={{
         backgroundColor: "var(--bg-secondary)",
-        borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+        borderTop: "1px solid rgba(0, 0, 0, 0.05)",
         padding: "6rem 2rem 4rem 2rem",
         position: "relative",
         zIndex: 10,
@@ -33,7 +33,7 @@ export default function Footer() {
               style={{
                 fontFamily: "var(--font-primary)",
                 fontSize: "1.8rem",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 letterSpacing: "-0.03em",
                 marginBottom: "1rem",
               }}
@@ -47,7 +47,7 @@ export default function Footer() {
 
           <div style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
             <div>
-              <h4 style={{ color: "#ffffff", fontSize: "1rem", marginBottom: "1.2rem", fontWeight: 600 }}>Navigation</h4>
+              <h4 style={{ color: "var(--text-primary)", fontSize: "1rem", marginBottom: "1.2rem", fontWeight: 600 }}>Navigation</h4>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
                 <li><a href="#work" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.9rem" }}>Work</a></li>
                 <li><a href="#solutions" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.9rem" }}>Solutions</a></li>
@@ -57,7 +57,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 style={{ color: "#ffffff", fontSize: "1rem", marginBottom: "1.2rem", fontWeight: 600 }}>Attribution Focus</h4>
+              <h4 style={{ color: "var(--text-primary)", fontSize: "1rem", marginBottom: "1.2rem", fontWeight: 600 }}>Attribution Focus</h4>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
                 <li><a href="#audit" style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "0.9rem" }}>Growth Diagnostic</a></li>
                 <li><span style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>Client Partners Portal</span></li>
@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div
           style={{
-            borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.05)",
             paddingTop: "2rem",
             display: "flex",
             flexWrap: "wrap",

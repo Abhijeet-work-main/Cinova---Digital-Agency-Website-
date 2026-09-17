@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local development tools
+cloudflared.exe
+
+# IDE / local workspace
+.idea/
+
+# Dummy Images for UI
+/Dummy_Image
+
+# Reference Folders
+/Screenshot
+/Current_website_UI

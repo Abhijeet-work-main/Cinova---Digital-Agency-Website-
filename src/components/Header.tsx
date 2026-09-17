@@ -1,276 +1,174 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const NAV_SECTIONS = [
-  {
-    label: "Solutions",
-    sub: [
-      { label: "Conversion Websites", href: "/solutions/websites" },
-      { label: "Paid Acquisition & Ads", href: "/solutions/paid-growth" },
-      { label: "Creative Production", href: "/solutions/creative-production" },
-      { label: "Social Media Growth", href: "/solutions/social-growth" },
-    ],
-  },
-  {
-    label: "Industries",
-    sub: [
-      { label: "E-commerce & Retail", href: "/for/ecommerce" },
-      { label: "Service Businesses", href: "/for/service-brands" },
-      { label: "Content Creators", href: "/for/creators" },
-      { label: "Fashion & Apparel", href: "/for/fashion-apparel" },
-    ],
-  },
-  {
-    label: "Work",
-    sub: [
-      { label: "Erminio Palamino", href: "/work/erminio-palamino" },
-      { label: "Balbeer", href: "/work/balbeer" },
-      { label: "Gloss & Shine", href: "/work/gloss-and-shine" },
-      { label: "Noor", href: "/work/noor" },
-      { label: "PBInvesting", href: "/work/pb-investing" },
-    ],
-  },
+const SOLUTIONS = [
+  { label: "Conversion Websites", href: "/solutions/websites" },
+  { label: "Paid Acquisition & Ads", href: "/solutions/paid-growth" },
+  { label: "Creative Production", href: "/solutions/creative-production" },
+  { label: "Social Media Growth", href: "/solutions/social-growth" },
+];
+
+const INDUSTRIES = [
+  { label: "E-commerce & Retail", href: "/for/ecommerce" },
+  { label: "Service Businesses", href: "/for/service-brands" },
+  { label: "Content Creators", href: "/for/creators" },
+  { label: "Fashion & Apparel", href: "/for/fashion-apparel" },
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const menuBtnRef = useRef<HTMLButtonElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const pathname = usePathname();
 
-  /* ── Scroll state ─────────────────────────── */
+  // Close mobile menu on route change
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    setMobileMenuOpen(false);
+    setExpandedSection(null);
+  }, [pathname]);
 
-  /* ── Body scroll lock ─────────────────────── */
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-      // Move focus into menu on open
-      setTimeout(() => closeRef.current?.focus(), 50);
-    } else {
-      document.body.style.overflow = "";
-      // Return focus to menu button on close
-      menuBtnRef.current?.focus();
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-  /* ── Keyboard: Escape + focus trap ──────────── */
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setMenuOpen(false);
-        return;
-      }
-
-      if (e.key === "Tab") {
-        const menu = menuRef.current;
-        if (!menu) return;
-        const focusable = menu.querySelectorAll<HTMLElement>(
-          'a[href], button, [tabindex]:not([tabindex="-1"])'
-        );
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-          }
-        } else {
-          if (document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-          }
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [menuOpen]);
-
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
-  const toggleMenu = useCallback(() => setMenuOpen((o) => !o), []);
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
 
   return (
     <>
-      {/* ─── HEADER BAR ─── */}
-      <header
-        className={`cinova-header${scrolled ? " cinova-header--scrolled" : ""}`}
-        role="banner"
-      >
-        <div className="cinova-header__inner">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="cinova-header__logo"
-            onClick={closeMenu}
-            aria-label="Cinova — home"
-          >
-            cinova<span className="cinova-header__logo-dot">.</span>
+      <header className="global-nav" role="banner">
+        <div className="global-nav__inner">
+          {/* Left: Brand */}
+          <Link href="/" className="global-nav__logo" aria-label="Cinova — home">
+            cinova<span className="global-nav__dot">.</span>
           </Link>
 
-          {/* Right side controls */}
-          <nav className="cinova-header__nav" aria-label="Primary navigation">
-            {/* Desktop quick links */}
-            <div className="cinova-header__links" aria-hidden="true">
-              <Link href="/solutions/paid-growth" className="cinova-header__link">
-                Solutions
-              </Link>
-              <Link href="/for/ecommerce" className="cinova-header__link">
+          {/* Center: Desktop Links */}
+          <nav className="global-nav__links" aria-label="Primary navigation">
+            <Link href="/" className="global-nav__link">Home</Link>
+            <Link href="/work/erminio-palamino" className="global-nav__link">Work</Link>
+            <Link href="/solutions/paid-growth" className="global-nav__link">Pricing</Link>
+
+            {/* Industries with Hover Submenu */}
+            <div className="global-nav__item-with-dropdown">
+              <span
+                className="global-nav__link"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Industries
-              </Link>
-              <Link href="/work/erminio-palamino" className="cinova-header__link">
-                Work
-              </Link>
+              </span>
+              <div className="global-nav__dropdown">
+                <ul className="global-nav__dropdown-list">
+                  {INDUSTRIES.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="global-nav__dropdown-link">
+                        <span className="global-nav__dropdown-label">{item.label}</span>
+                        <span className="global-nav__dropdown-arrow" aria-hidden="true">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            {/* Audit CTA */}
-            <Link
-              href="/#audit"
-              className="cinova-header__cta glass-panel"
-              onClick={closeMenu}
-            >
-              Free Audit
-            </Link>
+            {/* Solutions with Hover Submenu */}
+            <div className="global-nav__item-with-dropdown">
+              <span
+                className="global-nav__link"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Solutions
+              </span>
+              <div className="global-nav__dropdown">
+                <ul className="global-nav__dropdown-list">
+                  {SOLUTIONS.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="global-nav__dropdown-link">
+                        <span className="global-nav__dropdown-label">{item.label}</span>
+                        <span className="global-nav__dropdown-arrow" aria-hidden="true">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </nav>
 
-            {/* Menu bubble trigger */}
+          {/* Right: Contact & Mobile Toggle */}
+          <div className="global-nav__right">
+            <Link href="/#contact" className="global-nav__contact" id="nav-contact-cta">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                style={{ flexShrink: 0 }}
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              Contact
+            </Link>
             <button
-              ref={menuBtnRef}
-              onClick={toggleMenu}
-              className="cinova-header__menu-btn glass-panel"
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={menuOpen}
-              aria-controls="cinova-fullscreen-menu"
+              className="global-nav__mobile-toggle"
+              onClick={toggleMobileMenu}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
             >
-              <span className="cinova-header__menu-label">menu</span>
-              <span className="cinova-header__hamburger" aria-hidden="true">
-                <span
-                  className={`cinova-header__bar${menuOpen ? " cinova-header__bar--open-top" : ""}`}
-                />
-                <span
-                  className={`cinova-header__bar${menuOpen ? " cinova-header__bar--open-btm" : ""}`}
-                />
+              <span className={`global-nav__hamburger ${mobileMenuOpen ? "global-nav__hamburger--open" : ""}`}>
+                <span className="global-nav__hamburger-line"></span>
+                <span className="global-nav__hamburger-line"></span>
               </span>
             </button>
-          </nav>
+          </div>
         </div>
       </header>
 
-      {/* ─── FULLSCREEN MENU OVERLAY ─── */}
-      <div
-        id="cinova-fullscreen-menu"
-        ref={menuRef}
-        className={`cinova-menu${menuOpen ? " cinova-menu--open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Site navigation"
-        aria-hidden={!menuOpen}
-      >
-        {/* Backdrop click to close */}
-        <div
-          className="cinova-menu__backdrop"
-          onClick={closeMenu}
-          aria-hidden="true"
-        />
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-nav ${mobileMenuOpen ? "mobile-nav--open" : ""}`} aria-hidden={!mobileMenuOpen}>
+        <div className="mobile-nav__content">
+          <Link href="/" className="mobile-nav__link">Home</Link>
+          <Link href="/work/erminio-palamino" className="mobile-nav__link">Work</Link>
+          <Link href="/solutions/paid-growth" className="mobile-nav__link">Pricing</Link>
 
-        <div className="cinova-menu__panel glass-panel">
-          {/* Close button */}
-          <button
-            ref={closeRef}
-            className="cinova-menu__close"
-            onClick={closeMenu}
-            aria-label="Close navigation menu"
-          >
-            <span className="cinova-menu__close-line" aria-hidden="true" />
-            <span className="cinova-menu__close-line" aria-hidden="true" />
-          </button>
-
-          {/* Menu content */}
-          <div className="cinova-menu__content">
-            {/* Left: nav sections */}
-            <div className="cinova-menu__sections">
-              {NAV_SECTIONS.map((section, si) => (
-                <div
-                  key={section.label}
-                  className="cinova-menu__section"
-                  style={{ "--section-index": si } as React.CSSProperties}
-                >
-                  <p className="cinova-menu__section-label">{section.label}</p>
-                  <ul className="cinova-menu__list" role="list">
-                    {section.sub.map((item, ii) => (
-                      <li
-                        key={item.href}
-                        style={{ "--item-index": ii } as React.CSSProperties}
-                      >
-                        <Link
-                          href={item.href}
-                          className="cinova-menu__link"
-                          onClick={closeMenu}
-                          tabIndex={menuOpen ? 0 : -1}
-                        >
-                          <span className="cinova-menu__link-text">{item.label}</span>
-                          <span className="cinova-menu__link-arrow" aria-hidden="true">
-                            →
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          <div className="mobile-nav__section">
+            <button
+              className="mobile-nav__section-toggle"
+              onClick={() => toggleSection("industries")}
+              aria-expanded={expandedSection === "industries"}
+            >
+              Industries <span className="mobile-nav__section-icon">{expandedSection === "industries" ? "−" : "+"}</span>
+            </button>
+            <div className={`mobile-nav__section-content ${expandedSection === "industries" ? "mobile-nav__section-content--open" : ""}`}>
+              {INDUSTRIES.map((item) => (
+                <Link key={item.href} href={item.href} className="mobile-nav__sublink">
+                  {item.label}
+                </Link>
               ))}
             </div>
+          </div>
 
-            {/* Right: Growth Diagnostic CTA */}
-            <div className="cinova-menu__cta-col">
-              <div className="cinova-menu__cta-block">
-                <p className="cinova-menu__cta-eyebrow">Ready to grow?</p>
-                <h2 className="cinova-menu__cta-headline">
-                  Get your free<br />
-                  <em>Growth Diagnosis.</em>
-                </h2>
-                <p className="cinova-menu__cta-body">
-                  We identify your biggest conversion leak in 15 minutes — no obligation.
-                </p>
-                <Link
-                  href="/#audit"
-                  className="cinova-menu__cta-btn"
-                  onClick={closeMenu}
-                  tabIndex={menuOpen ? 0 : -1}
-                >
-                  Claim Your Free Audit
+          <div className="mobile-nav__section">
+            <button
+              className="mobile-nav__section-toggle"
+              onClick={() => toggleSection("solutions")}
+              aria-expanded={expandedSection === "solutions"}
+            >
+              Solutions <span className="mobile-nav__section-icon">{expandedSection === "solutions" ? "−" : "+"}</span>
+            </button>
+            <div className={`mobile-nav__section-content ${expandedSection === "solutions" ? "mobile-nav__section-content--open" : ""}`}>
+              {SOLUTIONS.map((item) => (
+                <Link key={item.href} href={item.href} className="mobile-nav__sublink">
+                  {item.label}
                 </Link>
-              </div>
-
-              {/* Contact info */}
-              <div className="cinova-menu__contact">
-                <a
-                  href="mailto:xabhijeetxa@gmail.com"
-                  className="cinova-menu__contact-link"
-                  tabIndex={menuOpen ? 0 : -1}
-                >
-                  xabhijeetxa@gmail.com
-                </a>
-                <a
-                  href="tel:+917428245045"
-                  className="cinova-menu__contact-link"
-                  tabIndex={menuOpen ? 0 : -1}
-                >
-                  +91 74282 45045
-                </a>
-              </div>
+              ))}
             </div>
           </div>
         </div>

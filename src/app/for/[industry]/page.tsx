@@ -51,7 +51,7 @@ export default async function IndustryPage({ params }: Props) {
         <section
           style={{
             padding: "10rem 2rem 6rem",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
           }}
         >
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -71,7 +71,7 @@ export default async function IndustryPage({ params }: Props) {
             <h1
               style={{
                 fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 lineHeight: 1.05,
                 letterSpacing: "-0.04em",
                 maxWidth: "1000px",
@@ -95,7 +95,7 @@ export default async function IndustryPage({ params }: Props) {
                 href="#audit"
                 style={{
                   backgroundColor: "var(--accent-primary)",
-                  color: "#000",
+                  color: "var(--text-primary)",
                   padding: "1rem 2rem",
                   borderRadius: "50px",
                   fontWeight: 700,
@@ -109,7 +109,7 @@ export default async function IndustryPage({ params }: Props) {
                 href="#proof"
                 className="glass-panel"
                 style={{
-                  color: "#fff",
+                  color: "var(--text-primary)",
                   padding: "1rem 2rem",
                   borderRadius: "50px",
                   fontWeight: 600,
@@ -153,7 +153,7 @@ export default async function IndustryPage({ params }: Props) {
               <h2
                 style={{
                   fontSize: "clamp(1.8rem, 4vw, 3rem)",
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   marginBottom: "1.5rem",
                   lineHeight: 1.2,
                 }}
@@ -168,7 +168,7 @@ export default async function IndustryPage({ params }: Props) {
               <h3
                 style={{
                   fontFamily: "var(--font-primary)",
-                  color: "#fff",
+                  color: "var(--text-primary)",
                   fontSize: "1rem",
                   fontWeight: 600,
                   textTransform: "uppercase",
@@ -229,7 +229,7 @@ export default async function IndustryPage({ params }: Props) {
               <h2
                 style={{
                   fontSize: "clamp(1.8rem, 4vw, 3rem)",
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   marginBottom: "1.5rem",
                 }}
               >
@@ -244,7 +244,7 @@ export default async function IndustryPage({ params }: Props) {
                 <h3
                   style={{
                     fontFamily: "var(--font-primary)",
-                    color: "#fff",
+                    color: "var(--text-primary)",
                     fontSize: "1rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
@@ -273,7 +273,7 @@ export default async function IndustryPage({ params }: Props) {
                         display: "block",
                       }}
                     >
-                      <h4 style={{ color: "#fff", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
+                      <h4 style={{ color: "var(--text-primary)", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
                         {sol.name}
                       </h4>
                       <p style={{ fontSize: "0.9rem", color: "var(--accent-primary)", marginBottom: "0.75rem" }}>
@@ -311,7 +311,7 @@ export default async function IndustryPage({ params }: Props) {
                 >
                   Verified Delivery
                 </span>
-                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#fff" }}>
+                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "var(--text-primary)" }}>
                   Real work in this category.
                 </h2>
                 <p style={{ marginTop: "1rem", maxWidth: "550px", fontSize: "1rem" }}>
@@ -344,7 +344,7 @@ export default async function IndustryPage({ params }: Props) {
           style={{
             padding: "6rem 2rem",
             backgroundColor: "var(--bg-primary)",
-            borderTop: "1px solid rgba(255,255,255,0.04)",
+            borderTop: "1px solid rgba(0, 0, 0,0.04)",
           }}
         >
           <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
