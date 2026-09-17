@@ -47,7 +47,7 @@ export default async function SolutionPage({ params }: Props) {
           style={{
             padding: "10rem 2rem 6.5rem",
             position: "relative",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
             backgroundColor: "var(--bg-primary)",
             overflow: "hidden",
           }}
@@ -84,7 +84,7 @@ export default async function SolutionPage({ params }: Props) {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.6rem, 6.5vw, 5.2rem)",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 lineHeight: 1.1,
                 letterSpacing: "-0.03em",
                 maxWidth: "1050px",
@@ -109,7 +109,7 @@ export default async function SolutionPage({ params }: Props) {
                 href="#audit"
                 style={{
                   backgroundColor: "var(--accent-primary)",
-                  color: "#000000",
+                  color: "var(--text-primary)",
                   padding: "1.05rem 2.2rem",
                   borderRadius: "50px",
                   fontWeight: 700,
@@ -128,13 +128,13 @@ export default async function SolutionPage({ params }: Props) {
                 href="#proof"
                 className="glass-panel"
                 style={{
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   padding: "1.05rem 2.2rem",
                   borderRadius: "50px",
                   fontWeight: 600,
                   textDecoration: "none",
                   fontSize: "0.95rem",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  border: "1px solid rgba(0, 0, 0, 0.1)",
                 }}
               >
                 See Real Results
@@ -148,7 +148,7 @@ export default async function SolutionPage({ params }: Props) {
           style={{
             padding: "8rem 2rem",
             backgroundColor: "var(--bg-secondary)",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.04)",
           }}
         >
           <div
@@ -180,7 +180,7 @@ export default async function SolutionPage({ params }: Props) {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   marginBottom: "1.5rem",
                   lineHeight: 1.2,
                 }}
@@ -194,7 +194,7 @@ export default async function SolutionPage({ params }: Props) {
             <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
               <h3
                 style={{
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   fontWeight: 600,
                   textTransform: "uppercase",
@@ -214,8 +214,8 @@ export default async function SolutionPage({ params }: Props) {
                     display: "flex",
                     gap: "1.2rem",
                     alignItems: "flex-start",
-                    border: "1px solid rgba(255, 255, 255, 0.06)",
-                    backgroundColor: "rgba(255, 255, 255, 0.015)",
+                    border: "1px solid rgba(0, 0, 0, 0.06)",
+                    backgroundColor: "rgba(0, 0, 0, 0.015)",
                   }}
                 >
                   <span
@@ -243,7 +243,7 @@ export default async function SolutionPage({ params }: Props) {
           style={{
             padding: "8rem 2rem",
             backgroundColor: "var(--bg-primary)",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.04)",
           }}
         >
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -274,7 +274,7 @@ export default async function SolutionPage({ params }: Props) {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: "1.5rem",
                     lineHeight: 1.2,
                   }}
@@ -288,7 +288,7 @@ export default async function SolutionPage({ params }: Props) {
                   href="#audit"
                   style={{
                     backgroundColor: "var(--accent-primary)",
-                    color: "#000000",
+                    color: "var(--text-primary)",
                     padding: "1rem 2.2rem",
                     borderRadius: "50px",
                     fontWeight: 700,
@@ -306,7 +306,7 @@ export default async function SolutionPage({ params }: Props) {
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <h3
                   style={{
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     fontSize: "0.95rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
@@ -324,9 +324,9 @@ export default async function SolutionPage({ params }: Props) {
                       borderRadius: "12px",
                       borderLeft: "3px solid var(--accent-primary)",
                       backgroundColor: "rgba(182, 245, 0, 0.03)",
-                      borderTop: "1px solid rgba(255, 255, 255, 0.04)",
-                      borderRight: "1px solid rgba(255, 255, 255, 0.04)",
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+                      borderTop: "1px solid rgba(0, 0, 0, 0.04)",
+                      borderRight: "1px solid rgba(0, 0, 0, 0.04)",
+                      borderBottom: "1px solid rgba(0, 0, 0, 0.04)",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.85rem",
@@ -365,7 +365,7 @@ export default async function SolutionPage({ params }: Props) {
                 >
                   Verified Delivery
                 </span>
-                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#fff" }}>
+                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "var(--text-primary)" }}>
                   Real results from real clients.
                 </h2>
                 <p style={{ marginTop: "1rem", maxWidth: "550px", fontSize: "1rem" }}>
@@ -398,7 +398,7 @@ export default async function SolutionPage({ params }: Props) {
           style={{
             padding: "8rem 2rem",
             backgroundColor: "var(--bg-primary)",
-            borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.05)",
           }}
         >
           <div

@@ -16,8 +16,8 @@ interface KineticGridProps {
 
 export default function KineticGrid({
   background = "transparent",
-  dotColor = "rgba(255,255,255,0.4)",
-  lineColor = "rgba(255,255,255,0.1)",
+  dotColor = "rgba(0, 0, 0,0.4)",
+  lineColor = "rgba(0, 0, 0,0.1)",
   trailColor = "rgba(182, 245, 0, 0.4)", // Cinova accent for trail
   spacing = 40,
   radius = 250,

@@ -44,5 +44,11 @@ next-env.d.ts
 cloudflared.exe
 
 # IDE / local workspace
-.vscode/
 .idea/
+
+# Dummy Images for UI
+/Dummy_Image
+
+# Reference Folders
+/Screenshot
+/Current_website_UI

@@ -49,7 +49,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <section
           style={{
             padding: "10rem 2rem 6rem",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
           }}
         >
           <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -91,7 +91,7 @@ export default async function CaseStudyPage({ params }: Props) {
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.15em",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(0, 0, 0,0.1)",
                   padding: "0.25rem 0.75rem",
                   borderRadius: "50px",
                 }}
@@ -102,7 +102,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <h1
               style={{
                 fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 lineHeight: 1.05,
                 letterSpacing: "-0.04em",
                 marginBottom: "1.5rem",
@@ -150,7 +150,7 @@ export default async function CaseStudyPage({ params }: Props) {
               >
                 The Situation
               </span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "#fff", marginBottom: "2rem" }}>
+              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "var(--text-primary)", marginBottom: "2rem" }}>
                 What {study.client} was dealing with
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -192,7 +192,7 @@ export default async function CaseStudyPage({ params }: Props) {
               >
                 What Cinova Did
               </span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "#fff", marginBottom: "2rem" }}>
+              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "var(--text-primary)", marginBottom: "2rem" }}>
                 Connected execution across the growth system
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -237,7 +237,7 @@ export default async function CaseStudyPage({ params }: Props) {
               >
                 Verified Evidence
               </span>
-              <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#fff", marginBottom: "0.75rem" }}>
+              <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "var(--text-primary)", marginBottom: "0.75rem" }}>
                 What the data shows.
               </h2>
               <p style={{ maxWidth: "550px", marginBottom: "3.5rem", fontSize: "1rem" }}>
@@ -265,7 +265,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         fontFamily: "var(--font-primary)",
                         fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
                         fontWeight: 800,
-                        color: "#ffffff",
+                        color: "var(--text-primary)",
                         letterSpacing: "-0.03em",
                         lineHeight: 1,
                         marginBottom: "0.5rem",
@@ -306,11 +306,11 @@ export default async function CaseStudyPage({ params }: Props) {
                 textAlign: "center",
                 padding: "3rem",
                 borderRadius: "20px",
-                border: "1px solid rgba(255,255,255,0.06)",
-                backgroundColor: "rgba(255,255,255,0.02)",
+                border: "1px solid rgba(0, 0, 0,0.06)",
+                backgroundColor: "rgba(0, 0, 0,0.02)",
               }}
             >
-              <h3 style={{ color: "#fff", fontSize: "1.3rem", marginBottom: "1rem" }}>
+              <h3 style={{ color: "var(--text-primary)", fontSize: "1.3rem", marginBottom: "1rem" }}>
                 Qualitative outcomes only
               </h3>
               <p>
@@ -327,7 +327,7 @@ export default async function CaseStudyPage({ params }: Props) {
               <h2
                 style={{
                   fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
-                  color: "#fff",
+                  color: "var(--text-primary)",
                   marginBottom: "0.75rem",
                 }}
               >
@@ -355,7 +355,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       display: "block",
                     }}
                   >
-                    <h4 style={{ color: "#fff", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
+                    <h4 style={{ color: "var(--text-primary)", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
                       {sol.name}
                     </h4>
                     <p style={{ fontSize: "0.9rem", color: "var(--accent-primary)", marginBottom: "0.75rem" }}>
@@ -378,7 +378,7 @@ export default async function CaseStudyPage({ params }: Props) {
               <h2
                 style={{
                   fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
-                  color: "#fff",
+                  color: "var(--text-primary)",
                   marginBottom: "3rem",
                 }}
               >
@@ -420,7 +420,7 @@ export default async function CaseStudyPage({ params }: Props) {
                           {other.industry}
                         </span>
                       )}
-                      <h3 style={{ color: "#fff", fontSize: "1.6rem", marginBottom: "0.75rem" }}>
+                      <h3 style={{ color: "var(--text-primary)", fontSize: "1.6rem", marginBottom: "0.75rem" }}>
                         {other.client}
                       </h3>
                       <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>

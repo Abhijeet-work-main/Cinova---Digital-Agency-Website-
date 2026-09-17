@@ -3,12 +3,15 @@
 import React from "react";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Footer from "../components/Footer";
-import CaseStudyCard from "../components/CaseStudyCard";
+import ProofSection from "../components/ProofSection";
+import PartnersSection from "../components/PartnersSection";
+import StatsSection from "../components/StatsSection";
+import TestimonialsSection from "../components/TestimonialsSection";
 import CTA from "../components/CTA";
-import { caseStudies } from "../data/caseStudies";
 import { solutions } from "../data/solutions";
-import EngagementModels from "../components/EngagementModels";
+import PricingSection from "../components/PricingSection";
+import ContactSection from "../components/ContactSection";
+import FooterCard from "../components/FooterCard";
 
 export default function Home() {
   return (
@@ -54,22 +57,22 @@ export default function Home() {
               >
                 The Friction Point
               </span>
-              <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#ffffff" }}>
+              <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--text-primary)" }}>
                 Does your marketing feel like disconnected pieces?
               </h2>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
               <div>
-                <h3 style={{ fontSize: "1.4rem", color: "#ffffff", marginBottom: "0.6rem" }}>
+                <h3 style={{ fontSize: "1.4rem", color: "var(--text-primary)", marginBottom: "0.6rem" }}>
                   1. Attention Without Business Results
                 </h3>
                 <p>
                   You receive link clicks or view loops, but product sales, appointment inquiries, and overall revenue remain flat. The gap is a conversion funnel error.
                 </p>
               </div>
-              <div style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)", paddingTop: "1.5rem" }}>
-                <h3 style={{ fontSize: "1.4rem", color: "#ffffff", marginBottom: "0.6rem" }}>
+              <div style={{ borderTop: "1px solid rgba(0, 0, 0, 0.05)", paddingTop: "1.5rem" }}>
+                <h3 style={{ fontSize: "1.4rem", color: "var(--text-primary)", marginBottom: "0.6rem" }}>
                   2. Disconnected Vendor Management
                 </h3>
                 <p>
@@ -129,7 +132,7 @@ export default function Home() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.4rem, 6vw, 5rem)",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 lineHeight: 1.1,
                 maxWidth: "760px",
                 marginBottom: "1.5rem",
@@ -175,7 +178,7 @@ export default function Home() {
                 style={{
                   padding: "3rem 2.5rem",
                   borderTop: "2px solid var(--accent-primary)",
-                  background: "rgba(255,255,255,0.02)",
+                  background: "rgba(0, 0, 0,0.02)",
                 }}
               >
                 <span
@@ -196,7 +199,7 @@ export default function Home() {
                 <h3
                   style={{
                     fontSize: "1.2rem",
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: "0.75rem",
                     fontFamily: "var(--font-display)",
                   }}
@@ -213,7 +216,7 @@ export default function Home() {
                 style={{
                   padding: "3rem 2.5rem",
                   borderTop: "2px solid rgba(182,245,0,0.35)",
-                  background: "rgba(255,255,255,0.02)",
+                  background: "rgba(0, 0, 0,0.02)",
                 }}
               >
                 <span
@@ -234,7 +237,7 @@ export default function Home() {
                 <h3
                   style={{
                     fontSize: "1.2rem",
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: "0.75rem",
                     fontFamily: "var(--font-display)",
                   }}
@@ -251,7 +254,7 @@ export default function Home() {
                 style={{
                   padding: "3rem 2.5rem",
                   borderTop: "2px solid rgba(182,245,0,0.15)",
-                  background: "rgba(255,255,255,0.02)",
+                  background: "rgba(0, 0, 0,0.02)",
                 }}
               >
                 <span
@@ -272,7 +275,7 @@ export default function Home() {
                 <h3
                   style={{
                     fontSize: "1.2rem",
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     marginBottom: "0.75rem",
                     fontFamily: "var(--font-display)",
                   }}
@@ -290,7 +293,7 @@ export default function Home() {
               style={{
                 marginTop: "5rem",
                 paddingTop: "3rem",
-                borderTop: "1px solid rgba(255,255,255,0.05)",
+                borderTop: "1px solid rgba(0, 0, 0, 0.05)",
                 display: "flex",
                 alignItems: "center",
                 gap: "2rem",
@@ -333,481 +336,32 @@ export default function Home() {
         </section>
 
         {/* 4. REAL WORK / PROOF */}
-        <section
-          id="work"
-          style={{
-            padding: "8rem 2rem",
-            backgroundColor: "var(--bg-primary)",
-            position: "relative",
-            zIndex: 10,
-          }}
-        >
-          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+        <ProofSection />
 
-            {/* Section header */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-                flexWrap: "wrap",
-                gap: "2rem",
-                marginBottom: "4rem",
-              }}
-            >
-              <div>
-                <span
-                  style={{
-                    color: "var(--accent-primary)",
-                    textTransform: "uppercase",
-                    fontSize: "0.85rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.15em",
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  Verified Delivery
-                </span>
-                <h2
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(2.2rem, 5vw, 4rem)",
-                    color: "#ffffff",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  Factual Proof. Real Solutions.
-                </h2>
-              </div>
-              <p style={{ maxWidth: "450px", fontSize: "1rem", lineHeight: 1.65 }}>
-                We avoid fabricated percentages or mock metrics. These are verified case studies representing actual client partner outcomes.
-              </p>
-            </div>
+        <PartnersSection />
+        <StatsSection />
+        <TestimonialsSection />
 
-            {/* Tier 1 — Featured case study (Erminio Palamino) */}
-            {(() => {
-              const featured = caseStudies.find((cs) => cs.slug === "erminio-palamino");
-              if (!featured) return null;
-              return (
-                <a
-                  href={`/work/${featured.slug}`}
-                  style={{ textDecoration: "none", display: "block", marginBottom: "2rem" }}
-                  className="cs-featured-wrapper"
-                >
-                  <CaseStudyCard study={featured} variant="featured" />
-                </a>
-              );
-            })()}
 
-            {/* Tier 2 — Supporting case studies */}
-            <div className="cs-supporting-grid">
-              {caseStudies
-                .filter((cs) => cs.slug !== "erminio-palamino")
-                .map((study) => (
-                  <a
-                    key={study.slug}
-                    href={`/work/${study.slug}`}
-                    style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}
-                    className="cs-supporting-link"
-                  >
-                    <CaseStudyCard study={study} variant="default" />
-                  </a>
-                ))}
-            </div>
+        {/* 5. PRICING */}
+        <PricingSection />
 
-            {/* Bridge statement */}
-            <div
-              style={{
-                marginTop: "5rem",
-                paddingTop: "3rem",
-                borderTop: "1px solid rgba(255, 255, 255, 0.05)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-                gap: "2rem",
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "clamp(1rem, 2vw, 1.15rem)",
-                  color: "var(--text-secondary)",
-                  maxWidth: "620px",
-                  lineHeight: 1.7,
-                  flex: "1 1 300px",
-                }}
-              >
-                Every engagement starts with understanding the problem. The solutions below show how we structure the work to close the gaps.
-              </p>
-              <a
-                href="#solutions"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  color: "var(--accent-primary)",
-                  fontSize: "0.85rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  flexShrink: 0,
-                  transition: "gap var(--transition-fast)",
-                }}
-                className="cs-bridge-link"
-              >
-                See the solutions
-                <span aria-hidden="true" style={{ fontSize: "1.1rem" }}>→</span>
-              </a>
-            </div>
+        {/* (Solutions overview and engagement models removed — see /pricing for full details) */}
 
-          </div>
 
-          {/* Scoped C.3E styles */}
-          <style>{`
-            /* Supporting grid layout */
-            .cs-supporting-grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-              gap: 1.5rem;
-            }
 
-            /* Featured card hover */
-            .cs-featured-wrapper:hover .cs-featured-card {
-              border-color: rgba(182, 245, 0, 0.3) !important;
-              background-color: rgba(255, 255, 255, 0.03) !important;
-            }
-            .cs-featured-wrapper:hover .cs-arrow {
-              transform: translateX(5px);
-            }
-
-            /* Featured metrics grid */
-            .cs-featured-metrics {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-              gap: 1.5rem 2rem;
-            }
-
-            /* Supporting card hover arrow */
-            .cs-supporting-link:hover .cs-arrow {
-              transform: translateX(4px);
-            }
-
-            /* Bridge link hover */
-            .cs-bridge-link:hover {
-              gap: 0.75rem !important;
-            }
-
-            /* Tablet: supporting grid 2-col */
-            @media (max-width: 1024px) {
-              .cs-supporting-grid {
-                grid-template-columns: repeat(2, 1fr);
-              }
-            }
-
-            /* Mobile: everything single column */
-            @media (max-width: 680px) {
-              .cs-supporting-grid {
-                grid-template-columns: 1fr;
-              }
-              .cs-featured-metrics {
-                grid-template-columns: 1fr 1fr;
-                gap: 1.25rem;
-              }
-            }
-
-            /* Reduced motion */
-            @media (prefers-reduced-motion: reduce) {
-              .cs-featured-wrapper:hover .cs-featured-card,
-              .cs-featured-card,
-              .cs-arrow,
-              .cs-bridge-link {
-                transition: none !important;
-                transform: none !important;
-              }
-              .cs-featured-wrapper:hover .cs-arrow,
-              .cs-supporting-link:hover .cs-arrow {
-                transform: none !important;
-              }
-            }
-          `}</style>
-        </section>
-
-        {/* 5. SOLUTIONS OVERVIEW */}
-        <section
-          id="solutions"
-          style={{
-            padding: "8rem 2rem",
-            backgroundColor: "var(--bg-secondary)",
-            position: "relative",
-            zIndex: 10,
-          }}
-        >
-          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-            <div style={{ textAlign: "center", marginBottom: "5rem" }}>
-              <span
-                style={{
-                  color: "var(--accent-primary)",
-                  textTransform: "uppercase",
-                  fontSize: "0.85rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.15em",
-                  display: "inline-block",
-                  marginBottom: "1rem",
-                }}
-              >
-                Integrated Capabilities
-              </span>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
-                  color: "#ffffff",
-                  lineHeight: 1.15,
-                  maxWidth: "800px",
-                  margin: "0 auto 1.25rem",
-                }}
-              >
-                How We Resolve Bottlenecks.
-              </h2>
-              <p
-                style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "1.05rem",
-                  maxWidth: "600px",
-                  margin: "0 auto",
-                  lineHeight: 1.6,
-                }}
-              >
-                Every capability is connected to drive actual customer acquisition and revenue, never isolated in a vacuum.
-              </p>
-            </div>
-
-            <div
-              className="solutions-overview-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                gap: "2rem",
-              }}
-            >
-              {solutions.map((sol, idx) => (
-                <a
-                  key={sol.id}
-                  href={`/solutions/${sol.slug}`}
-                  style={{ textDecoration: "none", display: "flex", flexDirection: "column" }}
-                  className="solution-card-link"
-                >
-                  <div
-                    style={{
-                      padding: "3rem 2.25rem",
-                      borderRadius: "16px",
-                      border: "1px solid rgba(255, 255, 255, 0.07)",
-                      backgroundColor: "rgba(255, 255, 255, 0.015)",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      height: "100%",
-                      position: "relative",
-                      transition: "transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease",
-                    }}
-                    className="solution-card glass-panel"
-                  >
-                    <div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          marginBottom: "1.75rem",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "var(--font-display)",
-                            fontSize: "1.2rem",
-                            color: "rgba(182, 245, 0, 0.5)",
-                            fontWeight: 700,
-                          }}
-                        >
-                          0{idx + 1}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: "0.75rem",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.15em",
-                            color: "var(--text-muted)",
-                            fontWeight: 600,
-                          }}
-                        >
-                          Core Solution
-                        </span>
-                      </div>
-
-                      <h3
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontSize: "1.85rem",
-                          color: "#ffffff",
-                          marginBottom: "0.75rem",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {sol.name}
-                      </h3>
-                      <h4
-                        style={{
-                          fontSize: "0.95rem",
-                          color: "var(--accent-primary)",
-                          fontWeight: 500,
-                          marginBottom: "1.25rem",
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {sol.tagline}
-                      </h4>
-                      <p
-                        style={{
-                          marginBottom: "2rem",
-                          fontSize: "0.92rem",
-                          color: "var(--text-secondary)",
-                          lineHeight: 1.65,
-                        }}
-                      >
-                        {sol.heroSubtext}
-                      </p>
-
-                      <div
-                        style={{
-                          borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-                          paddingTop: "1.5rem",
-                          marginBottom: "2.5rem",
-                        }}
-                      >
-                        <span
-                          style={{
-                            display: "block",
-                            fontSize: "0.75rem",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.12em",
-                            color: "var(--text-muted)",
-                            fontWeight: 600,
-                            marginBottom: "0.85rem",
-                          }}
-                        >
-                          Included Scope
-                        </span>
-                        <ul
-                          style={{
-                            listStyle: "none",
-                            padding: 0,
-                            margin: 0,
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.65rem",
-                          }}
-                        >
-                          {sol.capabilities.map((cap) => (
-                            <li
-                              key={cap}
-                              style={{
-                                fontSize: "0.88rem",
-                                color: "var(--text-primary)",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "0.6rem",
-                              }}
-                            >
-                              <span
-                                style={{
-                                  color: "var(--accent-primary)",
-                                  fontSize: "0.85rem",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                ✓
-                              </span>
-                              <span>{cap}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        paddingTop: "1.25rem",
-                        borderTop: "1px solid rgba(255, 255, 255, 0.05)",
-                      }}
-                    >
-                      <span
-                        style={{
-                          color: "var(--accent-primary)",
-                          fontSize: "0.9rem",
-                          fontWeight: 700,
-                          letterSpacing: "0.02em",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.4rem",
-                        }}
-                        className="solution-card-cta"
-                      >
-                        Explore Solution
-                        <span
-                          style={{
-                            transition: "transform 0.2s ease",
-                            display: "inline-block",
-                          }}
-                          className="solution-arrow"
-                        >
-                          →
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <style>{`
-            .solution-card-link:hover .solution-card {
-              border-color: rgba(182, 245, 0, 0.35) !important;
-              background-color: rgba(255, 255, 255, 0.03) !important;
-              transform: translateY(-4px);
-            }
-            .solution-card-link:hover .solution-arrow {
-              transform: translateX(4px);
-            }
-            @media (prefers-reduced-motion: reduce) {
-              .solution-card, .solution-arrow {
-                transition: none !important;
-                transform: none !important;
-              }
-              .solution-card-link:hover .solution-card {
-                transform: none !important;
-              }
-              .solution-card-link:hover .solution-arrow {
-                transform: none !important;
-              }
-            }
-          `}</style>
-        </section>
-
-        {/* 6. ENGAGEMENT MODELS */}
-        <EngagementModels />
 
         {/* 7. LOWER-FRICTION CONVERSION (CTA section with custom form) */}
         <CTA />
+
+        {/* 8. CONTACT SECTION */}
+        <ContactSection />
       </main>
 
-      {/* Global Footer */}
-      <Footer />
+      {/* Footer Card + Bottom Bar */}
+      <footer role="contentinfo">
+        <FooterCard />
+      </footer>
 
     </div>
   );

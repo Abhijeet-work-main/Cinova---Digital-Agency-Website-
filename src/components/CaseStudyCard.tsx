@@ -21,9 +21,9 @@ export default function CaseStudyCard({
           display: "flex",
           flexDirection: "column",
           gap: "2.5rem",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(0, 0, 0, 0.1)",
           borderTop: "2px solid var(--accent-primary)",
-          backgroundColor: "rgba(255, 255, 255, 0.02)",
+          backgroundColor: "rgba(0, 0, 0, 0.02)",
           position: "relative",
         }}
         className="cs-featured-card"
@@ -62,7 +62,7 @@ export default function CaseStudyCard({
                 textTransform: "uppercase",
                 fontWeight: 600,
                 letterSpacing: "0.12em",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(0, 0, 0, 0.1)",
                 borderRadius: "50px",
                 padding: "0.2rem 0.7rem",
               }}
@@ -74,7 +74,7 @@ export default function CaseStudyCard({
             style={{
               fontSize: "0.75rem",
               color: "var(--text-muted)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(0, 0, 0, 0.1)",
               borderRadius: "50px",
               padding: "0.25rem 0.75rem",
             }}
@@ -89,7 +89,7 @@ export default function CaseStudyCard({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2rem, 4vw, 3rem)",
-              color: "#ffffff",
+              color: "var(--text-primary)",
               lineHeight: 1.1,
               marginBottom: "1rem",
             }}
@@ -127,7 +127,7 @@ export default function CaseStudyCard({
         {study.verifiedResults.length > 0 && (
           <div
             style={{
-              borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+              borderTop: "1px solid rgba(0, 0, 0, 0.06)",
               paddingTop: "2rem",
             }}
           >
@@ -153,7 +153,7 @@ export default function CaseStudyCard({
                       fontFamily: "var(--font-primary)",
                       fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
                       fontWeight: 800,
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       letterSpacing: "-0.03em",
                       lineHeight: 1,
                       marginBottom: "0.4rem",
@@ -182,7 +182,7 @@ export default function CaseStudyCard({
         {/* What Cinova Did */}
         <div
           style={{
-            borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.06)",
             paddingTop: "2rem",
           }}
         >
@@ -278,7 +278,7 @@ export default function CaseStudyCard({
         justifyContent: "space-between",
         gap: "2rem",
         height: "100%",
-        border: "1px solid rgba(255, 255, 255, 0.05)",
+        border: "1px solid rgba(0, 0, 0, 0.05)",
       }}
       className="glass-panel glass-panel-hover cs-default-card"
     >
@@ -310,7 +310,7 @@ export default function CaseStudyCard({
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "1.7rem",
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 marginTop: "0.25rem",
                 lineHeight: 1.15,
               }}
@@ -322,7 +322,7 @@ export default function CaseStudyCard({
             style={{
               fontSize: "0.75rem",
               color: "var(--text-muted)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(0, 0, 0, 0.1)",
               borderRadius: "50px",
               padding: "0.2rem 0.65rem",
               flexShrink: 0,
@@ -392,7 +392,7 @@ export default function CaseStudyCard({
         {study.verifiedResults.length > 0 && (
           <div
             style={{
-              borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+              borderTop: "1px solid rgba(0, 0, 0, 0.05)",
               paddingTop: "1.25rem",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -407,7 +407,7 @@ export default function CaseStudyCard({
                     fontFamily: "var(--font-primary)",
                     fontSize: "1.4rem",
                     fontWeight: 700,
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     display: "block",
                     lineHeight: 1,
                     marginBottom: "0.25rem",

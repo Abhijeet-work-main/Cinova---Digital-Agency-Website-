@@ -69,7 +69,7 @@ export default function EngagementModels() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2.2rem, 5vw, 4rem)",
-              color: "#ffffff",
+              color: "var(--text-primary)",
               marginBottom: "1.5rem",
               lineHeight: 1.1,
             }}
@@ -176,10 +176,10 @@ export default function EngagementModels() {
           display: grid;
           grid-template-columns: minmax(220px, 1.2fr) repeat(3, 1fr);
           gap: 1px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(0, 0, 0, 0.05);
           border-radius: 12px;
-          box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
         }
         .em-cell {
           background: var(--bg-primary);
@@ -189,7 +189,7 @@ export default function EngagementModels() {
           align-items: center;
         }
         .em-header-cell {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(0, 0, 0, 0.02);
           padding: 2.5rem 1.5rem;
           flex-direction: column;
           align-items: flex-start;
@@ -198,7 +198,7 @@ export default function EngagementModels() {
         .em-tier-name {
           font-family: var(--font-display);
           font-size: 1.6rem;
-          color: #ffffff;
+          color: var(--text-primary);
           margin-bottom: 0.5rem;
           line-height: 1.2;
         }
@@ -209,13 +209,13 @@ export default function EngagementModels() {
         }
         .em-group-header {
           grid-column: 1 / -1;
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(0, 0, 0, 0.02);
           padding: 1.2rem 1.5rem;
           font-family: var(--font-display);
           font-size: 1.3rem;
-          color: #ffffff;
-          border-top: 1px solid rgba(255, 255, 255, 0.03);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          color: var(--text-primary);
+          border-top: 1px solid rgba(0, 0, 0, 0.03);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.03);
         }
         .em-feature-name {
           color: var(--text-secondary);
@@ -237,21 +237,21 @@ export default function EngagementModels() {
           }
           .em-mobile-card {
             background: var(--bg-primary);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             border-radius: 12px;
-            box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
           }
           .em-mobile-header {
             padding: 2.5rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.02);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           }
           .em-mobile-group {
             padding: 2rem 2rem 1rem;
             font-family: var(--font-display);
             font-size: 1.25rem;
-            color: #ffffff;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            color: var(--text-primary);
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
           }
           .em-mobile-card > div:nth-child(2) > .em-mobile-group {
             border-top: none;
