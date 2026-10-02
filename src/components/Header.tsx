@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ContactModal from "./ContactModal";
 
 const SOLUTIONS = [
   { label: "Conversion Websites", href: "/solutions/websites" },
@@ -21,6 +22,7 @@ const INDUSTRIES = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
   const pathname = usePathname();
 
   // Close mobile menu on route change
@@ -47,8 +49,8 @@ export default function Header() {
           {/* Center: Desktop Links */}
           <nav className="global-nav__links" aria-label="Primary navigation">
             <Link href="/" className="global-nav__link">Home</Link>
-            <Link href="/work/erminio-palamino" className="global-nav__link">Work</Link>
-            <Link href="/solutions/paid-growth" className="global-nav__link">Pricing</Link>
+            <Link href="/work" className="global-nav__link">Work</Link>
+            <Link href="/pricing" className="global-nav__link">Pricing</Link>
 
             {/* Industries with Hover Submenu */}
             <div className="global-nav__item-with-dropdown">
@@ -99,7 +101,13 @@ export default function Header() {
 
           {/* Right: Contact & Mobile Toggle */}
           <div className="global-nav__right">
-            <Link href="/#contact" className="global-nav__contact" id="nav-contact-cta">
+            <button
+              className="global-nav__contact"
+              id="nav-contact-cta"
+              onClick={() => setContactOpen(true)}
+              aria-label="Open contact form"
+              type="button"
+            >
               <svg
                 width="13"
                 height="13"
@@ -115,7 +123,7 @@ export default function Header() {
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
               Contact
-            </Link>
+            </button>
             <button
               className="global-nav__mobile-toggle"
               onClick={toggleMobileMenu}
@@ -135,8 +143,8 @@ export default function Header() {
       <div className={`mobile-nav ${mobileMenuOpen ? "mobile-nav--open" : ""}`} aria-hidden={!mobileMenuOpen}>
         <div className="mobile-nav__content">
           <Link href="/" className="mobile-nav__link">Home</Link>
-          <Link href="/work/erminio-palamino" className="mobile-nav__link">Work</Link>
-          <Link href="/solutions/paid-growth" className="mobile-nav__link">Pricing</Link>
+          <Link href="/work" className="mobile-nav__link">Work</Link>
+          <Link href="/pricing" className="mobile-nav__link">Pricing</Link>
 
           <div className="mobile-nav__section">
             <button
@@ -171,8 +179,20 @@ export default function Header() {
               ))}
             </div>
           </div>
+
+          {/* Mobile Contact Button */}
+          <button
+            className="mobile-nav__contact-btn"
+            onClick={() => { setMobileMenuOpen(false); setContactOpen(true); }}
+            type="button"
+          >
+            Get in Touch
+          </button>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   );
 }

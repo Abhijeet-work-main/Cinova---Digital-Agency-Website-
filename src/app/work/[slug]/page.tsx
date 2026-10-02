@@ -2,8 +2,7 @@ import { notFound } from "next/navigation";
 import { caseStudies } from "../../../data/caseStudies";
 import { solutions } from "../../../data/solutions";
 import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
-import CTA from "../../../components/CTA";
+import SharedPageClosing from "../../../components/SharedPageClosing";
 import type { Metadata } from "next";
 
 interface Props {
@@ -437,10 +436,9 @@ export default async function CaseStudyPage({ params }: Props) {
           </section>
         )}
 
-        <CTA />
       </main>
 
-      <Footer />
+      <SharedPageClosing />
     </div>
   );
 }

@@ -7,11 +7,9 @@ import ProofSection from "../components/ProofSection";
 import PartnersSection from "../components/PartnersSection";
 import StatsSection from "../components/StatsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
-import CTA from "../components/CTA";
 import { solutions } from "../data/solutions";
 import PricingSection from "../components/PricingSection";
-import ContactSection from "../components/ContactSection";
-import FooterCard from "../components/FooterCard";
+import SharedPageClosing from "../components/SharedPageClosing";
 
 export default function Home() {
   return (
@@ -351,17 +349,9 @@ export default function Home() {
 
 
 
-        {/* 7. LOWER-FRICTION CONVERSION (CTA section with custom form) */}
-        <CTA />
-
-        {/* 8. CONTACT SECTION */}
-        <ContactSection />
       </main>
 
-      {/* Footer Card + Bottom Bar */}
-      <footer role="contentinfo">
-        <FooterCard />
-      </footer>
+      <SharedPageClosing />
 
     </div>
   );

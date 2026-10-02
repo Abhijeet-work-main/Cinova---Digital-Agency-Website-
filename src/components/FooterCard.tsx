@@ -5,7 +5,7 @@ import Link from "next/link";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/work/erminio-palamino" },
-  { label: "Pricing", href: "/solutions/paid-growth" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Industries", href: "/#growth-leaking" },
   { label: "Contact", href: "/#contact" },
 ];

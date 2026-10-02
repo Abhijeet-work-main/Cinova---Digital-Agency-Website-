@@ -2096,6 +2096,23 @@ a:focus-visible {
   border-left-color: var(--accent-primary);
 }
 
+.mobile-nav__contact-btn {
+  margin-top: 2rem;
+  width: 100%;
+  background: var(--accent-primary);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+.mobile-nav__contact-btn:hover { background: #c8f500; }
+
 
 /* =============================================================
    CONTACT SECTION — Pokota-inspired, Cinova-styled
