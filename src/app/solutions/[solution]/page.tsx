@@ -2,8 +2,7 @@ import { notFound } from "next/navigation";
 import { getSolutionBySlug, solutions } from "../../../data/solutions";
 import { caseStudies } from "../../../data/caseStudies";
 import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
-import CTA from "../../../components/CTA";
+import SharedPageClosing from "../../../components/SharedPageClosing";
 import CaseStudyCard from "../../../components/CaseStudyCard";
 import type { Metadata } from "next";
 
@@ -435,11 +434,9 @@ export default async function SolutionPage({ params }: Props) {
           </div>
         </section>
 
-        {/* CTA */}
-        <CTA />
       </main>
 
-      <Footer />
+      <SharedPageClosing />
     </div>
   );
 }

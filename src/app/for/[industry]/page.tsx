@@ -3,8 +3,7 @@ import { getIndustryBySlug, industries } from "../../../data/industries";
 import { getSolutionBySlug } from "../../../data/solutions";
 import { caseStudies } from "../../../data/caseStudies";
 import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
-import CTA from "../../../components/CTA";
+import SharedPageClosing from "../../../components/SharedPageClosing";
 import CaseStudyCard from "../../../components/CaseStudyCard";
 import type { Metadata } from "next";
 
@@ -374,10 +373,9 @@ export default async function IndustryPage({ params }: Props) {
           </div>
         </section>
 
-        <CTA />
       </main>
 
-      <Footer />
+      <SharedPageClosing />
     </div>
   );
 }
