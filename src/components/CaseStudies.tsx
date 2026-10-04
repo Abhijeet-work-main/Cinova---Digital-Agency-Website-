@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CaseStudies.module.css";
 
-const HOME_CASE_STUDIES = [
+const CASE_STUDIES = [
   // Row 1
   {
     slug: "saanvi-botanical",
@@ -26,12 +24,12 @@ const HOME_CASE_STUDIES = [
     size: "short",
   },
   {
-    slug: "erminio-palamino",
-    title: "Erminio Palamino",
-    description: "Elegant retail identity and digital presence",
-    tags: ["Retail", "Identity"],
-    cover: "/brands/erminio-palamino/cover.png",
-    logo: "/brands/erminio-palamino/logo.png",
+    slug: "curate-home",
+    title: "Curate Home",
+    description: "Heritage rituals, reimagined for modern living",
+    tags: ["Strategy", "Creative"],
+    cover: "/brands/curate-home/cover.png",
+    logo: "/brands/curate-home/logo.png",
     size: "mid",
   },
   // Row 2
@@ -54,19 +52,47 @@ const HOME_CASE_STUDIES = [
     size: "tall",
   },
   {
+    slug: "purple-swan",
+    title: "Purple Swan",
+    description: "Gentle care, naturally — skincare with a clean conscience",
+    tags: ["Packaging", "Branding"],
+    cover: "/brands/purple-swan/cover.jpg",
+    logo: "/brands/purple-swan/logo.png",
+    size: "mid",
+  },
+  // Row 3
+  {
+    slug: "erminio-palamino",
+    title: "Erminio Palamino",
+    description: "Elegant retail identity and digital presence", // PLACEHOLDER COPY - review
+    tags: ["Retail", "Identity"], // PLACEHOLDER COPY - review
+    cover: "/brands/erminio-palamino/cover.png",
+    logo: "/brands/erminio-palamino/logo.png",
+    size: "tall",
+  },
+  {
+    slug: "noor",
+    title: "Noor",
+    description: "Custom booking system and refined brand architecture", // PLACEHOLDER COPY - review
+    tags: ["Web Dev", "Systems"], // PLACEHOLDER COPY - review
+    cover: "/brands/noor/cover.png",
+    logo: "/brands/noor/logo.png",
+    size: "short",
+  },
+  {
     slug: "pegah-toutak",
     title: "Pegah Toutak",
-    description: "Refined personal branding that commands authority",
-    tags: ["Branding", "Strategy"],
+    description: "Refined personal branding that commands authority", // PLACEHOLDER COPY - review
+    tags: ["Branding", "Strategy"], // PLACEHOLDER COPY - review
     cover: "/brands/pegah-toutak/cover.jpeg",
     logo: "/brands/pegah-toutak/logo.png",
     size: "mid",
   },
 ];
 
-export default function ProofSection() {
+export default function CaseStudies() {
   return (
-    <section id="work" className={styles.root} style={{ '--cs-top': '120px' } as React.CSSProperties}>
+    <div className={styles.root}>
       {/* HEADER */}
       <header className={styles.top}>
         {/* Row A: plus marks */}
@@ -95,28 +121,23 @@ export default function ProofSection() {
         <div className={styles.row12}>
           <div></div>
           <div className={styles.hCol}>
-            <h2 className={styles.h1} style={{ fontSize: "clamp(56px, 8vw, 120px)" }}>Case studies</h2>
+            <h1 className={styles.h1}>Case studies</h1>
             <p className={styles.sub}>Our top work till &copy;2026</p>
           </div>
         </div>
 
-        {/* Row C: lead paragraph + button */}
+        {/* Row C: lead paragraph. The leading spaces are preserved for indent. */}
         <div className={styles.row12}>
           <div></div>
-          <div>
-            <p className={styles.lead} style={{ marginBottom: "2rem" }}>
-              {"                        "}Our clients range from wellness startups to artisan jewellers &mdash; every project rooted in strategy, built around identity, and designed to convert.
-            </p>
-            <Link href="/work" className="prf-btn">
-              Discover all projects <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+          <p className={styles.lead}>
+            {"                        "}Our clients range from wellness startups to artisan jewellers &mdash; every project rooted in strategy, built around identity, and designed to convert.
+          </p>
         </div>
       </header>
 
       {/* CARD GRID */}
-      <div className={styles.grid} style={{ paddingBottom: "40px" }}>
-        {HOME_CASE_STUDIES.map((study) => (
+      <main className={styles.grid}>
+        {CASE_STUDIES.map((study) => (
           <Link
             key={study.slug}
             href={`/work/${study.slug}`}
@@ -142,50 +163,12 @@ export default function ProofSection() {
               </div>
             </div>
             <div className={styles.meta}>
-              <h3 className={styles.title}>{study.title}</h3>
+              <h2 className={styles.title}>{study.title}</h2>
               <p className={styles.desc}>{study.description}</p>
             </div>
           </Link>
         ))}
-      </div>
-
-      {/* ── Bottom CTA ──────────────────────────────────── */}
-      <div className="prf-bottom">
-        <Link href="/work" className="prf-btn">
-          View all projects <span aria-hidden="true">→</span>
-        </Link>
-      </div>
-
-      <style>{`
-        /* LIME BUTTON STYLES (Retained from original ProofSection) */
-        .prf-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          background: var(--accent-primary);
-          color: #0a0a0a;
-          font-family: var(--font-primary);
-          font-size: 0.88rem;
-          font-weight: 700;
-          letter-spacing: 0.01em;
-          padding: 0.72rem 1.8rem;
-          border-radius: 50px;
-          text-decoration: none;
-          transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-          width: fit-content;
-        }
-        .prf-btn:hover {
-          background: var(--accent-hover);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 24px rgba(182,245,0,0.35);
-        }
-
-        .prf-bottom {
-          display: flex;
-          justify-content: center;
-          padding-bottom: 6rem;
-        }
-      `}</style>
-    </section>
+      </main>
+    </div>
   );
 }

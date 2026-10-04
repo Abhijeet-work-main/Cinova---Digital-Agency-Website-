@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "../../components/Header";
 import SharedPageClosing from "../../components/SharedPageClosing";
+import caseStudyStyles from "../../components/CaseStudies.module.css";
 
 const TIERS = [
   {
@@ -244,76 +245,85 @@ function ProofStrip() {
 
 const PRICING_PROJECTS = [
   {
-    slug: "balbeer",
-    client: "Balbeer",
-    descriptor: "Videography and social growth strategy for an apparel brand.",
-    tags: ["Apparel", "Videography"],
-    image1: "/Dummy_Image/Balbeer1.jpg",
-    image2: "/Dummy_Image/Balbeer2.jpg",
+    slug: "saanvi-botanical",
+    title: "Saanvi Botanical",
+    description: "Plant-powered identity for a wellness brand",
+    tags: ["Branding", "Content"],
+    cover: "/brands/saanvi-botanical/cover.png",
+    logo: "/brands/saanvi-botanical/logo.png",
+    size: "tall",
+  },
+  {
+    slug: "kuptuuu",
+    title: "KUPTUUU",
+    description: "Made to be odd — craft ceramics with character",
+    tags: ["Branding", "Photography"],
+    cover: "/brands/kuptuuu/cover.jpg",
+    logo: "/brands/kuptuuu/logo.png",
+    size: "short",
   },
   {
     slug: "erminio-palamino",
-    client: "Erminio Palamino",
-    descriptor: "Luxury retail growth through Meta Ads and e-commerce conversion architecture.",
-    tags: ["Luxury Retail", "Meta Ads"],
-    image1: "/Dummy_Image/erminio1.jpg",
-    image2: "/Dummy_Image/erminio2.jpg",
-  },
-  {
-    slug: "noor",
-    client: "Noor",
-    descriptor: "Custom booking system that automated appointment management entirely.",
-    tags: ["Beauty & Bridal", "Web Dev"],
-    image1: "/Dummy_Image/noor1.jpg",
-    image2: "/Dummy_Image/noor2.jpg",
+    title: "Erminio Palamino",
+    description: "Elegant retail identity and digital presence",
+    tags: ["Retail", "Identity"],
+    cover: "/brands/erminio-palamino/cover.png",
+    logo: "/brands/erminio-palamino/logo.png",
+    size: "mid",
   },
 ];
 
 function PricingProjectsSection() {
   const { ref, visible } = useReveal();
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className={`pxp-projects ${visible ? "pxp-projects--visible" : ""}`} aria-label="Recent Projects">
-      <div className="pxp-projects__inner">
+    <section ref={ref as React.RefObject<HTMLElement>} className={`pxp-projects ${visible ? "pxp-projects--visible" : ""}`} style={{ paddingLeft: 0, paddingRight: 0 }} aria-label="Recent Projects">
+      <div className="pxp-projects__inner" style={{ padding: "0 2rem" }}>
         <div className="pxp-section-header pxp-section-header--centered">
           <h2 className="pxp-section-h2">Proven in Production</h2>
           <p className="pxp-section-header__sub">Real problems. Connected thinking. Measurable outcomes.</p>
         </div>
-        <div className="prf-row">
-          {PRICING_PROJECTS.map((project, i) => {
-            const size = i === 1 ? "small" : "tall";
-            const isFeatured = i === 1;
-            return (
-              <Link key={project.slug} href={`/work/${project.slug}`} className={`prf-card prf-card--${size}${isFeatured ? " prf-card--featured" : ""}`}>
-                <div className="prf-card__media">
-                  <div className="prf-card__pills">
-                    {project.tags.map((t) => (
-                      <span key={t} className="prf-card__pill">{t}</span>
-                    ))}
-                  </div>
-                  <div className="prf-card__img-main">
-                    <Image src={project.image1} alt={project.client} fill sizes="(max-width:680px) 100vw,33vw" style={{ objectFit: "cover" }} priority={isFeatured} />
-                  </div>
-                  <div className="prf-card__preview" aria-hidden="true">
-                    <div className="prf-card__preview-inner">
-                      <Image src={project.image2} alt="" fill sizes="22vw" style={{ objectFit: "cover" }} />
-                    </div>
-                  </div>
+      </div>
+        
+      <div className={caseStudyStyles.root} style={{ background: "transparent", padding: 0 }}>
+        <div className={caseStudyStyles.grid} style={{ paddingBottom: "40px" }}>
+          {PRICING_PROJECTS.map((study) => (
+            <Link
+              key={study.slug}
+              href={`/work/${study.slug}`}
+              className={`${caseStudyStyles.card} ${caseStudyStyles[study.size]}`}
+              aria-label={`Case study: ${study.title}`}
+            >
+              <div className={caseStudyStyles.media}>
+                <img
+                  className={caseStudyStyles.photo}
+                  src={study.cover}
+                  alt={`${study.title} cover`}
+                />
+                <div className={caseStudyStyles.shade}></div>
+                <div className={caseStudyStyles.tags}>
+                  {study.tags.map((tag) => (
+                    <span key={tag} className={caseStudyStyles.tag}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="prf-card__info">
-                  {isFeatured && (
-                    <div className="prf-card__feat-strip" aria-hidden="true">
-                      <span className="prf-card__feat-rule" />
-                      <span className="prf-card__feat-label">Featured Project</span>
-                      <span className="prf-card__feat-rule" />
-                    </div>
-                  )}
-                  <h3 className={`prf-card__title${isFeatured ? " prf-card__title--lime" : ""}`}>{project.client}</h3>
-                  <p className="prf-card__desc">{project.descriptor}</p>
+                <div className={caseStudyStyles.logo}>
+                  <img src={study.logo} alt={`${study.title} logo`} />
                 </div>
-              </Link>
-            )
-          })}
+              </div>
+              <div className={caseStudyStyles.meta}>
+                <h3 className={caseStudyStyles.title}>{study.title}</h3>
+                <p className={caseStudyStyles.desc}>{study.description}</p>
+              </div>
+            </Link>
+          ))}
         </div>
+      </div>
+
+      <div className="pxp-projects__inner" style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
+        <Link href="/work" className="pxp-btn-primary">
+          View all projects <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </section>
   );
@@ -616,29 +626,6 @@ const STYLES = `
 .pxp-projects--visible { opacity: 1; transform: translateY(0); }
 .pxp-projects__inner { max-width: 1360px; margin: 0 auto; }
 
-/* Proof Grid from Homepage */
-.prf-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: start; }
-.prf-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; position: relative; }
-.prf-card__media { position: relative; border-radius: 10px; overflow: hidden; background: #1c1c1c; margin-bottom: 1rem; }
-.prf-card--tall .prf-card__media { aspect-ratio: 3 / 4; }
-.prf-card--small .prf-card__media { aspect-ratio: 4 / 3; }
-.prf-card--featured .prf-card__media { border-top: 3px solid var(--accent-primary); }
-.prf-card__img-main { position: absolute; inset: 0; transition: filter 0.55s ease, transform 0.55s ease; }
-.prf-card:hover .prf-card__img-main { filter: blur(7px) brightness(0.65); transform: scale(1.04); }
-.prf-card__preview { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: scale(0.88); transition: opacity 0.4s ease 0.06s, transform 0.45s cubic-bezier(0.16,1,0.3,1) 0.06s; z-index: 10; }
-.prf-card:hover .prf-card__preview { opacity: 1; transform: scale(1); pointer-events: auto; }
-.prf-card__preview-inner { position: relative; width: 64%; aspect-ratio: 16 / 10; border: 2.5px solid rgba(255,255,255,0.92); border-radius: 6px; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.55); }
-.prf-card__pills { position: absolute; top: 0.9rem; left: 0.9rem; display: flex; gap: 0.4rem; z-index: 20; flex-wrap: wrap; max-width: calc(100% - 1.8rem); }
-.prf-card__pill { display: inline-block; background: rgba(8, 8, 8, 0.78); color: #fff; font-family: var(--font-primary); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.025em; padding: 0.26rem 0.65rem; border-radius: 50px; white-space: nowrap; line-height: 1.4; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-.prf-card__info { display: flex; flex-direction: column; gap: 0.35rem; }
-.prf-card__feat-strip { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.3rem; }
-.prf-card__feat-rule { flex: 1; height: 1px; background: var(--accent-primary); max-width: 40px; }
-.prf-card__feat-label { font-family: var(--font-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-primary); white-space: nowrap; }
-.prf-card__title { font-family: var(--font-display); font-size: clamp(1.15rem, 1.8vw, 1.5rem); font-weight: 600; color: var(--text-primary); line-height: 1.2; margin: 0; transition: color 0.2s ease; }
-.prf-card__title--lime { color: var(--accent-primary); }
-.prf-card:hover .prf-card__title { color: var(--text-primary); }
-.prf-card--featured:hover .prf-card__title { color: var(--accent-primary); }
-.prf-card__desc { font-family: var(--font-primary); font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
 
 /* Reviews Section */
 .pxp-reviews { padding: 5rem 2rem; background: #f5f5f3; opacity: 0; transition: opacity 0.6s ease; border-top: 1px solid rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04); }
@@ -694,10 +681,7 @@ const STYLES = `
 .pxp-reassurance__em { font-style: italic; color: var(--accent-primary); }
 
 @media (max-width: 1024px) {
-  .prf-row { grid-template-columns: 1fr 1fr; }
-  .prf-row .prf-card:nth-child(3) { grid-column: 1 / -1; }
-  .prf-card--tall .prf-card__media { aspect-ratio: 16 / 11; }
-  .prf-card--small .prf-card__media { aspect-ratio: 16 / 10; }
+
   .tst-layout { grid-template-columns: 1fr; gap: 4rem; }
   .tst-card { max-width: 380px; }
 }
@@ -715,11 +699,7 @@ const STYLES = `
 }
 
 @media (max-width: 680px) {
-  .prf-row { grid-template-columns: 1fr; gap: 2rem; }
-  .prf-row .prf-card:nth-child(3) { grid-column: auto; }
-  .prf-card--tall .prf-card__media { aspect-ratio: 4 / 3; }
-  .prf-card--small .prf-card__media { aspect-ratio: 16 / 9; }
-  .prf-card__preview-inner { width: 70%; }
+
 }
 
 @media (max-width: 560px) {
@@ -734,8 +714,7 @@ const STYLES = `
   }
   .pxp-btn-primary, .pxp-btn-ghost, .pxp-model-card__cta,
   .pxp-model-card__cta-arrow, .pxp-model-card::before { transition: none !important; }
-  .prf-card__img-main, .prf-card__preview { transition: none !important; transform: none !important; filter: none !important; }
-  .prf-card:hover .prf-card__preview { opacity: 1; }
+
   .tst-quote { animation: none !important; }
   .tst-nav__prev, .tst-nav__next, .tst-review-btn { transition: none !important; }
 }

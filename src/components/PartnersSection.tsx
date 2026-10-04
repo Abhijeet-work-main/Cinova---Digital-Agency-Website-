@@ -1,19 +1,24 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────────
-   Real Cinova client logos — replace src with finals when ready.
+   Real Cinova client images — beautiful wall-sign mockups
    ───────────────────────────────────────────────────────────── */
-const LOGOS = [
-  { name: "Balbeer",          src: "/logos/balbeer.jpg",     w: 140, h: 56 },
-  { name: "Erminio Palamino", src: "/logos/erminio.jpg",     w: 150, h: 56 },
-  { name: "Gloss & Shine",    src: "/logos/gloss-shine.jpg", w: 150, h: 56 },
-  { name: "Cuts & Looks",     src: "/logos/cuts-looks.jpg",  w: 150, h: 56 },
-  { name: "Saira",            src: "/logos/saira.jpg",       w: 130, h: 56 },
-  { name: "Velmora",          src: "/logos/velmora.png",     w: 150, h: 56 },
+const CLIENTS = [
+  { name: "Curate Home",       src: "/clients/Curate Home Monogram Wall Sign.png" },
+  { name: "Erminio Palamino",  src: "/clients/Embossed Erminio Palamino Monogram.png" },
+  { name: "Kap.mtl",           src: "/clients/Kap.mtl Raised Script Logo.png" },
+  { name: "Lustre Jewellery",  src: "/clients/Lustre Jewellery Logo on Warm Beige Wall.png" },
+  { name: "Luxury byXiu",      src: "/clients/Luxury byXiu Embossed Logo.png" },
+  { name: "Gloss & Shine",     src: "/clients/Premium Gloss & Shine Wall Logo.png" },
+  { name: "Purple Swan",       src: "/clients/Purple Swan 3D Wall Sign.png" },
+  { name: "Saanvi Botanicals", src: "/clients/Saanvi Botanicals Embossed Logo.png" },
 ];
+
+/* Duplicate for seamless infinite scroll */
+const TRACK = [...CLIENTS, ...CLIENTS];
 
 export default function PartnersSection() {
   return (
@@ -27,7 +32,7 @@ export default function PartnersSection() {
           <span className="prt-eyebrow__label">OUR CLIENTS</span>
         </div>
 
-        {/* Headline — Inter, centered */}
+        {/* Headline */}
         <h2 className="prt-headline">
           {"We've partnered with forward-thinking "}
           <span className="prt-headline__muted">
@@ -35,36 +40,58 @@ export default function PartnersSection() {
           </span>
         </h2>
 
-        {/* Logo Grid — 3 col × 2 row, cards tall and compact gutters */}
-        <div className="prt-grid" role="list" aria-label="Client logos">
-          {LOGOS.map((logo) => (
-            <div key={logo.name} className="prt-card" role="listitem">
-              <div className="prt-card__inner">
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={logo.w}
-                  height={logo.h}
-                  style={{ objectFit: "contain", width: "auto", height: "auto", maxWidth: "75%", maxHeight: "60%" }}
-                />
-              </div>
+      </div>
+
+      {/* ── Marquee strip ── */}
+      <div className="prt-marquee" aria-label="Client logos" role="list">
+        {/* Left fade */}
+        <div className="prt-marquee__fade prt-marquee__fade--left" aria-hidden="true" />
+
+        <div className="prt-track">
+          {TRACK.map((client, i) => (
+            <div
+              key={`${client.name}-${i}`}
+              className="prt-slide"
+              role="listitem"
+              aria-label={client.name}
+            >
+              <Image
+                src={client.src}
+                alt={client.name}
+                width={320}
+                height={180}
+                className="prt-slide__img"
+                draggable={false}
+              />
             </div>
           ))}
         </div>
 
+        {/* Right fade */}
+        <div className="prt-marquee__fade prt-marquee__fade--right" aria-hidden="true" />
       </div>
+
       <style>{`
+        /* ── Section ── */
         .prt-section {
-          padding: 9rem 2rem 8rem;
-          background: #f5f5f3;
+          padding: 6rem 0 6rem;
+          background: linear-gradient(160deg,
+            #f0ece6 0%,
+            #ede8e0 30%,
+            #e8e2d8 55%,
+            #ede8e0 75%,
+            #f2ede8 100%
+          );
           position: relative;
           z-index: 10;
-          border-top: 1px solid rgba(0,0,0,0.06);
+          border-top: 1px solid rgba(180,160,130,0.18);
+          overflow: hidden;
         }
         .prt-inner {
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           text-align: center;
+          padding: 0 2rem;
         }
 
         /* ── Eyebrow ── */
@@ -73,7 +100,7 @@ export default function PartnersSection() {
           align-items: center;
           justify-content: center;
           gap: 0.6rem;
-          margin-bottom: 2.5rem;
+          margin-bottom: 1.6rem;
         }
         .prt-eyebrow__bracket,
         .prt-eyebrow__dot,
@@ -81,7 +108,7 @@ export default function PartnersSection() {
           font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.78rem;
           font-weight: 400;
-          color: var(--text-muted);
+          color: var(--text-muted, #888);
           letter-spacing: 0.06em;
         }
         .prt-eyebrow__label {
@@ -89,58 +116,104 @@ export default function PartnersSection() {
           text-transform: uppercase;
         }
 
-        /* ── Headline — Inter (matches reference: Inter 400, 42px) ── */
+        /* ── Headline ── */
         .prt-headline {
           font-family: 'Inter', system-ui, sans-serif;
-          font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+          font-size: clamp(1.9rem, 3vw, 2.6rem);
           font-weight: 400;
-          color: var(--text-primary);
-          line-height: 1.3;
+          color: var(--text-primary, #0a0a0a);
+          line-height: 1.32;
           letter-spacing: -0.02em;
-          max-width: 820px;
-          margin: 0 auto 4.5rem;
+          max-width: 780px;
+          margin: 0 auto 3.5rem;
         }
         .prt-headline__muted {
-          color: rgba(10,10,10,0.45);
+          color: rgba(10,10,10,0.42);
           font-weight: 400;
         }
 
-        /* ── Grid — 3 columns, compact gutters, tall cards ── */
-        .prt-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 0.75rem;
-          max-width: 960px;
-          margin: 0 auto;
+        /* ── Marquee container ── */
+        .prt-marquee {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
         }
-        .prt-card {
-          border-radius: 10px;
-          border: 1px solid rgba(0,0,0,0.07);
-          background: #fff;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .prt-card:hover {
-          border-color: rgba(0,0,0,0.14);
-          box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-        }
-        .prt-card__inner {
+
+        /* ── Scrolling track ── */
+        .prt-track {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          /* Tall cards matching reference proportions */
-          padding: 3rem 2rem;
-          min-height: 140px;
+          gap: 1rem;
+          width: max-content;
+          animation: prt-scroll 36s linear infinite;
+          will-change: transform;
+        }
+        .prt-track:hover {
+          animation-play-state: paused;
+        }
+
+        /* ── Individual slide card ── */
+        .prt-slide {
+          flex: 0 0 auto;
+          width: 240px;
+          height: 140px;
+          border-radius: 10px;
+          border: 1px solid rgba(180,155,120,0.22);
+          background: rgba(255,252,247,0.82);
+          overflow: hidden;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+          cursor: default;
+        }
+        .prt-slide:hover {
+          border-color: rgba(0,0,0,0.15);
+          box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+          transform: translateY(-2px);
+        }
+        .prt-slide__img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          pointer-events: none;
+          user-select: none;
+        }
+
+        /* ── Edge fades ── */
+        .prt-marquee__fade {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 120px;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .prt-marquee__fade--left {
+          left: 0;
+          background: linear-gradient(to right, #f0ece6 0%, transparent 100%);
+        }
+        .prt-marquee__fade--right {
+          right: 0;
+          background: linear-gradient(to left, #f2ede8 0%, transparent 100%);
+        }
+
+        /* ── Keyframe ── */
+        @keyframes prt-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
 
         /* ── Responsive ── */
-        @media(max-width:768px) {
-          .prt-section { padding: 6rem 1.25rem 5rem; }
-          .prt-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-          .prt-card__inner { min-height: 110px; padding: 2rem 1.5rem; }
-          .prt-headline { font-size: clamp(1.7rem, 5vw, 2.2rem); margin-bottom: 3rem; }
+        @media (max-width: 768px) {
+          .prt-section { padding: 4.5rem 0 4.5rem; }
+          .prt-slide { width: 190px; height: 112px; }
+          .prt-track { gap: 0.75rem; }
+          .prt-headline { font-size: clamp(1.5rem, 5vw, 1.9rem); margin-bottom: 2.5rem; }
+          .prt-marquee__fade { width: 60px; }
         }
-        @media(prefers-reduced-motion:reduce) {
-          .prt-card { transition: none !important; }
+
+        /* ── Accessibility ── */
+        @media (prefers-reduced-motion: reduce) {
+          .prt-track { animation: none; }
+          .prt-slide:hover { transform: none; }
         }
       `}</style>
     </section>
