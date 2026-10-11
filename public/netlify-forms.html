@@ -6,40 +6,39 @@
   </head>
   <body>
     <!--
-      This file exists solely for Netlify's form-detection bot.
-      It is never linked or shown to visitors.
+      This static blueprint is parsed by Netlify's form-detection bot at deploy time.
       The three form name attributes must exactly match the
       form-name values used in the client-side fetch payloads.
     -->
 
     <!-- 1. Contact Modal (header / global) -->
-    <form name="cinova-contact-modal" netlify netlify-honeypot="bot-field" hidden>
+    <form name="cinova-contact-modal" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="cinova-contact-modal" />
-      <input name="bot-field" />
-      <input type="text"  name="name" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
     </form>
 
     <!-- 2. Contact Section (footer / inline) -->
-    <form name="cinova-contact-section" netlify netlify-honeypot="bot-field" hidden>
+    <form name="cinova-contact-section" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="cinova-contact-section" />
-      <input name="bot-field" />
-      <input type="text"  name="name" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
     </form>
 
     <!-- 3. Growth Diagnostic (CTA multi-step) -->
-    <form name="cinova-growth-diagnostic" netlify netlify-honeypot="bot-field" hidden>
+    <form name="cinova-growth-diagnostic" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="cinova-growth-diagnostic" />
-      <input name="bot-field" />
-      <input type="text"  name="name" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
       <input type="email" name="email" />
-      <input type="text"  name="improvement" />
-      <input type="text"  name="bottleneck" />
-      <input type="text"  name="brand" />
-      <input type="text"  name="channel" />
+      <input type="text" name="improvement" />
+      <input type="text" name="bottleneck" />
+      <input type="text" name="brand" />
+      <input type="text" name="channel" />
     </form>
   </body>
 </html>

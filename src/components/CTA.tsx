@@ -100,7 +100,7 @@ export default function CTA() {
         brand: formData.brand,
         channel: formData.channel,
       });
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
@@ -339,7 +339,7 @@ export default function CTA() {
               <div className="diag-state__lottie">
                 <Lottie src={successAnimation} loop={false} />
               </div>
-              <h3 className="diag-state__title">We've Received Your Request</h3>
+              <h3 className="diag-state__title">We&apos;ve Received Your Request</h3>
               <p className="diag-state__body">
                 Thank you for completing the diagnostic. We are analyzing your responses and will reach out shortly.
               </p>
