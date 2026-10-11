@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netlify Forms Detection</title>
+  </head>
+  <body>
+    <!--
+      This static blueprint is parsed by Netlify's form-detection bot at deploy time
+      and acts as the static POST endpoint (/__forms.html) for AJAX submissions,
+      preventing Next.js App Router serverless functions from intercepting the request.
+    -->
+
+    <!-- 1. Contact Modal (header / global) -->
+    <form name="cinova-contact-modal" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="cinova-contact-modal" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <!-- 2. Contact Section (footer / inline) -->
+    <form name="cinova-contact-section" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="cinova-contact-section" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <!-- 3. Growth Diagnostic (CTA multi-step) -->
+    <form name="cinova-growth-diagnostic" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="cinova-growth-diagnostic" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="improvement" />
+      <input type="text" name="bottleneck" />
+      <input type="text" name="brand" />
+      <input type="text" name="channel" />
+    </form>
+  </body>
+</html>
