@@ -19,8 +19,11 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     name: "",
     email: "",
     message: "",
+    botField: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -49,9 +52,30 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setSubmitting(true);
+    try {
+      const body = new URLSearchParams({
+        "form-name": "cinova-contact-modal",
+        "bot-field": formState.botField,
+        name: formState.name,
+        email: formState.email,
+        message: formState.message,
+      });
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!open) return null;
@@ -75,6 +99,8 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
 
         {!submitted ? (
           <form className="cm-form" onSubmit={handleSubmit} noValidate>
+            {/* Netlify required hidden field */}
+            <input type="hidden" name="form-name" value="cinova-contact-modal" />
 
             {/* ── Headline block ──────────────────── */}
             <div className="cm-head">
@@ -90,6 +116,23 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
 
               {/* LEFT */}
               <div className="cm-col cm-col--left">
+                {/* Honeypot — visually off-screen, not display:none so bots fill it */}
+                <input
+                  name="bot-field"
+                  value={formState.botField}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    width: "1px",
+                    height: "1px",
+                    overflow: "hidden",
+                  }}
+                  autoComplete="off"
+                />
+
                 <div className="cm-field">
                   <input
                     ref={nameRef}
@@ -118,8 +161,6 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                     autoComplete="email"
                   />
                 </div>
-
-
 
                 {/* Social links — separated by gap */}
                 <div className="cm-socials">
@@ -152,11 +193,16 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
 
                 {/* Submit row */}
                 <div className="cm-submit-row">
-                  <button type="submit" className="cm-submit">
-                    <span className="cm-submit__label">Submit</span>
+                  <button type="submit" className="cm-submit" disabled={submitting} aria-disabled={submitting}>
+                    <span className="cm-submit__label">{submitting ? "Sending…" : "Submit"}</span>
                     <span className="cm-submit__arrow" aria-hidden="true">→</span>
                   </button>
                 </div>
+
+                {/* Error message */}
+                {error && (
+                  <p className="cm-error" role="alert">{error}</p>
+                )}
 
                 {/* Trust note */}
                 <p className="cm-trust">
@@ -440,6 +486,15 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         .cm-submit:hover .cm-submit__arrow {
           transform: translateX(6px);
           background: #c8f500;
+        }
+
+        /* ── ERROR MESSAGE ────────────────────── */
+        .cm-error {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.8rem;
+          color: #c0392b;
+          margin: 0.5rem 0 0;
+          line-height: 1.5;
         }
 
         /* ── TRUST NOTE ───────────────────────── */

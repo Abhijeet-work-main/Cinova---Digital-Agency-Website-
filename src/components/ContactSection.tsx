@@ -3,9 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", botField: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -20,14 +21,31 @@ export default function ContactSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
+    setError("");
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      const body = new URLSearchParams({
+        "form-name": "cinova-contact-section",
+        "bot-field": formData.botField,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      });
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
-    }, 1800);
+    } catch {
+      setError("Something went wrong. Please try again or email us at hello@cinova.in.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -96,6 +114,26 @@ export default function ContactSection() {
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              {/* Netlify required hidden field */}
+              <input type="hidden" name="form-name" value="cinova-contact-section" />
+
+              {/* Honeypot — moved off-screen, not display:none */}
+              <input
+                name="bot-field"
+                value={formData.botField}
+                onChange={(e) => setFormData((p) => ({ ...p, botField: e.target.value }))}
+                tabIndex={-1}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                }}
+                autoComplete="off"
+              />
+
               <div className="contact-field">
                 <label htmlFor="contact-name" className="contact-field__label">
                   Your name *
@@ -103,6 +141,7 @@ export default function ContactSection() {
                 <input
                   id="contact-name"
                   type="text"
+                  name="name"
                   className="contact-field__input"
                   placeholder="Jane Smith"
                   value={formData.name}
@@ -119,6 +158,7 @@ export default function ContactSection() {
                 <input
                   id="contact-email"
                   type="email"
+                  name="email"
                   className="contact-field__input"
                   placeholder="jane@company.com"
                   value={formData.email}
@@ -134,6 +174,7 @@ export default function ContactSection() {
                 </label>
                 <textarea
                   id="contact-message"
+                  name="message"
                   className="contact-field__input contact-field__input--textarea"
                   placeholder="your message..."
                   rows={5}
@@ -142,6 +183,12 @@ export default function ContactSection() {
                   required
                 />
               </div>
+
+              {error && (
+                <p role="alert" style={{ fontSize: "0.82rem", color: "#ef4444", marginTop: "0.5rem", lineHeight: 1.5 }}>
+                  {error}
+                </p>
+              )}
 
               <button
                 type="submit"
