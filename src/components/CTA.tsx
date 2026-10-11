@@ -68,7 +68,9 @@ export default function CTA() {
     channel: "",
     name: "",
     email: "",
+    botField: "",
   });
+  const [submitError, setSubmitError] = useState("");
 
   const handleNext = useCallback(() => {
     if (step === 1 && formData.improvement) setStep(2);
@@ -82,18 +84,37 @@ export default function CTA() {
     else if (step === 4) setStep(3);
   }, [step]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (step !== 4) return;
+    setSubmitError("");
     setStep("loading");
-    if (typeof window !== "undefined") {
-      console.log("Telemetry event: diagnostic_completed", formData);
-      const event = new CustomEvent("cinova_audit_submit", { detail: formData });
-      window.dispatchEvent(event);
+    try {
+      const body = new URLSearchParams({
+        "form-name": "cinova-growth-diagnostic",
+        "bot-field": formData.botField,
+        name: formData.name,
+        email: formData.email,
+        improvement: formData.improvement,
+        bottleneck: formData.bottleneck,
+        brand: formData.brand,
+        channel: formData.channel,
+      });
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (typeof window !== "undefined") {
+        const event = new CustomEvent("cinova_audit_submit", { detail: formData });
+        window.dispatchEvent(event);
+      }
+      setStep("success");
+    } catch {
+      setSubmitError("Something went wrong. Please check your connection and try again.");
+      setStep(4);
     }
-    // Simulated delay — no real backend exists. Success screen explicitly states this.
-    const timer = setTimeout(() => setStep("success"), 2000);
-    return () => clearTimeout(timer);
   };
 
   const renderProgressBar = () => {
@@ -229,6 +250,26 @@ export default function CTA() {
 
           {step === 4 && (
             <form className="diag-step diag-step--form" key="step-4" onSubmit={handleSubmit} noValidate>
+              {/* Netlify required hidden field */}
+              <input type="hidden" name="form-name" value="cinova-growth-diagnostic" />
+
+              {/* Honeypot — off-screen, not display:none */}
+              <input
+                name="bot-field"
+                value={formData.botField}
+                onChange={(e) => setFormData((p) => ({ ...p, botField: e.target.value }))}
+                tabIndex={-1}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                }}
+                autoComplete="off"
+              />
+
               <h3 className="diag-step__question">Where should we send the diagnosis?</h3>
               <div className="diag-fields">
                 <div className="diag-field">
@@ -236,6 +277,7 @@ export default function CTA() {
                   <input
                     type="text"
                     id="diag-name"
+                    name="name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
@@ -249,6 +291,7 @@ export default function CTA() {
                   <input
                     type="email"
                     id="diag-email"
+                    name="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
@@ -258,6 +301,13 @@ export default function CTA() {
                   />
                 </div>
               </div>
+
+              {submitError && (
+                <p role="alert" style={{ fontSize: "0.82rem", color: "#ef4444", marginTop: "0.75rem", lineHeight: 1.5 }}>
+                  {submitError}
+                </p>
+              )}
+
               <div className="diag-nav">
                 <button type="button" className="diag-btn-secondary" onClick={handleBack}>← Back</button>
                 <button

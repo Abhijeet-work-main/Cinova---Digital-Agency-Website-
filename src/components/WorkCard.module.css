@@ -1,0 +1,145 @@
+/* =====================================================================
+   WorkCard.module.css
+   Shared card styles matching CaseStudies source of truth exactly.
+   All values VERIFIED from DevTools.
+   ===================================================================== */
+
+.card {
+  --hover-blur:     8px;
+  --hover-scale:    1.05;
+  --hover-duration: 0.4s;
+  --hover-ease:     ease;
+  --cs-radius:      16px;
+  --cs-ink:         #0a0a0a;
+  --cs-muted:       #7a7a7a;
+
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Media: relative, overflow hidden, radius 16px
+   aspect-ratios VERIFIED:
+     tall  0.704412/1
+     mid   0.917308/1
+     short 1.1925/1 */
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--cs-radius);
+  width: 100%;
+  background: #ccc;
+}
+.tall .media  { aspect-ratio: 0.704412 / 1; }
+.mid  .media  { aspect-ratio: 0.917308 / 1; }
+.short .media { aspect-ratio: 1.1925   / 1; }
+
+/* Cover photo: absolute fill, object-fit cover */
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    filter    var(--hover-duration) var(--hover-ease),
+    transform var(--hover-duration) var(--hover-ease);
+  transform-origin: center center;
+  will-change: filter, transform;
+  display: block;
+}
+.card:hover .photo {
+  filter: blur(var(--hover-blur));
+  transform: scale(var(--hover-scale));
+}
+
+/* Shade overlay: does NOT change on hover */
+.shade {
+  position: absolute;
+  inset: 0;
+  background: rgb(10, 10, 10);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Tags: absolute top 8px left 8px, flex, gap 4px */
+.tags {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+.tag {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.24);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20.8px;
+  letter-spacing: -0.64px;
+  color: #fff;
+  white-space: nowrap;
+  font-family: Inter, "Inter Placeholder", sans-serif;
+}
+
+/* Logo badge: centered, 200x120, radius 12px, opacity 0 → 1 on hover */
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 120px;
+  margin-top: -60px;
+  margin-left: -100px;
+  border-radius: 12px;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity var(--hover-duration) var(--hover-ease);
+  overflow: hidden;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+.card:hover .logo {
+  opacity: 1;
+}
+
+/* Text block: padding 16px 4px, flex col, gap 4px */
+.meta {
+  padding: 16px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* title: 28px/36.4px, w500, ls -1.12px */
+.title {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 36.4px;
+  letter-spacing: -1.12px;
+  color: var(--cs-ink);
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  margin: 0;
+}
+/* desc: 20px/26px, w500, ls -0.8px */
+.desc {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.8px;
+  color: var(--cs-muted);
+  font-family: Inter, "Inter Placeholder", sans-serif;
+  margin: 0;
+}

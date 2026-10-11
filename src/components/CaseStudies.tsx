@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CaseStudies.module.css";
+import WorkCard from "./WorkCard";
 
 const CASE_STUDIES = [
   // Row 1
@@ -10,7 +11,7 @@ const CASE_STUDIES = [
     title: "Saanvi Botanical",
     description: "Plant-powered identity for a wellness brand",
     tags: ["Branding", "Content"],
-    cover: "/brands/saanvi-botanical/cover.png",
+    cover: "/brands/saanvi-botanical/cover.jpg",
     logo: "/brands/saanvi-botanical/logo.png",
     size: "tall",
   },
@@ -28,7 +29,7 @@ const CASE_STUDIES = [
     title: "Curate Home",
     description: "Heritage rituals, reimagined for modern living",
     tags: ["Strategy", "Creative"],
-    cover: "/brands/curate-home/cover.png",
+    cover: "/brands/curate-home/cover.jpg",
     logo: "/brands/curate-home/logo.png",
     size: "mid",
   },
@@ -38,7 +39,7 @@ const CASE_STUDIES = [
     title: "Gloss & Shine",
     description: "Premium auto detailing, elevated online",
     tags: ["Branding", "Digital"],
-    cover: "/brands/gloss-shine/cover.png",
+    cover: "/brands/gloss-shine/cover.jpg",
     logo: "/brands/gloss-shine/logo.png",
     size: "short",
   },
@@ -64,28 +65,47 @@ const CASE_STUDIES = [
   {
     slug: "erminio-palamino",
     title: "Erminio Palamino",
-    description: "Elegant retail identity and digital presence", // PLACEHOLDER COPY - review
-    tags: ["Retail", "Identity"], // PLACEHOLDER COPY - review
-    cover: "/brands/erminio-palamino/cover.png",
+    description: "Luxury accessories, built to sell online",
+    tags: ["Ads", "Website"],
+    cover: "/brands/erminio-palamino/cover.jpg",
     logo: "/brands/erminio-palamino/logo.png",
     size: "tall",
   },
   {
     slug: "noor",
     title: "Noor",
-    description: "Custom booking system and refined brand architecture", // PLACEHOLDER COPY - review
-    tags: ["Web Dev", "Systems"], // PLACEHOLDER COPY - review
-    cover: "/brands/noor/cover.png",
+    description: "A makeup brand, now booked online",
+    tags: ["Website", "Reach"],
+    cover: "/brands/noor/cover.jpg",
     logo: "/brands/noor/logo.png",
     size: "short",
   },
   {
     slug: "pegah-toutak",
     title: "Pegah Toutak",
-    description: "Refined personal branding that commands authority", // PLACEHOLDER COPY - review
-    tags: ["Branding", "Strategy"], // PLACEHOLDER COPY - review
+    description: "Quiet luxury for the finishing touch",
+    tags: ["Branding", "Creative"],
     cover: "/brands/pegah-toutak/cover.jpeg",
     logo: "/brands/pegah-toutak/logo.png",
+    size: "mid",
+  },
+  // Row 4 -- new brands
+  {
+    slug: "balbeer",
+    title: "Balbeer",
+    description: "Traditional Indian wear, discovered through reels",
+    tags: ["Content", "Reels"],
+    cover: "/brands/balbeer/cover.jpg",
+    logo: "/brands/balbeer/logo.png",
+    size: "short",
+  },
+  {
+    slug: "pb-investing",
+    title: "PB Investing",
+    description: "Investing education, scripted to be watched",
+    tags: ["Content", "Strategy"],
+    cover: "/brands/pb-investing/cover.jpg",
+    logo: "/brands/pb-investing/logo.png",
     size: "mid",
   },
 ];
@@ -138,35 +158,17 @@ export default function CaseStudies() {
       {/* CARD GRID */}
       <main className={styles.grid}>
         {CASE_STUDIES.map((study) => (
-          <Link
+          <WorkCard
             key={study.slug}
-            href={`/work/${study.slug}`}
-            className={`${styles.card} ${styles[study.size]}`}
-            aria-label={`Case study: ${study.title}`}
-          >
-            <div className={styles.media}>
-              <img
-                className={styles.photo}
-                src={study.cover}
-                alt={`${study.title} cover`}
-              />
-              <div className={styles.shade}></div>
-              <div className={styles.tags}>
-                {study.tags.map((tag) => (
-                  <span key={tag} className={styles.tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className={styles.logo}>
-                <img src={study.logo} alt={`${study.title} logo`} />
-              </div>
-            </div>
-            <div className={styles.meta}>
-              <h2 className={styles.title}>{study.title}</h2>
-              <p className={styles.desc}>{study.description}</p>
-            </div>
-          </Link>
+            slug={study.slug}
+            title={study.title}
+            description={study.description}
+            tags={study.tags}
+            cover={study.cover}
+            logo={study.logo}
+            size={study.size as "tall" | "mid" | "short"}
+            headingTag="h2"
+          />
         ))}
       </main>
     </div>

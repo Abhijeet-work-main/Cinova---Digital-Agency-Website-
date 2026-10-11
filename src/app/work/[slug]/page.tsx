@@ -1,441 +1,247 @@
 import { notFound } from "next/navigation";
-import { caseStudies } from "../../../data/caseStudies";
-import { solutions } from "../../../data/solutions";
+import Link from "next/link";
+import type { Metadata } from "next";
 import Header from "../../../components/Header";
 import SharedPageClosing from "../../../components/SharedPageClosing";
-import type { Metadata } from "next";
+import WorkCard from "../../../components/WorkCard";
+import { getBrand, getDiscoverMore, brands } from "../../../data/brands";
+import styles from "../../../components/BrandPage.module.css";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return brands.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = caseStudies.find((cs) => cs.slug === slug);
-  if (!study) return { title: "Not Found" };
+  const brand = getBrand(slug);
+  if (!brand) return { title: "Not Found" };
+  const firstSentence = brand.overview.summary
+    ? brand.overview.summary.split(".")[0] + "."
+    : `${brand.name} | Cinova case study.`;
   return {
-    title: `${study.client} Case Study | Cinova`,
-    description: `How Cinova helped ${study.client}: ${study.problem[0]}`,
+    title: `${brand.name} | Case study | Cinova`,
+    description: firstSentence,
   };
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+export default async function BrandPage({ params }: Props) {
   const { slug } = await params;
-  const study = caseStudies.find((cs) => cs.slug === slug);
+  const brand = getBrand(slug);
 
-  if (!study) {
-    notFound();
+  if (!brand) notFound();
+
+  if (brand.comingSoon) {
+    return (
+      <div className={styles.root} style={{ backgroundColor: "var(--bp-bg)", minHeight: "100vh" }}>
+        <Header />
+        <main>
+          <section className={styles.comingSoon}>
+            <img src={brand.cover} alt={`${brand.name} cover`} className={styles.comingSoonCover} />
+            <h1 className={styles.comingSoonTitle}>{brand.name}</h1>
+            <p className={styles.comingSoonMsg}>Case study coming soon.</p>
+            <Link href="/work" className={styles.backLink}>
+              &larr; Back to all work
+            </Link>
+          </section>
+        </main>
+        <SharedPageClosing />
+      </div>
+    );
   }
 
-  // Find other case studies (not this one) for the related section
-  const otherStudies = caseStudies.filter((cs) => cs.slug !== slug).slice(0, 2);
-
-  // Find solutions relevant to this case study's category
-  const relatedSolutions = solutions.filter((sol) =>
-    sol.relevantCaseSlugs.includes(slug)
-  );
+  const discoverBrands = getDiscoverMore(slug);
 
   return (
-    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100vh" }}>
+    <div className={styles.root} style={{ backgroundColor: "var(--bp-bg)", minHeight: "100vh" }}>
       <Header />
 
       <main>
-        {/* HERO */}
-        <section
-          style={{
-            padding: "10rem 2rem 6rem",
-            borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
-          }}
-        >
-          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-            <a
-              href="/#work"
-              style={{
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                marginBottom: "2rem",
-              }}
-            >
-              ← All Work
-            </a>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
-              {study.industry && (
-                <span
-                  style={{
-                    color: "var(--accent-primary)",
-                    fontSize: "0.8rem",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.15em",
-                    border: "1px solid rgba(182,245,0,0.3)",
-                    padding: "0.25rem 0.75rem",
-                    borderRadius: "50px",
-                  }}
-                >
-                  {study.industry}
-                </span>
-              )}
-              <span
-                style={{
-                  color: "var(--text-muted)",
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                  border: "1px solid rgba(0, 0, 0,0.1)",
-                  padding: "0.25rem 0.75rem",
-                  borderRadius: "50px",
-                }}
-              >
-                {study.category}
-              </span>
-            </div>
-            <h1
-              style={{
-                fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
-                color: "var(--text-primary)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.04em",
-                marginBottom: "1.5rem",
-              }}
-            >
-              {study.client}
-            </h1>
-            <p
-              style={{
-                fontSize: "clamp(1.05rem, 2vw, 1.3rem)",
-                maxWidth: "700px",
-                lineHeight: 1.65,
-                color: "var(--text-secondary)",
-              }}
-            >
-              {study.problem[0]}
-            </p>
-          </div>
-        </section>
+        {/* 1. HERO */}
+        <section className={styles.hero} id="brand-hero">
+          <div className={styles.heroGrid}>
+            <ul className={styles.metaList}>
+              <li className={styles.metaItem}>
+                <span className={styles.metaLabel}>Client</span>
+                <span className={styles.metaValue}>{brand.client}</span>
+              </li>
+              <li className={styles.metaItem}>
+                <span className={styles.metaLabel}>Duration</span>
+                <span className={styles.metaValue}>{brand.duration}</span>
+              </li>
+              <li className={styles.metaItem}>
+                <span className={styles.metaLabel}>Date</span>
+                <span className={styles.metaValue}>{brand.date}</span>
+              </li>
+            </ul>
 
-        {/* SITUATION */}
-        <section style={{ padding: "7rem 2rem", backgroundColor: "var(--bg-secondary)" }}>
-          <div
-            style={{
-              maxWidth: "1400px",
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "5rem",
-            }}
-            className="two-col-grid"
-          >
-            {/* Problem */}
-            <div>
-              <span
-                style={{
-                  color: "var(--text-muted)",
-                  textTransform: "uppercase",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.15em",
-                  display: "inline-block",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                The Situation
-              </span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "var(--text-primary)", marginBottom: "2rem" }}>
-                What {study.client} was dealing with
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {study.problem.map((p, i) => (
-                  <div
-                    key={i}
-                    className="glass-panel"
-                    style={{
-                      padding: "1.1rem 1.5rem",
-                      borderRadius: "12px",
-                      display: "flex",
-                      gap: "1rem",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <span style={{ color: "var(--accent-primary)", fontWeight: 700, flexShrink: 0 }}>
-                      {i + 1}.
-                    </span>
-                    <p style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.55, color: "var(--text-secondary)" }}>
-                      {p}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Solution */}
-            <div>
-              <span
-                style={{
-                  color: "var(--accent-primary)",
-                  textTransform: "uppercase",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.15em",
-                  display: "inline-block",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                What Cinova Did
-              </span>
-              <h2 style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", color: "var(--text-primary)", marginBottom: "2rem" }}>
-                Connected execution across the growth system
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                {study.solution.map((s, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      padding: "1rem 1.4rem",
-                      borderRadius: "10px",
-                      borderLeft: "2px solid var(--accent-primary)",
-                      backgroundColor: "rgba(182,245,0,0.03)",
-                      display: "flex",
-                      gap: "0.75rem",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <span style={{ color: "var(--accent-primary)", fontSize: "0.9rem", marginTop: "0.05rem" }}>✓</span>
-                    <p style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.55, color: "var(--text-secondary)" }}>
-                      {s}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <div className={styles.heroContent}>
+              <span className={styles.heroService}>#{brand.services[0]}</span>
+              <h1 className={styles.heroHeadline}>{brand.cardLine}</h1>
+              <p className={styles.heroSub}>
+                {brand.overview.summary.split(".")[0]}.
+              </p>
+              <a href="#brand-banner" className={styles.heroCta}>
+                Scroll to explore
+              </a>
             </div>
           </div>
         </section>
 
-        {/* VERIFIED RESULTS */}
-        {study.verifiedResults.length > 0 && (
-          <section style={{ padding: "7rem 2rem", backgroundColor: "var(--bg-primary)" }}>
-            <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-              <span
-                style={{
-                  color: "var(--accent-primary)",
-                  textTransform: "uppercase",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.2em",
-                  display: "inline-block",
-                  marginBottom: "1rem",
-                }}
-              >
-                Verified Evidence
-              </span>
-              <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "var(--text-primary)", marginBottom: "0.75rem" }}>
-                What the data shows.
-              </h2>
-              <p style={{ maxWidth: "550px", marginBottom: "3.5rem", fontSize: "1rem" }}>
-                These figures are taken directly from verified platform screenshots or campaign data. We do not fabricate metrics.
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                  gap: "1.5rem",
-                }}
-              >
-                {study.verifiedResults.map((result, i) => (
-                  <div
-                    key={i}
-                    className="glass-panel"
-                    style={{
-                      padding: "2.5rem 2rem",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        display: "block",
-                        fontFamily: "var(--font-primary)",
-                        fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
-                        fontWeight: 800,
-                        color: "var(--text-primary)",
-                        letterSpacing: "-0.03em",
-                        lineHeight: 1,
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {result.value}
-                    </span>
-                    <span
-                      style={{
-                        display: "block",
-                        fontSize: "0.9rem",
-                        color: "var(--accent-primary)",
-                        fontWeight: 600,
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {result.label}
-                    </span>
-                    {result.description && (
-                      <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.5, margin: 0 }}>
-                        {result.description}
-                      </p>
-                    )}
-                  </div>
-                ))}
+        {/* 2. BANNER */}
+        <section className={styles.banner} id="brand-banner">
+          <div className={styles.bannerInner}>
+            <img src={brand.banner} alt={`${brand.name} banner`} className={styles.bannerImg} />
+          </div>
+        </section>
+
+        {/* 3. OVERVIEW / CHALLENGE / SOLUTION */}
+        <section className={styles.contentSection}>
+          <div className={styles.contentGrid}>
+            <div aria-hidden="true" />
+            <div className={styles.contentRight}>
+              <div className={styles.block}>
+                <h2 className={styles.blockHeading}>Overview</h2>
+                <p className={styles.blockBody}>{brand.overview.summary}</p>
               </div>
-            </div>
-          </section>
-        )}
 
-        {/* NO RESULTS STATE */}
-        {study.verifiedResults.length === 0 && (
-          <section style={{ padding: "5rem 2rem", backgroundColor: "var(--bg-primary)" }}>
-            <div
-              style={{
-                maxWidth: "800px",
-                margin: "0 auto",
-                textAlign: "center",
-                padding: "3rem",
-                borderRadius: "20px",
-                border: "1px solid rgba(0, 0, 0,0.06)",
-                backgroundColor: "rgba(0, 0, 0,0.02)",
-              }}
-            >
-              <h3 style={{ color: "var(--text-primary)", fontSize: "1.3rem", marginBottom: "1rem" }}>
-                Qualitative outcomes only
-              </h3>
-              <p>
-                For this engagement, the primary outcomes were qualitative — operational improvements, presence building, and audience development. We do not present invented metrics. Verified screenshots are available on request.
-              </p>
-            </div>
-          </section>
-        )}
-
-        {/* RELATED SOLUTIONS */}
-        {relatedSolutions.length > 0 && (
-          <section style={{ padding: "7rem 2rem", backgroundColor: "var(--bg-secondary)" }}>
-            <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-              <h2
-                style={{
-                  fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
-                  color: "var(--text-primary)",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Have a similar challenge?
-              </h2>
-              <p style={{ marginBottom: "2.5rem", maxWidth: "550px" }}>
-                Explore the relevant capabilities Cinova used in this engagement.
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                  gap: "1.5rem",
-                }}
-              >
-                {relatedSolutions.map((sol) => (
-                  <a
-                    key={sol.slug}
-                    href={`/solutions/${sol.slug}`}
-                    className="glass-panel glass-panel-hover"
-                    style={{
-                      padding: "2rem",
-                      borderRadius: "16px",
-                      textDecoration: "none",
-                      display: "block",
-                    }}
-                  >
-                    <h4 style={{ color: "var(--text-primary)", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
-                      {sol.name}
-                    </h4>
-                    <p style={{ fontSize: "0.9rem", color: "var(--accent-primary)", marginBottom: "0.75rem" }}>
-                      {sol.tagline}
-                    </p>
-                    <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                      Explore →
-                    </span>
-                  </a>
-                ))}
+              <div className={styles.block}>
+                <h2 className={styles.blockHeading}>The challenge</h2>
+                <p className={styles.challengeHeadline}>{brand.challenge.headline}</p>
+                <p className={styles.blockBody}>{brand.challenge.body}</p>
+                <ul className={styles.pains}>
+                  {brand.challenge.pains.map((pain, i) => (
+                    <li key={i} className={styles.pain}>&mdash; {pain}</li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          </section>
-        )}
 
-        {/* OTHER WORK */}
-        {otherStudies.length > 0 && (
-          <section style={{ padding: "7rem 2rem", backgroundColor: "var(--bg-primary)" }}>
-            <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-              <h2
-                style={{
-                  fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
-                  color: "var(--text-primary)",
-                  marginBottom: "3rem",
-                }}
-              >
-                More verified work
-              </h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-                  gap: "2rem",
-                }}
-              >
-                {otherStudies.map((other) => (
-                  <a
-                    key={other.slug}
-                    href={`/work/${other.slug}`}
-                    style={{ textDecoration: "none", display: "block" }}
-                  >
-                    <div
-                      className="glass-panel glass-panel-hover"
-                      style={{
-                        padding: "2.5rem 2rem",
-                        borderRadius: "var(--border-radius-medium)",
-                        height: "100%",
-                      }}
-                    >
-                      {other.industry && (
-                        <span
-                          style={{
-                            color: "var(--accent-primary)",
-                            fontSize: "0.75rem",
-                            fontWeight: 700,
-                            textTransform: "uppercase",
-                            letterSpacing: "0.1em",
-                            display: "block",
-                            marginBottom: "0.5rem",
-                          }}
-                        >
-                          {other.industry}
-                        </span>
+              <div className={styles.block}>
+                <h2 className={styles.blockHeading}>Our solution</h2>
+                <div className={styles.workstreams}>
+                  {brand.solution.map((ws, i) => (
+                    <div key={i} className={styles.workstream}>
+                      <p className={styles.workstreamNum}>0{i + 1}</p>
+                      <h3 className={styles.workstreamTitle}>{ws.title}</h3>
+                      <p className={styles.workstreamDesc}>{ws.description}</p>
+                      {ws.deliverables.length > 0 && (
+                        <div className={styles.deliverables}>
+                          {ws.deliverables.map((d) => (
+                            <span key={d} className={styles.deliverable}>{d}</span>
+                          ))}
+                        </div>
                       )}
-                      <h3 style={{ color: "var(--text-primary)", fontSize: "1.6rem", marginBottom: "0.75rem" }}>
-                        {other.client}
-                      </h3>
-                      <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
-                        {other.problem[0]}
-                      </p>
-                      <span style={{ color: "var(--accent-primary)", fontSize: "0.85rem", fontWeight: 600 }}>
-                        View Case Study →
-                      </span>
                     </div>
-                  </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. CREATIVE */}
+        {brand.creative.length > 0 && (
+          <section className={styles.creative}>
+            <div className={styles.creativeInner}>
+              {brand.creative.length === 1 && (
+                <div className={`${styles.creativeRow} ${styles.one}`}>
+                  <img src={brand.creative[0]} alt={`${brand.name} creative`} className={styles.creativeImg} />
+                </div>
+              )}
+              {brand.creative.length === 2 && (
+                <div className={`${styles.creativeRow} ${styles.two}`}>
+                  {brand.creative.map((src, i) => (
+                    <img key={i} src={src} alt={`${brand.name} creative ${i + 1}`} className={styles.creativeImg} />
+                  ))}
+                </div>
+              )}
+              {brand.creative.length >= 3 && (
+                <>
+                  <div className={`${styles.creativeRow} ${styles.two}`}>
+                    <img src={brand.creative[0]} alt={`${brand.name} creative 1`} className={styles.creativeImg} />
+                    <img src={brand.creative[1]} alt={`${brand.name} creative 2`} className={styles.creativeImg} />
+                  </div>
+                  <div className={`${styles.creativeRow} ${styles.one}`}>
+                    <img src={brand.creative[2]} alt={`${brand.name} creative 3`} className={styles.creativeImg} />
+                  </div>
+                  {brand.creative[3] && (
+                    <div className={`${styles.creativeRow} ${styles.one}`}>
+                      <img src={brand.creative[3]} alt={`${brand.name} creative 4`} className={styles.creativeImg} />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* 5. CONCLUSION */}
+        <section className={styles.conclusion}>
+          <div className={styles.conclusionInner}>
+            <h2 className={styles.conclusionHeading}>Conclusion</h2>
+            <div className={styles.outcomes}>
+              {brand.results.outcomes.map((o, i) => (
+                <p key={i} className={styles.outcomeText}>{o}</p>
+              ))}
+            </div>
+            {brand.results.metrics.some((m) => m.value !== "") && (
+              <div className={styles.metrics}>
+                {brand.results.metrics
+                  .filter((m) => m.value !== "")
+                  .map((m) => (
+                    <div key={m.label} className={styles.metric}>
+                      <span className={styles.metricValue}>{m.value}</span>
+                      <span className={styles.metricLabel}>{m.label}</span>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* 6. DISCOVER MORE */}
+        {discoverBrands.length > 0 && (
+          <section className={styles.discoverMore}>
+            <hr className={styles.discoverHairline} />
+            <div className={styles.discoverInner}>
+              <div className={styles.discoverHeader}>
+                <div className={styles.discoverLeft}>
+                  <span className={styles.discoverIcon} aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </span>
+                  <span className={styles.discoverLabel}>Discover more</span>
+                </div>
+                <div className={styles.discoverRight}>
+                  <p className={styles.discoverHeading}>
+                    <span className={styles.discoverLine1}>Want to check more?</span><br />
+                    <span className={styles.discoverLine2}>Discover our other projects.</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.discoverGrid}>
+                {discoverBrands.map((b) => (
+                  <WorkCard
+                    key={b.slug}
+                    slug={b.slug}
+                    title={b.name}
+                    description={b.cardLine}
+                    tags={b.services.slice(0, 2)}
+                    cover={b.cover}
+                    logo={b.logo}
+                    size="mid"
+                    headingTag="h3"
+                  />
                 ))}
               </div>
             </div>
           </section>
         )}
-
       </main>
 
       <SharedPageClosing />
