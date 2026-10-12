@@ -71,6 +71,7 @@ export default function CTA() {
     botField: "",
   });
   const [submitError, setSubmitError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleNext = useCallback(() => {
     if (step === 1 && formData.improvement) setStep(2);
@@ -88,7 +89,7 @@ export default function CTA() {
     e.preventDefault();
     if (step !== 4) return;
     setSubmitError("");
-    setStep("loading");
+    setSubmitting(true);
     try {
       const body = new URLSearchParams({
         "form-name": "cinova-growth-diagnostic",
@@ -113,7 +114,8 @@ export default function CTA() {
       setStep("success");
     } catch {
       setSubmitError("Something went wrong. Please check your connection and try again.");
-      setStep(4);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -248,10 +250,15 @@ export default function CTA() {
             </div>
           )}
 
-          {step === 4 && (
-            <form className="diag-step diag-step--form" key="step-4" onSubmit={handleSubmit} noValidate>
+          {(step === 4 || submitting) && (
+            <form name="cinova-growth-diagnostic" className="diag-step diag-step--form" key="step-4" onSubmit={handleSubmit} noValidate>
               {/* Netlify required hidden field */}
               <input type="hidden" name="form-name" value="cinova-growth-diagnostic" />
+              {/* Hidden multi-step answers included in the payload */}
+              <input type="hidden" name="improvement" value={formData.improvement} />
+              <input type="hidden" name="bottleneck" value={formData.bottleneck} />
+              <input type="hidden" name="brand" value={formData.brand} />
+              <input type="hidden" name="channel" value={formData.channel} />
 
               {/* Honeypot — off-screen, not display:none */}
               <input
@@ -267,7 +274,7 @@ export default function CTA() {
                   height: "1px",
                   overflow: "hidden",
                 }}
-                autoComplete="off"
+                autoComplete="one-time-code"
               />
 
               <h3 className="diag-step__question">Where should we send the diagnosis?</h3>
@@ -309,14 +316,14 @@ export default function CTA() {
               )}
 
               <div className="diag-nav">
-                <button type="button" className="diag-btn-secondary" onClick={handleBack}>← Back</button>
+                <button type="button" className="diag-btn-secondary" onClick={handleBack} disabled={submitting}>← Back</button>
                 <button
                   type="submit"
                   className="diag-btn-primary diag-btn-primary--submit"
-                  disabled={!formData.name || !formData.email}
-                  aria-disabled={!formData.name || !formData.email}
+                  disabled={submitting || !formData.name || !formData.email}
+                  aria-disabled={submitting || !formData.name || !formData.email}
                 >
-                  Request Diagnosis
+                  {submitting ? "Submitting..." : "Request Diagnosis"}
                   <span className="diag-btn-primary__lottie" aria-hidden="true">
                     <Lottie src={ctaAnimation} loop={true} />
                   </span>
