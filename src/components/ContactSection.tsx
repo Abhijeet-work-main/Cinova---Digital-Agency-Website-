@@ -113,7 +113,7 @@ export default function ContactSection() {
               </p>
             </div>
           ) : (
-            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <form name="cinova-contact-section" className="contact-form" onSubmit={handleSubmit} noValidate>
               {/* Netlify required hidden field */}
               <input type="hidden" name="form-name" value="cinova-contact-section" />
 
@@ -131,7 +131,7 @@ export default function ContactSection() {
                   height: "1px",
                   overflow: "hidden",
                 }}
-                autoComplete="off"
+                autoComplete="one-time-code"
               />
 
               <div className="contact-field">
