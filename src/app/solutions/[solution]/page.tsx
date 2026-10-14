@@ -43,11 +43,11 @@ export default async function SolutionPage({ params }: Props) {
     .filter(Boolean);
 
   return (
-    <div className="sol-root">
+    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100vh" }}>
       <Header />
 
       <main>
-        {/* 1. HERO */}
+        {/* 1. HERO — Light editorial */}
         <section className="sol-hero">
           <div className="sol-hero__glow" aria-hidden="true" />
           <div className="sol-hero__inner">
@@ -58,7 +58,7 @@ export default async function SolutionPage({ params }: Props) {
               <a href="#audit" className="sol-btn-primary">
                 Get Free Growth Audit
               </a>
-              <a href="#proof" className="sol-btn-secondary">
+              <a href="#proof" className="sol-btn-ghost">
                 See Verified Work ({relatedBrands.length}) →
               </a>
             </div>
@@ -66,7 +66,14 @@ export default async function SolutionPage({ params }: Props) {
         </section>
 
         {/* 2. PROBLEM RECOGNITION */}
-        <section className="sol-section sol-section--pattern">
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-secondary)",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
           <div className="sol-container sol-grid-2">
             <div>
               <span className="sol-section-tag">The Friction Point</span>
@@ -86,20 +93,45 @@ export default async function SolutionPage({ params }: Props) {
         </section>
 
         {/* 3. HOW CINOVA HELPS */}
-        <section className="sol-section sol-section--approach">
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            position: "relative",
+            zIndex: 10,
+            overflow: "hidden",
+          }}
+        >
+          {/* Subtle lime accent glow — matching homepage */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "-80px",
+              left: "-120px",
+              width: "520px",
+              height: "520px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(182,245,0,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
           <div className="sol-container">
             <div className="sol-grid-2" style={{ alignItems: "center" }}>
               <div>
-                <span className="sol-section-tag">The Cinova Approach</span>
+                <span className="sol-section-tag" style={{ color: "var(--accent-primary)" }}>
+                  The Cinova Approach
+                </span>
                 <h2 className="sol-section-h2">
                   Connected execution across all the parts that matter.
                 </h2>
-                <p className="sol-section-body">{solution.howCinovaHelps}</p>
-                <div style={{ marginTop: "2rem" }}>
-                  <a href="#audit" className="sol-btn-primary">
-                    Diagnose My Growth Gaps →
-                  </a>
-                </div>
+                <p className="sol-section-body" style={{ marginBottom: "2rem" }}>
+                  {solution.howCinovaHelps}
+                </p>
+                <a href="#audit" className="sol-btn-primary">
+                  Diagnose My Growth Gaps →
+                </a>
               </div>
 
               {/* Capabilities checklist */}
@@ -118,19 +150,22 @@ export default async function SolutionPage({ params }: Props) {
 
             {/* Related Industries Navigation */}
             {relatedIndustries.length > 0 && (
-              <div className="sol-industries-block">
+              <div style={{ marginTop: "5rem", paddingTop: "3rem", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
                 <h3 className="sol-col-label">Relevant Industry Frameworks</h3>
-                <div className="sol-industries-grid">
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: "2px",
+                  }}
+                >
                   {relatedIndustries.map((ind) => ind && (
                     <Link
                       key={ind.slug}
                       href={`/for/${ind.slug}`}
                       className="sol-industry-card"
                     >
-                      <div className="sol-ind-top">
-                        <h4 className="sol-ind-name">{ind.name}</h4>
-                        <span className="sol-ind-arrow">↗</span>
-                      </div>
+                      <h4 className="sol-ind-name">{ind.name}</h4>
                       <p className="sol-ind-sub">{ind.problemStatement}</p>
                       <span className="sol-ind-explore">View Industry Solution →</span>
                     </Link>
@@ -143,9 +178,17 @@ export default async function SolutionPage({ params }: Props) {
 
         {/* 4. REAL PROOF — BRAND CARDS */}
         {relatedBrands.length > 0 && (
-          <section id="proof" className="sol-section sol-section--proof">
+          <section
+            id="proof"
+            style={{
+              padding: "8rem 2rem",
+              backgroundColor: "var(--bg-secondary)",
+              position: "relative",
+              zIndex: 10,
+            }}
+          >
             <div className="sol-container">
-              <div className="sol-proof-head">
+              <div style={{ marginBottom: "3.5rem" }}>
                 <span className="sol-section-tag">Verified Delivery</span>
                 <h2 className="sol-section-h2">Real brands using this solution.</h2>
                 <p className="sol-section-body">
@@ -181,16 +224,24 @@ export default async function SolutionPage({ params }: Props) {
         )}
 
         {/* 5. COST OF DELAY */}
-        <section className="sol-section sol-section--delay">
-          <div className="sol-container sol-delay-box">
-            <span className="sol-section-tag">The Cost of Waiting</span>
-            <p className="sol-delay-quote">
-              &ldquo;{solution.delayConsequence}&rdquo;
-            </p>
-            <div className="sol-delay-action">
-              <a href="#audit" className="sol-btn-primary">
-                Resolve This Now →
-              </a>
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            textAlign: "center",
+          }}
+        >
+          <div className="sol-container" style={{ maxWidth: "900px" }}>
+            <div className="sol-delay-box">
+              <span className="sol-section-tag">The Cost of Waiting</span>
+              <p className="sol-delay-quote">
+                &ldquo;{solution.delayConsequence}&rdquo;
+              </p>
+              <div>
+                <a href="#audit" className="sol-btn-primary">
+                  Resolve This Now →
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -199,33 +250,28 @@ export default async function SolutionPage({ params }: Props) {
       <SharedPageClosing />
 
       <style>{`
-        .sol-root {
-          background-color: var(--bg-primary, #060606);
-          min-height: 100vh;
-          color: #fff;
-        }
-
+        /* ── CONTAINER ──────────────────────────────── */
         .sol-container {
-          max-width: 1360px;
+          max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
         }
 
-        /* ── HERO ─────────────────────────────────── */
+        /* ── HERO — Light editorial ────────────────── */
         .sol-hero {
           position: relative;
-          padding: 12rem 2rem 7rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 11rem 2rem 6rem;
+          background-color: var(--bg-primary);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           overflow: hidden;
         }
         .sol-hero__glow {
           position: absolute;
-          top: -20%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 700px;
-          height: 500px;
-          background: radial-gradient(circle, rgba(182, 245, 0, 0.08) 0%, transparent 70%);
+          top: -100px;
+          right: -200px;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(182,245,0,0.07) 0%, transparent 65%);
           pointer-events: none;
         }
         .sol-hero__inner {
@@ -236,32 +282,28 @@ export default async function SolutionPage({ params }: Props) {
         }
         .sol-eyebrow {
           display: inline-block;
-          font-size: 0.78rem;
+          font-size: 0.8rem;
           font-weight: 700;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
-          background: rgba(182, 245, 0, 0.1);
-          border: 1px solid rgba(182, 245, 0, 0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.75rem;
+          color: var(--accent-primary);
+          margin-bottom: 1.5rem;
         }
         .sol-hero__headline {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: clamp(2.4rem, 5.5vw, 4.6rem);
-          font-weight: 400;
+          font-family: var(--font-display);
+          font-size: clamp(2.6rem, 5.5vw, 5rem);
+          font-weight: 700;
           line-height: 1.1;
           letter-spacing: -0.025em;
-          color: #fff;
+          color: var(--text-primary);
           margin: 0 0 1.5rem;
-          max-width: 980px;
+          max-width: 900px;
         }
         .sol-hero__sub {
-          font-size: clamp(1.1rem, 2vw, 1.25rem);
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.65;
-          max-width: 720px;
+          font-size: clamp(1.05rem, 2vw, 1.3rem);
+          color: var(--text-secondary);
+          line-height: 1.7;
+          max-width: 660px;
           margin: 0 0 2.5rem;
         }
         .sol-hero__actions {
@@ -269,8 +311,12 @@ export default async function SolutionPage({ params }: Props) {
           gap: 1.25rem;
           flex-wrap: wrap;
         }
+
+        /* ── BUTTONS ───────────────────────────────── */
         .sol-btn-primary {
-          background: var(--accent-primary, #b6f500);
+          display: inline-flex;
+          align-items: center;
+          background: var(--accent-primary);
           color: #000;
           font-size: 0.92rem;
           font-weight: 700;
@@ -283,10 +329,13 @@ export default async function SolutionPage({ params }: Props) {
           transform: translateY(-2px);
           box-shadow: 0 8px 24px rgba(182, 245, 0, 0.3);
         }
-        .sol-btn-secondary {
-          background: rgba(255, 255, 255, 0.05);
-          color: #fff;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+        .sol-btn-ghost {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: transparent;
+          color: var(--text-primary);
+          border: 1px solid var(--structural-border);
           font-size: 0.92rem;
           font-weight: 600;
           padding: 0.9rem 2rem;
@@ -294,52 +343,33 @@ export default async function SolutionPage({ params }: Props) {
           text-decoration: none;
           transition: all 0.2s;
         }
-        .sol-btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.35);
+        .sol-btn-ghost:hover {
+          border-color: var(--accent-primary);
+          color: var(--accent-primary);
           transform: translateY(-2px);
         }
 
-        /* ── SECTIONS ──────────────────────────────── */
-        .sol-section {
-          padding: 7rem 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .sol-section--pattern {
-          background: #090909;
-        }
-        .sol-section--approach {
-          background: #050505;
-        }
-        .sol-section--proof {
-          background: #0b0b0b;
-        }
-        .sol-section--delay {
-          background: #060606;
-          text-align: center;
-        }
-
+        /* ── SECTION TOKENS ────────────────────────── */
         .sol-section-tag {
           display: inline-block;
-          font-size: 0.72rem;
+          font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
+          color: var(--text-muted);
           margin-bottom: 1rem;
         }
         .sol-section-h2 {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: clamp(2rem, 3.8vw, 3.2rem);
-          font-weight: 400;
-          color: #fff;
-          letter-spacing: -0.02em;
-          line-height: 1.2;
-          margin: 0 0 1.25rem;
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          color: var(--text-primary);
+          line-height: 1.15;
+          margin: 0 0 1rem;
         }
         .sol-section-body {
-          font-size: 1.08rem;
-          color: rgba(255, 255, 255, 0.7);
+          font-size: clamp(1.05rem, 2vw, 1.15rem);
+          color: var(--text-secondary);
           line-height: 1.75;
           margin: 0;
         }
@@ -348,8 +378,8 @@ export default async function SolutionPage({ params }: Props) {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.5);
-          margin-bottom: 1rem;
+          color: var(--text-muted);
+          margin-bottom: 1.25rem;
         }
 
         /* ── TWO COL GRID ──────────────────────────── */
@@ -370,127 +400,106 @@ export default async function SolutionPage({ params }: Props) {
         .sol-problems-col {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.75rem;
         }
         .sol-problem-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-primary);
+          border: 1px solid var(--structural-border);
           border-radius: 12px;
-          padding: 1.25rem 1.5rem;
+          padding: 1.1rem 1.35rem;
           display: flex;
-          gap: 1rem;
+          gap: 0.85rem;
           align-items: flex-start;
-          transition: background 0.2s, border-color 0.2s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--glass-rim);
         }
         .sol-problem-card:hover {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.18);
+          border-color: #D4D4D4;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .sol-problem-arrow {
-          color: var(--accent-primary, #b6f500);
+          color: var(--accent-primary);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
           line-height: 1.4;
         }
         .sol-problem-text {
-          font-size: 0.96rem;
-          color: rgba(255, 255, 255, 0.85);
+          font-size: 0.95rem;
+          color: var(--text-primary);
           line-height: 1.55;
           margin: 0;
         }
 
-        /* ── CAPABILITIES ──────────────────────────── */
+        /* ── CAPABILITIES BOX ─────────────────────── */
         .sol-caps-box {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-secondary);
+          border: 1px solid var(--structural-border);
           border-radius: 16px;
           padding: 2rem;
+          box-shadow: var(--glass-rim);
         }
         .sol-caps-list {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.65rem;
         }
         .sol-cap-item {
           display: flex;
           align-items: center;
           gap: 0.85rem;
-          background: rgba(182, 245, 0, 0.04);
-          border-left: 3px solid var(--accent-primary, #b6f500);
+          background: rgba(182, 245, 0, 0.06);
+          border-left: 3px solid var(--accent-primary);
           border-radius: 8px;
           padding: 0.85rem 1.2rem;
         }
         .sol-cap-check {
-          color: var(--accent-primary, #b6f500);
+          color: var(--accent-primary);
           font-weight: 700;
         }
         .sol-cap-text {
           font-size: 0.92rem;
-          color: #fff;
+          color: var(--text-primary);
           font-weight: 500;
         }
 
-        /* ── INDUSTRIES CARDS ──────────────────────── */
-        .sol-industries-block {
-          margin-top: 4rem;
-        }
-        .sol-industries-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1.5rem;
-        }
+        /* ── INDUSTRY PILLAR CARDS ─────────────────── */
         .sol-industry-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.09);
-          border-radius: 16px;
-          padding: 2rem;
+          padding: 3rem 2.5rem;
+          border-top: 2px solid var(--accent-primary);
+          background: rgba(0, 0, 0, 0.02);
           text-decoration: none;
           color: inherit;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
           transition: all 0.2s;
         }
         .sol-industry-card:hover {
-          background: rgba(255, 255, 255, 0.07);
-          border-color: var(--accent-primary, #b6f500);
-          transform: translateY(-3px);
-        }
-        .sol-ind-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.75rem;
+          background: rgba(0, 0, 0, 0.04);
         }
         .sol-ind-name {
           font-size: 1.2rem;
-          color: #fff;
-          margin: 0;
+          color: var(--text-primary);
+          margin: 0 0 0.75rem;
+          font-family: var(--font-display);
           font-weight: 600;
         }
-        .sol-ind-arrow {
-          color: var(--accent-primary, #b6f500);
-          font-size: 1.1rem;
-        }
         .sol-ind-sub {
-          font-size: 0.92rem;
-          color: rgba(255, 255, 255, 0.65);
-          line-height: 1.5;
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
           margin: 0 0 1.5rem;
         }
         .sol-ind-explore {
           font-size: 0.82rem;
           font-weight: 700;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
+          color: var(--accent-primary);
+          margin-top: auto;
         }
 
         /* ── BRAND CARDS GRID ──────────────────────── */
-        .sol-proof-head {
-          margin-bottom: 3.5rem;
-        }
         .sol-brands-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -512,37 +521,37 @@ export default async function SolutionPage({ params }: Props) {
           display: flex;
           align-items: center;
           gap: 0.6rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-primary);
+          border: 1px solid var(--structural-border);
           border-radius: 8px;
           padding: 0.55rem 0.85rem;
+          box-shadow: var(--glass-rim);
         }
         .sol-outcome-dot {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: var(--accent-primary, #b6f500);
+          background: var(--accent-primary);
           flex-shrink: 0;
         }
         .sol-outcome-text {
           font-size: 0.82rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-secondary);
           line-height: 1.4;
         }
 
         /* ── DELAY BOX ─────────────────────────────── */
         .sol-delay-box {
-          max-width: 900px;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-secondary);
+          border: 1px solid var(--structural-border);
           border-radius: 20px;
           padding: 3.5rem 2.5rem;
         }
         .sol-delay-quote {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(1.3rem, 2.5vw, 1.8rem);
           font-style: italic;
-          color: rgba(255, 255, 255, 0.9);
+          color: var(--text-primary);
           line-height: 1.6;
           margin: 1.25rem 0 2rem;
         }

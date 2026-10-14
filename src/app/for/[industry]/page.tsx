@@ -43,11 +43,11 @@ export default async function IndustryPage({ params }: Props) {
     .filter(Boolean);
 
   return (
-    <div className="ind-root">
+    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100vh" }}>
       <Header />
 
       <main>
-        {/* 1. HERO */}
+        {/* 1. HERO — Light editorial, matching homepage pattern */}
         <section className="ind-hero">
           <div className="ind-hero__glow" aria-hidden="true" />
           <div className="ind-hero__inner">
@@ -58,7 +58,7 @@ export default async function IndustryPage({ params }: Props) {
               <a href="#audit" className="ind-btn-primary">
                 Get Free Growth Audit
               </a>
-              <a href="#proof" className="ind-btn-secondary">
+              <a href="#proof" className="ind-btn-ghost">
                 See Category Work ({relatedBrands.length}) →
               </a>
             </div>
@@ -66,7 +66,14 @@ export default async function IndustryPage({ params }: Props) {
         </section>
 
         {/* 2. RECOGNITION — THE FRICTION PATTERN */}
-        <section className="ind-section ind-section--pattern">
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-secondary)",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
           <div className="ind-container ind-grid-2">
             <div>
               <span className="ind-section-tag">The Pattern</span>
@@ -86,31 +93,61 @@ export default async function IndustryPage({ params }: Props) {
         </section>
 
         {/* 3. CINOVA CONNECTED APPROACH */}
-        <section className="ind-section ind-section--approach">
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            position: "relative",
+            zIndex: 10,
+            overflow: "hidden",
+          }}
+        >
+          {/* Subtle lime accent glow — matching homepage */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "-80px",
+              left: "-120px",
+              width: "520px",
+              height: "520px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(182,245,0,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
           <div className="ind-container">
             <div className="ind-approach-head">
-              <span className="ind-section-tag">The Connected Architecture</span>
+              <span className="ind-section-tag" style={{ color: "var(--accent-primary)" }}>
+                The Connected Architecture
+              </span>
               <h2 className="ind-section-h2">
                 Connecting the parts that make growth actually work.
               </h2>
-              <p className="ind-section-body">{industry.cinova_approach}</p>
+              <p className="ind-section-body" style={{ maxWidth: "680px" }}>
+                {industry.cinova_approach}
+              </p>
             </div>
 
-            {/* Related Solutions Pills */}
+            {/* Related Solutions — pillar cards matching homepage conversion bridge */}
             {relatedSolutions.length > 0 && (
-              <div className="ind-solutions-block">
+              <div style={{ marginTop: "4rem" }}>
                 <h3 className="ind-col-label">Relevant Growth Capabilities</h3>
-                <div className="ind-solutions-grid">
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: "2px",
+                  }}
+                >
                   {relatedSolutions.map((sol) => sol && (
                     <Link
                       key={sol.slug}
                       href={`/solutions/${sol.slug}`}
                       className="ind-solution-card"
                     >
-                      <div className="ind-sol-top">
-                        <h4 className="ind-sol-name">{sol.name}</h4>
-                        <span className="ind-sol-arrow">↗</span>
-                      </div>
+                      <h4 className="ind-sol-name">{sol.name}</h4>
                       <p className="ind-sol-tagline">{sol.tagline}</p>
                       <span className="ind-sol-explore">Explore Solution →</span>
                     </Link>
@@ -123,9 +160,17 @@ export default async function IndustryPage({ params }: Props) {
 
         {/* 4. VERIFIED DELIVERY — REAL BRAND CARDS */}
         {relatedBrands.length > 0 && (
-          <section id="proof" className="ind-section ind-section--proof">
+          <section
+            id="proof"
+            style={{
+              padding: "8rem 2rem",
+              backgroundColor: "var(--bg-secondary)",
+              position: "relative",
+              zIndex: 10,
+            }}
+          >
             <div className="ind-container">
-              <div className="ind-proof-head">
+              <div style={{ marginBottom: "3.5rem" }}>
                 <span className="ind-section-tag">Verified Proof</span>
                 <h2 className="ind-section-h2">Real brands in this category.</h2>
                 <p className="ind-section-body">
@@ -161,16 +206,24 @@ export default async function IndustryPage({ params }: Props) {
         )}
 
         {/* 5. COST OF WAITING */}
-        <section className="ind-section ind-section--delay">
-          <div className="ind-container ind-delay-box">
-            <span className="ind-section-tag">The Cost of Waiting</span>
-            <p className="ind-delay-quote">
-              &ldquo;{industry.delayConsequence}&rdquo;
-            </p>
-            <div className="ind-delay-action">
-              <a href="#audit" className="ind-btn-primary">
-                Resolve This Now →
-              </a>
+        <section
+          style={{
+            padding: "8rem 2rem",
+            backgroundColor: "var(--bg-primary)",
+            textAlign: "center",
+          }}
+        >
+          <div className="ind-container" style={{ maxWidth: "900px" }}>
+            <div className="ind-delay-box">
+              <span className="ind-section-tag">The Cost of Waiting</span>
+              <p className="ind-delay-quote">
+                &ldquo;{industry.delayConsequence}&rdquo;
+              </p>
+              <div>
+                <a href="#audit" className="ind-btn-primary">
+                  Resolve This Now →
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -179,33 +232,28 @@ export default async function IndustryPage({ params }: Props) {
       <SharedPageClosing />
 
       <style>{`
-        .ind-root {
-          background-color: var(--bg-primary, #060606);
-          min-height: 100vh;
-          color: #fff;
-        }
-
+        /* ── CONTAINER ──────────────────────────────── */
         .ind-container {
-          max-width: 1360px;
+          max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
         }
 
-        /* ── HERO ─────────────────────────────────── */
+        /* ── HERO — Light editorial ────────────────── */
         .ind-hero {
           position: relative;
-          padding: 12rem 2rem 7rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 11rem 2rem 6rem;
+          background-color: var(--bg-primary);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           overflow: hidden;
         }
         .ind-hero__glow {
           position: absolute;
-          top: -20%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 700px;
-          height: 500px;
-          background: radial-gradient(circle, rgba(182, 245, 0, 0.08) 0%, transparent 70%);
+          top: -100px;
+          right: -200px;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(182,245,0,0.07) 0%, transparent 65%);
           pointer-events: none;
         }
         .ind-hero__inner {
@@ -216,32 +264,28 @@ export default async function IndustryPage({ params }: Props) {
         }
         .ind-eyebrow {
           display: inline-block;
-          font-size: 0.78rem;
+          font-size: 0.8rem;
           font-weight: 700;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
-          background: rgba(182, 245, 0, 0.1);
-          border: 1px solid rgba(182, 245, 0, 0.25);
-          padding: 0.35rem 0.9rem;
-          border-radius: 999px;
-          margin-bottom: 1.75rem;
+          color: var(--accent-primary);
+          margin-bottom: 1.5rem;
         }
         .ind-hero__headline {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: clamp(2.4rem, 5.5vw, 4.6rem);
-          font-weight: 400;
+          font-family: var(--font-display);
+          font-size: clamp(2.6rem, 5.5vw, 5rem);
+          font-weight: 700;
           line-height: 1.1;
           letter-spacing: -0.025em;
-          color: #fff;
+          color: var(--text-primary);
           margin: 0 0 1.5rem;
-          max-width: 980px;
+          max-width: 900px;
         }
         .ind-hero__sub {
-          font-size: clamp(1.1rem, 2vw, 1.25rem);
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.65;
-          max-width: 720px;
+          font-size: clamp(1.05rem, 2vw, 1.3rem);
+          color: var(--text-secondary);
+          line-height: 1.7;
+          max-width: 660px;
           margin: 0 0 2.5rem;
         }
         .ind-hero__actions {
@@ -249,8 +293,12 @@ export default async function IndustryPage({ params }: Props) {
           gap: 1.25rem;
           flex-wrap: wrap;
         }
+
+        /* ── BUTTONS ───────────────────────────────── */
         .ind-btn-primary {
-          background: var(--accent-primary, #b6f500);
+          display: inline-flex;
+          align-items: center;
+          background: var(--accent-primary);
           color: #000;
           font-size: 0.92rem;
           font-weight: 700;
@@ -263,10 +311,13 @@ export default async function IndustryPage({ params }: Props) {
           transform: translateY(-2px);
           box-shadow: 0 8px 24px rgba(182, 245, 0, 0.3);
         }
-        .ind-btn-secondary {
-          background: rgba(255, 255, 255, 0.05);
-          color: #fff;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+        .ind-btn-ghost {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: transparent;
+          color: var(--text-primary);
+          border: 1px solid var(--structural-border);
           font-size: 0.92rem;
           font-weight: 600;
           padding: 0.9rem 2rem;
@@ -274,69 +325,50 @@ export default async function IndustryPage({ params }: Props) {
           text-decoration: none;
           transition: all 0.2s;
         }
-        .ind-btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.35);
+        .ind-btn-ghost:hover {
+          border-color: var(--accent-primary);
+          color: var(--accent-primary);
           transform: translateY(-2px);
         }
 
-        /* ── SECTIONS ──────────────────────────────── */
-        .ind-section {
-          padding: 7rem 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .ind-section--pattern {
-          background: #090909;
-        }
-        .ind-section--approach {
-          background: #050505;
-        }
-        .ind-section--proof {
-          background: #0b0b0b;
-        }
-        .ind-section--delay {
-          background: #060606;
-          text-align: center;
-        }
-
+        /* ── SECTION TOKENS ────────────────────────── */
         .ind-section-tag {
           display: inline-block;
-          font-size: 0.72rem;
+          font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
+          color: var(--text-muted);
           margin-bottom: 1rem;
         }
         .ind-section-h2 {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: clamp(2rem, 3.8vw, 3.2rem);
-          font-weight: 400;
-          color: #fff;
-          letter-spacing: -0.02em;
-          line-height: 1.2;
-          margin: 0 0 1.25rem;
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 700;
+          color: var(--text-primary);
+          line-height: 1.15;
+          margin: 0 0 1rem;
         }
         .ind-section-body {
-          font-size: 1.08rem;
-          color: rgba(255, 255, 255, 0.7);
+          font-size: clamp(1.05rem, 2vw, 1.15rem);
+          color: var(--text-secondary);
           line-height: 1.75;
-          margin: 0 0 2rem;
+          margin: 0;
         }
         .ind-col-label {
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.5);
-          margin-bottom: 1rem;
+          color: var(--text-muted);
+          margin-bottom: 1.25rem;
         }
 
         /* ── TWO COL GRID ──────────────────────────── */
         .ind-grid-2 {
           display: grid;
-          grid-template-columns: 1fr 1.15fr;
-          gap: 4.5rem;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 4rem;
           align-items: start;
         }
         @media (max-width: 900px) {
@@ -350,96 +382,74 @@ export default async function IndustryPage({ params }: Props) {
         .ind-problems-col {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.75rem;
         }
         .ind-problem-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-primary);
+          border: 1px solid var(--structural-border);
           border-radius: 12px;
-          padding: 1.25rem 1.5rem;
+          padding: 1.1rem 1.35rem;
           display: flex;
-          gap: 1rem;
+          gap: 0.85rem;
           align-items: flex-start;
-          transition: background 0.2s, border-color 0.2s;
+          transition: all var(--transition-fast);
+          box-shadow: var(--glass-rim);
         }
         .ind-problem-card:hover {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.18);
+          border-color: #D4D4D4;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .ind-problem-arrow {
-          color: var(--accent-primary, #b6f500);
+          color: var(--accent-primary);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
           line-height: 1.4;
         }
         .ind-problem-text {
-          font-size: 0.96rem;
-          color: rgba(255, 255, 255, 0.85);
+          font-size: 0.95rem;
+          color: var(--text-primary);
           line-height: 1.55;
           margin: 0;
         }
 
-        /* ── SOLUTIONS CARDS ───────────────────────── */
-        .ind-solutions-block {
-          margin-top: 3.5rem;
-        }
-        .ind-solutions-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1.5rem;
-        }
+        /* ── SOLUTION PILLAR CARDS ─────────────────── */
         .ind-solution-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.09);
-          border-radius: 16px;
-          padding: 2rem;
+          padding: 3rem 2.5rem;
+          border-top: 2px solid var(--accent-primary);
+          background: rgba(0, 0, 0, 0.02);
           text-decoration: none;
           color: inherit;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
           transition: all 0.2s;
         }
         .ind-solution-card:hover {
-          background: rgba(255, 255, 255, 0.07);
-          border-color: var(--accent-primary, #b6f500);
-          transform: translateY(-3px);
-        }
-        .ind-sol-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.75rem;
+          background: rgba(0, 0, 0, 0.04);
         }
         .ind-sol-name {
           font-size: 1.2rem;
-          color: #fff;
-          margin: 0;
+          color: var(--text-primary);
+          margin: 0 0 0.75rem;
+          font-family: var(--font-display);
           font-weight: 600;
         }
-        .ind-sol-arrow {
-          color: var(--accent-primary, #b6f500);
-          font-size: 1.1rem;
-        }
         .ind-sol-tagline {
-          font-size: 0.92rem;
-          color: rgba(255, 255, 255, 0.65);
-          line-height: 1.5;
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
           margin: 0 0 1.5rem;
         }
         .ind-sol-explore {
           font-size: 0.82rem;
           font-weight: 700;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary, #b6f500);
+          color: var(--accent-primary);
+          margin-top: auto;
         }
 
         /* ── BRAND CARDS GRID ──────────────────────── */
-        .ind-proof-head {
-          margin-bottom: 3.5rem;
-        }
         .ind-brands-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -461,37 +471,37 @@ export default async function IndustryPage({ params }: Props) {
           display: flex;
           align-items: center;
           gap: 0.6rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-primary);
+          border: 1px solid var(--structural-border);
           border-radius: 8px;
           padding: 0.55rem 0.85rem;
+          box-shadow: var(--glass-rim);
         }
         .ind-outcome-dot {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: var(--accent-primary, #b6f500);
+          background: var(--accent-primary);
           flex-shrink: 0;
         }
         .ind-outcome-text {
           font-size: 0.82rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-secondary);
           line-height: 1.4;
         }
 
         /* ── DELAY BOX ─────────────────────────────── */
         .ind-delay-box {
-          max-width: 900px;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: var(--bg-secondary);
+          border: 1px solid var(--structural-border);
           border-radius: 20px;
           padding: 3.5rem 2.5rem;
         }
         .ind-delay-quote {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(1.3rem, 2.5vw, 1.8rem);
           font-style: italic;
-          color: rgba(255, 255, 255, 0.9);
+          color: var(--text-primary);
           line-height: 1.6;
           margin: 1.25rem 0 2rem;
         }
