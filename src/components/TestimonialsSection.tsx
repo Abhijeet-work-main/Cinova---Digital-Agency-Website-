@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 
@@ -190,7 +190,7 @@ export default function TestimonialsSection() {
               <p className="tst-trusted">Trusted by 50+ teams</p>
 
               <a
-                href="mailto:hello@cinova.in?subject=Client%20Feedback"
+                href="mailto:cinova.edits@gmail.com?subject=Client%20Feedback"
                 className="tst-review-btn"
               >
                 Leave a review

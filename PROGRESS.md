@@ -482,3 +482,110 @@ Before implementation:
 8. Implement only the approved scope.
 9. Build and visually verify.
 10. Freeze C.3E after approval.
+
+---
+
+# BRAND CREATIVES & CONTACT INFORMATION UPDATE (OCT 2026)
+
+### Status: COMPLETE
+
+1. **Brand Creatives & Assets Updated** (All brands updated except exempt `erminio-palamino` and `kuptuuu`):
+   - **Balbeer**:
+     - Banner: High-resolution traditional sherwani walking portrait (16:9 crop)
+     - Cover: Rich lehenga & floral courtyard display (16:9)
+     - Logo: New `Ornamental White BS Monogram Logo` rendered as crisp white-on-black 600x300.
+     - Creatives (2 small + 1 big below):
+       - Small 1: Moody South Asian Bridal Portrait (1:1 square)
+       - Small 2: Timeless Tradition Boutique Display (1:1 square)
+       - Big 1: Embroidered lehenga garment craft display (2:1 wide)
+   - **Purple Swan**:
+     - Banner: Signature product collection editorial (16:9)
+     - Cover: Aura botanical face oil bottle & luxury box (`new_cover.png`)
+     - Creatives (2 small + 1 big below):
+       - Small 1: Ritual signature palette color board (`must_use_1_purple_swan.png`, 1:1)
+       - Small 2: Responsive website & devices showcase (`must_use_2_purple_swan.png`, 1:1)
+       - Big 1: 3D architectural wall sign mockup (2:1 wide)
+   - **Curate Home**:
+     - Banner: Ceramic tableware & ritual craft (16:9)
+     - Cover: Geometric Elegance Marble Cosmos Bowl (`New_cover.png`)
+     - Creatives (2 small + 1 big below):
+       - Small 1: Earth and Form Terra Ceramic Vases (1:1)
+       - Small 2: The Aura Lamp Handcrafted Materials (1:1)
+       - Big 1: The Art of Gathering Akira Dining Table (2:1 wide)
+   - **Gloss & Shine**:
+     - Banner: PPF application on blue Porsche headlight (`New_banner.png`, 16:9)
+     - Cover: Studio automotive detailing shot
+     - Creatives (2 small + 1 big below):
+       - Small 1: A finish worth looking back at (1:1)
+       - Small 2: Precision you can see detailing & paint correction (1:1)
+       - Big 1: Premium Gloss & Shine 3D Wall Logo (2:1 wide)
+   - **Lustre Jewellery**:
+     - Banner: Facet precision emerald pendant ("EVERY DETAIL MATTERS", 16:9)
+     - Cover: Jewellery collection display
+     - Creatives (2 small + 1 big below):
+       - Small 1: Colour with character gemstone necklaces (1:1)
+       - Small 2: Let your colours speak ruby pendant (1:1)
+       - Big 1: Find your next favourite collection display (2:1 wide)
+   - **Noor**:
+     - Banner: Multi-tone bridal editorial ("Every tone. Your story.", 16:9)
+     - Cover: Bridal gown in motion ("Made to move with you")
+     - Creatives (2 small + 1 big below):
+       - Small 1: Bridal makeup brush application with henna (`small_image_area.png`, 1:1)
+       - Small 2: Red velvet bridal portrait (`Gemini_Generated_Image...`, 1:1)
+       - Big 1: Bridal styling in progress ("A look that's yours", 2:1 wide)
+   - **Pegah Toutak**:
+     - Banner: Hand-woven silk pocket square editorial ("THE ART OF DETAIL", 16:9)
+     - Cover: Tailored silk bow tie ("AUTHENTIC LUXURY")
+     - Creatives (2 small + 1 big below):
+       - Small 1: Green enamel and gold cufflinks ("COLLECTIBLE DESIGN", 1:1)
+       - Small 2: Silk pocket square detail (1:1)
+       - Big 1: Silk bow tie collection presentation (2:1 wide)
+   - **PB Investing**:
+     - Banner: Real classroom YouTube trading screen setup (16:9)
+     - Cover: YouTube video thumbnail (Bootcamp Candlestick)
+     - Logo: New clean white YouTube play button logo on black background (600x300)
+     - Creatives (2 small + 1 big below):
+       - Small 1: "THE GOAL ISN'T MORE TRADES" Instagram lesson post (1:1)
+       - Small 2: "SMALL WINS CREATE BIG TRADERS" Instagram post (1:1)
+       - Big 1: "STOP OVERCOMPLICATING THE ENTRY" VWAP strategy graphic (2:1 wide)
+   - **byXiu Designs (New Brand Added)**:
+     - Banner: "WEAR YOUR STORY" signature jewellery model shot (16:9)
+     - Cover: "Made Once, For You" bespoke jewellery piece in niche (`cover.jpg`)
+     - Logo: Clean transparent white pinwheel monogram logo (`logo.png`)
+     - Creatives (2 small + 1 big below):
+       - Small 1: "Wear your story" pendant in daylight (1:1)
+       - Small 2: "Which one is yours? made for one story" vintage typewriter shot (1:1)
+       - Big 1: "A Story, Worn Daily" model along architectural corridor (2:1 wide)
+     - Dedicated page active at `/work/byxiu-designs`
+     - Case study card added to `/work` grid in `CaseStudies.tsx`
+   - **Logo Transparency on Work Cards**:
+     - Balbeer and PB Investing logos converted to transparent alpha PNGs, floating cleanly over card media on hover without black boxes.
+   - **Pricing Page Card Fix**:
+     - Fixed cover extensions from .png to .jpg for Saanvi Botanical and Erminio Palamino cards.
+   - **Schedule a Free Call Feature**:
+     - Built interactive ScheduleModal for 30-min strategy calls with date/time pickers, Google Calendar add, WhatsApp confirmation, and Netlify submission.
+   - **Erminio Palamino & Kuptuuu**: Preserved intact without modification as instructed.
+
+2. **Contact & Social Updates**:
+   - Phone number updated across all footer/contact touchpoints: `+91 74282 45045` (`tel:+917428245045`)
+   - Email updated across all components: `cinova.edits@gmail.com` (`mailto:cinova.edits@gmail.com`)
+   - Instagram link updated: `https://www.instagram.com/cinovaofficials?dlrf=ZDNlZDc0MzIxNw==`
+   - Behance link removed from all menus/footers.
+   - Twitter and LinkedIn links marked as `(Coming Soon)` / non-navigating.
+   - Verified compilation passes cleanly (`npm run build`).
+
+3. **Industries & Solutions Polish + Visual Brand Cards**:
+   - Replaced plain text case study cards on all `/for/[industry]` and `/solutions/[solution]` routes with real visual `WorkCard` brand cards.
+   - Each card features cover photography, category tag pills, centered floating transparent white logo on hover, and link to `/work/[slug]`.
+   - Enhanced each industry and solution page with editorial heroes, dark glassmorphism problem cards with lime arrows, integrated capabilities, and delay consequence quotes.
+   - Updated `relevantCaseSlugs` across `src/data/industries.ts` and `src/data/solutions.ts` to connect all verified client brands.
+
+4. **Cinova-Style Legal & Error Pages**:
+   - `src/app/not-found.tsx`: Dedicated dark/lime 404 page with editorial Playfair serif headline, quick destination links, and home/work navigation buttons.
+   - `src/app/privacy/page.tsx`: Dedicated Privacy Policy covering data protection, client commercial discretion, analytics, and verified contact info.
+   - `src/app/terms/page.tsx`: Dedicated Terms and Conditions covering scope of work, intellectual property ownership, milestone payments, and confidentiality.
+
+5. **Homepage Pricing Section Refinements**:
+   - Added `"Starting from"` text above the `$2,999/m` price in `src/components/PricingSection.tsx`.
+   - Added a ghost button `"See all packages →"` beside the `"Start your project"` button, linking directly to `/pricing`.
+

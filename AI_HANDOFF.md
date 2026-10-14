@@ -475,10 +475,16 @@ COMPLETE:
 - C.3B
 - C.3C
 - C.3D
+- C.3E — Proof / Work / Case Studies
+- Brand Creatives & Contact Details Refresh (Balbeer, Purple Swan, Curate Home, Gloss & Shine, Lustre Jewellery, Noor, Pegah Toutak, PB Investing assets + contact updates)
+- byXiu Designs brand addition & dedicated case study page
+- Industries & Solutions visual brand cards overhaul
+- Dedicated Cinova-style 404, Privacy Policy, and Terms & Conditions pages
+- Homepage pricing card refinements (Starting from & See all packages ghost button)
 
 CURRENT:
 
-- C.3E — Proof / Work / Case Studies
+- Review & user validation of new pages, brand cards, and pricing widget
 
 FUTURE:
 

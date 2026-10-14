@@ -108,6 +108,15 @@ const CASE_STUDIES = [
     logo: "/brands/pb-investing/logo.png",
     size: "mid",
   },
+  {
+    slug: "byxiu-designs",
+    title: "byXiu Designs",
+    description: "Wear your story — bespoke jewellery made once, for you",
+    tags: ["Branding", "Creative"],
+    cover: "/brands/byxiu-designs/cover.jpg",
+    logo: "/brands/byxiu-designs/logo.png",
+    size: "tall",
+  },
 ];
 
 export default function CaseStudies() {

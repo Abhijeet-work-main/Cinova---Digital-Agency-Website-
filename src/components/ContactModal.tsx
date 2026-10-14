@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const SOCIALS = [
-  { label: "X (Twitter)", href: "https://twitter.com/cinovadigital" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/cinova" },
-  { label: "Instagram", href: "https://instagram.com/cinova.in" },
-  { label: "WhatsApp", href: "https://wa.me/919999999999" },
+  { label: "Instagram", href: "https://www.instagram.com/cinovaofficials?dlrf=ZDNlZDc0MzIxNw==" },
+  { label: "WhatsApp", href: "https://wa.me/917428245045" },
+  { label: "X (Twitter)", href: "#", comingSoon: true },
+  { label: "LinkedIn", href: "#", comingSoon: true },
 ];
 
 interface ContactModalProps {
@@ -165,15 +165,25 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                 {/* Social links — separated by gap */}
                 <div className="cm-socials">
                   {SOCIALS.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cm-social"
-                    >
-                      {s.label}
-                    </a>
+                    s.comingSoon ? (
+                      <span
+                        key={s.label}
+                        className="cm-social"
+                        style={{ opacity: 0.45, cursor: "default", userSelect: "none" }}
+                      >
+                        {s.label} <span style={{ fontSize: "0.75em" }}>(Soon)</span>
+                      </span>
+                    ) : (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cm-social"
+                      >
+                        {s.label}
+                      </a>
+                    )
                   ))}
                 </div>
               </div>

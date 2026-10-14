@@ -1,4 +1,4 @@
-﻿// src/data/brands.ts
+// src/data/brands.ts
 // Single typed source of truth for all brand detail pages.
 // Metric values that are empty ("") will NOT be rendered — per spec.
 // Dates/durations marked "// INVENTED - replace with real" are owner-approved placeholders.
@@ -317,6 +317,7 @@ export const brands: Brand[] = [
     creative: [
       "/brands/lustre-jewellery/creative-1.jpg",
       "/brands/lustre-jewellery/creative-2.jpg",
+      "/brands/lustre-jewellery/creative-3.jpg",
     ],
     cover: "/brands/lustre-jewellery/cover.jpg",
     logo: "/brands/lustre-jewellery/logo.png",
@@ -376,7 +377,11 @@ export const brands: Brand[] = [
       ],
     },
     banner: "/brands/purple-swan/banner.jpg",
-    creative: ["/brands/purple-swan/creative-1.jpg"],
+    creative: [
+      "/brands/purple-swan/creative-1.jpg",
+      "/brands/purple-swan/creative-2.jpg",
+      "/brands/purple-swan/creative-3.jpg",
+    ],
     cover: "/brands/purple-swan/cover.jpg",
     logo: "/brands/purple-swan/logo.png",
   },
@@ -559,7 +564,11 @@ export const brands: Brand[] = [
       ],
     },
     banner: "/brands/pegah-toutak/banner.jpg",
-    creative: [],
+    creative: [
+      "/brands/pegah-toutak/creative-1.jpg",
+      "/brands/pegah-toutak/creative-2.jpg",
+      "/brands/pegah-toutak/creative-3.jpg",
+    ],
     cover: "/brands/pegah-toutak/cover.jpeg",
     logo: "/brands/pegah-toutak/logo.png",
   },
@@ -618,7 +627,11 @@ export const brands: Brand[] = [
       ],
     },
     banner: "/brands/balbeer/banner.jpg", // DUMMY - replace
-    creative: [], // DUMMY - replace
+    creative: [
+      "/brands/balbeer/creative-1.jpg",
+      "/brands/balbeer/creative-2.jpg",
+      "/brands/balbeer/creative-3.jpg",
+    ],
     cover: "/brands/balbeer/cover.jpg", // DUMMY - replace
     logo: "/brands/balbeer/logo.png", // DUMMY - replace
   },
@@ -678,11 +691,76 @@ export const brands: Brand[] = [
     },
     banner: "/brands/pb-investing/banner.jpg", // DUMMY - replace
     creative: [
-      "/brands/pb-investing/creative-1.jpg", // DUMMY - replace
-      "/brands/pb-investing/creative-2.jpg", // DUMMY - replace
+      "/brands/pb-investing/creative-1.jpg",
+      "/brands/pb-investing/creative-2.jpg",
+      "/brands/pb-investing/creative-3.jpg",
     ],
     cover: "/brands/pb-investing/cover.jpg", // DUMMY - replace
     logo: "/brands/pb-investing/logo.png", // DUMMY - replace
+  },
+  {
+    slug: "byxiu-designs",
+    name: "byXiu Designs",
+    client: "byXiu Designs",
+    cardLine: "Wear your story — bespoke jewellery made once, for you",
+    services: ["Branding", "Creative Direction", "Editorial Photography"],
+    duration: "4 months",
+    date: "2025",
+    overview: {
+      summary:
+        "byXiu Designs crafts one-of-a-kind bespoke jewellery sculpted around personal stories. Each piece is handmade once and never replicated.",
+    },
+    challenge: {
+      headline: "Artisanal storytelling lost in commercial jewellery noise.",
+      body: "Bespoke jewellery defies mass e-commerce presentation. Standard commercial product grids and transactional staging failed to communicate the emotional depth, organic textures, and one-of-a-kind philosophy of each piece.",
+      pains: [
+        "Standard jewellery staging made bespoke art look like mass-market retail.",
+        "The core bespoke philosophy ('Made once, for you') was lost in generic product listings.",
+        "Prospective collectors lacked a guided journey to understand custom commissioning.",
+      ],
+    },
+    solution: [
+      {
+        title: "Editorial narrative and positioning",
+        description:
+          "Framed the collection around wearable memories and poetic introspection, positioning byXiu as an artisan atelier rather than a conventional commercial label.",
+        deliverables: ["Brand narrative", "Tone of voice", "Art direction guidelines"],
+      },
+      {
+        title: "Location-based campaign photography",
+        description:
+          "Captured the collection in natural daylight against brutalist and heritage architectural corridors, contrasting textured organic metals with minimalist contemporary silhouettes.",
+        deliverables: ["Editorial lookbook", "Campaign stills", "Social asset suite"],
+      },
+      {
+        title: "Digital gallery presentation",
+        description:
+          "Designed a tranquil, narrative-first digital experience that lets collectors explore the conceptual provenance, material origins, and bespoke commissioning process.",
+        deliverables: ["Digital presence", "Storytelling templates", "Commissioning flow"],
+      },
+      {
+        title: "Collector engagement and content cadence",
+        description:
+          "Structured an intimate publishing rhythm highlighting workbench details, artisan craftsmanship, and personal stories behind individual pieces.",
+        deliverables: ["Content pillars", "Studio reels", "Collector guide"],
+      },
+    ],
+    results: {
+      outcomes: [
+        "A distinctive editorial identity that positions byXiu as a bespoke art atelier.",
+        "Visual storytelling that honors the 'Made once, for you' brand promise.",
+        "Higher engagement and elevated collector inquiries for bespoke pieces.",
+      ],
+      metrics: [],
+    },
+    banner: "/brands/byxiu-designs/banner.jpg",
+    creative: [
+      "/brands/byxiu-designs/creative-1.jpg",
+      "/brands/byxiu-designs/creative-2.jpg",
+      "/brands/byxiu-designs/creative-3.jpg",
+    ],
+    cover: "/brands/byxiu-designs/cover.jpg",
+    logo: "/brands/byxiu-designs/logo.png",
   },
 ];
 
