@@ -136,7 +136,6 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
   // Build calendar link for the scheduled call
   const generateGoogleCalendarUrl = () => {
     const cleanDate = selectedDate.replace(/-/g, "");
-    // Default to 11:30 AM local time if not parsed
     const startHour = selectedTime.includes("10:00")
       ? "100000"
       : selectedTime.includes("11:30")
@@ -200,82 +199,94 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
               value={botField}
               onChange={(e) => setBotField(e.target.value)}
               tabIndex={-1}
-              style={{ position: "absolute", left: "-9999px" }}
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: "1px",
+                height: "1px",
+                overflow: "hidden",
+              }}
               autoComplete="off"
             />
 
-            {/* Header */}
+            {/* Header Block matching ContactModal design */}
             <div className="sc-head">
-              <span className="sc-badge">30-Min Strategy Call</span>
+              <div className="sc-badge-wrap">
+                <span className="sc-badge">30-Min Strategy Call</span>
+              </div>
               <h2 className="sc-headline">SCHEDULE A FREE CALL</h2>
+              <div className="sc-head__rule" />
               <p className="sc-subline">
-                Select your preferred date and time. We’ll meet to understand your current growth system and identify high-leverage opportunities.
+                Select your preferred date and time. We&apos;ll meet to understand your current growth system and identify high-leverage opportunities.
               </p>
             </div>
 
             <div className="sc-grid">
-              {/* Left Column: Date & Time Pickers */}
-              <div className="sc-col">
-                <label className="sc-label">1. Choose a Date</label>
-                <div className="sc-chips">
-                  {days.map((d) => (
-                    <button
-                      key={d.value}
-                      type="button"
-                      className={`sc-chip${selectedDate === d.value ? " sc-chip--active" : ""}`}
-                      onClick={() => setSelectedDate(d.value)}
-                    >
-                      {d.label}
-                    </button>
-                  ))}
-                </div>
-                <div className="sc-custom-date">
-                  <span className="sc-custom-date-label">Or custom date:</span>
-                  <input
-                    type="date"
-                    className="sc-date-input"
-                    value={selectedDate}
-                    min={days[0]?.value}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                  />
-                </div>
-
-                <label className="sc-label" style={{ marginTop: "1.25rem" }}>
-                  2. Choose a Time Slot
-                </label>
-                <div className="sc-chips sc-chips--time">
-                  {TIME_SLOTS.map((slot) => (
-                    <button
-                      key={slot}
-                      type="button"
-                      className={`sc-chip sc-chip--time${selectedTime === slot ? " sc-chip--active" : ""}`}
-                      onClick={() => setSelectedTime(slot)}
-                    >
-                      {slot}
-                    </button>
-                  ))}
+              {/* Left Column: Date, Time & Platform Selections */}
+              <div className="sc-col sc-col--left">
+                <div className="sc-step-group">
+                  <label className="sc-step-label">1. Choose a Date</label>
+                  <div className="sc-chips">
+                    {days.map((d) => (
+                      <button
+                        key={d.value}
+                        type="button"
+                        className={`sc-chip${selectedDate === d.value ? " sc-chip--active" : ""}`}
+                        onClick={() => setSelectedDate(d.value)}
+                      >
+                        {d.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="sc-custom-date">
+                    <span className="sc-custom-date-label">Or custom date:</span>
+                    <input
+                      type="date"
+                      className="sc-date-input"
+                      value={selectedDate}
+                      min={days[0]?.value}
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <label className="sc-label" style={{ marginTop: "1.25rem" }}>
-                  3. Preferred Meeting Platform
-                </label>
-                <div className="sc-chips">
-                  {PLATFORMS.map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      className={`sc-chip${platform === p.id ? " sc-chip--active" : ""}`}
-                      onClick={() => setPlatform(p.id)}
-                    >
-                      {p.label}
-                    </button>
-                  ))}
+                <div className="sc-step-group">
+                  <label className="sc-step-label">2. Choose a Time Slot</label>
+                  <div className="sc-chips sc-chips--time">
+                    {TIME_SLOTS.map((slot) => (
+                      <button
+                        key={slot}
+                        type="button"
+                        className={`sc-chip sc-chip--time${selectedTime === slot ? " sc-chip--active" : ""}`}
+                        onClick={() => setSelectedTime(slot)}
+                      >
+                        {slot}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="sc-step-group">
+                  <label className="sc-step-label">3. Preferred Meeting Platform</label>
+                  <div className="sc-chips sc-chips--platform">
+                    {PLATFORMS.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        className={`sc-chip${platform === p.id ? " sc-chip--active" : ""}`}
+                        onClick={() => setPlatform(p.id)}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Contact Details */}
-              <div className="sc-col">
-                <label className="sc-label">4. Your Details</label>
+              {/* Right Column: Contact Details & Submit */}
+              <div className="sc-col sc-col--right">
+                <label className="sc-step-label">4. Your Details</label>
+
                 <div className="sc-field">
                   <input
                     ref={nameRef}
@@ -330,7 +341,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
                   />
                 </div>
 
-                <div className="sc-field">
+                <div className="sc-field sc-field--notes">
                   <textarea
                     id="sc-notes"
                     name="notes"
@@ -338,52 +349,75 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="sc-textarea"
-                    rows={3}
+                    rows={2}
                   />
                 </div>
 
-                {error && <p className="sc-error">{error}</p>}
+                {/* Submit Row matching ContactModal */}
+                <div className="sc-submit-row">
+                  <button
+                    type="submit"
+                    className="sc-submit"
+                    disabled={submitting}
+                    aria-disabled={submitting}
+                    id="sc-submit-booking"
+                  >
+                    <span className="sc-submit__label">
+                      {submitting ? "Booking Appointment…" : "Confirm Appointment"}
+                    </span>
+                    <span className="sc-submit__arrow" aria-hidden="true">→</span>
+                  </button>
+                </div>
 
-                <button
-                  type="submit"
-                  className="sc-submit-btn"
-                  disabled={submitting}
-                  id="sc-submit-booking"
-                >
-                  {submitting ? "Booking Appointment…" : "Confirm Appointment →"}
-                </button>
+                {error && (
+                  <p className="sc-error" role="alert">{error}</p>
+                )}
 
-                <p className="sc-privacy-note">
-                  Direct consultation with founders. No generic sales decks. Strictly confidential.
+                {/* Trust Note matching ContactModal */}
+                <p className="sc-trust">
+                  Direct consultation with founders. No generic sales decks.<br />
+                  Strictly confidential.
                 </p>
+
+                {/* Person Card (Human Touch) matching ContactModal */}
+                <div className="sc-person">
+                  <div className="sc-person__avatar" aria-hidden="true">
+                    <span className="sc-person__initials">AB</span>
+                  </div>
+                  <div className="sc-person__text">
+                    <span className="sc-person__name">Abhijeet</span>
+                    <span className="sc-person__role">Growth Strategist</span>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
         ) : (
-          /* Confirmation Screen */
+          /* Confirmation Screen matching ContactModal design system */
           <div className="sc-confirmation">
-            <div className="sc-confirm-icon">✓</div>
-            <h2 className="sc-confirm-title">Meeting Reserved</h2>
+            <div className="sc-confirm-icon" aria-hidden="true">✓</div>
+            <h2 className="sc-confirm-title">MEETING RESERVED</h2>
+            <div className="sc-head__rule" style={{ width: "100%", maxWidth: "480px", margin: "0 auto 1.25rem" }} />
             <p className="sc-confirm-desc">
-              Your 30-minute growth discovery call has been appointed for:
+              Your 30-minute growth strategy consultation has been appointed for:
             </p>
 
             <div className="sc-confirm-box">
               <div className="sc-confirm-row">
-                <span className="sc-confirm-label">Date:</span>
+                <span className="sc-confirm-label">Date</span>
                 <span className="sc-confirm-val">{selectedDate}</span>
               </div>
               <div className="sc-confirm-row">
-                <span className="sc-confirm-label">Time:</span>
+                <span className="sc-confirm-label">Time</span>
                 <span className="sc-confirm-val">{selectedTime}</span>
               </div>
               <div className="sc-confirm-row">
-                <span className="sc-confirm-label">Platform:</span>
+                <span className="sc-confirm-label">Platform</span>
                 <span className="sc-confirm-val">{platform}</span>
               </div>
               <div className="sc-confirm-row">
-                <span className="sc-confirm-label">Attendee:</span>
-                <span className="sc-confirm-val">{name} ({email})</span>
+                <span className="sc-confirm-label">Attendee</span>
+                <span className="sc-confirm-val">{name} {email ? `(${email})` : ""}</span>
               </div>
             </div>
 
@@ -417,296 +451,494 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
             </div>
 
             <button type="button" onClick={onClose} className="sc-close-btn">
-              Done
+              Close
             </button>
           </div>
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
+        /* ═══════════════════════════════════════════════════════
+           OVERLAY & MODAL CONTAINER
+        ═══════════════════════════════════════════════════════ */
         .sc-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(4, 4, 4, 0.88);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          z-index: 9999;
+          z-index: 9000;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 1.5rem;
-          animation: scFadeIn 0.25s ease forwards;
+          animation: scFade 0.22s ease forwards;
+        }
+        @keyframes scFade {
+          from { opacity: 0; }
+          to   { opacity: 1; }
         }
 
         .sc-panel {
           position: relative;
-          background: #0d0d0d;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: #ffffff;
           border-radius: 20px;
-          max-width: 860px;
           width: 100%;
-          max-height: 90vh;
+          max-width: 1100px;
+          padding: 3rem 3.5rem 2.75rem;
+          box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+          animation: scUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          max-height: 92vh;
           overflow-y: auto;
-          padding: 2.5rem;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
-          animation: scSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          box-sizing: border-box;
+          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        @keyframes scUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
 
+        .sc-panel::-webkit-scrollbar {
+          width: 6px;
+        }
+        .sc-panel::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .sc-panel::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.15);
+          border-radius: 999px;
+        }
+        .sc-panel::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           CLOSE BUTTON
+        ═══════════════════════════════════════════════════════ */
         .sc-close {
           position: absolute;
-          top: 1.5rem;
-          right: 1.5rem;
-          width: 40px;
-          height: 40px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          top: 1.25rem;
+          right: 1.25rem;
+          width: 36px;
+          height: 36px;
+          background: transparent;
+          border: 1.5px solid rgba(0, 0, 0, 0.18);
           border-radius: 50%;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s;
+          flex-direction: column;
+          gap: 4px;
+          transition: border-color 0.2s, background 0.2s;
+          flex-shrink: 0;
+          z-index: 10;
         }
         .sc-close:hover {
-          background: rgba(255, 255, 255, 0.15);
-          transform: rotate(90deg);
+          border-color: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.04);
         }
         .sc-close__line {
-          position: absolute;
-          width: 16px;
-          height: 2px;
-          background: #fff;
+          display: block;
+          width: 14px;
+          height: 1.5px;
+          background: #0a0a0a;
+          transform-origin: center;
         }
-        .sc-close__line:first-child { transform: rotate(45deg); }
-        .sc-close__line:last-child { transform: rotate(-45deg); }
+        .sc-close__line:first-child {
+          transform: rotate(45deg) translate(3.5px, 3.5px);
+        }
+        .sc-close__line:last-child {
+          transform: rotate(-45deg) translate(3.5px, -3.5px);
+        }
 
+        /* ═══════════════════════════════════════════════════════
+           HEADLINE BLOCK
+        ═══════════════════════════════════════════════════════ */
         .sc-head {
-          margin-bottom: 2rem;
+          margin-bottom: 1.25rem;
+        }
+        .sc-badge-wrap {
+          margin-bottom: 0.65rem;
         }
         .sc-badge {
           display: inline-block;
+          font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.72rem;
           font-weight: 700;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #000;
-          background: #b6f500;
-          padding: 0.3rem 0.75rem;
+          color: #0a0a0a;
+          background: var(--accent-primary, #b6f500);
+          padding: 0.35rem 0.85rem;
           border-radius: 999px;
-          margin-bottom: 0.75rem;
         }
         .sc-headline {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-          font-weight: 400;
+          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: clamp(2.4rem, 5vw, 4.2rem);
+          font-weight: 900;
+          color: #0a0a0a;
+          line-height: 0.95;
           letter-spacing: -0.02em;
-          color: #fff;
-          margin: 0 0 0.5rem 0;
+          text-transform: uppercase;
+          margin: 0 0 0.75rem;
+          white-space: nowrap;
+        }
+        .sc-head__rule {
+          height: 1px;
+          background: rgba(0, 0, 0, 0.1);
+          margin-bottom: 0.65rem;
         }
         .sc-subline {
-          color: rgba(255, 255, 255, 0.6);
-          font-size: 0.92rem;
-          line-height: 1.5;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.88rem;
+          font-weight: 400;
+          color: rgba(0, 0, 0, 0.55);
           margin: 0;
-          max-width: 620px;
+          line-height: 1.5;
+          max-width: 720px;
         }
 
+        /* ═══════════════════════════════════════════════════════
+           BODY: TWO EQUAL COLUMNS
+        ═══════════════════════════════════════════════════════ */
         .sc-grid {
           display: grid;
-          grid-template-columns: 1.1fr 1fr;
-          gap: 2.5rem;
+          grid-template-columns: 1.05fr 1fr;
+          gap: 0 3.5rem;
+          margin-top: 1rem;
           align-items: start;
         }
-        @media (max-width: 768px) {
-          .sc-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-          .sc-panel {
-            padding: 1.5rem;
-          }
+        .sc-col {
+          display: flex;
+          flex-direction: column;
         }
 
-        .sc-label {
-          display: block;
-          font-size: 0.78rem;
+        /* ── STEP LABELS ──────────────────────── */
+        .sc-step-group {
+          margin-bottom: 1.25rem;
+        }
+        .sc-step-label {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.76rem;
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.85);
+          color: rgba(0, 0, 0, 0.45);
           margin-bottom: 0.6rem;
+          display: block;
         }
 
+        /* ── CHIPS (DATE, TIME, PLATFORM) ─────── */
         .sc-chips {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.5rem;
+          gap: 0.45rem;
+        }
+        .sc-chips--time {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.45rem;
         }
         .sc-chip {
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: #f5f5f7;
+          border: 1px solid rgba(0, 0, 0, 0.08);
           border-radius: 8px;
-          color: rgba(255, 255, 255, 0.8);
+          color: #1a1a1a;
+          font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.82rem;
-          padding: 0.55rem 0.9rem;
+          font-weight: 500;
+          padding: 0.55rem 0.85rem;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.18s ease;
           text-align: center;
         }
         .sc-chip:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.25);
-          color: #fff;
+          background: #eaeaea;
+          border-color: rgba(0, 0, 0, 0.2);
+          color: #000;
         }
         .sc-chip--active {
-          background: #b6f500 !important;
-          border-color: #b6f500 !important;
-          color: #000 !important;
-          font-weight: 600;
+          background: var(--accent-primary, #b6f500) !important;
+          border-color: #a4dd00 !important;
+          color: #0a0a0a !important;
+          font-weight: 700 !important;
+          box-shadow: 0 2px 8px rgba(182, 245, 0, 0.35);
         }
         .sc-chip--time {
           font-size: 0.8rem;
-          padding: 0.45rem 0.75rem;
+          padding: 0.55rem 0.75rem;
         }
 
+        /* ── CUSTOM DATE PICKER ───────────────── */
         .sc-custom-date {
           display: flex;
           align-items: center;
           gap: 0.6rem;
-          margin-top: 0.6rem;
+          margin-top: 0.65rem;
         }
         .sc-custom-date-label {
-          font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.4);
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.78rem;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.45);
         }
         .sc-date-input {
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: #f5f5f7;
+          border: 1px solid rgba(0, 0, 0, 0.12);
           border-radius: 6px;
-          color: #fff;
-          font-size: 0.8rem;
-          padding: 0.35rem 0.6rem;
-          color-scheme: dark;
+          color: #0a0a0a;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.82rem;
+          padding: 0.35rem 0.65rem;
+          color-scheme: light;
+          outline: none;
+          transition: border-color 0.2s;
+        }
+        .sc-date-input:focus {
+          border-color: #0a0a0a;
         }
 
+        /* ── FORM FIELDS (UNDERLINE STYLE) ───── */
         .sc-field {
-          margin-bottom: 0.85rem;
+          border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+          margin-bottom: 0.25rem;
+          transition: border-bottom-color 0.2s ease;
         }
-        .sc-input,
-        .sc-textarea {
+        .sc-field:focus-within {
+          border-bottom-color: #0a0a0a;
+        }
+        .sc-input {
           width: 100%;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 8px;
-          color: #fff;
-          font-size: 0.88rem;
-          padding: 0.75rem 1rem;
-          transition: border-color 0.2s;
+          background: transparent;
+          border: none;
+          outline: none;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 1.05rem;
+          font-weight: 500;
+          color: #0a0a0a;
+          padding: 0.75rem 0;
+          -webkit-appearance: none;
+          appearance: none;
+          line-height: 1.4;
           box-sizing: border-box;
         }
-        .sc-input:focus,
-        .sc-textarea:focus {
-          outline: none;
-          border-color: #b6f500;
-          background: rgba(255, 255, 255, 0.07);
+        .sc-input::placeholder,
+        .sc-textarea::placeholder {
+          color: rgba(0, 0, 0, 0.4);
+          font-family: 'Inter', system-ui, sans-serif;
+          font-weight: 500;
         }
         .sc-textarea {
-          resize: vertical;
+          width: 100%;
+          background: transparent;
+          border: none;
+          outline: none;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.98rem;
+          font-weight: 500;
+          color: #0a0a0a;
+          padding: 0.75rem 0 0.4rem;
+          resize: none;
+          line-height: 1.4;
+          min-height: 58px;
+          box-sizing: border-box;
         }
 
-        .sc-submit-btn {
-          width: 100%;
-          background: #b6f500;
-          color: #000;
-          font-size: 0.92rem;
-          font-weight: 700;
-          padding: 0.9rem;
+        /* ── SUBMIT ROW ───────────────────────── */
+        .sc-submit-row {
+          display: flex;
+          align-items: center;
+          padding: 0.75rem 0;
+          margin-top: 1.25rem;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .sc-submit {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.85rem;
+          background: transparent;
           border: none;
-          border-radius: 8px;
           cursor: pointer;
-          transition: transform 0.2s, opacity 0.2s;
-          margin-top: 0.5rem;
+          padding: 0;
         }
-        .sc-submit-btn:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(182, 245, 0, 0.25);
+        .sc-submit__label {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #0a0a0a;
+          letter-spacing: -0.01em;
+          line-height: 1;
+          transition: color 0.18s ease;
         }
-        .sc-submit-btn:disabled {
+        .sc-submit:hover:not(:disabled) .sc-submit__label {
+          color: #333;
+        }
+        .sc-submit:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
-
-        .sc-error {
-          color: #ff5555;
-          font-size: 0.8rem;
-          margin: 0.4rem 0 0 0;
-        }
-        .sc-privacy-note {
-          font-size: 0.72rem;
-          color: rgba(255, 255, 255, 0.4);
-          text-align: center;
-          margin-top: 0.85rem;
-          line-height: 1.4;
-        }
-
-        /* Confirmation Screen */
-        .sc-confirmation {
-          text-align: center;
-          padding: 1.5rem 0.5rem;
-        }
-        .sc-confirm-icon {
-          width: 60px;
-          height: 60px;
-          background: #b6f500;
-          color: #000;
-          font-size: 1.8rem;
-          font-weight: 800;
+        .sc-submit__arrow {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
+          background: var(--accent-primary, #b6f500);
+          color: #0a0a0a;
+          font-size: 1rem;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+        }
+        .sc-submit:hover:not(:disabled) .sc-submit__arrow {
+          transform: translateX(6px);
+          background: #c8f500;
+        }
+
+        /* ── ERROR MESSAGE ────────────────────── */
+        .sc-error {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.8rem;
+          color: #c0392b;
+          margin: 0.5rem 0 0;
+          line-height: 1.5;
+        }
+
+        /* ── TRUST NOTE ───────────────────────── */
+        .sc-trust {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.82rem;
+          color: rgba(0, 0, 0, 0.55);
+          line-height: 1.6;
+          margin: 0.75rem 0 0;
+        }
+
+        /* ── PERSON CARD (HUMAN TOUCH) ────────── */
+        .sc-person {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-top: 0.75rem;
+          padding-top: 0.65rem;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .sc-person__avatar {
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          background: #f0f0ee;
+          flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 1.25rem;
+          overflow: hidden;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .sc-person__initials {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #0a0a0a;
+          letter-spacing: 0.02em;
+        }
+        .sc-person__text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+        }
+        .sc-person__name {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #0a0a0a;
+          line-height: 1.2;
+        }
+        .sc-person__role {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.68rem;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.45);
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           CONFIRMATION SCREEN
+        ═══════════════════════════════════════════════════════ */
+        .sc-confirmation {
+          text-align: center;
+          padding: 2.5rem 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .sc-confirm-icon {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          background: var(--accent-primary, #b6f500);
+          color: #0a0a0a;
+          font-size: 1.8rem;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1.25rem;
         }
         .sc-confirm-title {
-          font-family: var(--font-playfair, Georgia, serif);
-          font-size: 2.2rem;
-          color: #fff;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: clamp(2rem, 4.5vw, 2.8rem);
+          font-weight: 900;
+          color: #0a0a0a;
           margin: 0 0 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: -0.02em;
         }
         .sc-confirm-desc {
-          color: rgba(255, 255, 255, 0.65);
+          font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.95rem;
+          color: rgba(0, 0, 0, 0.55);
+          max-width: 480px;
+          line-height: 1.6;
           margin: 0 0 1.5rem;
         }
         .sc-confirm-box {
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          max-width: 450px;
-          margin: 0 auto 2rem;
-          padding: 1.25rem 1.5rem;
+          background: #f7f7f8;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 14px;
+          max-width: 480px;
+          width: 100%;
+          margin: 0 auto 1.75rem;
+          padding: 1.25rem 1.75rem;
           text-align: left;
+          box-sizing: border-box;
         }
         .sc-confirm-row {
           display: flex;
           justify-content: space-between;
-          padding: 0.4rem 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          font-size: 0.88rem;
+          align-items: center;
+          padding: 0.55rem 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+          font-size: 0.9rem;
+          font-family: 'Inter', system-ui, sans-serif;
         }
         .sc-confirm-row:last-child {
           border-bottom: none;
         }
         .sc-confirm-label {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgba(0, 0, 0, 0.45);
+          font-weight: 500;
+          font-size: 0.82rem;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
         }
         .sc-confirm-val {
-          color: #fff;
-          font-weight: 500;
+          color: #0a0a0a;
+          font-weight: 600;
         }
         .sc-confirm-actions {
           display: flex;
-          gap: 1rem;
+          gap: 0.85rem;
           justify-content: center;
           flex-wrap: wrap;
           margin-bottom: 1.5rem;
@@ -715,44 +947,94 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           display: inline-flex;
           align-items: center;
           gap: 0.6rem;
-          padding: 0.75rem 1.25rem;
-          border-radius: 8px;
+          padding: 0.8rem 1.4rem;
+          border-radius: 999px;
+          font-family: 'Inter', system-ui, sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
           text-decoration: none;
-          transition: transform 0.2s;
+          transition: transform 0.2s, background 0.2s;
         }
         .sc-action-btn:hover {
           transform: translateY(-2px);
         }
         .sc-action-btn--calendar {
-          background: #fff;
-          color: #000;
+          background: #0a0a0a;
+          color: #fff;
+        }
+        .sc-action-btn--calendar:hover {
+          background: #262626;
         }
         .sc-action-btn--whatsapp {
           background: #25d366;
-          color: #000;
+          color: #fff;
+        }
+        .sc-action-btn--whatsapp:hover {
+          background: #20bd5a;
         }
         .sc-close-btn {
           background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: rgba(255, 255, 255, 0.8);
-          padding: 0.55rem 2rem;
-          border-radius: 6px;
+          border: 1.5px solid rgba(0, 0, 0, 0.18);
+          border-radius: 999px;
+          color: #0a0a0a;
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.88rem;
+          font-weight: 600;
+          padding: 0.7rem 2.25rem;
           cursor: pointer;
+          transition: all 0.2s;
         }
         .sc-close-btn:hover {
-          color: #fff;
-          border-color: #fff;
+          border-color: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.04);
         }
 
-        @keyframes scFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+        /* ═══════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════ */
+        @media (max-width: 860px) {
+          .sc-panel {
+            padding: 2.25rem 2rem 2rem;
+            max-height: 94vh;
+            border-radius: 16px;
+          }
+          .sc-headline {
+            font-size: clamp(2.2rem, 9vw, 3.5rem);
+            white-space: normal;
+          }
+          .sc-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          .sc-chips--time {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
-        @keyframes scSlideUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 480px) {
+          .sc-panel {
+            padding: 1.5rem 1.25rem;
+            border-radius: 16px 16px 12px 12px;
+          }
+          .sc-overlay {
+            padding: 0.5rem;
+            align-items: flex-end;
+          }
+          .sc-headline {
+            font-size: clamp(2rem, 10vw, 2.8rem);
+          }
+          .sc-chips--time {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sc-overlay, .sc-panel {
+            animation: none !important;
+          }
+          .sc-submit__arrow, .sc-submit__label, .sc-chip {
+            transition: none !important;
+          }
         }
       `}</style>
     </div>
