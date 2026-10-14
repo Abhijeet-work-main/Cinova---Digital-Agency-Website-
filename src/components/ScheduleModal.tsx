@@ -126,8 +126,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
     } catch {
-      // In local dev without Netlify form backend, still allow confirmation
-      setSubmitted(true);
+      setError("Something went wrong. Please try again or email us directly at cinova.edits@gmail.com.");
     } finally {
       setSubmitting(false);
     }
@@ -192,13 +191,21 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
         </button>
 
         {!submitted ? (
-          <form className="sc-form" onSubmit={handleSubmit} noValidate>
+          <form name="cinova-schedule-call" className="sc-form" onSubmit={handleSubmit} noValidate>
+            {/* Netlify required hidden field */}
             <input type="hidden" name="form-name" value="cinova-schedule-call" />
+            {/* Hidden appointment selections included in DOM */}
+            <input type="hidden" name="date" value={selectedDate} />
+            <input type="hidden" name="time" value={selectedTime} />
+            <input type="hidden" name="platform" value={platform} />
+
+            {/* Honeypot — moved off-screen, not display:none; autoComplete="one-time-code" prevents browser autofill */}
             <input
               name="bot-field"
               value={botField}
               onChange={(e) => setBotField(e.target.value)}
               tabIndex={-1}
+              aria-hidden="true"
               style={{
                 position: "absolute",
                 left: "-9999px",
@@ -206,7 +213,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
                 height: "1px",
                 overflow: "hidden",
               }}
-              autoComplete="off"
+              autoComplete="one-time-code"
             />
 
             {/* Header Block matching ContactModal design */}
