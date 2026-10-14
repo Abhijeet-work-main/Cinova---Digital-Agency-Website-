@@ -32,7 +32,7 @@ export const industries: Industry[] = [
     cinova_approach:
       "We build e-commerce acquisition architectures that connect your ad creative to the landing experience, the landing experience to the purchase trigger, and the purchase trigger to a retention loop. We've helped luxury e-commerce brands generate 16,000+ link clicks at under ₹0.30 CPC.",
     relevantSolutionSlugs: ["paid-growth", "websites", "social-growth"],
-    relevantCaseSlugs: ["erminio-palamino"],
+    relevantCaseSlugs: ["erminio-palamino", "curate-home", "lustre-jewellery", "byxiu-designs", "kuptuuu"],
     delayConsequence:
       "Every month your conversion funnel has unresolved gaps, you're paying to attract buyers your system isn't capturing. That cost compounds over every campaign you run.",
   },
@@ -55,7 +55,7 @@ export const industries: Industry[] = [
     cinova_approach:
       "We build the digital infrastructure that service businesses need to scale beyond referrals — from booking-enabled websites to social media that communicates quality and trust. We've helped beauty and wellness brands go from zero online appointment capability to fully automated scheduling.",
     relevantSolutionSlugs: ["websites", "social-growth", "creative-production"],
-    relevantCaseSlugs: ["noor", "gloss-and-shine"],
+    relevantCaseSlugs: ["noor", "gloss-shine", "purple-swan"],
     delayConsequence:
       "Every week without a functioning appointment system, online enquiries, or a credible digital presence, you are leaving business to competitors who have invested in their infrastructure.",
   },
@@ -78,7 +78,7 @@ export const industries: Industry[] = [
     cinova_approach:
       "We work with creators on content strategy, scripting for retention, and high-end editing — with a focus on the hook quality and pacing that drives platform performance. We've supported financial media creators with audiences up to 123k subscribers.",
     relevantSolutionSlugs: ["creative-production", "social-growth"],
-    relevantCaseSlugs: ["pb-investing"],
+    relevantCaseSlugs: ["pb-investing", "balbeer"],
     delayConsequence:
       "The creator economy rewards compounding. Every month you produce content below your audience's rising expectations, you are training them to disengage. Rebuilding that trust later is harder than building it now.",
   },
@@ -101,7 +101,7 @@ export const industries: Industry[] = [
     cinova_approach:
       "We help fashion and apparel brands build the creative and distribution infrastructure they need to sell online — from campaign videography and Reels to structured Meta Ads and optimized product discovery.",
     relevantSolutionSlugs: ["creative-production", "social-growth", "paid-growth"],
-    relevantCaseSlugs: ["balbeer"],
+    relevantCaseSlugs: ["balbeer", "pegah-toutak", "byxiu-designs", "erminio-palamino"],
     delayConsequence:
       "Brand identity compounds. Every month your visual identity is inconsistent or your creative quality doesn't match your product quality, you are eroding the perception that justifies your pricing.",
   },

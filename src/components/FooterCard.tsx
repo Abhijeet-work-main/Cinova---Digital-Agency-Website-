@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ScheduleModal from "./ScheduleModal";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -11,13 +14,14 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://instagram.com/cinova" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/cinova" },
-  { label: "Twitter", href: "https://twitter.com/cinova" },
-  { label: "Behance", href: "https://behance.net/cinova" },
+  { label: "Instagram", href: "https://www.instagram.com/cinovaofficials?dlrf=ZDNlZDc0MzIxNw==" },
+  { label: "LinkedIn", href: "#", comingSoon: true },
+  { label: "Twitter", href: "#", comingSoon: true },
 ];
 
 export default function FooterCard() {
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+
   return (
     <div className="footer-card-wrapper">
       {/* Dark rounded rectangle */}
@@ -51,11 +55,11 @@ export default function FooterCard() {
             </p>
 
             <div className="footer-card__contacts">
-              <a href="tel:+919876543210" className="footer-card__contact-link">
-                +91 98765 43210
+              <a href="tel:+917428245045" className="footer-card__contact-link">
+                +91 74282 45045
               </a>
-              <a href="mailto:hello@cinova.in" className="footer-card__contact-link">
-                hello@cinova.in
+              <a href="mailto:cinova.edits@gmail.com" className="footer-card__contact-link">
+                cinova.edits@gmail.com
               </a>
             </div>
           </div>
@@ -67,10 +71,9 @@ export default function FooterCard() {
               <p className="footer-card__cta-label">
                 Ready to grow? Schedule a call for free.
               </p>
-              <a
-                href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3qk5r-AkH5VRbC2HgG_WS5r8jJu1K8T0h8_hYr6M5r7Kg"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => setScheduleOpen(true)}
                 className="footer-card__cta-btn"
                 id="footer-schedule-call"
               >
@@ -92,7 +95,7 @@ export default function FooterCard() {
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
                 Schedule a free call
-              </a>
+              </button>
             </div>
 
             {/* Navigation + Social */}
@@ -115,14 +118,23 @@ export default function FooterCard() {
                 <ul className="footer-card__links-list">
                   {SOCIAL_LINKS.map((l) => (
                     <li key={l.label}>
-                      <a
-                        href={l.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="footer-card__link"
-                      >
-                        {l.label}
-                      </a>
+                      {l.comingSoon ? (
+                        <span
+                          className="footer-card__link footer-card__link--soon"
+                          style={{ opacity: 0.5, cursor: "default", userSelect: "none" }}
+                        >
+                          {l.label} <span style={{ fontSize: "0.75rem", opacity: 0.7 }}>(Coming Soon)</span>
+                        </span>
+                      ) : (
+                        <a
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="footer-card__link"
+                        >
+                          {l.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -146,6 +158,8 @@ export default function FooterCard() {
           </Link>
         </div>
       </div>
+
+      <ScheduleModal open={scheduleOpen} onClose={() => setScheduleOpen(false)} />
     </div>
   );
 }

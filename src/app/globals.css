@@ -2571,6 +2571,7 @@ a:focus-visible {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
+  cursor: pointer;
   transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
   width: fit-content;
 }

@@ -45,7 +45,7 @@ export const solutions: Solution[] = [
     ],
     delayConsequence:
       "Every month your website is structurally weak, qualified visitors who found you are leaving and going to your competitors — without you knowing they were ever there.",
-    relevantCaseSlugs: ["noor", "erminio-palamino"],
+    relevantCaseSlugs: ["erminio-palamino", "noor", "curate-home", "kuptuuu"],
     relatedIndustrySlugs: ["ecommerce", "service-brands"],
   },
   {
@@ -75,7 +75,7 @@ export const solutions: Solution[] = [
     ],
     delayConsequence:
       "Attention is expensive. Every month you run campaigns without a connected creative and conversion system, you are paying to send qualified buyers to a leaking funnel.",
-    relevantCaseSlugs: ["erminio-palamino", "balbeer"],
+    relevantCaseSlugs: ["erminio-palamino", "balbeer", "gloss-shine"],
     relatedIndustrySlugs: ["ecommerce", "creators"],
   },
   {
@@ -106,7 +106,7 @@ export const solutions: Solution[] = [
     ],
     delayConsequence:
       "Every piece of weak content you post trains your audience to scroll past you. The opportunity cost compounds over time as competitors who invest in quality content build the trust you are waiting to build.",
-    relevantCaseSlugs: ["pb-investing", "balbeer", "gloss-and-shine"],
+    relevantCaseSlugs: ["balbeer", "pb-investing", "byxiu-designs", "pegah-toutak"],
     relatedIndustrySlugs: ["creators", "service-brands"],
   },
   {
@@ -136,7 +136,7 @@ export const solutions: Solution[] = [
     ],
     delayConsequence:
       "Brand recognition is built over time. Every month you post inconsistently or without strategy, competitors in your category are building the trust and familiarity that makes buyers choose them over you.",
-    relevantCaseSlugs: ["balbeer", "gloss-and-shine", "erminio-palamino"],
+    relevantCaseSlugs: ["balbeer", "pb-investing", "purple-swan", "noor"],
     relatedIndustrySlugs: ["service-brands", "ecommerce"],
   },
 ];

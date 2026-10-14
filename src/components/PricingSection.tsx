@@ -74,13 +74,21 @@ export default function PricingSection() {
               <p className="prx-card-light__sub">We&apos;ll handle it.</p>
             </div>
 
-            <div className="prx-price-row">
-              <span className="prx-price__currency">$</span>
-              <span className="prx-price__amount">2,999</span>
-              <span className="prx-price__period">/m</span>
+            <div className="prx-price-wrapper">
+              <span className="prx-price-starting">Starting from</span>
+              <div className="prx-price-row">
+                <span className="prx-price__currency">$</span>
+                <span className="prx-price__amount">2,999</span>
+                <span className="prx-price__period">/m</span>
+              </div>
             </div>
 
-            <a href="/pricing" className="prx-start-btn">Start your project</a>
+            <div className="prx-action-row">
+              <a href="/pricing" className="prx-start-btn">Start your project</a>
+              <Link href="/pricing" className="prx-ghost-btn">
+                See all packages <span aria-hidden="true">→</span>
+              </Link>
+            </div>
 
             <div className="prx-features">
               <ul className="prx-features__col">
@@ -276,11 +284,23 @@ export default function PricingSection() {
         }
 
         /* Price */
+        .prx-price-wrapper {
+          margin-bottom: 1.5rem;
+        }
+        .prx-price-starting {
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: rgba(10, 10, 10, 0.45);
+          letter-spacing: 0.03em;
+          display: block;
+          margin-bottom: 0.35rem;
+        }
         .prx-price-row {
           display: flex;
           align-items: baseline;
           gap: 0.1rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 0;
         }
         .prx-price__currency {
           font-family: 'Inter', system-ui, sans-serif;
@@ -305,6 +325,18 @@ export default function PricingSection() {
           margin-left: 0.2rem;
         }
 
+        /* Action buttons row */
+        .prx-action-row {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          margin-bottom: 2rem;
+        }
+        .prx-action-row .prx-start-btn {
+          margin-bottom: 0;
+        }
+
         /* Start button — lime from reference */
         .prx-start-btn {
           display: inline-flex;
@@ -319,11 +351,32 @@ export default function PricingSection() {
           border-radius: 100px;
           text-decoration: none;
           width: fit-content;
-          margin-bottom: 2rem;
           transition: background 0.2s ease, transform 0.2s ease;
         }
         .prx-start-btn:hover {
           background: #ceff1a;
+          transform: translateY(-1px);
+        }
+
+        /* Ghost button — see all packages */
+        .prx-ghost-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: transparent;
+          color: rgb(10, 10, 10);
+          border: 1px solid rgba(10, 10, 10, 0.2);
+          font-family: 'Inter', system-ui, sans-serif;
+          font-size: 0.92rem;
+          font-weight: 500;
+          padding: 0.72rem 1.35rem;
+          border-radius: 100px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+        .prx-ghost-btn:hover {
+          background: rgba(10, 10, 10, 0.05);
+          border-color: rgba(10, 10, 10, 0.45);
           transform: translateY(-1px);
         }
 

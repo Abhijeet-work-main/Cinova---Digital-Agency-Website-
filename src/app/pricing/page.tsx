@@ -249,7 +249,7 @@ const PRICING_PROJECTS = [
     title: "Saanvi Botanical",
     description: "Plant-powered identity for a wellness brand",
     tags: ["Branding", "Content"],
-    cover: "/brands/saanvi-botanical/cover.png",
+    cover: "/brands/saanvi-botanical/cover.jpg",
     logo: "/brands/saanvi-botanical/logo.png",
     size: "tall",
   },
@@ -267,7 +267,7 @@ const PRICING_PROJECTS = [
     title: "Erminio Palamino",
     description: "Elegant retail identity and digital presence",
     tags: ["Retail", "Identity"],
-    cover: "/brands/erminio-palamino/cover.png",
+    cover: "/brands/erminio-palamino/cover.jpg",
     logo: "/brands/erminio-palamino/logo.png",
     size: "mid",
   },
@@ -392,7 +392,7 @@ function PricingReviewsSection() {
                 ))}
               </div>
               <p className="tst-trusted">Trusted by 50+ teams</p>
-              <a href="mailto:hello@cinova.in?subject=Client%20Feedback" className="tst-review-btn">
+              <a href="mailto:cinova.edits@gmail.com?subject=Client%20Feedback" className="tst-review-btn">
                 Leave a review
               </a>
             </div>
