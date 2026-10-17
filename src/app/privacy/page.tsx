@@ -4,9 +4,25 @@ import SharedPageClosing from "../../components/SharedPageClosing";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Cinova",
+  title: "Privacy Policy",
   description:
     "How Cinova protects and manages client information, consultation inquiries, and website visitor privacy.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Cinova",
+    description:
+      "How Cinova protects and manages client information, consultation inquiries, and website visitor privacy.",
+    url: "/privacy",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Cinova",
+    description: "How Cinova manages client and visitor privacy.",
+  },
 };
 
 export default function PrivacyPage() {
@@ -40,7 +56,7 @@ export default function PrivacyPage() {
                   <strong>Consultation &amp; Contact Inquiries:</strong> When you complete our contact forms, request a growth diagnostic, or schedule a discovery session, we collect your name, email address, phone/WhatsApp number, company name, brand website, and any project notes you provide.
                 </li>
                 <li>
-                  <strong>Direct Communications:</strong> Any correspondence sent via email (cinova.edits@gmail.com) or direct messaging channels.
+                  <strong>Direct Communications:</strong> Any correspondence sent via email (hello@getcinova.com) or direct messaging channels.
                 </li>
                 <li>
                   <strong>Technical &amp; Usage Data:</strong> Standard server logs and privacy-centric telemetry such as browser type, referral source, pages viewed, and device parameters to ensure fast page loads and responsiveness.
@@ -101,8 +117,8 @@ export default function PrivacyPage() {
               </p>
               <div className="legal-contact-card">
                 <p><strong>Cinova Digital Agency</strong></p>
-                <p>Email: <a href="mailto:cinova.edits@gmail.com">cinova.edits@gmail.com</a></p>
-                <p>Phone / WhatsApp: <a href="tel:+917428245045">+91 74282 45045</a></p>
+                <p>Email: <a href="mailto:hello@getcinova.com">hello@getcinova.com</a></p>
+                <p>Phone / WhatsApp: <a href="tel:+917428245045">+91 7428245045</a></p>
                 <p>Direct Inquiries: Strategy, Creative Direction &amp; Digital Infrastructure</p>
               </div>
             </section>

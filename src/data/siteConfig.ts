@@ -1,4 +1,6 @@
 export interface SiteConfig {
+  siteUrl: string;
+  siteName: string;
   calLink: string;
   whatsappNumber: string;
   title: string;
@@ -8,11 +10,13 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  siteUrl: "https://getcinova.com",
+  siteName: "Cinova",
   calLink: "getcinova/free-strategy-call",
   whatsappNumber: "917428245045",
   title: "Cinova | Premium Digital Growth Agency",
   description:
     "Cinova builds high-conversion websites, paid acquisition funnels, and retention-optimized creative systems for luxury retail, brands, and creators.",
-  email: "cinova.edits@gmail.com",
-  phone: "+91 74282 45045",
+  email: "hello@getcinova.com",
+  phone: "+91 7428245045",
 };

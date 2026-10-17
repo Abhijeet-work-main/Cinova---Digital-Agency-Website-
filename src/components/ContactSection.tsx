@@ -43,7 +43,7 @@ export default function ContactSection() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us at cinova.edits@gmail.com.");
+      setError("Something went wrong. Please try again or email us at hello@getcinova.com.");
     } finally {
       setSubmitting(false);
     }
@@ -101,13 +101,13 @@ export default function ContactSection() {
             <li className="contact-info-item">
               <span className="contact-info-item__label">Want to call us?</span>
               <a href="tel:+917428245045" className="contact-info-item__value">
-                +91 74282 45045
+                +91 7428245045
               </a>
             </li>
             <li className="contact-info-item">
               <span className="contact-info-item__label">Prefer the old way?</span>
-              <a href="mailto:cinova.edits@gmail.com" className="contact-info-item__value">
-                cinova.edits@gmail.com
+              <a href="mailto:hello@getcinova.com" className="contact-info-item__value">
+                hello@getcinova.com
               </a>
             </li>
           </ul>

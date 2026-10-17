@@ -2,9 +2,10 @@ import type { MetadataRoute } from "next";
 import { solutions } from "../data/solutions";
 import { industries } from "../data/industries";
 import { brands } from "../data/brands";
+import { siteConfig } from "../data/siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://cinova.agency";
+  const baseUrl = siteConfig.siteUrl;
 
   const staticPages: MetadataRoute.Sitemap = [
     {

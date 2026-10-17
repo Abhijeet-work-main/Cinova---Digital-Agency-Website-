@@ -23,8 +23,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? brand.overview.summary.split(".")[0] + "."
     : `${brand.name} | Cinova case study.`;
   return {
-    title: `${brand.name} | Case study | Cinova`,
+    title: `${brand.name} | Case Study`,
     description: firstSentence,
+    alternates: {
+      canonical: `/work/${slug}`,
+    },
+    openGraph: {
+      title: `${brand.name} | Case Study | Cinova`,
+      description: firstSentence,
+      url: `/work/${slug}`,
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: "/hero-cinematic.png",
+          width: 1920,
+          height: 1080,
+          alt: `${brand.name} case study — Cinova`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${brand.name} | Case Study | Cinova`,
+      description: firstSentence,
+      images: ["/hero-cinematic.png"],
+    },
   };
 }
 

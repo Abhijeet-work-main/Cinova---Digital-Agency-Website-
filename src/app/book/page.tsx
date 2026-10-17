@@ -5,9 +5,35 @@ import FooterCard from "../../components/FooterCard";
 import CalBookingEmbed from "../../components/CalBookingEmbed";
 
 export const metadata: Metadata = {
-  title: "Book Your Free Strategy Call | Cinova",
+  title: "Book Your Free Strategy Call",
   description:
-    "Schedule a 30-minute growth diagnostic session with Cinova. We identify conversion bottlenecks and build an actionable growth roadmap.",
+    "Schedule a free 30-minute growth diagnostic with Cinova. We identify your conversion bottlenecks and leave you with a clear, actionable growth plan.",
+  alternates: {
+    canonical: "/book",
+  },
+  openGraph: {
+    title: "Book Your Free Strategy Call | Cinova",
+    description:
+      "Schedule a free 30-minute growth diagnostic with Cinova. We identify your conversion bottlenecks and leave you with a clear, actionable growth plan.",
+    url: "/book",
+    type: "website",
+    locale: "en_IN",
+    images: [
+      {
+        url: "/hero-cinematic.png",
+        width: 1920,
+        height: 1080,
+        alt: "Book a free strategy call with Cinova",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book Your Free Strategy Call | Cinova",
+    description:
+      "Schedule a free 30-minute growth diagnostic with Cinova.",
+    images: ["/hero-cinematic.png"],
+  },
 };
 
 const TRUST_BULLETS = [

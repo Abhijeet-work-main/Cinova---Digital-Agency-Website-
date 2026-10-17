@@ -7,6 +7,9 @@ import ThankYouClient from "../../components/ThankYouClient";
 export const metadata: Metadata = {
   title: "Booking Confirmed | Cinova",
   description: "Your free strategy call with Cinova is confirmed.",
+  alternates: {
+    canonical: "/thank-you",
+  },
   robots: {
     index: false,
     follow: false,

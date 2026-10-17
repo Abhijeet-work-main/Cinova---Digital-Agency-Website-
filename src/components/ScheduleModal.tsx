@@ -126,7 +126,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us directly at cinova.edits@gmail.com.");
+      setError("Something went wrong. Please try again or email us directly at hello@getcinova.com.");
     } finally {
       setSubmitting(false);
     }

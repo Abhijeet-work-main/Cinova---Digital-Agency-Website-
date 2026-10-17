@@ -23,6 +23,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${industry.name} | Cinova`,
     description: industry.heroSubtext,
+    alternates: {
+      canonical: `/for/${slug}`,
+    },
+    openGraph: {
+      title: `${industry.name} | Cinova`,
+      description: industry.heroSubtext,
+      url: `/for/${slug}`,
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: "/hero-cinematic.png",
+          width: 1920,
+          height: 1080,
+          alt: `${industry.name} — Cinova`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${industry.name} | Cinova`,
+      description: industry.heroSubtext,
+      images: ["/hero-cinematic.png"],
+    },
   };
 }
 

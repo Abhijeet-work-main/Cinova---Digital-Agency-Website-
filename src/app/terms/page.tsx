@@ -4,9 +4,25 @@ import SharedPageClosing from "../../components/SharedPageClosing";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Cinova",
+  title: "Terms and Conditions",
   description:
     "Engagement terms, project scope guidelines, intellectual property ownership, and service agreements for Cinova Digital Agency.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms and Conditions | Cinova",
+    description:
+      "Engagement terms, project scope guidelines, intellectual property ownership, and service agreements for Cinova Digital Agency.",
+    url: "/terms",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms and Conditions | Cinova",
+    description: "Engagement terms and service agreements for Cinova clients.",
+  },
 };
 
 export default function TermsPage() {
@@ -96,8 +112,8 @@ export default function TermsPage() {
               </p>
               <div className="legal-contact-card">
                 <p><strong>Cinova Digital Agency</strong></p>
-                <p>Email: <a href="mailto:cinova.edits@gmail.com">cinova.edits@gmail.com</a></p>
-                <p>Direct Inquiries: <a href="tel:+917428245045">+91 74282 45045</a></p>
+                <p>Email: <a href="mailto:hello@getcinova.com">hello@getcinova.com</a></p>
+                <p>Direct Inquiries: <a href="tel:+917428245045">+91 7428245045</a></p>
                 <p>Managing Director: Abhijeet Mishra</p>
               </div>
             </section>

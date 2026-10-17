@@ -53,10 +53,10 @@ export default function FooterCard() {
 
             <div className="footer-card__contacts">
               <a href="tel:+917428245045" className="footer-card__contact-link">
-                +91 74282 45045
+                +91 7428245045
               </a>
-              <a href="mailto:cinova.edits@gmail.com" className="footer-card__contact-link">
-                cinova.edits@gmail.com
+              <a href="mailto:hello@getcinova.com" className="footer-card__contact-link">
+                hello@getcinova.com
               </a>
             </div>
           </div>

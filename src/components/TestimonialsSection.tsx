@@ -190,7 +190,7 @@ export default function TestimonialsSection() {
               <p className="tst-trusted">Trusted by 50+ teams</p>
 
               <a
-                href="mailto:cinova.edits@gmail.com?subject=Client%20Feedback"
+                href="mailto:hello@getcinova.com?subject=Client%20Feedback"
                 className="tst-review-btn"
               >
                 Leave a review
