@@ -120,7 +120,7 @@ function PricingHero() {
         </p>
         <div className="pxp-hero__actions">
           <a href="#models" className="pxp-btn-primary">Explore the models</a>
-          <Link href="/#contact" className="pxp-btn-ghost">Talk to us &#8594;</Link>
+          <Link href="/book" className="pxp-btn-ghost" data-cta="pricing-hero">Book a Free Call &#8594;</Link>
         </div>
       </div>
       <div className="pxp-hero__rule" aria-hidden="true" />
@@ -182,8 +182,8 @@ function ModelCard({ tier, delay }: { tier: typeof TIERS[number]; delay: number 
         ))}
       </ul>
       <div className="pxp-model-card__footer">
-        <Link href="/#contact" className="pxp-model-card__cta" id={`pricing-cta-${tier.id}`}>
-          Start a conversation
+        <Link href="/book" className="pxp-model-card__cta" id={`pricing-cta-${tier.id}`} data-cta="pricing-tier">
+          Book a Free Call
           <span className="pxp-model-card__cta-arrow" aria-hidden="true"> &#8594;</span>
         </Link>
       </div>

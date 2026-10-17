@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import StickyMobileCta from "../components/StickyMobileCta";
 
 export const metadata: Metadata = {
   title: "Cinova | Premium Digital Growth Agency",
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <StickyMobileCta />
       </body>
     </html>
   );

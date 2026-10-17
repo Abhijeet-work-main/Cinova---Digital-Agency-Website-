@@ -1684,6 +1684,49 @@ a:focus-visible {
   font-weight: 400;
 }
 
+.hero__cta-wrapper {
+  margin-top: 2rem;
+  opacity: 0;
+  animation: heroTextReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.hero__primary-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--accent-primary);
+  color: #050505;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.85rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hero__primary-cta:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(182, 245, 0, 0.3);
+}
+
+.hero__primary-cta .hero__cta-arrow {
+  transition: transform 0.2s ease;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.hero__primary-cta:hover .hero__cta-arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cta-wrapper { animation: none; opacity: 1; }
+  .hero__primary-cta { transition: none; transform: none; }
+}
 
 .hero__meta-cta:hover .hero__cta-arrow {
   transform: translate(2px, -2px);
@@ -2226,6 +2269,48 @@ a:focus-visible {
 .contact-heading--muted {
   color: var(--text-muted);
   font-weight: 400;
+}
+
+.contact-primary-cta-wrap {
+  margin-bottom: 2.75rem;
+}
+
+.contact-primary-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--accent-primary);
+  color: #050505;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.85rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contact-primary-cta-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(182, 245, 0, 0.3);
+}
+
+.contact-primary-cta-arrow {
+  transition: transform 0.2s ease;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.contact-primary-cta-btn:hover .contact-primary-cta-arrow {
+  transform: translateX(4px);
+}
+
+.contact-primary-cta-sub {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
 }
 
 .contact-info-list {

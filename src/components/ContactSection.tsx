@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "", botField: "" });
@@ -81,6 +82,21 @@ export default function ContactSection() {
             <span className="contact-heading--muted">and how we can help.</span>
           </h2>
 
+          <div className="contact-primary-cta-wrap">
+            <Link
+              href="/book"
+              className="contact-primary-cta-btn"
+              data-cta="contact"
+              aria-label="Book a Free Strategy Call"
+            >
+              <span>Book a Free Strategy Call</span>
+              <span className="contact-primary-cta-arrow" aria-hidden="true">→</span>
+            </Link>
+            <p className="contact-primary-cta-sub">
+              Direct 30-minute diagnostic session. Leave with a prioritized action plan.
+            </p>
+          </div>
+
           <ul className="contact-info-list">
             <li className="contact-info-item">
               <span className="contact-info-item__label">Want to call us?</span>
@@ -100,8 +116,8 @@ export default function ContactSection() {
         {/* Right column — form */}
         <div className="contact-right">
           <div className="contact-form-header">
-            <p className="contact-form-headline">Let&apos;s start</p>
-            <p className="contact-form-headline contact-form-headline--muted">the conversation.</p>
+            <p className="contact-form-headline">Prefer to write?</p>
+            <p className="contact-form-headline contact-form-headline--muted">Send us a message.</p>
           </div>
 
           {submitted ? (

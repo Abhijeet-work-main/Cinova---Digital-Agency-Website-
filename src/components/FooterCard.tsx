@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ScheduleModal from "./ScheduleModal";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work/erminio-palamino" },
+  { label: "Work", href: "/work" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Industries", href: "/#growth-leaking" },
+  { label: "Book a Call", href: "/book" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -20,8 +19,6 @@ const SOCIAL_LINKS = [
 ];
 
 export default function FooterCard() {
-  const [scheduleOpen, setScheduleOpen] = useState(false);
-
   return (
     <div className="footer-card-wrapper">
       {/* Dark rounded rectangle */}
@@ -71,11 +68,12 @@ export default function FooterCard() {
               <p className="footer-card__cta-label">
                 Ready to grow? Schedule a call for free.
               </p>
-              <button
-                type="button"
-                onClick={() => setScheduleOpen(true)}
+              <Link
+                href="/book"
                 className="footer-card__cta-btn"
                 id="footer-schedule-call"
+                data-cta="footer"
+                aria-label="Schedule a free call"
               >
                 <svg
                   className="footer-card__cta-btn-icon"
@@ -95,7 +93,7 @@ export default function FooterCard() {
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
                 Schedule a free call
-              </button>
+              </Link>
             </div>
 
             {/* Navigation + Social */}
@@ -158,8 +156,6 @@ export default function FooterCard() {
           </Link>
         </div>
       </div>
-
-      <ScheduleModal open={scheduleOpen} onClose={() => setScheduleOpen(false)} />
     </div>
   );
 }

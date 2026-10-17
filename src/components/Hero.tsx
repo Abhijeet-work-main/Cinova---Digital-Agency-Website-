@@ -116,6 +116,18 @@ export default function Hero() {
           <span className="hero__title-line">to ignore.</span>
         </h1>
 
+        <div className="hero__cta-wrapper">
+          <Link
+            href="/book"
+            className="hero__primary-cta"
+            data-cta="hero"
+            aria-label="Book a Free Call"
+          >
+            <span>Book a Free Call</span>
+            <span className="hero__cta-arrow" aria-hidden="true">→</span>
+          </Link>
+        </div>
+
       </div>
 
     </section>

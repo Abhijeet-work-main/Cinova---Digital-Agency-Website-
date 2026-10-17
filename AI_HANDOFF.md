@@ -481,10 +481,13 @@ COMPLETE:
 - Industries & Solutions visual brand cards overhaul
 - Dedicated Cinova-style 404, Privacy Policy, and Terms & Conditions pages
 - Homepage pricing card refinements (Starting from & See all packages ghost button)
+- Cal.com booking system integration (`/book` with `@calcom/embed-react`, dark theme, defensive payload capture)
+- Branded `/thank-you` confirmation page (noindex, disallowed in robots, excluded from sitemap, timezone display, calendar exports, WhatsApp button, prep checklist)
+- Site-wide CTA routing to `/book` with `data-cta` attributes and mobile sticky bottom bar
 
 CURRENT:
 
-- Review & user validation of new pages, brand cards, and pricing widget
+- Review & user validation of Cal.com booking flow, /thank-you confirmation, and CTA pathways
 
 FUTURE:
 

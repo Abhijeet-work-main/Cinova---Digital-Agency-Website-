@@ -55,9 +55,9 @@ export default async function SolutionPage({ params }: Props) {
             <h1 className="sol-hero__headline">{solution.heroHeadline}</h1>
             <p className="sol-hero__sub">{solution.heroSubtext}</p>
             <div className="sol-hero__actions">
-              <a href="#audit" className="sol-btn-primary">
-                Get Free Growth Audit
-              </a>
+              <Link href="/book" className="sol-btn-primary" data-cta="solution">
+                Book a Free Call
+              </Link>
               <a href="#proof" className="sol-btn-ghost">
                 See Verified Work ({relatedBrands.length}) →
               </a>
@@ -238,9 +238,9 @@ export default async function SolutionPage({ params }: Props) {
                 &ldquo;{solution.delayConsequence}&rdquo;
               </p>
               <div>
-                <a href="#audit" className="sol-btn-primary">
-                  Resolve This Now →
-                </a>
+                <Link href="/book" className="sol-btn-primary" data-cta="solution">
+                  Book a Free Call →
+                </Link>
               </div>
             </div>
           </div>

@@ -84,7 +84,9 @@ export default function PricingSection() {
             </div>
 
             <div className="prx-action-row">
-              <a href="/pricing" className="prx-start-btn">Start your project</a>
+              <Link href="/book" className="prx-start-btn" data-cta="pricing">
+                Book a Free Call
+              </Link>
               <Link href="/pricing" className="prx-ghost-btn">
                 See all packages <span aria-hidden="true">→</span>
               </Link>

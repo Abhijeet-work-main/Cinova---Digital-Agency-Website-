@@ -55,9 +55,9 @@ export default async function IndustryPage({ params }: Props) {
             <h1 className="ind-hero__headline">{industry.heroHeadline}</h1>
             <p className="ind-hero__sub">{industry.heroSubtext}</p>
             <div className="ind-hero__actions">
-              <a href="#audit" className="ind-btn-primary">
-                Get Free Growth Audit
-              </a>
+              <Link href="/book" className="ind-btn-primary" data-cta="industry">
+                Book a Free Call
+              </Link>
               <a href="#proof" className="ind-btn-ghost">
                 See Category Work ({relatedBrands.length}) →
               </a>
@@ -220,9 +220,9 @@ export default async function IndustryPage({ params }: Props) {
                 &ldquo;{industry.delayConsequence}&rdquo;
               </p>
               <div>
-                <a href="#audit" className="ind-btn-primary">
-                  Resolve This Now →
-                </a>
+                <Link href="/book" className="ind-btn-primary" data-cta="industry">
+                  Book a Free Call →
+                </Link>
               </div>
             </div>
           </div>
