@@ -25,35 +25,47 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-function extractMeetUrl(data: Record<string, unknown>): string | null {
-  const ALLOWED_HOSTS = ["meet.google.com", "app.cal.com"];
+function isValidMeetUrl(url: unknown): string | null {
+  if (typeof url !== "string") return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return null;
+    if (parsed.username || parsed.password) return null;
 
-  function isValidMeetUrl(url: unknown): string | null {
-    if (typeof url !== "string") return null;
-    try {
-      const parsed = new URL(url);
-      if (ALLOWED_HOSTS.some((h) => parsed.hostname === h || parsed.hostname.endsWith("." + h))) {
-        return url;
+    if (parsed.hostname === "meet.google.com") {
+      if (/^\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(parsed.pathname)) {
+        return `https://meet.google.com${parsed.pathname}`;
       }
-    } catch {
-      // not a valid URL
+      return null;
     }
-    return null;
-  }
 
-  // Check top-level meetingUrl
+    if (parsed.hostname === "app.cal.com") {
+      if (parsed.pathname.startsWith("/video/")) {
+        return parsed.href;
+      }
+      return null;
+    }
+  } catch {
+    // not a valid URL
+  }
+  return null;
+}
+
+function extractMeetUrl(data: Record<string, unknown>): string | null {
+  // 1. Check top-level meetingUrl
   const top = isValidMeetUrl(data.meetingUrl);
   if (top) return top;
 
-  // Check location field
+  // 2. Check location field
   const loc = isValidMeetUrl(data.location);
   if (loc) return loc;
 
-  // Check references array
+  // 3. Check references array
   if (Array.isArray(data.references)) {
     for (const ref of data.references) {
       if (ref && typeof ref === "object") {
-        const refUrl = isValidMeetUrl((ref as Record<string, unknown>).meetingUrl);
+        const refObj = ref as Record<string, unknown>;
+        const refUrl = isValidMeetUrl(refObj.meetingUrl) || isValidMeetUrl(refObj.location);
         if (refUrl) return refUrl;
       }
     }
@@ -143,9 +155,10 @@ export async function GET(
     );
   }
 
-  // Confirm it matches our event
-  const slug = (calData.eventType as Record<string, unknown> | undefined)?.slug;
-  if (slug && slug !== "free-strategy-call") {
+  // Confirm booking belongs to "free-strategy-call" event (returns 404 with no details otherwise)
+  const eventType = calData.eventType as Record<string, unknown> | undefined;
+  const slug = typeof eventType?.slug === "string" ? eventType.slug : undefined;
+  if (slug !== "free-strategy-call") {
     return NextResponse.json(
       { error: "Booking not found" },
       { status: 404, headers: { "Cache-Control": "no-store" } }
@@ -163,7 +176,8 @@ export async function GET(
     status = "pending";
   }
 
-  const meetingUrl = extractMeetUrl(calData);
+  // Never return a meeting link for cancelled or rejected bookings
+  const meetingUrl = status === "cancelled" ? null : extractMeetUrl(calData);
   const startTime = typeof calData.startTime === "string" ? calData.startTime : undefined;
   const endTime = typeof calData.endTime === "string" ? calData.endTime : undefined;
 

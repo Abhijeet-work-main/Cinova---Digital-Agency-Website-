@@ -8,17 +8,25 @@ import { siteConfig } from "../data/siteConfig";
 function isValidMeetUrl(url: unknown): string | null {
   if (typeof url !== "string") return null;
   try {
-    const { hostname } = new URL(url);
-    if (
-      hostname === "meet.google.com" ||
-      hostname === "app.cal.com" ||
-      hostname.endsWith(".meet.google.com") ||
-      hostname.endsWith(".app.cal.com")
-    ) {
-      return url;
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return null;
+    if (parsed.username || parsed.password) return null;
+
+    if (parsed.hostname === "meet.google.com") {
+      if (/^\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(parsed.pathname)) {
+        return `https://meet.google.com${parsed.pathname}`;
+      }
+      return null;
+    }
+
+    if (parsed.hostname === "app.cal.com") {
+      if (parsed.pathname.startsWith("/video/")) {
+        return parsed.href;
+      }
+      return null;
     }
   } catch {
-    // not valid
+    // not a valid URL
   }
   return null;
 }
@@ -70,9 +78,9 @@ export default function ThankYouClient() {
   const [copied, setCopied] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<Date | null>(parsedStartDate);
 
-  // Poll for Google Meet URL if not passed in params
+  // Poll for verified meeting details when uid is present (prefers API over URL param)
   useEffect(() => {
-    if (meetUrl || !uid) {
+    if (!uid) {
       return;
     }
 
@@ -86,11 +94,11 @@ export default function ThankYouClient() {
         const res = await fetch(`/api/booking/${uid}`, { cache: "no-store" });
         if (!res.ok) {
           if (res.status === 404 || res.status === 400) {
-            if (!isCancelled) setMeetState("timeout");
+            if (!isCancelled && !initialMeetUrl) setMeetState("timeout");
             return true;
           }
           if (attempts >= maxAttempts) {
-            if (!isCancelled) setMeetState("timeout");
+            if (!isCancelled && !initialMeetUrl) setMeetState("timeout");
             return true;
           }
           return false;
@@ -101,6 +109,7 @@ export default function ThankYouClient() {
 
         if (data.status === "cancelled") {
           setMeetState("cancelled");
+          setMeetUrl(null);
           return true;
         }
 
@@ -111,22 +120,25 @@ export default function ThankYouClient() {
           }
         }
 
-        const validUrl = isValidMeetUrl(data.meetingUrl);
-        if (validUrl) {
-          setMeetUrl(validUrl);
+        const validApiUrl = isValidMeetUrl(data.meetingUrl);
+        if (validApiUrl) {
+          // Prefer value returned by /api/booking/[uid] over param
+          setMeetUrl(validApiUrl);
           setMeetState("ready");
           return true;
         }
 
         if (attempts >= maxAttempts) {
-          setMeetState("timeout");
+          if (!initialMeetUrl) {
+            setMeetState("timeout");
+          }
           return true;
         }
 
         return false;
       } catch {
         if (attempts >= maxAttempts) {
-          if (!isCancelled) setMeetState("timeout");
+          if (!isCancelled && !initialMeetUrl) setMeetState("timeout");
           return true;
         }
         return false;
@@ -152,7 +164,7 @@ export default function ThankYouClient() {
         clearInterval(intervalId);
       }
     };
-  }, [uid, meetUrl]);
+  }, [uid, initialMeetUrl]);
 
   const activeStartDate = sessionStartTime || parsedStartDate;
 

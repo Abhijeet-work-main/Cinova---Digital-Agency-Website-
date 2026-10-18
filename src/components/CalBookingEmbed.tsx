@@ -8,17 +8,25 @@ import { siteConfig } from "../data/siteConfig";
 function isValidMeetUrl(url: unknown): string | null {
   if (typeof url !== "string") return null;
   try {
-    const { hostname } = new URL(url);
-    if (
-      hostname === "meet.google.com" ||
-      hostname === "app.cal.com" ||
-      hostname.endsWith(".meet.google.com") ||
-      hostname.endsWith(".app.cal.com")
-    ) {
-      return url;
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return null;
+    if (parsed.username || parsed.password) return null;
+
+    if (parsed.hostname === "meet.google.com") {
+      if (/^\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/.test(parsed.pathname)) {
+        return `https://meet.google.com${parsed.pathname}`;
+      }
+      return null;
+    }
+
+    if (parsed.hostname === "app.cal.com") {
+      if (parsed.pathname.startsWith("/video/")) {
+        return parsed.href;
+      }
+      return null;
     }
   } catch {
-    // ignore
+    // not a valid URL
   }
   return null;
 }
