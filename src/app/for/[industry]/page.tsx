@@ -143,7 +143,7 @@ export default async function IndustryPage({ params }: Props) {
 
           <div className="ind-container">
             <div className="ind-approach-head">
-              <span className="ind-section-tag" style={{ color: "var(--accent-primary)" }}>
+              <span className="ind-section-tag" style={{ color: "var(--accent-text)" }}>
                 The Connected Architecture
               </span>
               <h2 className="ind-section-h2">
@@ -424,7 +424,7 @@ export default async function IndustryPage({ params }: Props) {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .ind-problem-arrow {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
@@ -469,7 +469,7 @@ export default async function IndustryPage({ params }: Props) {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary);
+          color: var(--accent-text);
           margin-top: auto;
         }
 

@@ -5,9 +5,10 @@
   --bg-tertiary: #EAEAEA;
   --text-primary: #0A0A0A;
   --text-secondary: #4A4A4A;
-  --text-muted: #737373;
+  --text-muted: #595959;
   --accent-primary: #b6f500;
   --accent-hover: #9ad200;
+  --accent-text: #3f6212;
 
   --font-display: var(--font-pjs, 'Plus Jakarta Sans'), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body: var(--font-inter, 'Inter'), "Helvetica Neue", Helvetica, Arial, sans-serif;

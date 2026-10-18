@@ -144,7 +144,7 @@ export default async function SolutionPage({ params }: Props) {
           <div className="sol-container">
             <div className="sol-grid-2" style={{ alignItems: "center" }}>
               <div>
-                <span className="sol-section-tag" style={{ color: "var(--accent-primary)" }}>
+                <span className="sol-section-tag" style={{ color: "var(--accent-text)" }}>
                   The Cinova Approach
                 </span>
                 <h2 className="sol-section-h2">
@@ -442,7 +442,7 @@ export default async function SolutionPage({ params }: Props) {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .sol-problem-arrow {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
@@ -478,7 +478,7 @@ export default async function SolutionPage({ params }: Props) {
           padding: 0.85rem 1.2rem;
         }
         .sol-cap-check {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
         }
         .sol-cap-text {
@@ -519,7 +519,7 @@ export default async function SolutionPage({ params }: Props) {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary);
+          color: var(--accent-text);
           margin-top: auto;
         }
 
