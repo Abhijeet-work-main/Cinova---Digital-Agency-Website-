@@ -129,8 +129,8 @@ export default function StickyMobileCta() {
             gap: 0.6rem;
             width: 100%;
             padding: 0.85rem 1.4rem;
-            background: var(--accent-primary);
-            color: #050505;
+            background: #b6f500;
+            color: #0a0a0a;
             font-family: var(--font-body);
             font-size: 0.95rem;
             font-weight: 700;
@@ -138,16 +138,23 @@ export default function StickyMobileCta() {
             text-decoration: none;
             border-radius: 100px;
             box-shadow: 0 4px 14px rgba(182, 245, 0, 0.25);
-            transition: background 0.2s ease, transform 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+          }
+
+          .sticky-mobile-cta-btn:hover {
+            background: #a4dd00;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(182, 245, 0, 0.35);
           }
 
           .sticky-mobile-cta-btn:active {
-            transform: scale(0.98);
+            background: #98cd00;
+            transform: translateY(0);
           }
 
           .sticky-mobile-cta-btn:focus-visible {
-            outline: 2px solid #ffffff;
-            outline-offset: 3px;
+            outline: 2px solid #b6f500;
+            outline-offset: 2px;
           }
 
           .sticky-mobile-cta-arrow {
