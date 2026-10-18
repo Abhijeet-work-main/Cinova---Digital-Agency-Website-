@@ -76,7 +76,7 @@ const FAQ_JSON_LD = {
       name: "Can I reschedule?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Life happens. You can reschedule or cancel at any time with a single click using the link provided in your confirmation email from Cal.com.",
+        text: "Yes, use the link in your confirmation email.",
       },
     },
     {

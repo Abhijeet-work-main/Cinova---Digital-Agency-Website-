@@ -49,7 +49,7 @@ const FAQS = [
   },
   {
     q: "Can I reschedule?",
-    a: "Life happens. You can reschedule or cancel at any time with a single click using the link provided in your confirmation email from Cal.com.",
+    a: "Yes, use the link in your confirmation email.",
   },
   {
     q: "What if I am not ready to hire yet?",
