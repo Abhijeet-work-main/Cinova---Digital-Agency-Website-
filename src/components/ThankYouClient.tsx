@@ -623,34 +623,34 @@ export default function ThankYouClient() {
         <div className="ty-card__top">
           <span className="ty-card__tag">Get Ready</span>
         </div>
-        <h2 className="ty-checklist-heading">How to prepare for maximum impact</h2>
-        <p className="ty-checklist-sub">Three quick things to note before we jump on the call:</p>
+        <h2 className="ty-checklist-heading">How to get ready</h2>
+        <p className="ty-checklist-sub">Three quick things that make the call more useful.</p>
 
         <ol className="ty-checklist">
           <li className="ty-checklist-item">
             <span className="ty-checklist-num" aria-hidden="true">1</span>
             <div className="ty-checklist-text">
-              <strong className="ty-checklist-title">Share your website or ad account access</strong>
+              <strong className="ty-checklist-title">Share your website or ad account</strong>
               <p className="ty-checklist-desc">
-                Drop your store or landing page link in advance, or prepare viewer access so we can inspect actual metrics rather than generic hypotheticals.
+                Send us your website or landing page link before the call. If you run ads, viewer access to your ad account lets us look at real numbers.
               </p>
             </div>
           </li>
           <li className="ty-checklist-item">
             <span className="ty-checklist-num" aria-hidden="true">2</span>
             <div className="ty-checklist-text">
-              <strong className="ty-checklist-title">List your top 3 growth goals</strong>
+              <strong className="ty-checklist-title">List your top 3 goals</strong>
               <p className="ty-checklist-desc">
-                Identify your primary bottlenecks (e.g. low ROAS, weak landing page conversion, creator coordination) and what milestone matters most over the next 90 days.
+                For example more leads, a lower cost per lead, or better video content. Tell us what matters most in the next 90 days.
               </p>
             </div>
           </li>
           <li className="ty-checklist-item">
             <span className="ty-checklist-num" aria-hidden="true">3</span>
             <div className="ty-checklist-text">
-              <strong className="ty-checklist-title">Note your monthly growth budget</strong>
+              <strong className="ty-checklist-title">Note your monthly budget</strong>
               <p className="ty-checklist-desc">
-                Have a clear sense of your allocated paid media and production budget so we can recommend the most mathematically viable execution roadmap.
+                A rough number for ads and production is enough, so we can suggest a realistic plan.
               </p>
             </div>
           </li>
