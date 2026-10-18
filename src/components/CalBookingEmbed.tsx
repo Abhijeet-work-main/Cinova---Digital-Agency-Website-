@@ -17,10 +17,10 @@ export default function CalBookingEmbed() {
         const cal = await getCalApi();
         if (!isMounted) return;
 
-        // Apply dark theme, month_view layout and Cinova neon lime accent
+        // Apply light theme, month_view layout and near-black brand color for maximum contrast
         cal("ui", {
-          theme: "dark",
-          styles: { branding: { brandColor: "#b6f500" } },
+          theme: "light",
+          styles: { branding: { brandColor: "#0a0a0a" } },
           hideEventTypeDetails: false,
           layout: "month_view",
         });
@@ -175,11 +175,11 @@ export default function CalBookingEmbed() {
         <Cal
           calLink={siteConfig.calLink}
           style={{ width: "100%", height: "100%", minHeight: "680px", overflow: "hidden" }}
-          config={{ layout: "month_view", theme: "dark" }}
+          config={{ layout: "month_view", theme: "light" }}
         />
       ) : (
         <iframe
-          src={`https://cal.com/${siteConfig.calLink}?embed=true&theme=dark`}
+          src={`https://cal.com/${siteConfig.calLink}?embed=true&theme=light`}
           title="Book your free strategy call with Cinova"
           style={{ width: "100%", height: "700px", border: "none", borderRadius: "16px" }}
           allow="camera; microphone; autoplay; fullscreen"

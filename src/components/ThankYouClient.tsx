@@ -128,13 +128,13 @@ export default function ThankYouClient() {
   const whatsappLink = `https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Cinova%2C%20I%20just%20booked%20a%20strategy%20call`;
 
   return (
-    <div className="ty-container">
-      {/* Top Badge & Heading */}
+    <div className="ty-page">
+      {/* ── SUCCESS HEADER ───────────────────────────────── */}
       <div className="ty-header">
         <div className="ty-icon-circle" aria-hidden="true">
           <svg
-            width="28"
-            height="28"
+            width="26"
+            height="26"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -148,43 +148,41 @@ export default function ThankYouClient() {
         <h1 className="ty-title">You&apos;re booked</h1>
         <p className="ty-subtitle">
           {validStartDate
-            ? "We're looking forward to speaking with you. Here are the details of your strategy session."
+            ? "We are looking forward to speaking with you. Here are the details of your strategy session."
             : "Check your email for your confirmation and calendar invitation from Cal.com."}
         </p>
       </div>
 
-      {/* Date & Time Card (Hidden if no valid startTime) */}
+      {/* ── YOUR CALL CARD ───────────────────────────────── */}
       {validStartDate && (
-        <div className="ty-card glass-panel" aria-label="Booked session time">
+        <div className="ty-card" aria-label="Booked session time">
           <div className="ty-card__top">
             <span className="ty-card__tag">Confirmed Session</span>
-            <span className="ty-card__duration">30 minutes</span>
+            <span className="ty-card__badge">30 min</span>
           </div>
 
-          <div className="ty-time-info">
+          <div className="ty-time-block">
             <div className="ty-time-row">
               <span className="ty-time-label">Your Local Time</span>
               <span className="ty-time-val">{localTimeStr}</span>
             </div>
-
             {istTimeStr && (
               <div className="ty-time-row ty-time-row--sub">
                 <span className="ty-time-label">Cinova Team Time (IST)</span>
-                <span className="ty-time-val">{istTimeStr}</span>
+                <span className="ty-time-val ty-time-val--sub">{istTimeStr}</span>
               </div>
             )}
           </div>
 
-          {/* Calendar Actions */}
           <div className="ty-cal-actions">
             <a
               href={gcalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ty-btn ty-btn--ghost"
+              className="ty-btn ty-btn--outline"
               aria-label="Add to Google Calendar"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
@@ -196,10 +194,10 @@ export default function ThankYouClient() {
             <button
               type="button"
               onClick={handleDownloadIcs}
-              className="ty-btn ty-btn--ghost"
+              className="ty-btn ty-btn--outline"
               aria-label="Download ICS calendar file"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
@@ -210,26 +208,75 @@ export default function ThankYouClient() {
         </div>
       )}
 
-      {/* Primary Action Button (Only if valid UID) */}
-      {uid && (
-        <div className="ty-primary-action-wrap">
-          <a
-            href={`https://cal.com/booking/${uid}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ty-btn ty-btn--primary"
-            aria-label="Open booking and join link on Cal.com"
-          >
-            <span>Open booking and join link</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-          <p className="ty-join-note">
-            Your Google Meet link is also in the confirmation email from Cal.com.
-          </p>
+      {/* ── JOIN THE CALL CARD ───────────────────────────── */}
+      <div className="ty-card" aria-label="Join the call">
+        <div className="ty-card__top">
+          <span className="ty-card__tag">Join the Call</span>
         </div>
-      )}
+        {uid ? (
+          <>
+            <a
+              href={`https://cal.com/booking/${uid}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ty-btn ty-btn--primary"
+              aria-label="Open booking and join link on Cal.com"
+            >
+              <span>Open booking and join link</span>
+              <span aria-hidden="true">&#8599;</span>
+            </a>
+            <p className="ty-join-note">
+              Your Google Meet link is also in the confirmation email from Cal.com.
+            </p>
+          </>
+        ) : (
+          <p className="ty-join-empty">
+            Your meeting link will appear in the confirmation email from Cal.com.
+            Check your inbox (and spam folder) for details.
+          </p>
+        )}
+      </div>
 
-      {/* WhatsApp Immediate Line */}
+      {/* ── GET READY CHECKLIST ──────────────────────────── */}
+      <div className="ty-card ty-card--checklist" aria-label="Preparation checklist">
+        <div className="ty-card__top">
+          <span className="ty-card__tag">Get Ready</span>
+        </div>
+        <h2 className="ty-checklist-heading">How to prepare for maximum impact</h2>
+        <p className="ty-checklist-sub">Three quick things to note before we jump on the call:</p>
+
+        <ol className="ty-checklist">
+          <li className="ty-checklist-item">
+            <span className="ty-checklist-num" aria-hidden="true">1</span>
+            <div className="ty-checklist-text">
+              <strong className="ty-checklist-title">Share your website or ad account access</strong>
+              <p className="ty-checklist-desc">
+                Drop your store or landing page link in advance, or prepare viewer access so we can inspect actual metrics rather than generic hypotheticals.
+              </p>
+            </div>
+          </li>
+          <li className="ty-checklist-item">
+            <span className="ty-checklist-num" aria-hidden="true">2</span>
+            <div className="ty-checklist-text">
+              <strong className="ty-checklist-title">List your top 3 growth goals</strong>
+              <p className="ty-checklist-desc">
+                Identify your primary bottlenecks (e.g. low ROAS, weak landing page conversion, creator coordination) and what milestone matters most over the next 90 days.
+              </p>
+            </div>
+          </li>
+          <li className="ty-checklist-item">
+            <span className="ty-checklist-num" aria-hidden="true">3</span>
+            <div className="ty-checklist-text">
+              <strong className="ty-checklist-title">Note your monthly growth budget</strong>
+              <p className="ty-checklist-desc">
+                Have a clear sense of your allocated paid media and production budget so we can recommend the most mathematically viable execution roadmap.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      {/* ── WHATSAPP ─────────────────────────────────────── */}
       <div className="ty-whatsapp-wrap">
         <a
           href={whatsappLink}
@@ -239,8 +286,8 @@ export default function ThankYouClient() {
           aria-label="Message Cinova on WhatsApp"
         >
           <svg
-            width="18"
-            height="18"
+            width="17"
+            height="17"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -255,67 +302,31 @@ export default function ThankYouClient() {
         </a>
       </div>
 
-      {/* How to prepare checklist */}
-      <div className="ty-prepare-section glass-panel">
-        <h2 className="ty-prepare-heading">How to prepare for maximum impact</h2>
-        <p className="ty-prepare-sub">Three quick things to note before we jump on the call:</p>
-
-        <ul className="ty-prepare-list">
-          <li className="ty-prepare-item">
-            <span className="ty-prepare-item__num" aria-hidden="true">1</span>
-            <div className="ty-prepare-item__text">
-              <strong className="ty-prepare-item__title">Share your website or ad account access</strong>
-              <p className="ty-prepare-item__desc">
-                Drop your store or landing page link in advance, or prepare viewer access so we can inspect actual metrics rather than generic hypotheticals.
-              </p>
-            </div>
-          </li>
-
-          <li className="ty-prepare-item">
-            <span className="ty-prepare-item__num" aria-hidden="true">2</span>
-            <div className="ty-prepare-item__text">
-              <strong className="ty-prepare-item__title">List your top 3 growth goals</strong>
-              <p className="ty-prepare-item__desc">
-                Identify your primary bottlenecks (e.g. low ROAS, weak landing page conversion, creator coordination) and what milestone matters most over the next 90 days.
-              </p>
-            </div>
-          </li>
-
-          <li className="ty-prepare-item">
-            <span className="ty-prepare-item__num" aria-hidden="true">3</span>
-            <div className="ty-prepare-item__text">
-              <strong className="ty-prepare-item__title">Note your monthly growth budget</strong>
-              <p className="ty-prepare-item__desc">
-                Have a clear sense of your allocated paid media and production budget so we can recommend the most mathematically viable execution roadmap.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      {/* Secondary Links */}
+      {/* ── SECONDARY LINKS ──────────────────────────────── */}
       <div className="ty-links-row">
         <Link href="/work" className="ty-sec-link">
           <span>Explore our case studies</span>
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true">&#8594;</span>
         </Link>
-        <span className="ty-sec-divider" aria-hidden="true">·</span>
+        <span className="ty-sec-sep" aria-hidden="true">&#183;</span>
         <Link href="/" className="ty-sec-link">
           <span>Return to Cinova homepage</span>
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true">&#8594;</span>
         </Link>
       </div>
 
       <style>{`
-        .ty-container {
-          max-width: 820px;
+        /* ── PAGE WRAPPER ──────────────────────────────────── */
+        .ty-page {
+          max-width: 720px;
           margin: 0 auto;
-          padding: 8rem 1.5rem 6rem;
+          padding: 8rem 1.5rem 5rem;
         }
 
+        /* ── SUCCESS HEADER ────────────────────────────────── */
         .ty-header {
           text-align: center;
-          margin-bottom: 2.75rem;
+          margin-bottom: 2.5rem;
         }
 
         .ty-icon-circle {
@@ -325,39 +336,38 @@ export default function ThankYouClient() {
           width: 56px;
           height: 56px;
           border-radius: 50%;
-          background: rgba(182, 245, 0, 0.12);
-          color: var(--accent-primary);
-          border: 1px solid rgba(182, 245, 0, 0.3);
+          background: var(--accent-primary);
+          color: #0a0a0a;
           margin-bottom: 1.5rem;
         }
 
         .ty-title {
           font-family: var(--font-display);
-          font-size: clamp(2.4rem, 5vw, 3.8rem);
-          font-weight: 700;
-          color: #FAFAFA;
+          font-size: clamp(2.2rem, 5vw, 3.6rem);
+          font-weight: 800;
+          color: var(--text-primary);
           line-height: 1.1;
-          letter-spacing: -0.02em;
-          margin-bottom: 1rem;
+          letter-spacing: -0.025em;
+          margin-bottom: 0.85rem;
         }
 
         .ty-subtitle {
           font-family: var(--font-body);
-          font-size: 1.05rem;
-          color: #A3A3A3;
-          max-width: 560px;
+          font-size: 1.02rem;
+          color: #3d3d38;
+          max-width: 520px;
           margin: 0 auto;
-          line-height: 1.6;
+          line-height: 1.65;
         }
 
-        /* ── CARD ────────────────────────────────────────── */
+        /* ── CARD ─────────────────────────────────────────── */
         .ty-card {
-          background: #111111;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #ffffff;
+          border: 1px solid #e8e8e5;
           border-radius: 18px;
           padding: 2rem 2.25rem;
-          margin-bottom: 2rem;
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+          margin-bottom: 1.5rem;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
         }
 
         .ty-card__top {
@@ -365,28 +375,30 @@ export default function ThankYouClient() {
           align-items: center;
           justify-content: space-between;
           margin-bottom: 1.5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
           padding-bottom: 1rem;
+          border-bottom: 1px solid #f0f0ec;
         }
 
         .ty-card__tag {
-          font-size: 0.75rem;
+          font-family: var(--font-label);
+          font-size: 0.72rem;
           font-weight: 700;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: var(--accent-primary);
+          color: var(--accent-text);
         }
 
-        .ty-card__duration {
-          font-size: 0.85rem;
+        .ty-card__badge {
+          font-size: 0.82rem;
           font-weight: 600;
-          color: #E5E5E5;
-          background: rgba(255, 255, 255, 0.05);
-          padding: 0.3rem 0.75rem;
+          color: var(--text-muted);
+          background: var(--bg-secondary);
+          padding: 0.28rem 0.75rem;
           border-radius: 50px;
         }
 
-        .ty-time-info {
+        /* ── TIME BLOCK ────────────────────────────────────── */
+        .ty-time-block {
           display: flex;
           flex-direction: column;
           gap: 0.85rem;
@@ -396,211 +408,236 @@ export default function ThankYouClient() {
         .ty-time-row {
           display: flex;
           flex-direction: column;
-          gap: 0.25rem;
+          gap: 0.2rem;
         }
 
         .ty-time-label {
-          font-size: 0.78rem;
+          font-family: var(--font-label);
+          font-size: 0.72rem;
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: #737373;
+          letter-spacing: 0.1em;
+          color: var(--text-muted);
         }
 
         .ty-time-val {
           font-family: var(--font-display);
-          font-size: 1.35rem;
-          font-weight: 600;
-          color: #FAFAFA;
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          line-height: 1.3;
         }
 
-        .ty-time-row--sub .ty-time-val {
-          font-size: 1.05rem;
-          color: #CCCCCC;
+        .ty-time-val--sub {
+          font-size: 1rem;
+          color: #595959;
         }
 
+        /* ── CALENDAR ACTIONS ──────────────────────────────── */
         .ty-cal-actions {
           display: flex;
           gap: 0.75rem;
           flex-wrap: wrap;
         }
 
-        /* ── BUTTONS ─────────────────────────────────────── */
+        /* ── BUTTONS ──────────────────────────────────────── */
         .ty-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 0.6rem;
+          gap: 0.55rem;
           font-family: var(--font-body);
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           font-weight: 600;
           text-decoration: none;
           border-radius: 100px;
-          padding: 0.75rem 1.4rem;
+          padding: 0.7rem 1.35rem;
           cursor: pointer;
-          transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+          transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
           border: none;
         }
 
         .ty-btn--primary {
           background: var(--accent-primary);
-          color: #0A0A0A;
-          font-size: 1rem;
-          padding: 0.95rem 2.2rem;
+          color: #0a0a0a;
+          font-size: 0.95rem;
+          padding: 0.9rem 2rem;
+          margin-bottom: 0.75rem;
         }
-
         .ty-btn--primary:hover {
           background: var(--accent-hover);
           transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(182, 245, 0, 0.25);
+          box-shadow: 0 6px 20px rgba(182,245,0,0.25);
+        }
+        .ty-btn--primary:focus-visible {
+          outline: 2px solid var(--text-primary);
+          outline-offset: 3px;
         }
 
-        .ty-btn--ghost {
-          background: rgba(255, 255, 255, 0.05);
-          color: #FAFAFA;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+        .ty-btn--outline {
+          background: transparent;
+          color: var(--text-secondary);
+          border: 1px solid #dcdcd8;
+          font-size: 0.85rem;
         }
-
-        .ty-btn--ghost:hover {
-          background: rgba(255, 255, 255, 0.09);
-          border-color: rgba(255, 255, 255, 0.2);
+        .ty-btn--outline:hover {
+          background: var(--bg-secondary);
+          border-color: #c8c8c4;
           transform: translateY(-1px);
         }
-
-        .ty-primary-action-wrap {
-          text-align: center;
-          margin-bottom: 2rem;
+        .ty-btn--outline:focus-visible {
+          outline: 2px solid var(--accent-primary);
+          outline-offset: 3px;
         }
 
         .ty-join-note {
-          font-size: 0.85rem;
-          color: #888888;
-          margin-top: 0.85rem;
+          font-size: 0.82rem;
+          color: var(--text-muted);
+          margin-top: 0;
+          line-height: 1.5;
         }
 
-        /* ── WHATSAPP ────────────────────────────────────── */
-        .ty-whatsapp-wrap {
-          margin-bottom: 2.5rem;
-          text-align: center;
-        }
-
-        .ty-whatsapp-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.65rem;
-          padding: 0.8rem 1.4rem;
-          background: rgba(37, 211, 102, 0.08);
-          border: 1px solid rgba(37, 211, 102, 0.25);
-          color: #25D366;
-          border-radius: 100px;
-          font-size: 0.88rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: background 0.2s ease, border-color 0.2s ease;
-        }
-
-        .ty-whatsapp-btn:hover {
-          background: rgba(37, 211, 102, 0.15);
-          border-color: rgba(37, 211, 102, 0.4);
-        }
-
-        /* ── PREPARE CHECKLIST ───────────────────────────── */
-        .ty-prepare-section {
-          background: #111111;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 18px;
-          padding: 2.5rem 2.25rem;
-          margin-bottom: 2.5rem;
-        }
-
-        .ty-prepare-heading {
-          font-family: var(--font-display);
-          font-size: 1.4rem;
-          font-weight: 600;
-          color: #FAFAFA;
-          margin-bottom: 0.4rem;
-        }
-
-        .ty-prepare-sub {
+        .ty-join-empty {
           font-size: 0.92rem;
-          color: #888888;
+          color: #3d3d38;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        /* ── CHECKLIST ────────────────────────────────────── */
+        .ty-checklist-heading {
+          font-family: var(--font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.35rem;
+          line-height: 1.3;
+        }
+
+        .ty-checklist-sub {
+          font-size: 0.9rem;
+          color: var(--text-muted);
           margin-bottom: 1.75rem;
         }
 
-        .ty-prepare-list {
+        .ty-checklist {
           list-style: none;
           display: flex;
           flex-direction: column;
           gap: 1.35rem;
         }
 
-        .ty-prepare-item {
+        .ty-checklist-item {
           display: flex;
           align-items: flex-start;
-          gap: 1.1rem;
+          gap: 1rem;
         }
 
-        .ty-prepare-item__num {
+        .ty-checklist-num {
           display: inline-flex;
           align-items: center;
           justify-content: center;
           width: 28px;
           height: 28px;
           border-radius: 50%;
-          background: rgba(182, 245, 0, 0.12);
-          color: var(--accent-primary);
+          background: var(--accent-primary);
+          color: #0a0a0a;
+          font-family: var(--font-display);
           font-weight: 700;
           font-size: 0.82rem;
           flex-shrink: 0;
-          margin-top: 2px;
+          margin-top: 1px;
         }
 
-        .ty-prepare-item__title {
+        .ty-checklist-text {
+          flex: 1;
+        }
+
+        .ty-checklist-title {
           display: block;
-          font-size: 0.98rem;
-          color: #FAFAFA;
-          margin-bottom: 0.25rem;
+          font-family: var(--font-display);
+          font-size: 0.97rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.3rem;
         }
 
-        .ty-prepare-item__desc {
-          font-size: 0.88rem;
-          color: #999999;
-          line-height: 1.55;
+        .ty-checklist-desc {
+          font-size: 0.87rem;
+          color: #3d3d38;
+          line-height: 1.6;
           margin: 0;
         }
 
-        /* ── SECONDARY LINKS ─────────────────────────────── */
+        /* ── WHATSAPP ─────────────────────────────────────── */
+        .ty-whatsapp-wrap {
+          margin-bottom: 2rem;
+          text-align: center;
+        }
+
+        .ty-whatsapp-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.75rem 1.35rem;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          color: #15803d;
+          border-radius: 100px;
+          font-family: var(--font-body);
+          font-size: 0.86rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: background 0.18s ease, border-color 0.18s ease;
+        }
+
+        .ty-whatsapp-btn:hover {
+          background: #dcfce7;
+          border-color: #86efac;
+        }
+
+        .ty-whatsapp-btn:focus-visible {
+          outline: 2px solid #15803d;
+          outline-offset: 3px;
+          border-radius: 100px;
+        }
+
+        /* ── SECONDARY LINKS ──────────────────────────────── */
         .ty-links-row {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 1.25rem;
+          gap: 1.1rem;
           flex-wrap: wrap;
+          padding-bottom: 4rem;
         }
 
         .ty-sec-link {
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
-          font-size: 0.9rem;
+          gap: 0.4rem;
+          font-family: var(--font-body);
+          font-size: 0.87rem;
           font-weight: 500;
-          color: #A3A3A3;
+          color: var(--text-muted);
           text-decoration: none;
           transition: color 0.18s ease;
         }
 
-        .ty-sec-link:hover {
-          color: var(--accent-primary);
+        .ty-sec-link:hover { color: var(--text-primary); }
+        .ty-sec-link:focus-visible {
+          outline: 2px solid var(--accent-primary);
+          outline-offset: 3px;
+          border-radius: 3px;
         }
 
-        .ty-sec-divider {
-          color: #555555;
-        }
+        .ty-sec-sep { color: #d0d0cc; font-size: 0.75rem; }
 
+        /* ── RESPONSIVE ───────────────────────────────────── */
         @media (max-width: 600px) {
-          .ty-card,
-          .ty-prepare-section {
-            padding: 1.75rem 1.25rem;
-          }
+          .ty-card { padding: 1.6rem 1.25rem; }
+          .ty-cal-actions { flex-direction: column; }
+          .ty-btn { width: 100%; justify-content: center; }
         }
       `}</style>
     </div>

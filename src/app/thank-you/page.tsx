@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Header from "../../components/Header";
-import FooterCard from "../../components/FooterCard";
+import SharedPageClosing from "../../components/SharedPageClosing";
 import ThankYouClient from "../../components/ThankYouClient";
 
 export const metadata: Metadata = {
@@ -19,15 +19,24 @@ export const metadata: Metadata = {
 
 function ThankYouFallback() {
   return (
-    <div style={{ maxWidth: "820px", margin: "0 auto", padding: "10rem 1.5rem", textAlign: "center" }}>
-      <p style={{ color: "#888888", fontSize: "1rem" }}>Loading your booking confirmation…</p>
+    <div
+      style={{
+        maxWidth: "720px",
+        margin: "0 auto",
+        padding: "10rem 1.5rem",
+        textAlign: "center",
+      }}
+    >
+      <p style={{ color: "var(--text-muted)", fontSize: "1rem" }}>
+        Loading your booking confirmation...
+      </p>
     </div>
   );
 }
 
 export default function ThankYouPage() {
   return (
-    <div style={{ backgroundColor: "var(--text-primary)", minHeight: "100vh", color: "#FAFAFA" }}>
+    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100vh" }}>
       <Header />
 
       <main>
@@ -36,9 +45,7 @@ export default function ThankYouPage() {
         </Suspense>
       </main>
 
-      <footer role="contentinfo">
-        <FooterCard />
-      </footer>
+      <SharedPageClosing />
     </div>
   );
 }
