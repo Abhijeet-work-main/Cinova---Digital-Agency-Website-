@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { siteConfig } from "../data/siteConfig";
 
 export default function ContactSection() {
   const pathname = usePathname();
@@ -46,7 +47,7 @@ export default function ContactSection() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us at hello@getcinova.com.");
+      setError(`Something went wrong. Please try again or email us at ${siteConfig.email}.`);
     } finally {
       setSubmitting(false);
     }
@@ -103,14 +104,14 @@ export default function ContactSection() {
           <ul className="contact-info-list">
             <li className="contact-info-item">
               <span className="contact-info-item__label">Want to call us?</span>
-              <a href="tel:+917428245045" className="contact-info-item__value">
-                +91 7428245045
+              <a href={`tel:+${siteConfig.whatsappNumber}`} className="contact-info-item__value">
+                {siteConfig.phone}
               </a>
             </li>
             <li className="contact-info-item">
               <span className="contact-info-item__label">Prefer the old way?</span>
-              <a href="mailto:hello@getcinova.com" className="contact-info-item__value">
-                hello@getcinova.com
+              <a href={`mailto:${siteConfig.email}`} className="contact-info-item__value">
+                {siteConfig.email}
               </a>
             </li>
           </ul>

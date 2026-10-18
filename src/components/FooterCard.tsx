@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { siteConfig } from "../data/siteConfig";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -56,11 +57,11 @@ export default function FooterCard() {
             </p>
 
             <div className="footer-card__contacts">
-              <a href="tel:+917428245045" className="footer-card__contact-link">
-                +91 7428245045
+              <a href={`tel:+${siteConfig.whatsappNumber}`} className="footer-card__contact-link">
+                {siteConfig.phone}
               </a>
-              <a href="mailto:hello@getcinova.com" className="footer-card__contact-link">
-                hello@getcinova.com
+              <a href={`mailto:${siteConfig.email}`} className="footer-card__contact-link">
+                {siteConfig.email}
               </a>
             </div>
           </div>

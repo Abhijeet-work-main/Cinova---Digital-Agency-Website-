@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/Header";
 import SharedPageClosing from "../../components/SharedPageClosing";
 import type { Metadata } from "next";
+import { siteConfig } from "../../data/siteConfig";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -117,8 +118,8 @@ export default function PrivacyPage() {
               </p>
               <div className="legal-contact-card">
                 <p><strong>Cinova Digital Agency</strong></p>
-                <p>Email: <a href="mailto:hello@getcinova.com">hello@getcinova.com</a></p>
-                <p>Phone / WhatsApp: <a href="tel:+917428245045">+91 7428245045</a></p>
+                <p>Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+                <p>Phone / WhatsApp: <a href={`tel:+${siteConfig.whatsappNumber}`}>{siteConfig.phone}</a></p>
                 <p>Direct Inquiries: Strategy, Creative Direction &amp; Digital Infrastructure</p>
               </div>
             </section>
