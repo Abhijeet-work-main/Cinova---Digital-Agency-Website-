@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -19,6 +20,9 @@ const SOCIAL_LINKS = [
 ];
 
 export default function FooterCard() {
+  const pathname = usePathname();
+  const isBookPage = pathname === "/book";
+
   return (
     <div className="footer-card-wrapper">
       {/* Dark rounded rectangle */}
@@ -69,7 +73,7 @@ export default function FooterCard() {
                 Ready to grow? Schedule a call for free.
               </p>
               <Link
-                href="/book"
+                href={isBookPage ? "#book" : "/book"}
                 className="footer-card__cta-btn"
                 id="footer-schedule-call"
                 data-cta="footer"

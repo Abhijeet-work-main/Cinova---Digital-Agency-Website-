@@ -5,6 +5,24 @@ import { useRouter } from "next/navigation";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { siteConfig } from "../data/siteConfig";
 
+function isValidMeetUrl(url: unknown): string | null {
+  if (typeof url !== "string") return null;
+  try {
+    const { hostname } = new URL(url);
+    if (
+      hostname === "meet.google.com" ||
+      hostname === "app.cal.com" ||
+      hostname.endsWith(".meet.google.com") ||
+      hostname.endsWith(".app.cal.com")
+    ) {
+      return url;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
 export default function CalBookingEmbed() {
   const router = useRouter();
   const [embedError, setEmbedError] = useState(false);
@@ -25,19 +43,24 @@ export default function CalBookingEmbed() {
           layout: "month_view",
         });
 
-        const handleSuccess = (e: any) => {
+        const handleSuccess = (e: unknown) => {
           if (process.env.NODE_ENV !== "production") {
-            // eslint-disable-next-line no-console
             console.log("[Cal.com Booking Success Payload]:", e);
           }
 
+          const evt = (e && typeof e === "object" ? (e as Record<string, unknown>) : {}) as Record<
+            string,
+            unknown
+          >;
+          const detail = evt.detail as Record<string, unknown> | undefined;
+          const data = evt.data as Record<string, unknown> | undefined;
           const rawData =
-            e?.detail?.data ||
-            e?.data?.data ||
-            e?.data ||
-            e?.detail ||
-            e;
-          const booking = rawData?.booking || rawData;
+            (detail?.data as Record<string, unknown> | undefined) ||
+            (data?.data as Record<string, unknown> | undefined) ||
+            data ||
+            detail ||
+            evt;
+          const booking = (rawData?.booking as Record<string, unknown> | undefined) || rawData;
 
           // Look for uid, start time, end time, duration and title defensively
           const uid =
@@ -62,12 +85,18 @@ export default function CalBookingEmbed() {
           const duration =
             rawData?.duration ||
             booking?.duration ||
-            rawData?.eventType?.length;
+            (rawData?.eventType as Record<string, unknown> | undefined)?.length;
 
           const title =
             rawData?.title ||
             booking?.title ||
-            rawData?.eventType?.title;
+            (rawData?.eventType as Record<string, unknown> | undefined)?.title;
+
+          const meetingUrl =
+            isValidMeetUrl(rawData?.meetingUrl) ||
+            isValidMeetUrl(rawData?.location) ||
+            isValidMeetUrl(booking?.meetingUrl) ||
+            isValidMeetUrl(booking?.location);
 
           const query = new URLSearchParams();
 
@@ -87,6 +116,9 @@ export default function CalBookingEmbed() {
           if (title && typeof title === "string") {
             query.set("title", title);
           }
+          if (meetingUrl) {
+            query.set("meetingUrl", meetingUrl);
+          }
 
           // Never put email, name or phone in the URL!
           const qs = query.toString();
@@ -105,7 +137,6 @@ export default function CalBookingEmbed() {
         });
       } catch (err) {
         if (process.env.NODE_ENV !== "production") {
-          // eslint-disable-next-line no-console
           console.warn("Could not initialize Cal API, falling back to iframe:", err);
         }
         if (isMounted) {
@@ -132,7 +163,6 @@ export default function CalBookingEmbed() {
           data?.event === "bookingSuccessful"
         ) {
           if (process.env.NODE_ENV !== "production") {
-            // eslint-disable-next-line no-console
             console.log("[Cal.com postMessage payload]:", data);
           }
           const raw = data?.data || data?.payload || data;
@@ -143,6 +173,11 @@ export default function CalBookingEmbed() {
           const endTime = raw?.endTime || booking?.endTime;
           const duration = raw?.duration || booking?.duration;
           const title = raw?.title || booking?.title;
+          const meetingUrl =
+            isValidMeetUrl(raw?.meetingUrl) ||
+            isValidMeetUrl(raw?.location) ||
+            isValidMeetUrl(booking?.meetingUrl) ||
+            isValidMeetUrl(booking?.location);
 
           const query = new URLSearchParams();
           if (uid && typeof uid === "string") query.set("uid", uid);
@@ -152,6 +187,7 @@ export default function CalBookingEmbed() {
             query.set("duration", String(duration));
           }
           if (title && typeof title === "string") query.set("title", title);
+          if (meetingUrl) query.set("meetingUrl", meetingUrl);
 
           const qs = query.toString();
           router.push(qs ? `/thank-you?${qs}` : "/thank-you");

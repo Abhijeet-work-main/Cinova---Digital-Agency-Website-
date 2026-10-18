@@ -2,8 +2,11 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function ContactSection() {
+  const pathname = usePathname();
+  const isBookPage = pathname === "/book";
   const [formData, setFormData] = useState({ name: "", email: "", message: "", botField: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -84,7 +87,7 @@ export default function ContactSection() {
 
           <div className="contact-primary-cta-wrap">
             <Link
-              href="/book"
+              href={isBookPage ? "#book" : "/book"}
               className="contact-primary-cta-btn"
               data-cta="contact"
               aria-label="Book a Free Strategy Call"

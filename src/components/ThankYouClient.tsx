@@ -1,9 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { siteConfig } from "../data/siteConfig";
+
+function isValidMeetUrl(url: unknown): string | null {
+  if (typeof url !== "string") return null;
+  try {
+    const { hostname } = new URL(url);
+    if (
+      hostname === "meet.google.com" ||
+      hostname === "app.cal.com" ||
+      hostname.endsWith(".meet.google.com") ||
+      hostname.endsWith(".app.cal.com")
+    ) {
+      return url;
+    }
+  } catch {
+    // not valid
+  }
+  return null;
+}
+
+function getTimeUntilCall(date: Date | null): string | null {
+  if (!date) return null;
+  const now = Date.now();
+  const diffMs = date.getTime() - now;
+  if (diffMs <= 0 || diffMs > 24 * 60 * 60 * 1000) return null;
+
+  const diffMins = Math.round(diffMs / (60 * 1000));
+  if (diffMins < 1) return "Starts in less than a min";
+  if (diffMins < 60) return `Starts in ${diffMins} min`;
+  const hours = Math.floor(diffMins / 60);
+  const remainingMins = diffMins % 60;
+  if (remainingMins === 0) {
+    return `Starts in ${hours} ${hours === 1 ? "hour" : "hours"}`;
+  }
+  return `Starts in ${hours}h ${remainingMins}m`;
+}
 
 export default function ThankYouClient() {
   const searchParams = useSearchParams();
@@ -13,34 +48,118 @@ export default function ThankYouClient() {
   const isValidUid = /^[A-Za-z0-9_-]{8,64}$/.test(rawUid);
   const uid = isValidUid ? rawUid : null;
 
+  const rawMeetUrl = searchParams.get("meetingUrl") || "";
+  const initialMeetUrl = isValidMeetUrl(rawMeetUrl);
+
   const rawStartTime = searchParams.get("startTime") || "";
-  let validStartDate: Date | null = null;
+  let parsedStartDate: Date | null = null;
   if (rawStartTime) {
     const parsed = new Date(rawStartTime);
     const now = new Date();
     const maxFuture = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
     const minPast = new Date(now.getTime() - 24 * 60 * 60 * 1000);
     if (!isNaN(parsed.getTime()) && parsed >= minPast && parsed <= maxFuture) {
-      validStartDate = parsed;
+      parsedStartDate = parsed;
     }
   }
 
-  // TODO: [Meta Pixel Integration]
-  // Fire standard Meta Pixel "Schedule" event on booking confirmation load:
-  // useEffect(() => {
-  //   if (typeof window !== "undefined" && (window as any).fbq) {
-  //     (window as any).fbq("track", "Schedule", {
-  //       content_name: "Free Strategy Call",
-  //       currency: "USD",
-  //       value: 0.0,
-  //     });
-  //   }
-  // }, []);
+  const [meetUrl, setMeetUrl] = useState<string | null>(initialMeetUrl);
+  const [meetState, setMeetState] = useState<
+    "loading" | "ready" | "timeout" | "cancelled" | "empty"
+  >(initialMeetUrl ? "ready" : uid ? "loading" : "empty");
+  const [copied, setCopied] = useState(false);
+  const [sessionStartTime, setSessionStartTime] = useState<Date | null>(parsedStartDate);
+
+  // Poll for Google Meet URL if not passed in params
+  useEffect(() => {
+    if (meetUrl || !uid) {
+      return;
+    }
+
+    let attempts = 0;
+    const maxAttempts = 15; // 15 attempts * 3s = 45s max
+    let isCancelled = false;
+
+    const poll = async (): Promise<boolean> => {
+      attempts++;
+      try {
+        const res = await fetch(`/api/booking/${uid}`, { cache: "no-store" });
+        if (!res.ok) {
+          if (res.status === 404 || res.status === 400) {
+            if (!isCancelled) setMeetState("timeout");
+            return true;
+          }
+          if (attempts >= maxAttempts) {
+            if (!isCancelled) setMeetState("timeout");
+            return true;
+          }
+          return false;
+        }
+
+        const data = await res.json();
+        if (isCancelled) return true;
+
+        if (data.status === "cancelled") {
+          setMeetState("cancelled");
+          return true;
+        }
+
+        if (data.startTime) {
+          const parsed = new Date(data.startTime);
+          if (!isNaN(parsed.getTime())) {
+            setSessionStartTime((prev) => prev || parsed);
+          }
+        }
+
+        const validUrl = isValidMeetUrl(data.meetingUrl);
+        if (validUrl) {
+          setMeetUrl(validUrl);
+          setMeetState("ready");
+          return true;
+        }
+
+        if (attempts >= maxAttempts) {
+          setMeetState("timeout");
+          return true;
+        }
+
+        return false;
+      } catch {
+        if (attempts >= maxAttempts) {
+          if (!isCancelled) setMeetState("timeout");
+          return true;
+        }
+        return false;
+      }
+    };
+
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+
+    poll().then((finished) => {
+      if (finished || isCancelled) return;
+      intervalId = setInterval(async () => {
+        const done = await poll();
+        if (done && intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      }, 3000);
+    });
+
+    return () => {
+      isCancelled = true;
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [uid, meetUrl]);
+
+  const activeStartDate = sessionStartTime || parsedStartDate;
 
   // Format date in visitor's own timezone
   let localTimeStr = "";
   let istTimeStr = "";
-  if (validStartDate) {
+  if (activeStartDate) {
     try {
       const localFormatter = new Intl.DateTimeFormat(undefined, {
         weekday: "long",
@@ -51,9 +170,9 @@ export default function ThankYouClient() {
         minute: "2-digit",
         timeZoneName: "short",
       });
-      localTimeStr = localFormatter.format(validStartDate);
+      localTimeStr = localFormatter.format(activeStartDate);
     } catch {
-      localTimeStr = validStartDate.toLocaleString();
+      localTimeStr = activeStartDate.toLocaleString();
     }
 
     try {
@@ -67,7 +186,7 @@ export default function ThankYouClient() {
         timeZone: "Asia/Kolkata",
         timeZoneName: "short",
       });
-      istTimeStr = istFormatter.format(validStartDate);
+      istTimeStr = istFormatter.format(activeStartDate);
     } catch {
       istTimeStr = "";
     }
@@ -75,14 +194,14 @@ export default function ThankYouClient() {
 
   // Google Calendar URL
   let gcalUrl = "";
-  if (validStartDate) {
+  if (activeStartDate) {
     const toUtcStr = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-    const endDate = new Date(validStartDate.getTime() + 30 * 60 * 1000);
-    const dates = `${toUtcStr(validStartDate)}/${toUtcStr(endDate)}`;
+    const endDate = new Date(activeStartDate.getTime() + 30 * 60 * 1000);
+    const dates = `${toUtcStr(activeStartDate)}/${toUtcStr(endDate)}`;
     const text = encodeURIComponent("Free Strategy Call with Cinova");
     const details = encodeURIComponent(
       `Free 30-minute growth strategy diagnostic session with Cinova.\nJoin link: ${
-        uid ? `https://cal.com/booking/${uid}` : "Check your confirmation email"
+        meetUrl || (uid ? `https://cal.com/booking/${uid}` : "Check your confirmation email")
       }`
     );
     gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}`;
@@ -90,8 +209,8 @@ export default function ThankYouClient() {
 
   // ICS File Download fallback
   const handleDownloadIcs = () => {
-    if (!validStartDate) return;
-    const endDate = new Date(validStartDate.getTime() + 30 * 60 * 1000);
+    if (!activeStartDate) return;
+    const endDate = new Date(activeStartDate.getTime() + 30 * 60 * 1000);
     const toUtcStr = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     const icsLines = [
       "BEGIN:VCALENDAR",
@@ -102,13 +221,13 @@ export default function ThankYouClient() {
       "BEGIN:VEVENT",
       `UID:${uid || `cinova-${Date.now()}`}@cinova.agency`,
       `DTSTAMP:${toUtcStr(new Date())}`,
-      `DTSTART:${toUtcStr(validStartDate)}`,
+      `DTSTART:${toUtcStr(activeStartDate)}`,
       `DTEND:${toUtcStr(endDate)}`,
       "SUMMARY:Free Strategy Call with Cinova",
       `DESCRIPTION:Free 30-minute growth strategy diagnostic session with Cinova.\\nJoin link: ${
-        uid ? `https://cal.com/booking/${uid}` : "Check confirmation email"
+        meetUrl || (uid ? `https://cal.com/booking/${uid}` : "Check confirmation email")
       }`,
-      `URL:${uid ? `https://cal.com/booking/${uid}` : "https://cinova.agency"}`,
+      `URL:${meetUrl || (uid ? `https://cal.com/booking/${uid}` : "https://cinova.agency")}`,
       "STATUS:CONFIRMED",
       "END:VEVENT",
       "END:VCALENDAR",
@@ -125,7 +244,28 @@ export default function ThankYouClient() {
     URL.revokeObjectURL(url);
   };
 
+  const handleCopyLink = async () => {
+    if (!meetUrl) return;
+    try {
+      await navigator.clipboard.writeText(meetUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = meetUrl;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   const whatsappLink = `https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Cinova%2C%20I%20just%20booked%20a%20strategy%20call`;
+  const timeUntil = getTimeUntilCall(activeStartDate);
 
   return (
     <div className="ty-page">
@@ -147,14 +287,14 @@ export default function ThankYouClient() {
         </div>
         <h1 className="ty-title">You&apos;re booked</h1>
         <p className="ty-subtitle">
-          {validStartDate
+          {activeStartDate
             ? "We are looking forward to speaking with you. Here are the details of your strategy session."
             : "Check your email for your confirmation and calendar invitation from Cal.com."}
         </p>
       </div>
 
       {/* ── YOUR CALL CARD ───────────────────────────────── */}
-      {validStartDate && (
+      {activeStartDate && (
         <div className="ty-card" aria-label="Booked session time">
           <div className="ty-card__top">
             <span className="ty-card__tag">Confirmed Session</span>
@@ -182,7 +322,17 @@ export default function ThankYouClient() {
               className="ty-btn ty-btn--outline"
               aria-label="Add to Google Calendar"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
@@ -197,7 +347,17 @@ export default function ThankYouClient() {
               className="ty-btn ty-btn--outline"
               aria-label="Download ICS calendar file"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
@@ -212,28 +372,169 @@ export default function ThankYouClient() {
       <div className="ty-card" aria-label="Join the call">
         <div className="ty-card__top">
           <span className="ty-card__tag">Join the Call</span>
+          {timeUntil && meetState === "ready" && (
+            <span className="ty-meet-countdown-pill">{timeUntil}</span>
+          )}
         </div>
-        {uid ? (
-          <>
+
+        <div aria-live="polite" aria-atomic="true">
+          {meetState === "ready" && meetUrl && (
+            <div className="ty-meet-ready-wrap">
+              <div className="ty-meet-actions">
+                <a
+                  href={meetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ty-btn ty-btn--primary"
+                  aria-label="Join Google Meet session in a new tab"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polygon points="23 7 16 12 23 17 23 7" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                  </svg>
+                  <span>Join Google Meet</span>
+                  <span aria-hidden="true">&#8599;</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="ty-btn ty-btn--outline"
+                  aria-label="Copy Google Meet link to clipboard"
+                >
+                  {copied ? (
+                    <>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      <span>Copy link</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <p className="ty-join-note">
+                We also emailed your invitation and link from Cal.com.
+              </p>
+            </div>
+          )}
+
+          {meetState === "loading" && (
+            <div className="ty-meet-loading-wrap">
+              <div className="ty-meet-loading-row">
+                <span className="ty-spinner" aria-hidden="true" />
+                <span className="ty-meet-loading-text">Preparing your Google Meet link...</span>
+              </div>
+              <p className="ty-meet-loading-sub">
+                This usually takes a few seconds while Google Calendar creates the session.
+              </p>
+            </div>
+          )}
+
+          {meetState === "timeout" && (
+            <div className="ty-meet-timeout-wrap">
+              <p className="ty-meet-timeout-msg">
+                Your Google Meet link is being generated by Cal.com and Google Calendar.
+                Please check your confirmation email or view your booking page below.
+              </p>
+              <div className="ty-meet-actions">
+                {uid && (
+                  <a
+                    href={`https://cal.com/booking/${uid}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ty-btn ty-btn--outline"
+                    aria-label="Open booking page on Cal.com"
+                  >
+                    <span>Open booking page</span>
+                    <span aria-hidden="true">&#8599;</span>
+                  </a>
+                )}
+                <a
+                  href="https://mail.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ty-btn ty-btn--outline"
+                  aria-label="Check your email inbox"
+                >
+                  <span>Check your email</span>
+                  <span aria-hidden="true">&#8599;</span>
+                </a>
+              </div>
+            </div>
+          )}
+
+          {meetState === "cancelled" && (
+            <div className="ty-meet-cancelled-wrap">
+              <p className="ty-meet-cancelled-msg">
+                This booking has been cancelled. If you would like to reschedule, you can choose a new time slot anytime.
+              </p>
+              <Link href="/book" className="ty-btn ty-btn--primary">
+                <span>Schedule a new call</span>
+                <span aria-hidden="true">&#8594;</span>
+              </Link>
+            </div>
+          )}
+
+          {meetState === "empty" && (
+            <p className="ty-join-empty">
+              Your meeting link will appear in the confirmation email from Cal.com.
+              Check your inbox (and spam folder) for details.
+            </p>
+          )}
+        </div>
+
+        {uid && meetState !== "cancelled" && (
+          <div className="ty-meet-manage-wrap">
             <a
               href={`https://cal.com/booking/${uid}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="ty-btn ty-btn--primary"
-              aria-label="Open booking and join link on Cal.com"
+              className="ty-meet-manage-link"
+              aria-label="Manage booking, reschedule or cancel on Cal.com"
             >
-              <span>Open booking and join link</span>
+              <span>Manage booking (reschedule or cancel)</span>
               <span aria-hidden="true">&#8599;</span>
             </a>
-            <p className="ty-join-note">
-              Your Google Meet link is also in the confirmation email from Cal.com.
-            </p>
-          </>
-        ) : (
-          <p className="ty-join-empty">
-            Your meeting link will appear in the confirmation email from Cal.com.
-            Check your inbox (and spam folder) for details.
-          </p>
+          </div>
         )}
       </div>
 
@@ -461,8 +762,7 @@ export default function ThankYouClient() {
           background: var(--accent-primary);
           color: #0a0a0a;
           font-size: 0.95rem;
-          padding: 0.9rem 2rem;
-          margin-bottom: 0.75rem;
+          padding: 0.85rem 1.85rem;
         }
         .ty-btn--primary:hover {
           background: var(--accent-hover);
@@ -488,6 +788,116 @@ export default function ThankYouClient() {
         .ty-btn--outline:focus-visible {
           outline: 2px solid var(--accent-primary);
           outline-offset: 3px;
+        }
+
+        /* ── MEET ACTIONS & COUNTDOWN ─────────────────────── */
+        .ty-meet-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.85rem;
+        }
+
+        .ty-meet-countdown-pill {
+          font-family: var(--font-body);
+          font-size: 0.78rem;
+          font-weight: 600;
+          color: #15803d;
+          background: #dcfce7;
+          border: 1px solid #bbf7d0;
+          padding: 0.25rem 0.75rem;
+          border-radius: 50px;
+        }
+
+        .ty-meet-loading-wrap {
+          padding: 0.5rem 0 0.85rem;
+        }
+
+        .ty-meet-loading-row {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 0.4rem;
+        }
+
+        .ty-meet-loading-text {
+          font-family: var(--font-display);
+          font-weight: 700;
+          font-size: 1.05rem;
+          color: var(--text-primary);
+        }
+
+        .ty-meet-loading-sub {
+          font-size: 0.88rem;
+          color: var(--text-muted);
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        .ty-spinner {
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          border: 2px solid #e8e8e5;
+          border-top-color: #0a0a0a;
+          border-radius: 50%;
+          animation: ty-spin 0.8s linear infinite;
+        }
+
+        @keyframes ty-spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .ty-meet-timeout-wrap {
+          padding: 0.25rem 0 0.75rem;
+        }
+
+        .ty-meet-timeout-msg {
+          font-size: 0.92rem;
+          color: #3d3d38;
+          line-height: 1.6;
+          margin-bottom: 1.25rem;
+        }
+
+        .ty-meet-cancelled-wrap {
+          padding: 0.25rem 0 0.75rem;
+        }
+
+        .ty-meet-cancelled-msg {
+          font-size: 0.92rem;
+          color: #b91c1c;
+          line-height: 1.6;
+          margin-bottom: 1.25rem;
+        }
+
+        .ty-meet-manage-wrap {
+          margin-top: 1.25rem;
+          padding-top: 1rem;
+          border-top: 1px dashed #e8e8e5;
+        }
+
+        .ty-meet-manage-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font-size: 0.82rem;
+          color: var(--text-muted);
+          text-decoration: none;
+          transition: color 0.18s ease;
+        }
+
+        .ty-meet-manage-link:hover {
+          color: var(--text-primary);
+          text-decoration: underline;
+        }
+
+        .ty-meet-manage-link:focus-visible {
+          outline: 2px solid var(--accent-primary);
+          outline-offset: 2px;
+          border-radius: 2px;
         }
 
         .ty-join-note {
@@ -638,6 +1048,7 @@ export default function ThankYouClient() {
           .ty-card { padding: 1.6rem 1.25rem; }
           .ty-cal-actions { flex-direction: column; }
           .ty-btn { width: 100%; justify-content: center; }
+          .ty-meet-actions { flex-direction: column; }
         }
       `}</style>
     </div>

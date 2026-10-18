@@ -598,3 +598,14 @@ Before implementation:
    - Implemented mobile-only sticky bottom bar "Book a Free Call" (`data-cta="sticky-mobile"`) appearing after scrolling past the hero, auto-hiding on `/book` and `/thank-you`, respecting footer boundaries and reduced-motion preferences.
    - Configured Content-Security-Policy headers in `next.config.ts` allowing `cal.com` and `app.cal.com` across `frame-src`, `script-src`, `connect-src`, `img-src`, and `style-src`. Verified production build passes cleanly (`npm run build`).
 
+7. **Google Meet Server-Side Integration (/thank-you)**:
+   - Added secure route handler `src/app/api/booking/[uid]/route.ts` (GET) querying Cal.com API v2 (`https://api.cal.com/v2/bookings/${uid}`) using `CAL_API_KEY` and header `cal-api-version: 2024-08-13`.
+   - Strict input sanitization with regex validation for `uid`, in-memory IP rate limiting (30 requests/minute), and strict caching controls (`Cache-Control: no-store`).
+   - Extracts verified `meetingUrl` (whitelisted to `meet.google.com` and `app.cal.com`), `startTime`, `endTime`, and mapped safe booking status.
+   - Server-side environment variable `CAL_API_KEY` stored in `.env.local` (strictly gitignored via `.env*`). Never exposed to client, never prefixed with `NEXT_PUBLIC_`.
+   - Added `.env.example` with placeholder `CAL_API_KEY=`.
+   - Netlify deployment requirement: configure `CAL_API_KEY` in the Netlify dashboard under Site configuration > Environment variables.
+   - Updated `CalBookingEmbed.tsx` to forward `meetingUrl` from booking success event payload and postMessage when available.
+   - Updated `ThankYouClient.tsx` to poll `/api/booking/[uid]` every 3 seconds up to 45 seconds with accessible `aria-live` region, prominent "Join Google Meet" button, copy link feedback, countdown badge ("Starts in X") for calls within 24 hours, calm timeout fallback, and secondary reschedule/cancel link.
+
+
