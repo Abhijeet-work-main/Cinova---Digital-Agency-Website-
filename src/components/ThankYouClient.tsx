@@ -265,6 +265,9 @@ export default function ThankYouClient() {
   };
 
   const whatsappLink = `https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Cinova%2C%20I%20just%20booked%20a%20strategy%20call`;
+  const timeoutWhatsappLink = `https://wa.me/${siteConfig.whatsappNumber}?text=Hi%20Cinova%2C%20I%20am%20waiting%20for%20my%20meeting%20link${
+    uid ? `%20for%20booking%20${encodeURIComponent(uid)}` : ""
+  }`;
   const timeUntil = getTimeUntilCall(activeStartDate);
 
   return (
@@ -380,12 +383,62 @@ export default function ThankYouClient() {
         <div aria-live="polite" aria-atomic="true">
           {meetState === "ready" && meetUrl && (
             <div className="ty-meet-ready-wrap">
+              <div className="ty-meet-url-row" aria-label="Meeting link">
+                <a
+                  href={meetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ty-meet-url-text"
+                  aria-label="Google Meet link"
+                >
+                  {meetUrl.replace(/^https?:\/\//, "")}
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="ty-meet-copy-icon-btn"
+                  aria-label={copied ? "Link copied" : "Copy meeting link"}
+                  title="Copy link"
+                >
+                  {copied ? (
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+
               <div className="ty-meet-actions">
                 <a
                   href={meetUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ty-btn ty-btn--primary"
+                  className="ty-btn ty-btn--primary ty-btn--join"
                   aria-label="Join Google Meet session in a new tab"
                 >
                   <svg
@@ -409,7 +462,7 @@ export default function ThankYouClient() {
                 <button
                   type="button"
                   onClick={handleCopyLink}
-                  className="ty-btn ty-btn--outline"
+                  className="ty-btn ty-btn--copy"
                   aria-label="Copy Google Meet link to clipboard"
                 >
                   {copied ? (
@@ -451,6 +504,10 @@ export default function ThankYouClient() {
                 </button>
               </div>
 
+              <div aria-live="polite" className="sr-only">
+                {copied ? "Meeting link copied to clipboard" : ""}
+              </div>
+
               <p className="ty-join-note">
                 We also emailed your invitation and this link to you.
               </p>
@@ -472,30 +529,53 @@ export default function ThankYouClient() {
           {meetState === "timeout" && (
             <div className="ty-meet-timeout-wrap">
               <p className="ty-meet-timeout-msg">
-                Your Google Meet link is being generated.
-                Please check your confirmation email or view your booking page below.
+                We are still setting up your link. It will arrive in your confirmation email. Prefer not to wait? Message us on WhatsApp and we will send it right away.
               </p>
               <div className="ty-meet-actions">
-                {uid && (
-                  <a
-                    href={`https://cal.com/booking/${uid}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ty-btn ty-btn--outline"
-                    aria-label="Open booking page"
-                  >
-                    <span>Open booking page</span>
-                    <span aria-hidden="true">&#8599;</span>
-                  </a>
-                )}
                 <a
-                  href="https://mail.google.com"
+                  href={timeoutWhatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ty-btn ty-btn--outline"
-                  aria-label="Check your email inbox"
+                  className="ty-btn ty-btn--timeout-wa"
+                  aria-label="Message Cinova on WhatsApp for your meeting link"
                 >
-                  <span>Check your email</span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
+                  <span>Message on WhatsApp</span>
+                  <span aria-hidden="true">&#8599;</span>
+                </a>
+
+                <a
+                  href={`mailto:${siteConfig.email}?subject=Meeting%20Link%20for%20Strategy%20Call`}
+                  className="ty-btn ty-btn--outline"
+                  aria-label={`Email ${siteConfig.email} for your meeting link`}
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  <span>Email us</span>
                   <span aria-hidden="true">&#8599;</span>
                 </a>
               </div>
@@ -682,17 +762,17 @@ export default function ThankYouClient() {
 
         .ty-card__tag {
           font-family: var(--font-label);
-          font-size: 0.72rem;
+          font-size: 12px;
           font-weight: 700;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.10em;
           text-transform: uppercase;
-          color: var(--accent-text);
+          color: #3f6212;
         }
 
         .ty-card__badge {
           font-size: 0.82rem;
           font-weight: 600;
-          color: var(--text-muted);
+          color: #3d3d38;
           background: var(--bg-secondary);
           padding: 0.28rem 0.75rem;
           border-radius: 50px;
@@ -714,11 +794,11 @@ export default function ThankYouClient() {
 
         .ty-time-label {
           font-family: var(--font-label);
-          font-size: 0.72rem;
+          font-size: 12px;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--text-muted);
+          letter-spacing: 0.10em;
+          color: #3d3d38;
         }
 
         .ty-time-val {
@@ -730,8 +810,8 @@ export default function ThankYouClient() {
         }
 
         .ty-time-val--sub {
-          font-size: 1rem;
-          color: #595959;
+          font-size: 14px;
+          color: #3d3d38;
         }
 
         /* ── CALENDAR ACTIONS ──────────────────────────────── */
@@ -770,24 +850,127 @@ export default function ThankYouClient() {
           box-shadow: 0 6px 20px rgba(182,245,0,0.25);
         }
         .ty-btn--primary:focus-visible {
-          outline: 2px solid var(--text-primary);
+          outline: 2px solid #0a0a0a;
+          outline-offset: 3px;
+        }
+
+        .ty-btn--primary.ty-btn--join {
+          font-size: 15px;
+          font-weight: 700;
+          color: #0a0a0a;
+        }
+
+        .ty-btn--copy {
+          background: #ffffff;
+          color: #0a0a0a;
+          border: 1.5px solid #0a0a0a;
+          font-size: 14px;
+          font-weight: 600;
+          padding: 0.85rem 1.6rem;
+        }
+        .ty-btn--copy:hover {
+          background: #f4f4f0;
+          transform: translateY(-1px);
+        }
+        .ty-btn--copy:focus-visible {
+          outline: 2px solid #0a0a0a;
+          outline-offset: 3px;
+        }
+
+        .ty-btn--timeout-wa {
+          background: #f0fdf4;
+          border: 1.5px solid #16a34a;
+          color: #15803d;
+          font-size: 14px;
+          font-weight: 600;
+          padding: 0.8rem 1.5rem;
+        }
+        .ty-btn--timeout-wa:hover {
+          background: #dcfce7;
+          border-color: #15803d;
+          transform: translateY(-1px);
+        }
+        .ty-btn--timeout-wa:focus-visible {
+          outline: 2px solid #15803d;
           outline-offset: 3px;
         }
 
         .ty-btn--outline {
           background: transparent;
-          color: var(--text-secondary);
-          border: 1px solid #dcdcd8;
-          font-size: 0.85rem;
+          color: #0a0a0a;
+          border: 1.5px solid #dcdcd8;
+          font-size: 14px;
+          font-weight: 600;
         }
         .ty-btn--outline:hover {
           background: var(--bg-secondary);
-          border-color: #c8c8c4;
+          border-color: #0a0a0a;
           transform: translateY(-1px);
         }
         .ty-btn--outline:focus-visible {
-          outline: 2px solid var(--accent-primary);
+          outline: 2px solid #0a0a0a;
           outline-offset: 3px;
+        }
+
+        /* ── READ-ONLY URL ROW ────────────────────────────── */
+        .ty-meet-url-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          background: #f8f8f6;
+          border: 1px solid #e5e5e0;
+          border-radius: 12px;
+          padding: 0.7rem 1rem;
+          margin-bottom: 1rem;
+          min-width: 0;
+        }
+
+        .ty-meet-url-text {
+          font-family: var(--font-body);
+          font-size: 14px;
+          font-weight: 500;
+          color: #0a0a0a;
+          text-decoration: underline;
+          text-decoration-color: #c4c4be;
+          text-underline-offset: 3px;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          min-width: 0;
+          flex: 1;
+          transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        .ty-meet-url-text:hover {
+          color: #15803d;
+          text-decoration-color: #15803d;
+        }
+        .ty-meet-url-text:focus-visible {
+          outline: 2px solid #0a0a0a;
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+
+        .ty-meet-copy-icon-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: #ffffff;
+          border: 1.5px solid #dcdcd8;
+          color: #0a0a0a;
+          cursor: pointer;
+          flex-shrink: 0;
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .ty-meet-copy-icon-btn:hover {
+          background: #f0f0ec;
+          border-color: #0a0a0a;
+        }
+        .ty-meet-copy-icon-btn:focus-visible {
+          outline: 2px solid #0a0a0a;
+          outline-offset: 2px;
         }
 
         /* ── MEET ACTIONS & COUNTDOWN ─────────────────────── */
@@ -829,8 +1012,8 @@ export default function ThankYouClient() {
         }
 
         .ty-meet-loading-sub {
-          font-size: 0.88rem;
-          color: var(--text-muted);
+          font-size: 14px;
+          color: #3d3d38;
           margin: 0;
           line-height: 1.5;
         }
@@ -856,7 +1039,7 @@ export default function ThankYouClient() {
         }
 
         .ty-meet-timeout-msg {
-          font-size: 0.92rem;
+          font-size: 14px;
           color: #3d3d38;
           line-height: 1.6;
           margin-bottom: 1.25rem;
@@ -867,7 +1050,7 @@ export default function ThankYouClient() {
         }
 
         .ty-meet-cancelled-msg {
-          font-size: 0.92rem;
+          font-size: 14px;
           color: #b91c1c;
           line-height: 1.6;
           margin-bottom: 1.25rem;
@@ -883,32 +1066,32 @@ export default function ThankYouClient() {
           display: inline-flex;
           align-items: center;
           gap: 0.35rem;
-          font-size: 0.82rem;
-          color: var(--text-muted);
+          font-size: 14px;
+          color: #3d3d38;
           text-decoration: none;
           transition: color 0.18s ease;
         }
 
         .ty-meet-manage-link:hover {
-          color: var(--text-primary);
+          color: #0a0a0a;
           text-decoration: underline;
         }
 
         .ty-meet-manage-link:focus-visible {
-          outline: 2px solid var(--accent-primary);
+          outline: 2px solid #0a0a0a;
           outline-offset: 2px;
           border-radius: 2px;
         }
 
         .ty-join-note {
-          font-size: 0.82rem;
-          color: var(--text-muted);
-          margin-top: 0;
+          font-size: 14px;
+          color: #3d3d38;
+          margin-top: 0.75rem;
           line-height: 1.5;
         }
 
         .ty-join-empty {
-          font-size: 0.92rem;
+          font-size: 14px;
           color: #3d3d38;
           line-height: 1.6;
           margin: 0;
@@ -925,8 +1108,8 @@ export default function ThankYouClient() {
         }
 
         .ty-checklist-sub {
-          font-size: 0.9rem;
-          color: var(--text-muted);
+          font-size: 14px;
+          color: #3d3d38;
           margin-bottom: 1.75rem;
         }
 
@@ -973,7 +1156,7 @@ export default function ThankYouClient() {
         }
 
         .ty-checklist-desc {
-          font-size: 0.87rem;
+          font-size: 14px;
           color: #3d3d38;
           line-height: 1.6;
           margin: 0;
@@ -995,7 +1178,7 @@ export default function ThankYouClient() {
           color: #15803d;
           border-radius: 100px;
           font-family: var(--font-body);
-          font-size: 0.86rem;
+          font-size: 14px;
           font-weight: 500;
           text-decoration: none;
           transition: background 0.18s ease, border-color 0.18s ease;
@@ -1027,28 +1210,43 @@ export default function ThankYouClient() {
           align-items: center;
           gap: 0.4rem;
           font-family: var(--font-body);
-          font-size: 0.87rem;
+          font-size: 14px;
           font-weight: 500;
-          color: var(--text-muted);
+          color: #3d3d38;
           text-decoration: none;
           transition: color 0.18s ease;
         }
 
         .ty-sec-link:hover { color: var(--text-primary); }
         .ty-sec-link:focus-visible {
-          outline: 2px solid var(--accent-primary);
+          outline: 2px solid #0a0a0a;
           outline-offset: 3px;
           border-radius: 3px;
         }
 
         .ty-sec-sep { color: #d0d0cc; font-size: 0.75rem; }
 
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+
         /* ── RESPONSIVE ───────────────────────────────────── */
         @media (max-width: 600px) {
           .ty-card { padding: 1.6rem 1.25rem; }
           .ty-cal-actions { flex-direction: column; }
           .ty-btn { width: 100%; justify-content: center; }
-          .ty-meet-actions { flex-direction: column; }
+          .ty-meet-actions { flex-direction: column; width: 100%; }
+          .ty-btn--join { width: 100%; }
+          .ty-btn--copy { width: 100%; }
+          .ty-meet-url-row { padding: 0.65rem 0.85rem; }
         }
       `}</style>
     </div>
