@@ -9,14 +9,14 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 const REVIEWS = [
   {
     id: 1,
-    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach — the site, the targeting, everything. We finally started seeing real traction.",
+    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach: the site, the targeting, everything. We finally started seeing real traction.",
     author: "Erminio Palamino",
     role: "Founder, Erminio Palamino",
     initials: "EP",
   },
   {
     id: 2,
-    quote: "The content they produced felt genuinely like us. Not polished agency work — actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
+    quote: "The content they produced felt genuinely like us. Not polished agency work, but actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
     author: "Balbeer",
     role: "Founder, Balbeer",
     initials: "BA",
@@ -30,7 +30,7 @@ const REVIEWS = [
   },
   {
     id: 4,
-    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story — 32,000 views on a single video.",
+    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story, including 32,000 views on a single video.",
     author: "PBInvesting",
     role: "Creator, PBInvesting",
     initials: "PB",

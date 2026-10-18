@@ -7,14 +7,14 @@ import CaseStudies from "../../components/CaseStudies";
 export const metadata: Metadata = {
   title: "Our Work",
   description:
-    "Explore Cinova's client work — brand campaigns, paid media, websites, and creative systems built for luxury retail, creators, and growth-focused brands.",
+    "Explore Cinova's client work: brand campaigns, paid media, websites, and creative systems built for luxury retail, creators, and growth-focused brands.",
   alternates: {
     canonical: "/work",
   },
   openGraph: {
     title: "Our Work | Cinova",
     description:
-      "Explore Cinova's client work — brand campaigns, paid media, websites, and creative systems built for luxury retail, creators, and growth-focused brands.",
+      "Explore Cinova's client work: brand campaigns, paid media, websites, and creative systems built for luxury retail, creators, and growth-focused brands.",
     url: "/work",
     type: "website",
     locale: "en_IN",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Our Work | Cinova",
     description:
-      "Explore Cinova's client work — brand campaigns, paid media, websites, and creative systems.",
+      "Explore Cinova's client work: brand campaigns, paid media, websites, and creative systems.",
     images: ["/hero-cinematic.png"],
   },
 };

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1920,
         height: 1080,
-        alt: "Cinova — Premium Digital Growth Agency",
+        alt: "Cinova: Premium Digital Growth Agency",
       },
     ],
   },

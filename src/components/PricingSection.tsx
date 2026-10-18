@@ -5,7 +5,7 @@ import Link from "next/link";
 
 /* ── Cinova pricing details for the $2,999/m featured plan ── */
 const FEATURES_LEFT = [
-  "1 Shoot day & 4–6 Reels/mo",
+  "1 Shoot day & 4 to 6 Reels/mo",
   "16 Social posts/mo",
   "Static & basic templates",
   "1-page branded landing page",

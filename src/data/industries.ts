@@ -41,7 +41,7 @@ export const industries: Industry[] = [
     name: "Service Businesses & Local Brands",
     heroHeadline: "You deliver an excellent service. But your online presence isn't reflecting it.",
     heroSubtext:
-      "Potential clients find you — or they don't. When they do, your digital presence either builds trust or loses it in the first 10 seconds.",
+      "Potential clients either find you or they do not. When they do, your digital presence either builds trust or loses it in the first 10 seconds.",
     problemStatement: "Offline excellence that isn't visible online loses business to competitors who are.",
     recognitionProblems: [
       "Appointment and inquiry management is chaotic and disorganized",
@@ -53,7 +53,7 @@ export const industries: Industry[] = [
     whyItHappens:
       "Service businesses often grow through word of mouth to a ceiling. Breaking through that ceiling requires a digital presence that can scale enquiries, build trust before the first conversation, and automate the initial intake process.",
     cinova_approach:
-      "We build the digital infrastructure that service businesses need to scale beyond referrals — from booking-enabled websites to social media that communicates quality and trust. We've helped beauty and wellness brands go from zero online appointment capability to fully automated scheduling.",
+      "We build the digital infrastructure that service businesses need to scale beyond referrals, from booking-enabled websites to social media that communicates quality and trust. We've helped beauty and wellness brands go from zero online appointment capability to fully automated scheduling.",
     relevantSolutionSlugs: ["websites", "social-growth", "creative-production"],
     relevantCaseSlugs: ["noor", "gloss-shine", "purple-swan"],
     delayConsequence:
@@ -74,9 +74,9 @@ export const industries: Industry[] = [
       "Your hook doesn't stop the scroll in the first 3 seconds",
     ],
     whyItHappens:
-      "Most creators optimise for output — posting more, more often. But the algorithm rewards retention, engagement, and session time. Without editorial strategy and quality production, more content just means more average content.",
+      "Most creators optimise for output by posting more, more often. But the algorithm rewards retention, engagement, and session time. Without editorial strategy and quality production, more content just means more average content.",
     cinova_approach:
-      "We work with creators on content strategy, scripting for retention, and high-end editing — with a focus on the hook quality and pacing that drives platform performance. We've supported financial media creators with audiences up to 123k subscribers.",
+      "We work with creators on content strategy, scripting for retention, and high-end editing, with a focus on the hook quality and pacing that drives platform performance. We've supported financial media creators with audiences up to 123k subscribers.",
     relevantSolutionSlugs: ["creative-production", "social-growth"],
     relevantCaseSlugs: ["pb-investing", "balbeer"],
     delayConsequence:
@@ -97,9 +97,9 @@ export const industries: Industry[] = [
       "You know you have a strong product but don't know how to communicate it online",
     ],
     whyItHappens:
-      "Fashion brands often invest in product and underinvest in communication. The creative assets, social presence, and ad infrastructure are treated as secondary — when for online buyers, they are the primary buying signal.",
+      "Fashion brands often invest in product and underinvest in communication. The creative assets, social presence, and ad infrastructure are treated as secondary, when for online buyers, they are the primary buying signal.",
     cinova_approach:
-      "We help fashion and apparel brands build the creative and distribution infrastructure they need to sell online — from campaign videography and Reels to structured Meta Ads and optimized product discovery.",
+      "We help fashion and apparel brands build the creative and distribution infrastructure they need to sell online, from campaign videography and Reels to structured Meta Ads and optimized product discovery.",
     relevantSolutionSlugs: ["creative-production", "social-growth", "paid-growth"],
     relevantCaseSlugs: ["balbeer", "pegah-toutak", "byxiu-designs", "erminio-palamino"],
     delayConsequence:

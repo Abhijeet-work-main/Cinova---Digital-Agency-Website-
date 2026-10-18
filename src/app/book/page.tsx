@@ -51,7 +51,7 @@ const CALL_STEPS = [
   {
     step: "02",
     title: "Opportunity & Leak Mapping",
-    desc: "We pinpoint the high-leverage fixes—whether landing page architecture, offer messaging, or ad-to-conversion alignment.",
+    desc: "We pinpoint the high-leverage fixes, whether landing page architecture, offer messaging, or ad-to-conversion alignment.",
   },
   {
     step: "03",
@@ -71,7 +71,7 @@ const FAQS = [
   },
   {
     q: "What should I have prepared for the call?",
-    a: "Having your website link, current performance benchmarks (traffic, conversion rates, or ad metrics if applicable), and your primary goal for the next 3–6 months will help us deliver maximum value.",
+    a: "Having your website link, current performance benchmarks (traffic, conversion rates, or ad metrics if applicable), and your primary goal for the next 3 to 6 months will help us deliver maximum value.",
   },
   {
     q: "What happens if I need to reschedule?",

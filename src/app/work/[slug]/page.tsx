@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: "/hero-cinematic.png",
           width: 1920,
           height: 1080,
-          alt: `${brand.name} case study — Cinova`,
+          alt: `${brand.name} case study: Cinova`,
         },
       ],
     },
@@ -138,7 +138,7 @@ export default async function BrandPage({ params }: Props) {
                 <p className={styles.blockBody}>{brand.challenge.body}</p>
                 <ul className={styles.pains}>
                   {brand.challenge.pains.map((pain, i) => (
-                    <li key={i} className={styles.pain}>&mdash; {pain}</li>
+                    <li key={i} className={styles.pain}>{pain}</li>
                   ))}
                 </ul>
               </div>

@@ -11,7 +11,7 @@ const DATA = {
       name: "Production & Creative",
       features: [
         { label: "Shoot Days/Month", values: ["1", "2", "4 (weekly)"] },
-        { label: "Reels Delivered", values: ["4–6", "10–12", "16–20"] },
+        { label: "Reels Delivered", values: ["4 to 6", "10 to 12", "16 to 20"] },
         { label: "Posts/Month", values: ["16", "24", "30+"] },
         { label: "Creatives", values: ["Static + basic templates", "Static + motion graphics", "Full suite + 3D elements"] },
       ],
@@ -21,9 +21,9 @@ const DATA = {
       features: [
         { label: "Platforms Managed", values: ["2", "3", "All major"] },
         { label: "Paid Ads", values: ["Meta only (1 campaign)", "Meta + Google (multi-campaign)", "Meta + Google + TikTok (full funnel)"] },
-        { label: "Min. Ad Spend", values: ["$500–$1,000/mo", "$2,000–$4,000/mo", "$5,000–$12,000/mo"] },
+        { label: "Min. Ad Spend", values: ["$500 to $1,000/mo", "$2,000 to $4,000/mo", "$5,000 to $12,000/mo"] },
         { label: "Website", values: ["✅ 1-page branded landing page (built once)", "✅ Landing page builds + monthly maintenance", "✅ CRO + SEO + new pages on demand"] },
-        { label: "Micro-Influencer", values: ["X", "X", "1–2 activations/month"] },
+        { label: "Micro-Influencer", values: ["X", "X", "1 to 2 activations/month"] },
       ],
     },
     {
@@ -32,7 +32,7 @@ const DATA = {
         { label: "Strategy Calls", values: ["Monthly (1×)", "Bi-weekly (2×)", "Weekly (4×)"] },
         { label: "Account Manager", values: ["Shared", "Dedicated", "Senior + dedicated"] },
         { label: "Reporting", values: ["Monthly report", "Bi-weekly report", "Weekly dashboard + full monthly review"] },
-        { label: "Turnaround", values: ["Standard (5–7 days)", "Standard (3–5 days)", "Priority (24–48 hrs)"] },
+        { label: "Turnaround", values: ["Standard (5 to 7 days)", "Standard (3 to 5 days)", "Priority (24 to 48 hrs)"] },
       ],
     },
   ],

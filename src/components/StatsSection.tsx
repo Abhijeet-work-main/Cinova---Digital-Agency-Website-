@@ -73,7 +73,7 @@ export default function StatsSection() {
 
         {/* Top eyebrow label — Helvetica, small caps */}
         <p className="sts-eyebrow">
-          @{new Date().getFullYear()}&mdash;Transform Digital Obstacles into Growth Opportunities
+          @{new Date().getFullYear()}: Transform Digital Obstacles into Growth Opportunities
         </p>
 
         {/* Stat row */}

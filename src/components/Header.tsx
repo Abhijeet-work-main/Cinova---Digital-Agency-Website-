@@ -42,7 +42,7 @@ export default function Header() {
       <header className="global-nav" role="banner">
         <div className="global-nav__inner">
           {/* Left: Brand */}
-          <Link href="/" className="global-nav__logo" aria-label="Cinova — home">
+          <Link href="/" className="global-nav__logo" aria-label="Cinova home">
             cinova<span className="global-nav__dot">.</span>
           </Link>
 

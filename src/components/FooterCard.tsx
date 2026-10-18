@@ -48,7 +48,7 @@ export default function FooterCard() {
             </div>
 
             <p className="footer-card__description">
-              With Cinova, every part of your growth system works together to build clarity, trust, and momentum — not just visual polish, but real business outcomes.
+              With Cinova, every part of your growth system works together to build clarity, trust, and momentum, delivering real business outcomes rather than just visual polish.
             </p>
 
             <div className="footer-card__contacts">

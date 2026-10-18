@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: "/hero-cinematic.png",
           width: 1920,
           height: 1080,
-          alt: `${industry.name} — Cinova`,
+          alt: `${industry.name}: Cinova`,
         },
       ],
     },

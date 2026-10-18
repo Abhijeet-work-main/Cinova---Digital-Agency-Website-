@@ -78,7 +78,7 @@ export const brands: Brand[] = [
     cardLine: "Odd-shaped utensils with a story",
     services: ["Product Design", "Website", "Ads"],
     duration: "7 months", // INVENTED - replace with real
-    date: "Feb 2025 \u2013 Aug 2025", // INVENTED - replace with real
+    date: "Feb 2025  to Aug 2025", // INVENTED - replace with real
     overview: {
       summary: "KUPTUUU makes utensils that break the rules of shape: kitchen and tableware designed to be noticed, used and talked about.",
     },
@@ -141,7 +141,7 @@ export const brands: Brand[] = [
     cardLine: "Heritage rituals, reimagined for modern living",
     services: ["Branding", "Creative"],
     duration: "10 Weeks", // INVENTED - replace with real
-    date: "Nov 2024 \u2013 Jan 2025", // INVENTED - replace with real
+    date: "Nov 2024  to Jan 2025", // INVENTED - replace with real
     overview: {
       summary: "Curate Home is a home-living brand built around ritual: ornate incense and fragrance pieces in carved wood, brass and marble, rooted in Middle Eastern hospitality and reimagined for modern homes.",
     },
@@ -203,7 +203,7 @@ export const brands: Brand[] = [
     cardLine: "Premium auto care, filled with qualified leads",
     services: ["Ads", "Reels", "Lead Nurturing"],
     duration: "5 months", // INVENTED - replace with real
-    date: "Jun 2025 \u2013 Oct 2025", // INVENTED - replace with real
+    date: "Jun 2025  to Oct 2025", // INVENTED - replace with real
     overview: {
       summary: "Gloss & Shine is a car-care studio specialising in paint protection film (PPF), detailing and protection services for owners who care deeply about their cars.",
     },
@@ -266,7 +266,7 @@ export const brands: Brand[] = [
     cardLine: "Jewellery designed to stand apart",
     services: ["Identity", "Photography"],
     duration: "12 Weeks", // INVENTED - replace with real
-    date: "Apr 2026 \u2013 Jun 2026", // INVENTED - replace with real
+    date: "Apr 2026  to Jun 2026", // INVENTED - replace with real
     overview: {
       summary: "Lustre Jewellery creates contemporary statement jewellery: sculptural gold-toned earrings set with rose-toned stones, for women who want pieces with presence.",
     },
@@ -329,7 +329,7 @@ export const brands: Brand[] = [
     cardLine: "Gentle care, naturally",
     services: ["Packaging", "Branding"],
     duration: "3 months", // INVENTED - replace with real
-    date: "Aug 2024 \u2013 Oct 2024", // INVENTED - replace with real
+    date: "Aug 2024  to Oct 2024", // INVENTED - replace with real
     overview: {
       summary: "Purple Swan is a skincare brand making an eczema relief cream with natural ingredients for people with sensitive, reactive skin.",
     },
@@ -392,7 +392,7 @@ export const brands: Brand[] = [
     cardLine: "Luxury accessories, built to sell online",
     services: ["Ads", "Website", "Offers", "Marketplaces"],
     duration: "6 months",
-    date: "Oct 2025 \u2013 Apr 2026",
+    date: "Oct 2025  to Apr 2026",
     overview: {
       summary: "Erminio Palamino is a luxury accessories house: designer frames, handbags and watches for customers who buy on craftsmanship and status.",
     },
@@ -454,7 +454,7 @@ export const brands: Brand[] = [
     cardLine: "A makeup brand, now booked online",
     services: ["Website", "Reach", "Creative"],
     duration: "12 Weeks", // INVENTED - replace with real
-    date: "Mar 2025 \u2013 May 2025", // INVENTED - replace with real
+    date: "Mar 2025  to May 2025", // INVENTED - replace with real
     overview: {
       summary: "Noor is a makeup brand for clients who want a polished look for occasions and everyday glamour, with services they book in advance.",
     },
@@ -517,7 +517,7 @@ export const brands: Brand[] = [
     cardLine: "Quiet luxury for the finishing touch",
     services: ["Branding", "Creative"],
     duration: "10 Weeks", // INVENTED - replace with real
-    date: "Jun 2026 \u2013 Aug 2026", // INVENTED - replace with real
+    date: "Jun 2026  to Aug 2026", // INVENTED - replace with real
     overview: {
       summary: "Pegah Toutak designs formalwear accessories (cufflinks, hand-woven silk bow ties and pocket squares) for men who dress with attention to detail.",
     },
@@ -579,7 +579,7 @@ export const brands: Brand[] = [
     cardLine: "Traditional Indian wear, discovered through reels",
     services: ["Content", "Reels", "Strategy"],
     duration: "4 months", // INVENTED - replace with real
-    date: "Feb 2026 \u2013 May 2026", // INVENTED - replace with real
+    date: "Feb 2026  to May 2026", // INVENTED - replace with real
     overview: {
       summary: "Balbeer makes traditional Indian clothing for men and women: pieces rooted in craft, made for weddings, festivals and everyday occasions.",
     },
@@ -642,7 +642,7 @@ export const brands: Brand[] = [
     cardLine: "Investing education, scripted to be watched",
     services: ["Content", "Strategy"],
     duration: "6 months", // INVENTED - replace with real
-    date: "Oct 2024 \u2013 Mar 2025", // INVENTED - replace with real
+    date: "Oct 2024  to Mar 2025", // INVENTED - replace with real
     overview: {
       summary: "PB Investing is a YouTube channel that explains investing and markets in plain language for everyday viewers.",
     },
@@ -702,7 +702,7 @@ export const brands: Brand[] = [
     slug: "byxiu-designs",
     name: "byXiu Designs",
     client: "byXiu Designs",
-    cardLine: "Wear your story — bespoke jewellery made once, for you",
+    cardLine: "Wear your story: bespoke jewellery made once, for you",
     services: ["Branding", "Creative Direction", "Editorial Photography"],
     duration: "4 months",
     date: "2025",

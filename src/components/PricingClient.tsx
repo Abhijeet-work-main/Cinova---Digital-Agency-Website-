@@ -17,14 +17,14 @@ const TIERS = [
       { label: "Platforms", value: "2 platforms" },
       { label: "Posts", value: "16 posts/month" },
       { label: "Creative Format", value: "Static + basic templates" },
-      { label: "Paid Media", value: "Meta only — 1 campaign" },
+      { label: "Paid Media", value: "Meta only: 1 campaign" },
       { label: "Landing Page", value: "An advanced 3D website" },
       { label: "Influencer", value: "1 influencer" },
       { label: "Strategy", value: "Monthly strategy call" },
       { label: "Account Manager", value: "Shared AM" },
       { label: "Reporting", value: "Monthly report" },
-      { label: "Turnaround", value: "5–7 days" },
-      { label: "Min. Ad Spend", value: "$500–$1,000/mo" },
+      { label: "Turnaround", value: "5 to 7 days" },
+      { label: "Min. Ad Spend", value: "$500 to $1,000/mo" },
     ],
   },
   {
@@ -42,8 +42,8 @@ const TIERS = [
       { label: "Strategy", value: "Biweekly strategy calls" },
       { label: "Account Manager", value: "Dedicated AM" },
       { label: "Reporting", value: "Biweekly report" },
-      { label: "Turnaround", value: "3–5 days" },
-      { label: "Min. Ad Spend", value: "$2,000–$4,000/mo" },
+      { label: "Turnaround", value: "3 to 5 days" },
+      { label: "Min. Ad Spend", value: "$2,000 to $4,000/mo" },
     ],
   },
   {
@@ -61,8 +61,8 @@ const TIERS = [
       { label: "Strategy", value: "Weekly strategy sessions" },
       { label: "Account Manager", value: "Senior + dedicated AM" },
       { label: "Reporting", value: "Weekly dashboard + full monthly review" },
-      { label: "Turnaround", value: "24–48 hrs (priority)" },
-      { label: "Min. Ad Spend", value: "$5,000–$12,000/mo" },
+      { label: "Turnaround", value: "24 to 48 hrs (priority)" },
+      { label: "Min. Ad Spend", value: "$5,000 to $12,000/mo" },
     ],
   },
 ] as const;
@@ -256,7 +256,7 @@ const PRICING_PROJECTS = [
   {
     slug: "kuptuuu",
     title: "KUPTUUU",
-    description: "Made to be odd — craft ceramics with character",
+    description: "Made to be odd: craft ceramics with character",
     tags: ["Branding", "Photography"],
     cover: "/brands/kuptuuu/cover.jpg",
     logo: "/brands/kuptuuu/logo.png",
@@ -332,14 +332,14 @@ function PricingProjectsSection() {
 const REVIEWS = [
   {
     id: 1,
-    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach — the site, the targeting, everything. We finally started seeing real traction.",
+    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach: the site, the targeting, everything. We finally started seeing real traction.",
     author: "Erminio Palamino",
     role: "Founder, Erminio Palamino",
     initials: "EP",
   },
   {
     id: 2,
-    quote: "The content they produced felt genuinely like us. Not polished agency work — actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
+    quote: "The content they produced felt genuinely like us. Not polished agency work, but actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
     author: "Balbeer",
     role: "Founder, Balbeer",
     initials: "BA",
@@ -353,7 +353,7 @@ const REVIEWS = [
   },
   {
     id: 4,
-    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story — 32,000 views on a single video.",
+    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story, including 32,000 views on a single video.",
     author: "PBInvesting",
     role: "Creator, PBInvesting",
     initials: "PB",
@@ -431,7 +431,7 @@ function DecisionReassuranceSection() {
       <div className="pxp-reassurance__inner">
         <h2 className="pxp-section-h2">Not sure which level fits?</h2>
         <p className="pxp-reassurance__p">
-          You don&apos;t need to choose based on a pricing table alone. Tell us what you&apos;re trying to improve, where the current system is breaking, and what you&apos;re building. We&apos;ll tell you which level makes sense &mdash; or whether we&apos;re the right fit at all.
+          You don&apos;t need to choose based on a pricing table alone. Tell us what you&apos;re trying to improve, where the current system is breaking, and what you&apos;re building. We&apos;ll tell you which level makes sense, or whether we&apos;re the right fit at all.
         </p>
         <p className="pxp-reassurance__transition">
           Don&apos;t choose from a table.<br/>
