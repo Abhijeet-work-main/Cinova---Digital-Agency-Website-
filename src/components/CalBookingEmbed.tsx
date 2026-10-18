@@ -214,18 +214,18 @@ export default function CalBookingEmbed() {
   }, [router]);
 
   return (
-    <div className="cal-embed-container" style={{ width: "100%", minHeight: "680px" }}>
+    <div className="cal-embed-container" style={{ width: "100%" }}>
       {!embedError ? (
         <Cal
           calLink={siteConfig.calLink}
-          style={{ width: "100%", height: "100%", minHeight: "680px", overflow: "hidden" }}
+          style={{ width: "100%", minHeight: "680px" }}
           config={{ layout: "month_view", theme: "light" }}
         />
       ) : (
         <iframe
           src={`https://cal.com/${siteConfig.calLink}?embed=true&theme=light`}
           title="Book your free strategy call with Cinova"
-          style={{ width: "100%", height: "700px", border: "none", borderRadius: "16px" }}
+          style={{ width: "100%", minHeight: "680px", border: "none" }}
           allow="camera; microphone; autoplay; fullscreen"
         />
       )}

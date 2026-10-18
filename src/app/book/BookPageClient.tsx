@@ -3,6 +3,7 @@
 import React, { useState, useRef, useId } from "react";
 import CalBookingEmbed from "../../components/CalBookingEmbed";
 import SharedPageClosing from "../../components/SharedPageClosing";
+import { siteConfig } from "../../data/siteConfig";
 
 /* ─── DATA ─────────────────────────────────────────────────── */
 
@@ -183,21 +184,35 @@ export default function BookPageClient() {
 
               {/* Contact */}
               <div className="book-contact-strip">
-                <a href="mailto:hello@getcinova.com" className="book-contact-link" aria-label="Email Cinova">
-                  hello@getcinova.com
+                <a href={`mailto:${siteConfig.email}`} className="book-contact-link" aria-label="Email Cinova">
+                  {siteConfig.email}
                 </a>
                 <span className="book-contact-sep" aria-hidden="true">|</span>
-                <a href="tel:+917428245045" className="book-contact-link" aria-label="Call Cinova">
-                  +91 74282 45045
+                <a href={`tel:+${siteConfig.whatsappNumber}`} className="book-contact-link" aria-label="Call Cinova">
+                  {siteConfig.phone}
                 </a>
               </div>
             </div>
 
             {/* RIGHT: Embed */}
             <div className="book-hero__right">
-              <div className="book-embed-card" aria-label="Calendar booking widget">
-                <CalBookingEmbed />
+              <div className="book-embed-card-border">
+                <div className="book-embed-card" aria-label="Calendar booking widget">
+                  <CalBookingEmbed />
+                </div>
               </div>
+              {/* Task 2: Mobile fallback link */}
+              <p className="book-embed-fallback">
+                Having trouble picking a time?{" "}
+                <a
+                  href={`https://cal.com/${siteConfig.calLink}?theme=light`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="book-embed-fallback__link"
+                >
+                  Open the full scheduler
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -433,22 +448,60 @@ export default function BookPageClient() {
         }
         .book-contact-sep { color: #d0d0cc; font-size: 0.75rem; }
 
-        /* Embed card */
+        /* Embed card: overflow:visible so border-radius does NOT clip touch events */
         .book-hero__right { min-width: 0; }
-        .book-embed-card {
+        /* Decorative rounded border on a non-clipping wrapper */
+        .book-embed-card-border {
           background: #ffffff;
           border: 1px solid #e8e8e5;
           border-radius: 20px;
-          padding: 1.5rem 1.25rem;
           box-shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
-          overflow: hidden;
+          scroll-margin-top: 7rem;
+        }
+        .book-embed-card {
+          background: transparent;
+          border-radius: 18px;
+          padding: 1.5rem 1.25rem;
+          overflow: visible;
           min-height: 700px;
         }
         @media (max-width: 480px) {
+          .book-embed-card-border {
+            border-radius: 14px;
+          }
           .book-embed-card {
             padding: 0.75rem 0.25rem;
-            border-radius: 14px;
+            border-radius: 12px;
             min-height: 580px;
+          }
+        }
+
+        /* Mobile fallback link -- shown only below 768px */
+        .book-embed-fallback {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .book-embed-fallback {
+            display: block;
+            margin-top: 1rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+            text-align: center;
+          }
+          .book-embed-fallback__link {
+            color: var(--text-primary);
+            text-decoration: underline;
+            font-weight: 600;
+            display: inline-block;
+            min-height: 44px;
+            line-height: 44px;
+          }
+          .book-embed-fallback__link:focus-visible {
+            outline: 2px solid var(--text-primary);
+            outline-offset: 3px;
+            border-radius: 3px;
           }
         }
 

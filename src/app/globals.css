@@ -43,7 +43,7 @@ html {
 
 body {
   background-color: var(--text-primary);
-  overflow-x: hidden;
+  overflow-x: clip;
   line-height: 1.6;
 }
 
@@ -1828,12 +1828,12 @@ a:focus-visible {
   z-index: 1000;
   width: calc(100% - 3rem);
   max-width: 760px;
-  background: rgba(15, 15, 15, 0.45);
+  background: rgba(10, 10, 10, 0.90);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 100px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 .global-nav__inner {
