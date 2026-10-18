@@ -756,7 +756,7 @@ export default function ThankYouClient() {
         /* ── CARD ─────────────────────────────────────────── */
         .ty-card {
           background: #ffffff;
-          border: 1px solid #e8e8e5;
+          border: 1px solid #8c8c88;
           border-radius: 18px;
           padding: 2rem 2.25rem;
           margin-bottom: 1.5rem;
@@ -784,8 +784,8 @@ export default function ThankYouClient() {
         .ty-card__badge {
           font-size: 0.82rem;
           font-weight: 600;
-          color: #3d3d38;
-          background: var(--bg-secondary);
+          color: #0a0a0a;
+          background: #f3f3f3;
           padding: 0.28rem 0.75rem;
           border-radius: 50px;
         }
@@ -910,7 +910,7 @@ export default function ThankYouClient() {
         .ty-btn--outline {
           background: transparent;
           color: #0a0a0a;
-          border: 1.5px solid #dcdcd8;
+          border: 1.5px solid #0a0a0a;
           font-size: 14px;
           font-weight: 600;
         }
@@ -931,7 +931,7 @@ export default function ThankYouClient() {
           justify-content: space-between;
           gap: 0.75rem;
           background: #f8f8f6;
-          border: 1px solid #e5e5e0;
+          border: 1px solid #8c8c88;
           border-radius: 12px;
           padding: 0.7rem 1rem;
           margin-bottom: 1rem;
@@ -970,7 +970,7 @@ export default function ThankYouClient() {
           height: 32px;
           border-radius: 8px;
           background: #ffffff;
-          border: 1.5px solid #dcdcd8;
+          border: 1.5px solid #0a0a0a;
           color: #0a0a0a;
           cursor: pointer;
           flex-shrink: 0;
@@ -1186,7 +1186,7 @@ export default function ThankYouClient() {
           gap: 0.6rem;
           padding: 0.75rem 1.35rem;
           background: #f0fdf4;
-          border: 1px solid #bbf7d0;
+          border: 1.5px solid #16a34a;
           color: #15803d;
           border-radius: 100px;
           font-family: var(--font-body);
@@ -1198,11 +1198,11 @@ export default function ThankYouClient() {
 
         .ty-whatsapp-btn:hover {
           background: #dcfce7;
-          border-color: #86efac;
+          border-color: #15803d;
         }
 
         .ty-whatsapp-btn:focus-visible {
-          outline: 2px solid #15803d;
+          outline: 2px solid #0a0a0a;
           outline-offset: 3px;
           border-radius: 100px;
         }
