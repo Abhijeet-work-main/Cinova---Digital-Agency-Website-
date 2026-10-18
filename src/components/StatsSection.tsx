@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
@@ -71,7 +71,7 @@ export default function StatsSection() {
     <section id="data" ref={ref} className="sts-section">
       <div className="sts-inner">
 
-        {/* Top eyebrow label — Geist, small caps */}
+        {/* Top eyebrow label — Helvetica, small caps */}
         <p className="sts-eyebrow">
           @{new Date().getFullYear()}&mdash;Transform Digital Obstacles into Growth Opportunities
         </p>
@@ -103,9 +103,9 @@ export default function StatsSection() {
           text-align: center;
         }
 
-        /* Eyebrow — Geist small, uppercase */
+        /* Eyebrow — Helvetica small, uppercase */
         .sts-eyebrow {
-          font-family: 'Geist', system-ui, sans-serif;
+          font-family: var(--font-label);
           font-size: 0.82rem;
           font-weight: 500;
           color: var(--text-muted);
@@ -134,7 +134,7 @@ export default function StatsSection() {
 
         /* Numbers — Inter 700, very large (reference: 144px) */
         .sts-stat__number {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(5.5rem, 12vw, 9.5rem);
           font-weight: 700;
           color: var(--text-primary);
@@ -143,9 +143,9 @@ export default function StatsSection() {
           font-variant-numeric: tabular-nums;
         }
 
-        /* Labels — Geist 500, substantial size matching reference */
+        /* Labels — Helvetica 500, substantial size matching reference */
         .sts-stat__label {
-          font-family: 'Geist', system-ui, sans-serif;
+          font-family: var(--font-label);
           font-size: clamp(1rem, 1.5vw, 1.35rem);
           font-weight: 500;
           color: var(--text-secondary);
@@ -162,7 +162,7 @@ export default function StatsSection() {
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           color: #fff;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 500;
           letter-spacing: 0.04em;

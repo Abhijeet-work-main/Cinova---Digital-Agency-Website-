@@ -131,7 +131,7 @@ export default function StickyMobileCta() {
             padding: 0.85rem 1.4rem;
             background: var(--accent-primary);
             color: #050505;
-            font-family: var(--font-primary);
+            font-family: var(--font-body);
             font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: 0.01em;

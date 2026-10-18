@@ -164,7 +164,7 @@ export default function ProofSection() {
           gap: 0.55rem;
           background: var(--accent-primary);
           color: #0a0a0a;
-          font-family: var(--font-primary);
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 700;
           letter-spacing: 0.01em;

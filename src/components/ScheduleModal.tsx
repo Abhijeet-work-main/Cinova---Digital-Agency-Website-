@@ -498,7 +498,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           max-height: 92vh;
           overflow-y: auto;
           box-sizing: border-box;
-          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-family: var(--font-body);
         }
         @keyframes scUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -570,7 +570,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
         }
         .sc-badge {
           display: inline-block;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.72rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -581,7 +581,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           border-radius: 999px;
         }
         .sc-headline {
-          font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(2.4rem, 5vw, 4.2rem);
           font-weight: 900;
           color: #0a0a0a;
@@ -597,7 +597,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           margin-bottom: 0.65rem;
         }
         .sc-subline {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.55);
@@ -626,7 +626,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           margin-bottom: 1.25rem;
         }
         .sc-step-label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.76rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -652,7 +652,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           border: 1px solid rgba(0, 0, 0, 0.08);
           border-radius: 8px;
           color: #1a1a1a;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.82rem;
           font-weight: 500;
           padding: 0.55rem 0.85rem;
@@ -685,7 +685,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           margin-top: 0.65rem;
         }
         .sc-custom-date-label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.78rem;
           font-weight: 500;
           color: rgba(0, 0, 0, 0.45);
@@ -695,7 +695,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           border: 1px solid rgba(0, 0, 0, 0.12);
           border-radius: 6px;
           color: #0a0a0a;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.82rem;
           padding: 0.35rem 0.65rem;
           color-scheme: light;
@@ -720,7 +720,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           background: transparent;
           border: none;
           outline: none;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1.05rem;
           font-weight: 500;
           color: #0a0a0a;
@@ -733,7 +733,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
         .sc-input::placeholder,
         .sc-textarea::placeholder {
           color: rgba(0, 0, 0, 0.4);
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-weight: 500;
         }
         .sc-textarea {
@@ -741,7 +741,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           background: transparent;
           border: none;
           outline: none;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.98rem;
           font-weight: 500;
           color: #0a0a0a;
@@ -770,7 +770,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           padding: 0;
         }
         .sc-submit__label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1.5rem;
           font-weight: 600;
           color: #0a0a0a;
@@ -804,7 +804,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
 
         /* ── ERROR MESSAGE ────────────────────── */
         .sc-error {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.8rem;
           color: #c0392b;
           margin: 0.5rem 0 0;
@@ -813,7 +813,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
 
         /* ── TRUST NOTE ───────────────────────── */
         .sc-trust {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.82rem;
           color: rgba(0, 0, 0, 0.55);
           line-height: 1.6;
@@ -842,7 +842,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           border: 1px solid rgba(0, 0, 0, 0.08);
         }
         .sc-person__initials {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 700;
           color: #0a0a0a;
@@ -854,14 +854,14 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           gap: 0.15rem;
         }
         .sc-person__name {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 700;
           color: #0a0a0a;
           line-height: 1.2;
         }
         .sc-person__role {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.68rem;
           font-weight: 500;
           color: rgba(0, 0, 0, 0.45);
@@ -893,7 +893,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           margin-bottom: 1.25rem;
         }
         .sc-confirm-title {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(2rem, 4.5vw, 2.8rem);
           font-weight: 900;
           color: #0a0a0a;
@@ -902,7 +902,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           letter-spacing: -0.02em;
         }
         .sc-confirm-desc {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.95rem;
           color: rgba(0, 0, 0, 0.55);
           max-width: 480px;
@@ -927,7 +927,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           padding: 0.55rem 0;
           border-bottom: 1px solid rgba(0, 0, 0, 0.06);
           font-size: 0.9rem;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
         }
         .sc-confirm-row:last-child {
           border-bottom: none;
@@ -956,7 +956,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           gap: 0.6rem;
           padding: 0.8rem 1.4rem;
           border-radius: 999px;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.85rem;
           font-weight: 600;
           text-decoration: none;
@@ -984,7 +984,7 @@ export default function ScheduleModal({ open, onClose }: ScheduleModalProps) {
           border: 1.5px solid rgba(0, 0, 0, 0.18);
           border-radius: 999px;
           color: #0a0a0a;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 600;
           padding: 0.7rem 2.25rem;

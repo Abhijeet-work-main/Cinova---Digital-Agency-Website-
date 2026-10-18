@@ -9,9 +9,10 @@
   --accent-primary: #b6f500;
   --accent-hover: #9ad200;
 
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-geist: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: var(--font-pjs, 'Plus Jakarta Sans'), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: var(--font-inter, 'Inter'), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-label: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-primary: var(--font-body);
 
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -35,7 +36,7 @@ html {
   scroll-behavior: smooth;
   background-color: var(--text-primary);
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,8 +49,9 @@ body {
 /* Typography styles */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
 }
 
 p {
@@ -124,7 +126,7 @@ a:focus-visible {
 
 /* Logo */
 .cinova-header__logo {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: -0.03em;
@@ -198,7 +200,7 @@ a:focus-visible {
   gap: 0.5rem;
   padding: 0.55rem 1rem;
   border-radius: 50px;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -376,7 +378,7 @@ a:focus-visible {
 }
 
 .cinova-menu__section-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -401,7 +403,7 @@ a:focus-visible {
   padding: 0.55rem 0;
   text-decoration: none;
   color: var(--text-secondary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
@@ -452,7 +454,7 @@ a:focus-visible {
 }
 
 .cinova-menu__cta-eyebrow {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -475,7 +477,7 @@ a:focus-visible {
 }
 
 .cinova-menu__cta-body {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -487,7 +489,7 @@ a:focus-visible {
   padding: 0.75rem 1.4rem;
   background: var(--accent-primary);
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -512,7 +514,7 @@ a:focus-visible {
   opacity: 1;
 }
 .cinova-menu__contact-link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   color: var(--text-muted);
   text-decoration: none;
@@ -646,7 +648,7 @@ a:focus-visible {
 }
 .cinova-hero__eyebrow {
   color: var(--accent-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -673,7 +675,7 @@ a:focus-visible {
   }
 }
 .cinova-hero__subcopy {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: clamp(1rem, 1.8vw, 1.15rem);
   color: var(--text-secondary);
   max-width: 480px;
@@ -862,7 +864,7 @@ a:focus-visible {
   cursor: pointer;
   text-align: left;
   transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
 }
 .diag-option:hover {
   background: rgba(0, 0, 0,0.04);
@@ -952,7 +954,7 @@ a:focus-visible {
   border-radius: 12px;
   padding: 1rem 1.2rem;
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 1rem;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
@@ -984,7 +986,7 @@ a:focus-visible {
   border: none;
   border-radius: 50px;
   padding: 0.95rem 2rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
@@ -1014,7 +1016,7 @@ a:focus-visible {
   color: var(--text-muted);
   border: none;
   padding: 0.95rem 1.2rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -1147,7 +1149,7 @@ a:focus-visible {
 
 /* Logo */
 .ch3-header__logo {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: -0.04em;
@@ -1184,7 +1186,7 @@ a:focus-visible {
 }
 
 .ch3-header__link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.005em;
@@ -1203,7 +1205,7 @@ a:focus-visible {
   padding: 0.5rem 1.1rem;
   background: var(--accent-primary);
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -1225,7 +1227,7 @@ a:focus-visible {
   background: transparent;
   border: 1px solid var(--structural-border);
   border-radius: 50px;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1333,7 +1335,7 @@ a:focus-visible {
 }
 
 .ch3-menu__panel-logo {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.2rem;
   letter-spacing: -0.04em;
@@ -1406,7 +1408,7 @@ a:focus-visible {
 }
 
 .ch3-menu__section-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -1430,7 +1432,7 @@ a:focus-visible {
   padding: 0.55rem 0;
   text-decoration: none;
   color: var(--text-secondary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.92rem;
   font-weight: 500;
   border-bottom: 1px solid var(--structural-border);
@@ -1481,7 +1483,7 @@ a:focus-visible {
 }
 
 .ch3-menu__cta-eyebrow {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -1502,7 +1504,7 @@ a:focus-visible {
   color: var(--accent-primary);
 }
 .ch3-menu__cta-body {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -1513,7 +1515,7 @@ a:focus-visible {
   padding: 0.7rem 1.4rem;
   background: var(--accent-primary);
   color: var(--text-primary);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1538,7 +1540,7 @@ a:focus-visible {
   opacity: 1;
 }
 .ch3-menu__contact-link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   color: var(--text-muted);
   text-decoration: none;
@@ -1631,7 +1633,7 @@ a:focus-visible {
 }
 
 .hero__discipline-bar span {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: clamp(0.6rem, 0.8vw, 0.75rem);
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -1696,7 +1698,7 @@ a:focus-visible {
   gap: 0.65rem;
   background: var(--accent-primary);
   color: #050505;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -1830,7 +1832,7 @@ a:focus-visible {
 }
 
 .global-nav__logo {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.04em;
@@ -1860,7 +1862,7 @@ a:focus-visible {
 }
 
 .global-nav__link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1947,7 +1949,7 @@ a:focus-visible {
 }
 
 .global-nav__dropdown-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 500;
 }
@@ -1977,7 +1979,7 @@ a:focus-visible {
   padding: 0.55rem 1.35rem;
   background: #ffffff;
   color: #050505;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -2126,7 +2128,7 @@ a:focus-visible {
 }
 
 .mobile-nav__sublink {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -2147,7 +2149,7 @@ a:focus-visible {
   border: none;
   border-radius: 50px;
   padding: 1rem 2rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -2204,7 +2206,7 @@ a:focus-visible {
   align-items: center;
   gap: 1.2rem;
   padding: 0 2.5rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 1.2vw, 1.05rem);
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -2243,7 +2245,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -2281,7 +2283,7 @@ a:focus-visible {
   gap: 0.65rem;
   background: var(--accent-primary);
   color: #050505;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   padding: 0.85rem 1.85rem;
@@ -2335,14 +2337,14 @@ a:focus-visible {
 }
 
 .contact-info-item__label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .contact-info-item__value {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--text-muted);
   text-decoration: none;
@@ -2392,7 +2394,7 @@ a:focus-visible {
 }
 
 .contact-field__label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-secondary);
@@ -2406,7 +2408,7 @@ a:focus-visible {
   border: 1px solid transparent;
   border-bottom: 1.5px solid var(--structural-border);
   border-radius: 0;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--text-primary);
   transition: border-color var(--transition-fast), background var(--transition-fast);
@@ -2438,7 +2440,7 @@ a:focus-visible {
   background: var(--bg-secondary);
   border: 1px solid var(--structural-border);
   border-radius: 4px;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -2574,7 +2576,7 @@ a:focus-visible {
 }
 
 .footer-card__tagline {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -2584,7 +2586,7 @@ a:focus-visible {
 }
 
 .footer-card__brand {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: clamp(3rem, 6vw, 5.5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -2597,7 +2599,7 @@ a:focus-visible {
 }
 
 .footer-card__description {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.5);
@@ -2612,7 +2614,7 @@ a:focus-visible {
 }
 
 .footer-card__contact-link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   color: #fff;
   text-decoration: none;
@@ -2637,7 +2639,7 @@ a:focus-visible {
 }
 
 .footer-card__cta-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.5;
@@ -2651,7 +2653,7 @@ a:focus-visible {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
@@ -2685,7 +2687,7 @@ a:focus-visible {
 }
 
 .footer-card__links-heading {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -2701,7 +2703,7 @@ a:focus-visible {
 }
 
 .footer-card__link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
@@ -2724,7 +2726,7 @@ a:focus-visible {
 }
 
 .footer-bottom__copy {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   color: var(--text-muted);
 }
@@ -2735,7 +2737,7 @@ a:focus-visible {
 }
 
 .footer-bottom__legal-link {
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   color: var(--text-muted);
   text-decoration: none;

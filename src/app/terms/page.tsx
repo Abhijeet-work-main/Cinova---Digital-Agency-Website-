@@ -162,7 +162,7 @@ export default function TermsPage() {
         }
 
         .legal-title {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(2.5rem, 5vw, 3.8rem);
           font-weight: 400;
           letter-spacing: -0.02em;
@@ -188,7 +188,7 @@ export default function TermsPage() {
         }
 
         .legal-section h2 {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: 1.55rem;
           font-weight: 400;
           color: #fff;

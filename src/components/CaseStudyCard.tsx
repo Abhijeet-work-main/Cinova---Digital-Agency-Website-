@@ -150,7 +150,7 @@ export default function CaseStudyCard({
                   <span
                     style={{
                       display: "block",
-                      fontFamily: "var(--font-primary)",
+                      fontFamily: "var(--font-body)",
                       fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
                       fontWeight: 800,
                       color: "var(--text-primary)",
@@ -404,7 +404,7 @@ export default function CaseStudyCard({
               <div key={result.label}>
                 <span
                   style={{
-                    fontFamily: "var(--font-primary)",
+                    fontFamily: "var(--font-body)",
                     fontSize: "1.4rem",
                     fontWeight: 700,
                     color: "var(--text-primary)",

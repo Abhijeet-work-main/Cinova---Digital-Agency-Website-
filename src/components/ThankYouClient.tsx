@@ -342,7 +342,7 @@ export default function ThankYouClient() {
         }
 
         .ty-subtitle {
-          font-family: var(--font-primary);
+          font-family: var(--font-body);
           font-size: 1.05rem;
           color: #A3A3A3;
           max-width: 560px;
@@ -430,7 +430,7 @@ export default function ThankYouClient() {
           align-items: center;
           justify-content: center;
           gap: 0.6rem;
-          font-family: var(--font-primary);
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 600;
           text-decoration: none;

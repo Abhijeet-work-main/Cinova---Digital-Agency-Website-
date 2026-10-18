@@ -87,7 +87,7 @@
   letter-spacing: -0.64px;
   color: #fff;
   white-space: nowrap;
-  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-family: var(--font-body);
 }
 
 /* Logo badge: centered, 200x120, radius 12px, opacity 0 → 1 on hover */
@@ -130,7 +130,7 @@
   line-height: 36.4px;
   letter-spacing: -1.12px;
   color: var(--cs-ink);
-  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }
 /* desc: 20px/26px, w500, ls -0.8px */
@@ -140,6 +140,6 @@
   line-height: 26px;
   letter-spacing: -0.8px;
   color: var(--cs-muted);
-  font-family: Inter, "Inter Placeholder", sans-serif;
+  font-family: var(--font-body);
   margin: 0;
 }

@@ -31,7 +31,7 @@ export default function Footer() {
           <div>
             <h3
               style={{
-                fontFamily: "var(--font-primary)",
+                fontFamily: "var(--font-body)",
                 fontSize: "1.8rem",
                 color: "var(--text-primary)",
                 letterSpacing: "-0.03em",

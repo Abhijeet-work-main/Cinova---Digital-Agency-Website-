@@ -108,7 +108,7 @@ export default function NotFound() {
         }
 
         .nf-code {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(6rem, 15vw, 11rem);
           font-weight: 400;
           line-height: 0.9;
@@ -122,7 +122,7 @@ export default function NotFound() {
         }
 
         .nf-headline {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(2rem, 4vw, 3rem);
           color: #fff;
           font-weight: 400;
