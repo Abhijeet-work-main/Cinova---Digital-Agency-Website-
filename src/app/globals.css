@@ -1828,7 +1828,7 @@ a:focus-visible {
   z-index: 1000;
   width: calc(100% - 3rem);
   max-width: 760px;
-  background: rgba(10, 10, 10, 0.90);
+  background: rgba(15,15,15,0.45);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.10);
