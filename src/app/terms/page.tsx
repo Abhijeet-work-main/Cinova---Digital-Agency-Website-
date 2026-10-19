@@ -2,11 +2,28 @@ import React from "react";
 import Header from "../../components/Header";
 import SharedPageClosing from "../../components/SharedPageClosing";
 import type { Metadata } from "next";
+import { siteConfig } from "../../data/siteConfig";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Cinova",
+  title: "Terms and Conditions",
   description:
     "Engagement terms, project scope guidelines, intellectual property ownership, and service agreements for Cinova Digital Agency.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms and Conditions | Cinova",
+    description:
+      "Engagement terms, project scope guidelines, intellectual property ownership, and service agreements for Cinova Digital Agency.",
+    url: "/terms",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms and Conditions | Cinova",
+    description: "Engagement terms and service agreements for Cinova clients.",
+  },
 };
 
 export default function TermsPage() {
@@ -96,8 +113,8 @@ export default function TermsPage() {
               </p>
               <div className="legal-contact-card">
                 <p><strong>Cinova Digital Agency</strong></p>
-                <p>Email: <a href="mailto:cinova.edits@gmail.com">cinova.edits@gmail.com</a></p>
-                <p>Direct Inquiries: <a href="tel:+917428245045">+91 74282 45045</a></p>
+                <p>Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+                <p>Direct Inquiries: <a href={`tel:+${siteConfig.whatsappNumber}`}>{siteConfig.phone}</a></p>
                 <p>Managing Director: Abhijeet Mishra</p>
               </div>
             </section>
@@ -146,7 +163,7 @@ export default function TermsPage() {
         }
 
         .legal-title {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: clamp(2.5rem, 5vw, 3.8rem);
           font-weight: 400;
           letter-spacing: -0.02em;
@@ -172,7 +189,7 @@ export default function TermsPage() {
         }
 
         .legal-section h2 {
-          font-family: var(--font-playfair, Georgia, serif);
+          font-family: var(--font-display);
           font-size: 1.55rem;
           font-weight: 400;
           color: #fff;

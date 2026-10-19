@@ -23,6 +23,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${industry.name} | Cinova`,
     description: industry.heroSubtext,
+    alternates: {
+      canonical: `/for/${slug}`,
+    },
+    openGraph: {
+      title: `${industry.name} | Cinova`,
+      description: industry.heroSubtext,
+      url: `/for/${slug}`,
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: "/hero-cinematic.png",
+          width: 1920,
+          height: 1080,
+          alt: `${industry.name}: Cinova`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${industry.name} | Cinova`,
+      description: industry.heroSubtext,
+      images: ["/hero-cinematic.png"],
+    },
   };
 }
 
@@ -55,9 +79,9 @@ export default async function IndustryPage({ params }: Props) {
             <h1 className="ind-hero__headline">{industry.heroHeadline}</h1>
             <p className="ind-hero__sub">{industry.heroSubtext}</p>
             <div className="ind-hero__actions">
-              <a href="#audit" className="ind-btn-primary">
-                Get Free Growth Audit
-              </a>
+              <Link href="/book" className="ind-btn-primary" data-cta="industry">
+                Book a Free Call
+              </Link>
               <a href="#proof" className="ind-btn-ghost">
                 See Category Work ({relatedBrands.length}) →
               </a>
@@ -119,7 +143,7 @@ export default async function IndustryPage({ params }: Props) {
 
           <div className="ind-container">
             <div className="ind-approach-head">
-              <span className="ind-section-tag" style={{ color: "var(--accent-primary)" }}>
+              <span className="ind-section-tag" style={{ color: "var(--accent-text)" }}>
                 The Connected Architecture
               </span>
               <h2 className="ind-section-h2">
@@ -220,9 +244,9 @@ export default async function IndustryPage({ params }: Props) {
                 &ldquo;{industry.delayConsequence}&rdquo;
               </p>
               <div>
-                <a href="#audit" className="ind-btn-primary">
-                  Resolve This Now →
-                </a>
+                <Link href="/book" className="ind-btn-primary" data-cta="industry">
+                  Book a Free Call →
+                </Link>
               </div>
             </div>
           </div>
@@ -400,7 +424,7 @@ export default async function IndustryPage({ params }: Props) {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .ind-problem-arrow {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
@@ -445,7 +469,7 @@ export default async function IndustryPage({ params }: Props) {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary);
+          color: var(--accent-text);
           margin-top: auto;
         }
 

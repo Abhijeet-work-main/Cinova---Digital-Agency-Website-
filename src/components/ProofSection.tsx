@@ -19,7 +19,7 @@ const HOME_CASE_STUDIES = [
   {
     slug: "kuptuuu",
     title: "KUPTUUU",
-    description: "Made to be odd — craft ceramics with character",
+    description: "Made to be odd: craft ceramics with character",
     tags: ["Branding", "Photography"],
     cover: "/brands/kuptuuu/cover.jpg",
     logo: "/brands/kuptuuu/logo.png",
@@ -47,7 +47,7 @@ const HOME_CASE_STUDIES = [
   {
     slug: "lustre-jewellery",
     title: "Lustre Jewellery",
-    description: "Designed to stand apart — jewellery that speaks first",
+    description: "Designed to stand apart: jewellery that speaks first",
     tags: ["Identity", "Photography"],
     cover: "/brands/lustre-jewellery/cover.jpg",
     logo: "/brands/lustre-jewellery/logo.png",
@@ -105,7 +105,7 @@ export default function ProofSection() {
           <div></div>
           <div>
             <p className={styles.lead} style={{ marginBottom: "2rem" }}>
-              {"                        "}Our clients range from wellness startups to artisan jewellers &mdash; every project rooted in strategy, built around identity, and designed to convert.
+              {"                        "}Our clients range from wellness startups to artisan jewellers: every project rooted in strategy, built around identity, and designed to convert.
             </p>
             <Link href="/work" className="prf-btn">
               Discover all projects <span aria-hidden="true">→</span>
@@ -164,7 +164,7 @@ export default function ProofSection() {
           gap: 0.55rem;
           background: var(--accent-primary);
           color: #0a0a0a;
-          font-family: var(--font-primary);
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 700;
           letter-spacing: 0.01em;

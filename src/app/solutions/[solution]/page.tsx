@@ -23,6 +23,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${solution.name} | Cinova`,
     description: solution.heroSubtext,
+    alternates: {
+      canonical: `/solutions/${slug}`,
+    },
+    openGraph: {
+      title: `${solution.name} | Cinova`,
+      description: solution.heroSubtext,
+      url: `/solutions/${slug}`,
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: "/hero-cinematic.png",
+          width: 1920,
+          height: 1080,
+          alt: `${solution.name}: Cinova`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${solution.name} | Cinova`,
+      description: solution.heroSubtext,
+      images: ["/hero-cinematic.png"],
+    },
   };
 }
 
@@ -55,9 +79,9 @@ export default async function SolutionPage({ params }: Props) {
             <h1 className="sol-hero__headline">{solution.heroHeadline}</h1>
             <p className="sol-hero__sub">{solution.heroSubtext}</p>
             <div className="sol-hero__actions">
-              <a href="#audit" className="sol-btn-primary">
-                Get Free Growth Audit
-              </a>
+              <Link href="/book" className="sol-btn-primary" data-cta="solution">
+                Book a Free Call
+              </Link>
               <a href="#proof" className="sol-btn-ghost">
                 See Verified Work ({relatedBrands.length}) →
               </a>
@@ -120,7 +144,7 @@ export default async function SolutionPage({ params }: Props) {
           <div className="sol-container">
             <div className="sol-grid-2" style={{ alignItems: "center" }}>
               <div>
-                <span className="sol-section-tag" style={{ color: "var(--accent-primary)" }}>
+                <span className="sol-section-tag" style={{ color: "var(--accent-text)" }}>
                   The Cinova Approach
                 </span>
                 <h2 className="sol-section-h2">
@@ -238,9 +262,9 @@ export default async function SolutionPage({ params }: Props) {
                 &ldquo;{solution.delayConsequence}&rdquo;
               </p>
               <div>
-                <a href="#audit" className="sol-btn-primary">
-                  Resolve This Now →
-                </a>
+                <Link href="/book" className="sol-btn-primary" data-cta="solution">
+                  Book a Free Call →
+                </Link>
               </div>
             </div>
           </div>
@@ -418,7 +442,7 @@ export default async function SolutionPage({ params }: Props) {
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
         .sol-problem-arrow {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
           font-size: 1.1rem;
           flex-shrink: 0;
@@ -454,7 +478,7 @@ export default async function SolutionPage({ params }: Props) {
           padding: 0.85rem 1.2rem;
         }
         .sol-cap-check {
-          color: var(--accent-primary);
+          color: var(--accent-text);
           font-weight: 700;
         }
         .sol-cap-text {
@@ -495,7 +519,7 @@ export default async function SolutionPage({ params }: Props) {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: var(--accent-primary);
+          color: var(--accent-text);
           margin-top: auto;
         }
 

@@ -24,7 +24,7 @@ export const solutions: Solution[] = [
     name: "Conversion Websites",
     tagline: "Stop losing qualified traffic to weak digital funnels.",
     heroHeadline: "Your website is getting traffic. It's not turning it into business.",
-    heroSubtext: "Most websites look professional but are structurally built to receive visitors — not convert them. We change that.",
+    heroSubtext: "Most websites look professional but are structurally built to receive visitors, not convert them. We change that.",
     problemStatement: "Traffic without conversion is just an expense.",
     problems: [
       "Visitors land on your website but leave without booking, buying, or reaching out",
@@ -35,7 +35,7 @@ export const solutions: Solution[] = [
     whyItHappens:
       "Most websites are built to 'look good' rather than convert. Designers optimize for aesthetics. Developers optimize for code. Nobody owns the gap where attention becomes revenue.",
     howCinovaHelps:
-      "We design and build websites around the visitor's decision journey — not around the client's preference for aesthetics. Every section earns its space by moving the visitor closer to acting.",
+      "We design and build websites around the visitor's decision journey, not around the client's preference for aesthetics. Every section earns its space by moving the visitor closer to acting.",
     capabilities: [
       "Conversion-focused UI/UX design",
       "Next.js web development",
@@ -44,7 +44,7 @@ export const solutions: Solution[] = [
       "Landing page systems",
     ],
     delayConsequence:
-      "Every month your website is structurally weak, qualified visitors who found you are leaving and going to your competitors — without you knowing they were ever there.",
+      "Every month your website is structurally weak, qualified visitors who found you are leaving and going to your competitors, without you knowing they were ever there.",
     relevantCaseSlugs: ["erminio-palamino", "noor", "curate-home", "kuptuuu"],
     relatedIndustrySlugs: ["ecommerce", "service-brands"],
   },
@@ -65,7 +65,7 @@ export const solutions: Solution[] = [
     whyItHappens:
       "Paid acquisition is only one part of the system. When ads, creative, landing pages, and measurement aren't connected, even a perfectly targeted campaign leaks money.",
     howCinovaHelps:
-      "We structure campaigns, creative, and conversion architecture together — so that paid traffic lands somewhere it can actually convert. We've driven high-volume campaigns with sub-₹0.30 CPC for luxury e-commerce clients.",
+      "We structure campaigns, creative, and conversion architecture together so that paid traffic lands somewhere it can actually convert. We've driven high-volume campaigns with sub-₹0.30 CPC for luxury e-commerce clients.",
     capabilities: [
       "Meta Ads strategy and campaign setup",
       "Ad creative concept and direction",
@@ -95,7 +95,7 @@ export const solutions: Solution[] = [
     whyItHappens:
       "Most content is created reactively. There's no brief connecting the hook to the audience's specific problem, no edit structure designed for retention, and no distribution plan connecting the content to a conversion path.",
     howCinovaHelps:
-      "We plan, script, shoot, and edit content with a clear audience and outcome in mind — from YouTube long-form to short-form Reels. We've helped creators with 100k+ subscribers elevate the quality and retention of their content.",
+      "We plan, script, shoot, and edit content with a clear audience and outcome in mind, from YouTube long-form to short-form Reels. We've helped creators with 100k+ subscribers elevate the quality and retention of their content.",
     capabilities: [
       "Content strategy and planning",
       "Scripting and hook writing",
@@ -124,7 +124,7 @@ export const solutions: Solution[] = [
       "No plan connecting content to actual business goals",
     ],
     whyItHappens:
-      "Most social accounts are run reactively — posting when there's time, using whatever assets are available, without a defined audience or outcome in mind. The result is activity that looks productive but generates no commercial return.",
+      "Most social accounts are run reactively by posting when there is time, using whatever assets are available, without a defined audience or outcome in mind. The result is activity that looks productive but generates no commercial return.",
     howCinovaHelps:
       "We manage social accounts with a defined strategy, consistent visual identity, and content engineered for the platform's discovery algorithm and the client's business objectives.",
     capabilities: [

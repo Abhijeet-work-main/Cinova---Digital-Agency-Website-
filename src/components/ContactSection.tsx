@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { siteConfig } from "../data/siteConfig";
 
 export default function ContactSection() {
+  const pathname = usePathname();
+  const isBookPage = pathname === "/book";
   const [formData, setFormData] = useState({ name: "", email: "", message: "", botField: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -42,7 +47,7 @@ export default function ContactSection() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us at cinova.edits@gmail.com.");
+      setError(`Something went wrong. Please try again or email us at ${siteConfig.email}.`);
     } finally {
       setSubmitting(false);
     }
@@ -81,17 +86,32 @@ export default function ContactSection() {
             <span className="contact-heading--muted">and how we can help.</span>
           </h2>
 
+          <div className="contact-primary-cta-wrap">
+            <Link
+              href={isBookPage ? "#book" : "/book"}
+              className="contact-primary-cta-btn"
+              data-cta="contact"
+              aria-label="Book a Free Strategy Call"
+            >
+              <span>Book a Free Strategy Call</span>
+              <span className="contact-primary-cta-arrow" aria-hidden="true">→</span>
+            </Link>
+            <p className="contact-primary-cta-sub">
+              Direct 30-minute diagnostic session. Leave with a prioritized action plan.
+            </p>
+          </div>
+
           <ul className="contact-info-list">
             <li className="contact-info-item">
               <span className="contact-info-item__label">Want to call us?</span>
-              <a href="tel:+917428245045" className="contact-info-item__value">
-                +91 74282 45045
+              <a href={`tel:+${siteConfig.whatsappNumber}`} className="contact-info-item__value">
+                {siteConfig.phone}
               </a>
             </li>
             <li className="contact-info-item">
               <span className="contact-info-item__label">Prefer the old way?</span>
-              <a href="mailto:cinova.edits@gmail.com" className="contact-info-item__value">
-                cinova.edits@gmail.com
+              <a href={`mailto:${siteConfig.email}`} className="contact-info-item__value">
+                {siteConfig.email}
               </a>
             </li>
           </ul>
@@ -100,8 +120,8 @@ export default function ContactSection() {
         {/* Right column — form */}
         <div className="contact-right">
           <div className="contact-form-header">
-            <p className="contact-form-headline">Let&apos;s start</p>
-            <p className="contact-form-headline contact-form-headline--muted">the conversation.</p>
+            <p className="contact-form-headline">Prefer to write?</p>
+            <p className="contact-form-headline contact-form-headline--muted">Send us a message.</p>
           </div>
 
           {submitted ? (

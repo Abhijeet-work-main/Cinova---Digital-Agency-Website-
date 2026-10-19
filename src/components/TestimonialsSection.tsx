@@ -9,14 +9,14 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 const REVIEWS = [
   {
     id: 1,
-    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach — the site, the targeting, everything. We finally started seeing real traction.",
+    quote: "Before Cinova, we were throwing money at ads without knowing what was working. They rebuilt our entire approach: the site, the targeting, everything. We finally started seeing real traction.",
     author: "Erminio Palamino",
     role: "Founder, Erminio Palamino",
     initials: "EP",
   },
   {
     id: 2,
-    quote: "The content they produced felt genuinely like us. Not polished agency work — actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
+    quote: "The content they produced felt genuinely like us. Not polished agency work, but actually us. Our Reels started performing in a way they never had before and we didn't have to keep explaining the brand.",
     author: "Balbeer",
     role: "Founder, Balbeer",
     initials: "BA",
@@ -30,7 +30,7 @@ const REVIEWS = [
   },
   {
     id: 4,
-    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story — 32,000 views on a single video.",
+    quote: "Our channel had solid content but the packaging was holding us back. Cinova changed how we think about thumbnails, titles, everything. The numbers tell the story, including 32,000 views on a single video.",
     author: "PBInvesting",
     role: "Creator, PBInvesting",
     initials: "PB",
@@ -190,7 +190,7 @@ export default function TestimonialsSection() {
               <p className="tst-trusted">Trusted by 50+ teams</p>
 
               <a
-                href="mailto:cinova.edits@gmail.com?subject=Client%20Feedback"
+                href="mailto:hello@getcinova.com?subject=Client%20Feedback"
                 className="tst-review-btn"
               >
                 Leave a review
@@ -272,7 +272,7 @@ export default function TestimonialsSection() {
           flex-shrink: 0;
         }
         .tst-label-text {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 500;
           color: var(--text-muted);
@@ -281,7 +281,7 @@ export default function TestimonialsSection() {
 
         /* ══════════ STATEMENT ══════════ */
         .tst-statement {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(2.4rem, 4vw, 3.5rem);
           font-weight: 600;
           line-height: 1.15;
@@ -345,7 +345,7 @@ export default function TestimonialsSection() {
           margin-bottom: 0.4rem;
         }
         .tst-rating__num {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 4.5rem;
           font-weight: 700;
           color: var(--text-primary);
@@ -353,14 +353,14 @@ export default function TestimonialsSection() {
           letter-spacing: -0.04em;
         }
         .tst-rating__denom {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1.8rem;
           font-weight: 600;
           color: rgba(10,10,10,0.4);
           letter-spacing: -0.02em;
         }
         .tst-rating__sub {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 400;
           color: var(--text-muted);
@@ -380,7 +380,7 @@ export default function TestimonialsSection() {
           border-radius: 50%;
           background: #e8e8e8;
           color: var(--text-primary);
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.72rem;
           font-weight: 600;
           display: inline-flex;
@@ -391,7 +391,7 @@ export default function TestimonialsSection() {
         }
         .tst-avatar:first-child { margin-left: 0; }
         .tst-trusted {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.85rem;
           font-weight: 400;
           color: var(--text-muted);
@@ -406,7 +406,7 @@ export default function TestimonialsSection() {
           width: 100%;
           background: var(--text-primary);
           color: #fff;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 500;
           padding: 0.9rem 1.5rem;
@@ -424,14 +424,14 @@ export default function TestimonialsSection() {
           padding-top: 0.5rem;
         }
         .tst-counter {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.85rem;
           font-weight: 500;
           color: var(--text-muted);
           letter-spacing: 0.05em;
         }
         .tst-quote {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(1.6rem, 2.5vw, 2.25rem);
           font-style: italic;
           font-weight: 600;
@@ -464,7 +464,7 @@ export default function TestimonialsSection() {
           height: 52px;
           border-radius: 50%;
           background: #e2e2e2;
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.85rem;
           font-weight: 600;
           color: var(--text-primary);
@@ -479,13 +479,13 @@ export default function TestimonialsSection() {
           gap: 0.2rem;
         }
         .tst-author__name {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 600;
           color: var(--text-primary);
         }
         .tst-author__role {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 400;
           color: var(--text-muted);
@@ -544,7 +544,7 @@ export default function TestimonialsSection() {
           gap: 0.75rem;
         }
         .tst-metric__value {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(3.5rem, 6vw, 5rem);
           font-weight: 600;
           color: var(--text-primary);
@@ -553,7 +553,7 @@ export default function TestimonialsSection() {
           font-variant-numeric: tabular-nums;
         }
         .tst-metric__label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 400;
           color: var(--text-muted);

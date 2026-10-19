@@ -589,3 +589,23 @@ Before implementation:
    - Added `"Starting from"` text above the `$2,999/m` price in `src/components/PricingSection.tsx`.
    - Added a ghost button `"See all packages →"` beside the `"Start your project"` button, linking directly to `/pricing`.
 
+6. **Cal.com Direct Booking Integration & Branded Confirmation (/book & /thank-you)**:
+   - Configured centralized `src/data/siteConfig.ts` with `siteConfig.calLink = "getcinova/free-strategy-call"` and `siteConfig.whatsappNumber = "917428245045"`.
+   - Built dedicated `/book` page featuring high-contrast editorial typography, 3 trust bullets ("Free 30-minute call", "No obligation", "You leave with a clear plan"), inline Cal.com embed using `@calcom/embed-react` (dark theme, month_view layout, iframe fallback), 3-step "What happens on the call" strip, and 4-question FAQ.
+   - Built `CalBookingEmbed` component with defensive payload extraction for `bookingSuccessfulV2` and `bookingSuccessful` events (dev console logging), routing to `/thank-you` with non-sensitive parameters only (`uid`, `startTime`, `endTime`, `duration`, `title`).
+   - Built branded `/thank-you` confirmation page (`noindex, nofollow`, disallowed in `src/app/robots.ts`, excluded from `src/app/sitemap.ts`) reading client-side search params inside a `<Suspense>` boundary. Strict input sanitization with regex validation for `uid` and 12-month boundary check for `startTime`. Renders user local timezone and IST times, direct Cal.com join link, Google Calendar and `.ics` export buttons, prefilled WhatsApp quick-action button, 3-step preparation checklist, and fallback state for direct visits. Includes marked Meta Pixel Schedule event TODO comment.
+   - Connected all site CTAs to `/book`: Navbar "Book a Free Call" (`data-cta="navbar"`), Hero primary CTA (`data-cta="hero"`), Contact section primary CTA (`data-cta="contact"`), Solutions & Industries CTAs (`data-cta="solution"`, `data-cta="industry"`), Pricing CTAs (`data-cta="pricing"`, `data-cta="pricing-tier"`), and Footer CTA (`data-cta="footer"`). Kept EmailJS contact form as a secondary option labelled "Prefer to write? Send us a message".
+   - Implemented mobile-only sticky bottom bar "Book a Free Call" (`data-cta="sticky-mobile"`) appearing after scrolling past the hero, auto-hiding on `/book` and `/thank-you`, respecting footer boundaries and reduced-motion preferences.
+   - Configured Content-Security-Policy headers in `next.config.ts` allowing `cal.com` and `app.cal.com` across `frame-src`, `script-src`, `connect-src`, `img-src`, and `style-src`. Verified production build passes cleanly (`npm run build`).
+
+7. **Google Meet Server-Side Integration (/thank-you)**:
+   - Added secure route handler `src/app/api/booking/[uid]/route.ts` (GET) querying Cal.com API v2 (`https://api.cal.com/v2/bookings/${uid}`) using `CAL_API_KEY` and header `cal-api-version: 2024-08-13`.
+   - Strict input sanitization with regex validation for `uid`, in-memory IP rate limiting (30 requests/minute), and strict caching controls (`Cache-Control: no-store`).
+   - Extracts verified `meetingUrl` (whitelisted to `meet.google.com` and `app.cal.com`), `startTime`, `endTime`, and mapped safe booking status.
+   - Server-side environment variable `CAL_API_KEY` stored in `.env.local` (strictly gitignored via `.env*`). Never exposed to client, never prefixed with `NEXT_PUBLIC_`.
+   - Added `.env.example` with placeholder `CAL_API_KEY=`.
+   - Netlify deployment requirement: configure `CAL_API_KEY` in the Netlify dashboard under Site configuration > Environment variables.
+   - Updated `CalBookingEmbed.tsx` to forward `meetingUrl` from booking success event payload and postMessage when available.
+   - Updated `ThankYouClient.tsx` to poll `/api/booking/[uid]` every 3 seconds up to 45 seconds with accessible `aria-live` region, prominent "Join Google Meet" button, copy link feedback, countdown badge ("Starts in X") for calls within 24 hours, calm timeout fallback, and secondary reschedule/cancel link.
+
+

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 /* ── Cinova pricing details for the $2,999/m featured plan ── */
 const FEATURES_LEFT = [
-  "1 Shoot day & 4–6 Reels/mo",
+  "1 Shoot day & 4 to 6 Reels/mo",
   "16 Social posts/mo",
   "Static & basic templates",
   "1-page branded landing page",
@@ -84,7 +84,9 @@ export default function PricingSection() {
             </div>
 
             <div className="prx-action-row">
-              <a href="/pricing" className="prx-start-btn">Start your project</a>
+              <Link href="/book" className="prx-start-btn" data-cta="pricing">
+                Book a Free Call
+              </Link>
               <Link href="/pricing" className="prx-ghost-btn">
                 See all packages <span aria-hidden="true">→</span>
               </Link>
@@ -141,7 +143,7 @@ export default function PricingSection() {
           flex-shrink: 0;
         }
         .prx-label-text {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 500;
           color: rgba(10,10,10,0.55);
@@ -150,7 +152,7 @@ export default function PricingSection() {
 
         /* ══════════ HEADLINE ══════════ */
         .prx-headline {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(2rem, 3.5vw, 2.8rem);
           font-weight: 400;
           color: rgb(10,10,10);
@@ -187,7 +189,7 @@ export default function PricingSection() {
           background-image: radial-gradient(ellipse at 60% 80%, rgba(255,255,255,0.04) 0%, transparent 65%);
         }
         .prx-card-dark__label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.82rem;
           font-weight: 500;
           color: rgba(255,255,255,0.55);
@@ -196,7 +198,7 @@ export default function PricingSection() {
           margin-bottom: 1rem;
         }
         .prx-card-dark__title {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(1.35rem, 2vw, 1.6rem);
           font-weight: 600;
           color: #fff;
@@ -204,7 +206,7 @@ export default function PricingSection() {
           margin: 0 0 0.5rem;
         }
         .prx-card-dark__sub {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 400;
           color: rgba(255,255,255,0.55);
@@ -223,19 +225,19 @@ export default function PricingSection() {
           gap: 0.2rem;
         }
         .prx-card-dark__name {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.95rem;
           font-weight: 500;
           color: #fff;
         }
         .prx-card-dark__role {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.8rem;
           font-weight: 400;
           color: rgba(255,255,255,0.45);
         }
         .prx-card-dark__cta {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 500;
           color: rgba(255,255,255,0.75);
@@ -259,7 +261,7 @@ export default function PricingSection() {
           gap: 0;
         }
         .prx-card-light__label {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.82rem;
           font-weight: 500;
           color: rgba(10,10,10,0.4);
@@ -268,7 +270,7 @@ export default function PricingSection() {
           margin-bottom: 0.75rem;
         }
         .prx-card-light__title {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(1.5rem, 2.2vw, 1.9rem);
           font-weight: 500;
           color: rgb(10,10,10);
@@ -276,7 +278,7 @@ export default function PricingSection() {
           margin: 0 0 0.35rem;
         }
         .prx-card-light__sub {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 400;
           color: rgba(10,10,10,0.38);
@@ -288,7 +290,7 @@ export default function PricingSection() {
           margin-bottom: 1.5rem;
         }
         .prx-price-starting {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.85rem;
           font-weight: 500;
           color: rgba(10, 10, 10, 0.45);
@@ -303,14 +305,14 @@ export default function PricingSection() {
           margin-bottom: 0;
         }
         .prx-price__currency {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1.5rem;
           font-weight: 400;
           color: rgb(10,10,10);
           letter-spacing: -0.01em;
         }
         .prx-price__amount {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: clamp(2.5rem, 4vw, 3.2rem);
           font-weight: 500;
           color: rgb(10,10,10);
@@ -318,7 +320,7 @@ export default function PricingSection() {
           line-height: 1;
         }
         .prx-price__period {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 1rem;
           font-weight: 400;
           color: rgba(10,10,10,0.45);
@@ -344,7 +346,7 @@ export default function PricingSection() {
           justify-content: center;
           background: #b6f500;
           color: rgb(10,10,10);
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.95rem;
           font-weight: 500;
           padding: 0.75rem 1.6rem;
@@ -366,7 +368,7 @@ export default function PricingSection() {
           background: transparent;
           color: rgb(10, 10, 10);
           border: 1px solid rgba(10, 10, 10, 0.2);
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.92rem;
           font-weight: 500;
           padding: 0.72rem 1.35rem;
@@ -396,7 +398,7 @@ export default function PricingSection() {
           gap: 0.55rem;
         }
         .prx-feature-item {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 400;
           color: rgba(10,10,10,0.65);
@@ -410,7 +412,7 @@ export default function PricingSection() {
           margin-top: auto;
         }
         .prx-see-all__link {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: var(--font-body);
           font-size: 0.88rem;
           font-weight: 500;
           color: rgba(10,10,10,0.5);

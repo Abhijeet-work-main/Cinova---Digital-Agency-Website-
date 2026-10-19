@@ -42,7 +42,7 @@ export default function Header() {
       <header className="global-nav" role="banner">
         <div className="global-nav__inner">
           {/* Left: Brand */}
-          <Link href="/" className="global-nav__logo" aria-label="Cinova — home">
+          <Link href="/" className="global-nav__logo" aria-label="Cinova home">
             cinova<span className="global-nav__dot">.</span>
           </Link>
 
@@ -101,12 +101,12 @@ export default function Header() {
 
           {/* Right: Contact & Mobile Toggle */}
           <div className="global-nav__right">
-            <button
+            <Link
+              href="/book"
               className="global-nav__contact"
               id="nav-contact-cta"
-              onClick={() => setContactOpen(true)}
-              aria-label="Open contact form"
-              type="button"
+              data-cta="navbar"
+              aria-label="Book a Free Call"
             >
               <svg
                 width="13"
@@ -120,10 +120,13 @@ export default function Header() {
                 aria-hidden="true"
                 style={{ flexShrink: 0 }}
               >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              Contact
-            </button>
+              Book a Free Call
+            </Link>
             <button
               className="global-nav__mobile-toggle"
               onClick={toggleMobileMenu}
@@ -181,13 +184,15 @@ export default function Header() {
           </div>
 
           {/* Mobile Contact Button */}
-          <button
+          <Link
+            href="/book"
             className="mobile-nav__contact-btn"
-            onClick={() => { setMobileMenuOpen(false); setContactOpen(true); }}
-            type="button"
+            data-cta="navbar"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Book a Free Call"
           >
-            Get in Touch
-          </button>
+            Book a Free Call
+          </Link>
         </div>
       </div>
 

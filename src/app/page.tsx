@@ -205,7 +205,7 @@ export default function Home() {
                   Traffic Without Conversion
                 </h3>
                 <p style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>
-                  Clicks arrive. Visitors browse. Nothing is purchased or booked. The gap is not visibility — it is the conversion architecture between your ad and your outcome.
+                  Clicks arrive. Visitors browse. Nothing is purchased or booked. The gap is not visibility: it is the conversion architecture between your ad and your outcome.
                 </p>
               </div>
 
@@ -243,7 +243,7 @@ export default function Home() {
                   Creative Without a System
                 </h3>
                 <p style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>
-                  You have content. You may even have good content. But without a connected system, content earns attention for the algorithm — not revenue for the business.
+                  You have content. You may even have good content. But without a connected system, content earns attention for the algorithm, not revenue for the business.
                 </p>
               </div>
 

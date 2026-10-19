@@ -18,7 +18,7 @@ const CASE_STUDIES = [
   {
     slug: "kuptuuu",
     title: "KUPTUUU",
-    description: "Made to be odd — craft ceramics with character",
+    description: "Made to be odd: craft ceramics with character",
     tags: ["Branding", "Photography"],
     cover: "/brands/kuptuuu/cover.jpg",
     logo: "/brands/kuptuuu/logo.png",
@@ -46,7 +46,7 @@ const CASE_STUDIES = [
   {
     slug: "lustre-jewellery",
     title: "Lustre Jewellery",
-    description: "Designed to stand apart — jewellery that speaks first",
+    description: "Designed to stand apart: jewellery that speaks first",
     tags: ["Identity", "Photography"],
     cover: "/brands/lustre-jewellery/cover.jpg",
     logo: "/brands/lustre-jewellery/logo.png",
@@ -55,7 +55,7 @@ const CASE_STUDIES = [
   {
     slug: "purple-swan",
     title: "Purple Swan",
-    description: "Gentle care, naturally — skincare with a clean conscience",
+    description: "Gentle care, naturally: skincare with a clean conscience",
     tags: ["Packaging", "Branding"],
     cover: "/brands/purple-swan/cover.jpg",
     logo: "/brands/purple-swan/logo.png",
@@ -111,7 +111,7 @@ const CASE_STUDIES = [
   {
     slug: "byxiu-designs",
     title: "byXiu Designs",
-    description: "Wear your story — bespoke jewellery made once, for you",
+    description: "Wear your story: bespoke jewellery made once, for you",
     tags: ["Branding", "Creative"],
     cover: "/brands/byxiu-designs/cover.jpg",
     logo: "/brands/byxiu-designs/logo.png",
@@ -159,7 +159,7 @@ export default function CaseStudies() {
         <div className={styles.row12}>
           <div></div>
           <p className={styles.lead}>
-            {"                        "}Our clients range from wellness startups to artisan jewellers &mdash; every project rooted in strategy, built around identity, and designed to convert.
+            {"                        "}Our clients range from wellness startups to artisan jewellers: every project rooted in strategy, built around identity, and designed to convert.
           </p>
         </div>
       </header>

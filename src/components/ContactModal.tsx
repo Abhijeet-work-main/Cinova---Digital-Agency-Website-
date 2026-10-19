@@ -240,7 +240,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
             <h2 className="cm-success__title">Message received.</h2>
             <p className="cm-success__body">
               We review every enquiry personally. If it&apos;s a strong fit,
-              you&apos;ll hear back within 1–2 business days.
+              you&apos;ll hear back within 1 to 2 business days.
             </p>
             <button className="cm-success__close" onClick={onClose}>
               Close
